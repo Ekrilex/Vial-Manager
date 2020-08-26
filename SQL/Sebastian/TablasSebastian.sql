@@ -23,6 +23,7 @@ create table tbl_caso (
 	cas_fotografia_inicio varchar(100) not null,
 	cas_fotografia_fin varchar(100),
 	cas_prioridad varchar(10) not null,
+	cas_disponibilidad int not null,
 	tipo_pavimento_id  int not null,
 	entorno_id int not null,
 	tramo_id int not null,
@@ -55,6 +56,18 @@ create table tbl_entorno(
 	ent_id serial,
 	ent_descripcion varchar(200) not null,
 	primary key(ent_id)
+);
+
+--Tabla Bitacora (Triggers)
+
+create table tbl_bitacora(
+	bit_id serial,
+	bit_usuario varchar(30),
+	bit_fecha_modificacion date,
+	bit_tabla varchar(45),
+	bit_observacion varchar(100),
+	primary key(bit_id)
+
 );
 
 -- LLAVES FORANEAS CORRESPONDIENTES A LAS TABLAS

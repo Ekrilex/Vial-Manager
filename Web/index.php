@@ -1,7 +1,7 @@
 <?php 
 
 	include_once '../View/Partials/HtmlHead.php';
-	echo "<body>";
+	echo "<body data-background-color='dark'>";
 		echo "<div class='wrapper static-sidebar'>";
 
 			include_once '../View/Partials/navBar.php';

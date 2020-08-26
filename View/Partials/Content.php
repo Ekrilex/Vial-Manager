@@ -1,4 +1,4 @@
-<div class="panel-header bg-primary-gradient">
+<div class="panel-header bg-default-gradient">
 					<div class="page-inner py-5">
 						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 							<div>
@@ -92,7 +92,7 @@
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="card card-primary">
+							<div class="card card-secondary">
 								<div class="card-header">
 									<div class="card-title">Daily Sales</div>
 									<div class="card-category">March 25 - April 02</div>
@@ -106,14 +106,10 @@
 									</div>
 								</div>
 							</div>
-							<div class="card">
-								<div class="card-body pb-0">
-									<div class="h1 fw-bold float-right text-warning">+7%</div>
-									<h2 class="mb-2">213</h2>
-									<p class="text-muted">Transactions</p>
-									<div class="pull-in sparkline-fix">
-										<div id="lineChart"></div>
-									</div>
+							<div class="card card-primary bg-primary-gradient">
+								<div class="card-body">
+									<h4 class="mb-1 fw-bold">Tasks Progress</h4>
+									<div id="task-complete" class="chart-circle mt-4 mb-3"></div>
 								</div>
 							</div>
 						</div>

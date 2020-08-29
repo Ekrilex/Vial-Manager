@@ -1,0 +1,34 @@
+body.fondo{
+    background-image: url("../img/img4.jpg"); 
+    background-size: 100%;
+    -moz-background-size: 100% 100%;           /* Gecko 1.9.2 (Firefox 3.6) */
+    -o-background-size: 100% 100%;           /* Opera 9.5 */
+    padding-top: 5em;
+    padding-left: 31em;
+    width: 65%;
+    z-index: 100;
+}
+
+.formu {
+    background: rgba(0, 0, 0, 0.39);
+    width: 95%;
+    border-radius: 1em;
+    padding-bottom: 1em;
+    padding: 1em;
+    box-shadow: 0em 0em 30px rgb(0, 24, 236);
+    color: white;
+    font-weight: bold;
+    z-index: 100;
+}
+
+
+#iconop {
+    width: 100px; 
+    height: 100px;  
+    margin-top: -60px;
+   
+}
+
+
+
+

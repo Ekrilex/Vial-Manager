@@ -1,3 +1,24 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title text-center" id="exampleModalLabel"><b>¿Desea cerrar sesión?</b></h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"></span>
+				</button>
+			</div>
+			<div class="modal-body">
+			Seleccione "Aceptar" a continuación si está listo para finalizar su sesión actual
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal"  href="index.php">Cancelar</button>
+				<a class="btn btn-success" href="login.php">Aceptar</a>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script src="assets/js/core/jquery.3.2.1.min.js"></script>
 	<script src="assets/js/core/popper.min.js"></script>
 	<script src="assets/js/core/bootstrap.min.js"></script>

@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.2.9
 -- Dumped by pg_dump version 9.2.9
--- Started on 2020-08-25 22:05:32
+-- Started on 2020-08-29 15:58:14
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -209,7 +209,10 @@ ALTER SEQUENCE tbl_caso_cas_id_seq OWNED BY tbl_caso.cas_id;
 CREATE TABLE tbl_caso_deterioro (
     cas_det_id integer NOT NULL,
     deterioro_id integer NOT NULL,
-    caso_id integer NOT NULL
+    caso_id integer NOT NULL,
+    cas_det_gravedad integer NOT NULL,
+    cas_det_area numeric(10,3) NOT NULL,
+    cas_det_extension numeric(8,2) NOT NULL
 );
 
 
@@ -719,7 +722,10 @@ CREATE TABLE tbl_tramo (
     jerarquia_vial_id integer NOT NULL,
     eje_vial_id integer NOT NULL,
     estado_id integer NOT NULL,
-    usuario_id integer NOT NULL
+    usuario_id integer NOT NULL,
+    tra_disponibilidad integer NOT NULL,
+    tra_ancho_inicio numeric(5,2) NOT NULL,
+    tra_ancho_fin numeric(5,2) NOT NULL
 );
 
 
@@ -1040,7 +1046,7 @@ SELECT pg_catalog.setval('tbl_caso_cas_id_seq', 1, false);
 -- Data for Name: tbl_caso_deterioro; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY tbl_caso_deterioro (cas_det_id, deterioro_id, caso_id) FROM stdin;
+COPY tbl_caso_deterioro (cas_det_id, deterioro_id, caso_id, cas_det_gravedad, cas_det_area, cas_det_extension) FROM stdin;
 \.
 
 
@@ -1297,7 +1303,7 @@ SELECT pg_catalog.setval('tbl_tipo_documento_tip_id_seq', 1, false);
 -- Data for Name: tbl_tramo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY tbl_tramo (tra_id, tra_codigo, tra_fecha_creacion, tra_segmento, tra_nomenclatura, tra_nombre_via, calzada_id, barrio_id, elemento_id, jerarquia_vial_id, eje_vial_id, estado_id, usuario_id) FROM stdin;
+COPY tbl_tramo (tra_id, tra_codigo, tra_fecha_creacion, tra_segmento, tra_nomenclatura, tra_nombre_via, calzada_id, barrio_id, elemento_id, jerarquia_vial_id, eje_vial_id, estado_id, usuario_id, tra_disponibilidad, tra_ancho_inicio, tra_ancho_fin) FROM stdin;
 \.
 
 
@@ -1745,7 +1751,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2020-08-25 22:05:32
+-- Completed on 2020-08-29 15:58:16
 
 --
 -- PostgreSQL database dump complete

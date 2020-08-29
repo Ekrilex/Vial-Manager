@@ -32,7 +32,7 @@
     <center><body class="fondo">
         <div class="container">
        
-            <div class="col-md-15 formu">
+            <div class="formu">
             <img src="assets/img/iconos/avatardefault_92824.ico" id="iconop">
             <h1 class="text-center text-light display-5" ><b>Login<b></h1><br>
                 <form action="index.php" method="POST" name="login">

@@ -8,6 +8,9 @@ CREATE TABLE tbl_tramo(
   Tra_segmento integer  not null,
   Tra_nomenclatura varchar (45) not null, 
   Tra_nombre_via varchar(15) not null,
+  Tra_disponibilidad int not null,
+  Tra_ancho_inicio decimal(5,2) not null,
+  Tra_ancho_fin decimal(5,2) not null,
   Calzada_id integer  not null,
   Barrio_id integer  not null,
   Elemento_id integer  not null,
@@ -30,6 +33,9 @@ CREATE TABLE tbl_comuna(
 
  CREATE TABLE tbl_caso_deterioro(
  Cas_det_id serial primary key,
+ Cas_det_gravedad int not null,
+ Cas_det_area decimal(10,3) not null,
+ Cas_det_extension decimal(8,2) not null,
  Deterioro_id integer  not null,
  Caso_id integer  not null  
 );

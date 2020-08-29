@@ -32,3 +32,72 @@ body.fondo{
 
 
 
+@media screen and (max-width: 1400px){
+
+    body.fondo{
+        padding-left:0;
+    }
+
+    .formu{
+        margin-left:49%;
+        width:55%;
+        
+    }
+
+}
+
+@media screen and (max-width: 1200px){
+    body.fondo{
+        background-size:100% 100%;
+    }
+    .formu{
+        margin-left:47%;
+        width:60%;
+        
+    }
+
+}
+
+@media screen and (max-width: 1050px){
+    
+    .formu{
+        margin-left:44%;
+        width:66%;
+        
+    }
+
+}
+
+@media screen and (max-width: 950px){
+    
+    .formu{
+        margin-left:40%;
+        width:72%;
+        
+    }
+
+}
+
+@media screen and (max-width: 800px){
+    
+
+    .formu{
+        margin-left:38%;
+        width:81%;
+        
+    }
+
+}
+
+@media screen and (max-width: 700px){
+
+    
+    
+
+    .formu{
+        margin-left:0;
+        width:160%;
+        
+    }
+
+}

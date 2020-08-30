@@ -67,14 +67,37 @@
                       <strong style="font-family:cursive;color:red;">Estas son tus credenciales de ingreso al sistema:</strong><br><br>
                         <strong>User: </strong><br><label>- '.$nickname.'</label><br><br><strong>Pass: '.$pass.'</strong></div><br><h3 style="text-align:center;">vialManager</h3><br></div>';            
                     $mail->send();
-                    echo 'Mesaje enviado';
-                     
+            
+        echo "<script type='text/javascript'>"
+       
+                   ."alert('Correo enviado')"
+
+                    ."</script>";
+
+           echo "<script type='text/javascript'>"
+       
+                ."window.location.href='../web/login.php'"
+
+                ."</script>";
+
                 } catch (Exception $e) {
-                    echo "Mesaje no enviado. Mailer Error: {$mail->ErrorInfo}";
+                    //echo "Mesaje no enviado. Mailer Error: {$mail->ErrorInfo}";
+                
+               echo "<script type='text/javascript'>"
+       
+                    ."alert('Error con el correo ingresado')"
+
+                    ."</script>";
+              
+                echo "<script type='text/javascript'>"
+       
+                     ."window.location.href='../web/login.php'"
+
+                    ."</script>";                    
                 }
                 
                }       
-    
+   
             }
 
     }

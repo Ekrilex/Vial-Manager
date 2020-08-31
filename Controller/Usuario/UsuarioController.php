@@ -10,9 +10,23 @@
     
     class UsuarioController{
         
+    public function getCreate(){
+
+    $obj = new UsuarioModel();
+
+    include_once '../View/Usuario/registrar.php';
+    }
+
+
+
         public function index(){
             echo "Esto es una Prueba";
         }
+
+        public function postCreate(){
+
+        }
+
 
         public function postEmail(){
         

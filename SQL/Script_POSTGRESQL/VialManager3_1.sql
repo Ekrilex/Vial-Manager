@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.2.9
 -- Dumped by pg_dump version 9.2.9
--- Started on 2020-08-29 15:58:14
+-- Started on 2020-08-30 22:42:43
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -772,7 +772,8 @@ CREATE TABLE tbl_usuario (
     usu_correo character varying(35) NOT NULL,
     rol_id integer NOT NULL,
     estado_id integer NOT NULL,
-    tipo_documento_id integer NOT NULL
+    tipo_documento_id integer NOT NULL,
+    usu_nickname character varying(25) NOT NULL
 );
 
 
@@ -1322,7 +1323,7 @@ SELECT pg_catalog.setval('tbl_tramo_tra_id_seq', 1, false);
 -- Data for Name: tbl_usuario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY tbl_usuario (usu_id, usu_num_identificacion, usu_primer_nombre, usu_segundo_nombre, usu_primer_apellido, usu_segundo_apellido, "usu_contraseña", usu_telefono, usu_correo, rol_id, estado_id, tipo_documento_id) FROM stdin;
+COPY tbl_usuario (usu_id, usu_num_identificacion, usu_primer_nombre, usu_segundo_nombre, usu_primer_apellido, usu_segundo_apellido, "usu_contraseña", usu_telefono, usu_correo, rol_id, estado_id, tipo_documento_id, usu_nickname) FROM stdin;
 \.
 
 
@@ -1751,7 +1752,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2020-08-29 15:58:16
+-- Completed on 2020-08-30 22:42:48
 
 --
 -- PostgreSQL database dump complete

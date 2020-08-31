@@ -13,7 +13,7 @@
             $this->connect();
         }
         private function setConnect(){
-            require_once 'conf.php';
+            require_once 'ConexionMY.php';
             $this->server=$server;
             $this->user=$user;
             $this->pass=$pass;

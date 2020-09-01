@@ -1,5 +1,8 @@
 <?php
 //agregar el helpers para el MVC
+
+@session_start();
+
     function redirect($url){
         echo "<script type='text/javascript'>"
             ."window.location.href='$url'"

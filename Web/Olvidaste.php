@@ -52,9 +52,27 @@
                 <div class="text-center">  
                     <a class="btn btn-success btn-link " href="login.php"><b>Regresar</b></a><br>
                 </div>
-              
-              
+            
             </div>
+
+            <?php
+            if (isset($_SESSION['errores'])) {
+            ?>
+              <br><br>
+         <div class="alert alert-danger alert-dismissible fade show col-md-6" role="alert">
+            <?php 
+             foreach ($_SESSION['errores'] as $errores => $error) {
+              echo $error;
+               }
+            ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+          <?php
+          } unset($_SESSION['errores']);
+          ?>
+          
         </div>
     </body>
 </html>

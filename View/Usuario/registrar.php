@@ -1,6 +1,29 @@
 <style>
-      
+    @media screen and (max-width: 765px){
+      .boton-interfaz {
+
+        position:absolute;
+        bottom:1px;
+        top:-25px;
+        
+      }
+
+      .guardar{
+        left:20%;
+      }
+
+      .cancelar{
+        left:58%;
+      }
+
+      .fondo {
+        background-image:url('../Web/assets/img/fondoAlternativoRegistroUsu.jpg');
+        background-size:700px 1300px;
+      }
+    }
 </style>
+<!--Hoja de estilos utilizada es web/assets/css/demo.css-->
+
 <div class="container fondo"><br>
 
       <div style="text-align:center;background:white;color:blue;border-radius:50px 50px 50px;">
@@ -9,19 +32,20 @@
 
 </div><br>
   <form action="<?php echo getUrl("Usuario","Usuario","postCreate"); ?>" method="POST">
+
       <div style="width:95%;  border: 1 solid red;" class="container personal letra">
             <div class="row">
                   <div class="col-md-3">
                       <h3>Primer nombre: </h3>	
                   </div>     
                   <div class="col-md-3">
-                     <input type="text" class="form-control"  id="bor"name="primer_nombre">
+                     <input type="text" class="form-control"  id="bor" name="primer_nombre">
                   </div> 
                   <div class="col-md-3">
                       <h3>Segundo nombre: </h3>	
                   </div>  
                   <div class="col-md-3">
-                     <input type="text" class="form-control" id="bor" name="primer_nombre">
+                     <input type="text" class="form-control" id="bor" name="segundo_nombre">
                   </div>         
             </div><br>
         <div class="row">
@@ -29,31 +53,31 @@
                 <h3>Primer apellido:</h3>
           </div>
           <div class="col-md-3">
-               <input type="text" class="form-control" id="bor"name="primer_apellido">
+               <input type="text" class="form-control" id="bor" name="primer_apellido">
           </div>
           <div class="col-md-3">
                <h3>Segundo apellido:</h3>
          </div>
-      <div class="col-md-3">
-          <input type="text"  class="form-control"  id="bor"name="segundo_apellido">
-      </div>
+          <div class="col-md-3">
+              <input type="text"  class="form-control"  id="bor" name="segundo_apellido">
+          </div>
       </div><br>
           <div class="row">
           <div class="col-md-3">
             <h3>Tipo identificación:</h3>
           </div>
           <div class="col-md-3">
-          <select class="form-control" name="documento" id="bor">
-            <option>Cedula de ciudadania</option>
-            <option>Tarjeta de identidad</option>
-            <option>Documento extrangero</option>
-          </select><br>
+              <select class="form-control" name="documento" id="bor">
+                  <option>Cedula de ciudadania</option>
+                  <option>Tarjeta de identidad</option>
+                  <option>Documento extrangero</option>
+              </select><br>
           </div>
           <div class="col-md-3">
             <h3>Numero de documento:</h3>
           </div>
           <div class="col-md-3">
-          <input type="number" class="form-control"  id="bor"name="numero_documento">
+             <input type="number" class="form-control"  id="bor"name="numero_documento">
           </div>
       </div>
 
@@ -111,12 +135,12 @@
          </div>
       </div><br><br>
       <div class="row" id="bon">
-          <div class="col-md-5"></div>
+          <div class="col-md-4"></div>
             <div class="col-md-2 "> 
-                <a href="#ventana" data-toggle="modal"><button type="button" class="btn btn-primary">Guardar</button></a>
+                <a class="boton-interfaz guardar" href="#ventana" data-toggle="modal"><button type="button" class="btn btn-primary">Guardar</button></a>
             </div>
             <div class="col-md-2 ">
-               <a href="#ventana2" data-toggle="modal"><button type="button" class="btn btn-danger">Cancelar</button></a>
+               <a class="boton-interfaz cancelar" href="#ventana2" data-toggle="modal"><button type="button" class="btn btn-danger">Cancelar</button></a>
            </div>
       </div>
       <br><br>

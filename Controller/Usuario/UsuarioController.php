@@ -95,7 +95,7 @@
                 ."</script>";
 
                 } catch (Exception $e) {
-                    //echo "Mesaje no enviado. Mailer Error: {$mail->ErrorInfo}";
+                    //echo "Mensaje no enviado. Mailer Error: {$mail->ErrorInfo}";
                 
                echo "<script type='text/javascript'>"
        

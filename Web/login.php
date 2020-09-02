@@ -31,8 +31,35 @@
     </head>
     <center><body class="fondo">
         <div class="container">
-       
-            <div class="formu">
+
+         <?php
+           if (isset($_SESSION['result'])) {
+          ?>
+         <script type="text/javascript">$( document ).ready(function() {$('#ventana').modal('toggle')});</script>
+          <div class="modal" id="ventana">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content text-center">
+               <div class="modal-header">
+                 <h4><strong>¡Correo enviado!</strong></h4>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+              <div class="modal-body">
+                <p><?php echo $_SESSION['result']; ?></p>
+                <p>Vial Manager</p>              
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+              </div>           
+            </div>
+          </div>
+        </div>
+       <?php
+         } unset($_SESSION['result']); 
+       ?>               
+        
+           <div class="formu">
             <img src="assets/img/iconos/avatardefault_92824.ico" id="iconop">
             <h1 class="text-center text-light display-5" ><b>Login<b></h1><br>
                 <form action="index.php" method="POST" name="login">

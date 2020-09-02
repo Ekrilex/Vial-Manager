@@ -31,26 +31,35 @@
         public function postEmail(){
         
             $obj = new UsuarioModel();
-            $email=$_POST['correo'];
-            
+            $email1=$_POST['correo'];
+        
+            if (!$email1!="") {
+              $_SESSION['errores']['correo']="Debe diligenciar el correo";
+
+                 echo "<script type='text/javascript'>"
+       
+                 ."window.location.href='../web/Olvidaste.php'"
+
+                 ."</script>";
+
+             }else{             
     
-            $sql="SELECT * FROM tblusuario WHERE Usu_correo = '".$email."'";
-               
+            $sql="SELECT * FROM tblusuario WHERE Usu_correo = '".$email1."'"; 
             $usuario=$obj->consultar($sql);
         
             foreach ($usuario as $usu){
-                $email=$usu['Usu_correo'];
+                $email2=$usu['Usu_correo'];
                 $pass=$usu['Usu_contrasena'];
                 $nickname=$usu['Nickname'];         
             }
     
-            if (isset($email)){
+            if (isset($email2)){
     
                 $mail = new PHPMailer(true);
                 
-                try {
+                 try {
                 
-                $mail->SMTPOptions = array(
+                   $mail->SMTPOptions = array(
                     'ssl' => array(
                     'verify_peer' => false,
                     'verify_peer_name' => false,
@@ -68,8 +77,8 @@
                     $mail->Port       = 587;                                 
                 
                     $mail->setFrom('pruebavialmanager123@gmail.com', 'vialManager');
-                    $mail->addAddress($email, 'usuario');  
-                
+                    $mail->addAddress($email2, 'usuario');  
+
                     $mail->isHTML(true);                                  
                     $mail->Subject = 'Recuperar cuenta';
                 
@@ -80,39 +89,39 @@
                       </div><br><div style="margin:auto 40px;text-align:justify;font-size:18px;">
                       <strong style="font-family:cursive;color:red;">Estas son tus credenciales de ingreso al sistema:</strong><br><br>
                         <strong>User: </strong><br><label>- '.$nickname.'</label><br><br><strong>Pass: '.$pass.'</strong></div><br><h3 style="text-align:center;">vialManager</h3><br></div>';            
+                
                     $mail->send();
-            
-        echo "<script type='text/javascript'>"
+                    $c1=substr($email2,0,3);
+                    $c2 = strstr($email2, '@');
+                    $cor=$c1."******".$c2;
+
+                   if ($usuario) {
+                     $_SESSION['result']="Por favor revise el correo $cor en el encontrara la información de recuperación de cuenta.";
+                   }
+
+                   echo "<script type='text/javascript'>"
        
-                   ."alert('Correo enviado')"
+                   ."window.location.href='../web/login.php'"
 
-                    ."</script>";
-
-           echo "<script type='text/javascript'>"
-       
-                ."window.location.href='../web/login.php'"
-
-                ."</script>";
-
-                } catch (Exception $e) {
-                    //echo "Mensaje no enviado. Mailer Error: {$mail->ErrorInfo}";
+                   ."</script>";
+                   
+                 } catch (Exception $e) {
+                    echo "Mesaje no enviado. Mailer Error: {$mail->ErrorInfo}";
+                 }
                 
-               echo "<script type='text/javascript'>"
-       
-                    ."alert('Error con el correo ingresado')"
+                }else{
 
-                    ."</script>";
-              
-                echo "<script type='text/javascript'>"
+                  $_SESSION['errores']['correo']="Correo invalido";              
+                   
+                    echo "<script type='text/javascript'>"
        
-                     ."window.location.href='../web/login.php'"
+                    ."window.location.href='../web/Olvidaste.php'"
 
-                    ."</script>";                    
-                }
-                
-               }       
-   
+                    ."</script>";                  
+                }       
             }
+          }        
+
 
     }
 ?>

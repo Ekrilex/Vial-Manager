@@ -94,7 +94,7 @@
 					<li class="nav-item">
 						<a data-toggle="collapse" href="#sidebarLayouts">
 							<i class="fas fa-clipboard-list"></i>
-							<p>Orden Mto</p>
+							<p>Gestion Vial (Ordenes)</p>
 							<span class="caret"></span>
 						</a>
 						<div class="collapse" id="sidebarLayouts">

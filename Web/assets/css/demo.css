@@ -52,7 +52,28 @@ font-size:18px;
   text-shadow: -2px 2px 0 black;
   }
 
+  @media screen and (max-width: 765px){
+	.boton-interfaz {
 
+	  position:absolute;
+	  bottom:1px;
+	  top:-25px;
+	  
+	}
+
+	.guardar{
+	  left:20%;
+	}
+
+	.cancelar{
+	  left:58%;
+	}
+
+	.fondo {
+	  background-image:url('../img/fondoAlternativoRegistroUsu.jpg');
+	  background-size:700px 1300px;
+	}
+  }
 
 
 .custom-template.open {

@@ -1,27 +1,4 @@
-<style>
-    @media screen and (max-width: 765px){
-      .boton-interfaz {
 
-        position:absolute;
-        bottom:1px;
-        top:-25px;
-        
-      }
-
-      .guardar{
-        left:20%;
-      }
-
-      .cancelar{
-        left:58%;
-      }
-
-      .fondo {
-        background-image:url('../Web/assets/img/fondoAlternativoRegistroUsu.jpg');
-        background-size:700px 1300px;
-      }
-    }
-</style>
 <!--Hoja de estilos utilizada es web/assets/css/demo.css-->
 
 <div class="container fondo"><br>

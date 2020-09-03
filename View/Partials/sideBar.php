@@ -212,26 +212,7 @@
 										</ul>
 									</div>
 								</li>
-								<li>
-									<a data-toggle="collapse" href="#subnav2">
-										<span class="sub-item">Comuna</span>
-										<span class="caret"></span>
-									</a>
-									<div class="collapse" id="subnav2">
-										<ul class="nav nav-collapse subnav">
-											<li>
-												<a href="#">
-													<span class="sub-item">Registrar Comuna</span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span class="sub-item">Consultar Comuna</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</li>
+								
 								<li>
 									<a data-toggle="collapse" href="#subnav3">
 										<span class="sub-item">Deterioro</span>

@@ -44,13 +44,13 @@
 
              }else{             
     
-            $sql="SELECT * FROM tblusuario WHERE Usu_correo = '".$email1."'"; 
+            $sql="SELECT * FROM tbl_usuario WHERE usu_correo = '".$email1."'"; 
             $usuario=$obj->consultar($sql);
         
             foreach ($usuario as $usu){
-                $email2=$usu['Usu_correo'];
-                $pass=$usu['Usu_contrasena'];
-                $nickname=$usu['Nickname'];         
+                $email2=$usu['usu_correo'];
+                $pass=$usu['usu_contraseña'];
+                $nickname=$usu['usu_nickname'];         
             }
     
             if (isset($email2)){

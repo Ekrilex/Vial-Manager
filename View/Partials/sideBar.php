@@ -221,12 +221,12 @@
 									<div class="collapse" id="subnav3">
 										<ul class="nav nav-collapse subnav">
 											<li>
-												<a href="#">
+												<a href="<?php echo getUrl("Deterioro","Deterioro","getCreate");?>">
 													<span class="sub-item">Registrar Deterioro</span>
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="<?php echo getUrl("Deterioro","Deterioro","index");?>">
 													<span class="sub-item">Consultar Deterioro</span>
 												</a>
 											</li>

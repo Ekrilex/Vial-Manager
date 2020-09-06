@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.2.9
 -- Dumped by pg_dump version 9.2.9
--- Started on 2020-09-03 18:50:21
+-- Started on 2020-09-06 15:28:22
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -249,7 +249,7 @@ ALTER SEQUENCE tbl_caso_deterioro_cas_det_id_seq OWNED BY tbl_caso_deterioro.cas
 
 CREATE TABLE tbl_comuna (
     com_id integer NOT NULL,
-    com_descripcion character varying(15) NOT NULL
+    com_ubicacion character varying(15) NOT NULL
 );
 
 
@@ -1066,7 +1066,7 @@ SELECT pg_catalog.setval('tbl_caso_deterioro_cas_det_id_seq', 1, false);
 -- Data for Name: tbl_comuna; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY tbl_comuna (com_id, com_descripcion) FROM stdin;
+COPY tbl_comuna (com_id, com_ubicacion) FROM stdin;
 \.
 
 
@@ -1752,7 +1752,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2020-09-03 18:50:23
+-- Completed on 2020-09-06 15:28:24
 
 --
 -- PostgreSQL database dump complete

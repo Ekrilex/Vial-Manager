@@ -2,7 +2,7 @@
 	include_once '../Lib/helpers.php';
 	include_once '../View/Partials/HtmlHead.php';
 	
-	echo "<body data-background-color='dark' style='background-color:rgb(18,18,37);'>";
+	echo "<body data-background-color='dark'>";
 		echo "<div class='wrapper static-sidebar'>";
 
 			include_once '../View/Partials/navBar.php';

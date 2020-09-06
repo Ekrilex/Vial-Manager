@@ -28,7 +28,7 @@ CREATE TABLE tbl_jerarquia_vial(
 
 CREATE TABLE tbl_comuna(
   Com_id serial primary key,
-  Com_descripcion varchar (15) not null
+  Com_ubicacion varchar (15) not null
 );
 
  CREATE TABLE tbl_caso_deterioro(

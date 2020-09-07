@@ -15,6 +15,7 @@
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <script src="assets/js/core/jquery.3.2.1.min.js"></script>
         <script src="assets/js/core/bootstrap.min.js"></script>
+        <script src="assets/js/core/global.js"></script>
 
         <!-- Fonts and icons -->
         <script src="assets/js/plugin/webfont/webfont.min.js"></script>

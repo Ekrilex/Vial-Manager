@@ -80,17 +80,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    const userDelete = ( identificacion ) => {
-        console.log(identificacion);
-        input = document.getElementById('inputcito');
-        input.value = identificacion;
-    }
-    
-    const userActivation = ( identificacion ) =>{
-        console.log(identificacion);
-        input = document.getElementById('inputcito2');
-        input.value = identificacion;
-    }
-</script>

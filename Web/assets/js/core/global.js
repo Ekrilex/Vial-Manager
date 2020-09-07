@@ -32,6 +32,7 @@ $(document).ready(function(){
         }
     });
 
+    // Funcion para la validacion de caracteres especiales en los inputs.
     $(document).on("change",".validacion",function(){
         let texto = $(this).val();
         let noValidos = '!"#$%/()=?¡¿+´{}[]-_,:,;@*|';
@@ -60,3 +61,17 @@ $(document).ready(function(){
     });
 
 });
+
+// Funcion para enviar paramentos mediante la modal a la funcion userDelete
+const userDelete = ( identificacion ) => {
+    console.log(identificacion);
+    input = document.getElementById('inputcito');
+    input.value = identificacion;
+}
+
+// Funcion para enviar paramentos mediante la modal a la funcion userActivation
+const userActivation = ( identificacion ) =>{
+    console.log(identificacion);
+    input = document.getElementById('inputcito2');
+    input.value = identificacion;
+}

@@ -1,5 +1,5 @@
 <?php
-    include_once '../Lib/Conf/connection.php';
+    include_once '../Lib/ConexionMY.php';
 
     class MasterModel extends Connection{
         public function insertar($sql)

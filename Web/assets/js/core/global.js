@@ -1,5 +1,49 @@
 $(document).ready(function(){
 
+
+//////////////////Daniel //////////////////
+
+   $(document).on("keyup","#filtro",function(){
+    var url=$(this).attr("data-url");
+    var valor=$(this).val();
+     $.ajax({
+     url:url,
+     type: "POST",
+     data: "valor="+valor,
+       success:function(datos){
+          $("tbody").html(datos);}
+     });
+   });
+
+ $(document).on("click","#editar", function(){
+  var id= $(this).val();
+  var url=$(this).attr("data-url");  
+  $.ajax({
+    url:url,
+    type: "POST",
+    data: "id="+id,     
+    success:function(datos){
+      $("#contenido_editar").html(datos);
+      $('#modal_editar').modal();}   
+    });
+  }); 
+
+  $(document).on("click","#eliminar", function(){
+  var id= $(this).val();
+  var url=$(this).attr("data-url");  
+  $.ajax({
+    url:url,
+    type: "POST",
+    data: "id="+id,     
+    success:function(datos){
+      $("#cotenido_eliminar").html(datos);
+      $('#modal_eliminar').modal();}   
+    });
+  }); 
+
+////////////////////////////////////////////////////////////////////
+
+
     $(document).on("keyup", "#correo", function() {
         var cadena = $(this).val();
         var cont = 0;

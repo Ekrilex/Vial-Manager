@@ -32,14 +32,14 @@
         echo "<td>".$det['det_nombre']."</td>";
         echo "<td>".$det['det_tipo_deterioro']."</td>";
 
-    echo "<td><button class='btn btn-primary' id='g' value='".$det['det_id']."' data-url='".getUrl("Deterioro","Deterioro","getUpdate",false,"ajax")."'>Modificar</button></td>";
-         echo "<td><button class='btn btn-danger' id='e' value='".$det['det_id']."' data-url='".getUrl("Deterioro","Deterioro","getDelete",false,"ajax")."'>Eliminar</button></td>";
+    echo "<td><button class='btn btn-primary' id='editar' value='".$det['det_id']."' data-url='".getUrl("Deterioro","Deterioro","getUpdate",false,"ajax")."'>Modificar</button></td>";
+         echo "<td><button class='btn btn-danger' id='eliminar' value='".$det['det_id']."' data-url='".getUrl("Deterioro","Deterioro","getDelete",false,"ajax")."'>Eliminar</button></td>";
         echo "</tr>";
        }
   ?><br><br>
 </table>
 </div>
-<div class="modal col-md-12 col-sm-12" id="myModal">
+<div class="modal col-md-12 col-sm-12" id="modal_editar">
   <div class="modal-dialog">
     <div class="modal-content">
       <form action="<?php echo getUrl("Deterioro","Deterioro","postUpdate"); ?>" method="POST">            
@@ -47,7 +47,7 @@
         <h3 class="modal-title text-white">Actualizar registro</h3>
       </div>
       <div class="modal-body">
-          <div id="contenido" class="text-dark"></div>      
+          <div id="contenido_editar" class="text-dark"></div>      
       </div>
       <div class="modal-footer">
         <input type="submit" class="btn btn-primary" value="Actualizar">
@@ -57,7 +57,7 @@
     </div>
   </div>
 </div>
-<div class="modal col-md-12 col-sm-12" id="myModal2">
+<div class="modal col-md-12 col-sm-12" id="modal_eliminar">
   <div class="modal-dialog">
     <div class="modal-content">
       <form action="<?php echo getUrl("Deterioro","Deterioro","postDelete"); ?>" method="POST">          
@@ -66,7 +66,7 @@
       </div>
       <h3 class="container text-dark">¿Esta seguro de eliminar este registro?</h3>
       <div class="modal-body">
-          <div id="contenido2" class="text-dark"></div>      
+          <div id="cotenido_eliminar" class="text-dark"></div>      
       </div>
       <div class="modal-footer">
         <input type="submit" class="btn btn-danger" value="Aceptar">

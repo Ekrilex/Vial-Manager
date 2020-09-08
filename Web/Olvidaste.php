@@ -36,7 +36,7 @@
             <div class="col-md-15 formu">
             <img src="assets/img/iconos/avatardefault_92824.ico" id="iconop">
             <h1 class="text-center text-light display-5" ><b>Recuperar Contraseña<b></h1><br>
-                <form action="<?php echo getUrl("Usuario","Usuario","postEmail"); ?>" method="POST" name="login">
+                <form action="<?php echo getUrl("Correo","Correo","postEmail"); ?>" method="POST" name="login">
                     <label for="exampleInputEmail1" class="text-light">Email</label>
                     <div class="input-group">
                             <div class="input-group-prepend">

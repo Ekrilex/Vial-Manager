@@ -43,7 +43,7 @@ $(document).ready(function(){
 
 ////////////////////////////////////////////////////////////////////
 
-
+    //Validacion de caracteres especiales en la interfaz "Olvidaste.php" correo electronico
     $(document).on("keyup", "#correo", function() {
         var cadena = $(this).val();
         var cont = 0;
@@ -103,6 +103,94 @@ $(document).ready(function(){
             $("#error").html("");
         }
     });
+
+///////////////////////////Sandra Barrio ////////////////////////////
+
+    //Se creo esta funcion para que NO ingrese el usuario caracteres especiales en la vista "Registrar"
+    $(document).on("keyup", ".barrioN",function(){
+        
+        var barrioNom = $(this).val();
+        var cont = 0;
+        var noValidos = "!#$%&/()=?¡+{}[]°|',;:´¨*¿";
+        for (let a = 0; a < barrioNom.length; a++) {
+            for (let b = 0; b < noValidos.length; b++) {
+                if (barrioNom[a] == noValidos[b]) {
+                    cont++;
+                }
+            }
+        }
+        if (cont > 0) {
+            $(this).val(barrioNom.substr(0, barrioNom.length - 1));
+        }
+    });
+    // Se creo el filtro para tbl_barrio, No se puden recibir carcateres especiales tambien
+    $(document).on("keyup","#filtroB",function(){
+        var url=$(this).attr("data-url");
+        var valor=$(this).val();
+        var cont = 0;
+        var noValidos = "!#$%&/()=?¡+{}[]°|',;:´¨*¿";
+
+        //Validacion de caracteres especiales
+        for (let a = 0; a < valor.length; a++) {
+            for (let b = 0; b < noValidos.length; b++) {
+                if (valor[a] == noValidos[b]) {
+                    cont++;
+                }
+            }
+        }
+        if (cont > 0) {
+            $(this).val(valor.substr(0, valor.length - 1));
+        }
+        
+        //Validacion de Filtro
+        $.ajax({
+            url:url,
+            type: "POST",
+            data: "barrio=" + valor,
+            success: function(datos){
+                $("tbody").html(datos);
+            }
+        });
+    });
+
+    //Se creo esta funcion para que NO ingrese el usuario caracteres especiales en la vista "Editar"
+    $(document).on("keyup", ".barrioEditar",function(){
+        var barrioEdit = $(this).val();
+        var cont = 0;
+        var noValidos = "!#$%&/()=?¡+{}[]°|',;:´¨*¿";
+        for (let a = 0; a < barrioEdit.length; a++) {
+            for (let b = 0; b < noValidos.length; b++) {
+                if (barrioEdit[a] == noValidos[b]) {
+                    cont++;
+                }
+            }
+        }
+        if (cont > 0) {
+            $(this).val(barrioEdit.substr(0, barrioEdit.length - 1));
+        }
+    });
+   
+
+    //Se creo esta funcion para el modal de "Eliminar"
+    $(document).on("click", "#elimi",function(){
+       
+        var barrioElimi = $(this).val();
+        var url = $(this).attr("data-url");
+
+        // alert(barrioElimi);
+        $.ajax({
+            url:url,
+            type: "POST",
+            data: "barrioElimi=" + barrioElimi,
+            success: function(datos){
+                $("#eliminarB").html(datos);
+                $("#eliminar").modal();
+            }
+        });
+
+    });
+///////////////////////Aqui termina las funciones de tbl_barrio///////////////////
+
 
 });
 

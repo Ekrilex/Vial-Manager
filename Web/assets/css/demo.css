@@ -16,66 +16,6 @@
 	transition: all .5s;
 }
 
-.modal-l{
-color:black;
-font-size:18px;
-}
-
-#bor{
-	border: 2px solid #036BFF;
-}
-.personal {
-    background: rgba(0,0,0,0.5);
-    width: 95%;
-    border-radius: 1em;
-    padding-bottom: 1em;
-    padding: 1em;
-    color:black;
-    font-weight: bold;
-    z-index: 100;
-}
-
-.fondo{
-    background-image: url("../img/img7.jpg"); 
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    -moz-background-size: 100% 100%;       
-    -o-background-size: 100% 100%;           
-}
-
-  .letra{
-  color: white;
-  margin: 0 auto;
-  text-align: center;
-  font-weight: 20;
-  font: verdana bold 19px Georgia, Serif;
-  text-shadow: -2px 2px 0 black;
-  }
-
-  @media screen and (max-width: 765px){
-	.boton-interfaz {
-
-	  position:absolute;
-	  bottom:1px;
-	  top:-25px;
-	  
-	}
-
-	.guardar{
-	  left:20%;
-	}
-
-	.cancelar{
-	  left:58%;
-	}
-
-	.fondo {
-	  background-image:url('../img/fondoAlternativoRegistroUsu.jpg');
-	  background-size:700px 1300px;
-	}
-  }
-
-
 .custom-template.open {
 	right: 0px;
 }

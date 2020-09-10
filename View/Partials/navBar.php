@@ -241,7 +241,7 @@
 							</li>
 							<li>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"><i class="fas fa-user-alt"></i> Mi Perfil</a>
+								<a class="dropdown-item" href="<?php echo getUrl("Usuario","Usuario","getPerfil"); ?>"><i class="fas fa-user-alt"></i> Mi Perfil</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" data-toggle="modal" data-target="#exampleModal" ><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
 							</li>

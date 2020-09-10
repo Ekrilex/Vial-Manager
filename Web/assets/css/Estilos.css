@@ -56,18 +56,11 @@ font-size:16px;
 /**********************************************************************/
 
 /**************************************Daniel Mosquera**************************/
- .det-fondo{ 	
-    background-image: url("../img/deterioro.jpg"); 
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    -moz-background-size: 100% 100%;       
-    -o-background-size: 100% 100%;
-}
-  .text-d{font-family: verdana;}
+.text-d{font-family: verdana;}
  .ld{color:black;text-align:center;font-weight: 20;font: verdana bold 19px Georgia, Serif;
- 	text-shadow: -1px 1px 0 blue;}
+  text-shadow: -1px 1px 0 blue;}
 .ldt{font-size:30px;background-color:white; color:blue;text-align:center;border-radius: 91px 94px 88px 91px;
--moz-border-radius: 91px 94px 88px 91px;-webkit-border-radius: 91px 94px 88px 91px;border: 0px solid #000000;} 	
+-moz-border-radius: 91px 94px 88px 91px;-webkit-border-radius: 91px 94px 88px 91px;border: 0px solid #000000;}  
  
  .lad{background-color:rgb(255,255,255,0.5);color:black;text-align:center;text-shadow: -1px 1px 0 blue;}
 /*************************************************************************************************************/

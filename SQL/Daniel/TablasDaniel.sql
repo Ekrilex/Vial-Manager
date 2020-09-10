@@ -4,10 +4,10 @@ CREATE TABLE tbl_tramo(
   
   Tra_id  serial primary key,
   Tra_codigo integer not null,
-  Tra_fecha_creacion date ,
-  Tra_segmento integer  not null,
+  Tra_fecha_creacion date,
+  Tra_segmento integer not null,
   Tra_nomenclatura varchar (45) not null, 
-  Tra_nombre_via varchar(15) not null,
+  Tra_nombre_via varchar(30) not null,
   Tra_disponibilidad int not null,
   Tra_ancho_inicio decimal(5,2) not null,
   Tra_ancho_fin decimal(5,2) not null,
@@ -23,7 +23,7 @@ CREATE TABLE tbl_tramo(
 
 CREATE TABLE tbl_jerarquia_vial(
   Jer_id integer not null primary key,
-  descripcion varchar (45) not null
+  Jer_descripcion varchar (45) not null
 );
 
 CREATE TABLE tbl_comuna(

@@ -14,7 +14,7 @@ create table tbl_usuario(
     usu_segundo_apellido varchar(30) not null,
 	usu_contrasena varchar(25) not null,
 	usu_telefono varchar(15) not null,
-    usu_nickname varchar(25) not null,
+    usu_nickname varchar(30) not null,
 	usu_correo varchar(35) not null,
 	rol_id int not null,
 	estado_id int not null,

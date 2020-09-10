@@ -90,6 +90,7 @@ if (clave1.length>0 && clave2.length>0) {
 
 //////////////////Daniel //////////////////
 
+
    $(document).on("keyup","#filtro",function(){
     var url=$(this).attr("data-url");
     var valor=$(this).val();
@@ -127,6 +128,19 @@ if (clave1.length>0 && clave2.length>0) {
       $('#modal_eliminar').modal();}   
     });
   }); 
+
+  $(document).on("keyup",".nombred",function(){
+  
+  var nombre=$(".nombred").val();
+
+  if (nombre.length == 0) {
+     $(".actualizar").attr('disabled',true);          
+     $("#errord").html("<h5 class='text-danger'>Debe llenar el nombre del detrioro</h5>");        
+  }else{
+     $(".actualizar").attr('disabled',false);          
+     $("#errord").html("");            
+  }    
+});
 
 ////////////////////////////////////////////////////////////////////
 

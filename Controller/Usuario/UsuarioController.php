@@ -114,8 +114,39 @@
           mysqli_error($ejecucion);
         }
 
-      }       
+      }
 
+       public function getPerfil(){
+        $obj = new UsuarioModel();
+        $_SESSION['id']="1";
+        $sql="SELECT * FROM  tbl_usuario as u , tbl_rol  as r, tbl_tipo_documento as d WHERE usu_id = '".$_SESSION['id']."' and u.rol_id = r.rol_id and d.tip_id = u.tipo_documento_id";
+        $Usuario=$obj->consultar($sql);
+        include_once '../View/Usuario/mi_perfil.php';
+       }
 
-    }
+       public function postPerfil(){
+        $obj = new UsuarioModel();
+        $correo=$_POST['correo2'];
+        $clave1=$_POST['clave1'];
+        $clave2=$_POST['clave2'];
+           
+        if ($correo=="" || $clave2=="" || $clave1=="" || $clave1!=$clave2) { 
+             $_SESSION['error']="Datos invalidos, Debe diligenciar correctamente los campos";             
+            redirect(getUrl("Usuario","Usuario","getPerfil"));                     
+        }else{
+
+          $val="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/";         
+          
+          if (preg_match($val, $correo)) {
+            $sql="UPDATE tbl_usuario set usu_correo='".$correo."', usu_contrasena='".$clave1."' WHERE usu_id='".$_SESSION['id']."'";
+            $Usuario=$obj->editar($sql);
+            redirect(getUrl("Usuario","Usuario","getPerfil"));           
+          }else{
+            $_SESSION['error']="Email invalido , no se guardo cambios";           
+            redirect(getUrl("Usuario","Usuario","getPerfil"));                  
+          }
+        }
+      }             
+
+  }
 ?>

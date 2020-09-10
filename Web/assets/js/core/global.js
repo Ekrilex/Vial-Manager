@@ -1,6 +1,93 @@
 $(document).ready(function(){
 
 
+/////////////Camila ////////////////////////
+
+$(document).on("click","#view", function(){
+    var boton=$(this).val();
+    if (boton=="v1") {
+    $(this).attr('Class','far fa-eye-slash text-primary bg-dark btn btn-dark','Id','view');
+    $(this).attr('value','v2');
+    $(".gyg").attr('type','text');
+
+     }else if (boton=="v2"){
+        $(this).attr('Class','far fa-eye text-primary bg-dark btn btn-dark','Id','view');
+        $(this).attr('value','v1');
+        $(".gyg").attr('type','password'); 
+     }
+  });
+
+$(document).on("click","#contra", function(){
+    var boton=$(this).val();
+    if (boton=="v1") {
+    $(this).attr('Class','far fa-eye-slash text-primary bg-dark btn btn-dark','Id','contra');
+    $(this).attr('value','v2');
+    $(".cl1").attr('type','text');
+    $("#cam").attr('Class','far fa-eye-slash text-primary bg-dark btn btn-dark');
+
+     }else if (boton=="v2"){
+        $(this).attr('Class','far fa-eye text-primary bg-dark btn btn-dark','Id','contra');
+        $(this).attr('value','v1');
+        $(".cl1").attr('type','password'); 
+        $("#cam").attr('Class','far fa-eye text-primary bg-dark btn btn-dark');
+     }
+  });
+
+  $(document).on("keyup","#correo2",function(){
+
+ var correo=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/;
+
+  if(correo.test($(this).val())){  
+         $("#error1").html("");  
+    }else{
+         $("#error1").html("<h5 class='text-danger'>El correo es invalido</h5>");    
+    }
+ });
+
+$(document).on("keyup",".campos",function(){
+  
+  var correo=$(".correo").val();
+  var clave1=$(".clave1").val();
+  var clave2=$(".clave2").val();
+  
+  if (correo.length == 0) {
+     $(".actualizar").attr('disabled',true);          
+     $("#error1").html("<h5 class='text-danger'>Debe llenar el correo electronico</h5>");        
+  }else{
+     $(".actualizar").attr('disabled',false);          
+     $("#error1").html("");            
+  }
+  
+  if (clave1.length == 0) {
+     $(".actualizar").attr('disabled',true);          
+     $("#error2").html("<h5 class='text-danger'>Debe llenar la contraseña</h5>");        
+  }else{
+     $(".actualizar").attr('disabled',false);          
+     $("#error2").html("");            
+  }
+
+  if (clave2.length == 0) {
+     $(".actualizar").attr('disabled',true);          
+     $("#error3").html("<h5 class='text-danger'>Debe confirmar la contraseña</h5>");        
+  }else{
+     $(".actualizar").attr('disabled',false);          
+     $("#error3").html("");            
+  }
+
+if (clave1.length>0 && clave2.length>0) {
+   if (clave1!=clave2) {
+     $(".actualizar").attr('disabled',true);          
+     $("#error2").html("<h5 class='text-danger'>Las contraseñas no coinciden</h5>");        
+     $("#error3").html("<h5 class='text-danger'>Las contraseñas no coinciden</h5>");        
+  }else{
+     $(".actualizar").attr('disabled',false);          
+     $("#error3").html("");            
+     $("#error3").html("");  
+  } 
+}    
+});
+//////////////////////////////////////////////////////////
+
 //////////////////Daniel //////////////////
 
    $(document).on("keyup","#filtro",function(){

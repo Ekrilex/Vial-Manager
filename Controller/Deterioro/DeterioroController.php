@@ -38,7 +38,7 @@
       $clasi=$obj->Clasificacion();
 
       while ($det=pg_fetch_assoc($deterioro)) {        
-       echo "<h3>Nombre:</h3><input type='text' name='nombre' class='form-control nombred' value='".$det['det_nombre']."'><div id='errord'></div><input type='hidden' name='id' value='".$det['det_id']."'><br>";
+       echo "<h3>Nombre:</h3><input type='text' name='nombre' class='form-control nombred' value='".$det['det_nombre']."'><div id='error'></div><input type='hidden' name='id' value='".$det['det_id']."'><br>";
        echo "<h3>Tipo deterioro:</h3>"; 
       echo "<select name='det_tipo_deterioro' class='form-control'>";
       foreach ($tiposs as $key => $tip) {
@@ -124,12 +124,14 @@
      $deterioro=$obj->consultar($sql);
      $datos=pg_num_rows($deterioro);
      if ($datos==0) {
-       echo "<br><td class='text-light'>No se encontraron registros</td>";
+       echo "<br><td colspan='5'><span class='icon-information text-warning'></span>&nbsp;&nbsp;No se encontraron resultados</td>";
      }else{
      include_once '../view/Deterioro/filtro.php';  
      }
 
     }
+
+
 
     }
 ?>

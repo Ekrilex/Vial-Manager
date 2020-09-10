@@ -1,11 +1,11 @@
-<div class="container"><br>
-
-<div style="background:#87CEFA;"><br>
-  <div class="ld"><h2>Registrar nuevo deterioro</h2></div><br>    
+<div class="container"><br><br>
+<div class="card col-md-12 col-sm-12 col-lg-12" style="max-width: 53rem;">
+  <div class="card-body">
+    <h5 class="card-title" style="text-align:center;">Registrar nuevo deterioro</h5><br>
   <form action="<?php echo getUrl("Deterioro","Deterioro","postCreate"); ?>" method="POST">
   <div class="row">
     <span class="col-md-1"></span>
-    <div class="col-md-2 ld">
+    <div class="col-md-3 text-white">
       <h3>Nombre del deterioro</h3>
     </div>
     <div class="col-md-6">
@@ -15,7 +15,7 @@
   </div><br><br>
   <div class="row">
     <span class="col-md-1"></span>
-    <div class="col-md-2 ld">
+    <div class="col-md-3 text-white">
       <h3>Tipo de daño</h3>
     </div>
     <div class="col-md-6">
@@ -31,7 +31,7 @@
   </div><br><br>
   <div class="row">
     <span class="col-md-1"></span>
-    <div class="col-md-2 ld">
+    <div class="col-md-3 text-white">
       <h3>Clasificaci&oacute;n</h3>
     </div>
     <div class="col-md-6">
@@ -48,20 +48,18 @@
   <div class="row col-md-12">
     <span class="col-md-4"></span>
   <div class="col-md-2">
-    <input type="submit" class="btn btn-danger" value="Guardar" id="enviar">
+    <input type="submit" class="btn btn-primary" value="Guardar" id="enviar">
   </div>
+</div>
 </form>
-  <div class="col-md-2">
-    <a href="#"><button class="btn btn-dark">Cancelar</button></a>
   </div>
-</div><br><br>
-</div><br><br>
+  </div><br><br>
 <?php
 if (isset($_SESSION['result'])) {
 
 ?>
-
-<div class="alert alert-primary alert-dismissible fade show" role="alert">
+<div class="container">
+<div class="alert alert-primary alert-dismissible fade show col-md-9 col-sm-12 col-lg-9" role="alert">
   <?php 
    foreach ($_SESSION['result'] as $result => $res) {
     echo $res;} 
@@ -74,4 +72,5 @@ if (isset($_SESSION['result'])) {
 }
 unset($_SESSION['result']);
 ?>
+</div>
 </div>

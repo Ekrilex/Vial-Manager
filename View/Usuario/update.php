@@ -1,4 +1,4 @@
- <form>
+ <form action="<?php echo getUrl("Usuario","Usuario","postUpdate") ?>" method="POST" >
      <div class="col-md-12" style="margin-top: 20px;">
         <div class="card">
             <div class="card-header">
@@ -6,55 +6,57 @@
             </div>
             <div class="card-body" style="background-color: #1f283e">
                 <?php 
-                    foreach ($users as $index) {
+                    while ($index=pg_fetch_assoc($users)) {
                 ?>
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputEmail4">Primer Nombre</label>
-                        <input type="text" class="form-control" id="inputEmail4" value="<?php echo $index['usu_primer_nombre'] ?>" required>
+                        <input type="text" class="form-control" name="primer_nombre" id="inputEmail4" value="<?php echo $index['usu_primer_nombre'] ?>" required>
+                        <input type="hidden" name="id" value="<?php echo $index['usu_id'] ?>">
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="inputPassword4">Segundo Nombre</label>
-                        <input type="text" class="form-control" id="inputtext" value="<?php echo $index['usu_segundo_nombre'] ?>" required>
+                        <input type="text" class="form-control" id="inputtext" name="segundo_nombre" value="<?php echo $index['usu_segundo_nombre'] ?>" required>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="inputPassword4">Primer Apellido</label>
-                        <input type="text" class="form-control" id="inputPassword4" value="<?php echo $index['usu_primer_apellido'] ?>" required>
+                        <input type="text" class="form-control" id="inputPassword4" name="primer_apellido" value="<?php echo $index['usu_primer_apellido'] ?>" required>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="inputPassword4">Segundo Apellido</label>
-                        <input type="text" class="form-control" id="inputPassword4" value="<?php echo $index['usu_segundo_apellido'] ?>" required>
+                        <input type="text" class="form-control" id="inputPassword4" name="segundo_apellido" value="<?php echo $index['usu_segundo_apellido'] ?>" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label for="inputAddress">Correo Electronico</label>
-                        <input type="text" class="form-control" id="inputAddress" value="<?php echo $index['usu_correo'] ?>" required>
+                        <input type="text" class="form-control" id="inputAddress" name="correo" value="<?php echo $index['usu_correo'] ?>" required>
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="inputAddress2">Telefono</label>
-                        <input type="text" class="form-control" id="inputAddress2" value="<?php echo $index['usu_telefono'] ?>" required>
+                        <input type="text" class="form-control" id="inputAddress2" name="telefono" value="<?php echo $index['usu_telefono'] ?>" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="inputCity">Numero de documento</label>
-                        <input type="text" class="form-control" id="inputCity" value="<?php echo $index['usu_num_identificacion'] ?>" required>
+                        <input type="text" class="form-control" id="inputCity" name="numero_documento" value="<?php echo $index['usu_num_identificacion'] ?>" required>
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="inputState">Tipo de documento</label>
-                        <select id="inputState" class="form-control">
-                        <option selected>Seleccione...</option>
+                        <select id="inputState" name="tipo_documento" class="form-control">
                         <?php
-                            foreach ($documentos as $index2) {
-                                echo "<option value='".$index2['Tip_id']."'>".$index2['Tip_descripcion']."</option>";
+                            echo "<option value=' ".$index['tipo_documento_id']." ' selected>".$index['tip_descripcion']."</option>";                     
+                            
+                            while ($index2=pg_fetch_assoc($documentos)) {
+                                echo "<option value='".$index2['tip_id']."'>".$index2['tip_descripcion']."</option>";
                             }
                         ?>
                         </select>
@@ -62,44 +64,17 @@
 
                     <div class="form-group col-md-3">
                         <label for="inputState">Rol</label>
-                        <select id="inputState" class="form-control" required>
-                        <option selected>Seleccione</option>
+                        <select id="inputState" name="rol" class="form-control">
                         <?php
-                            foreach ($roles as $index3) {
+                            echo "<option value='".$index['rol_id']."' selected>".$index['rol_nombre']."</option>";
+
+                            while ($index3=pg_fetch_assoc($roles)) {
                                 echo "<option value='".$index3['rol_id']."'>".$index3['rol_nombre']."</option>";
                             }
                         ?>
                         </select>
                     </div>
                 </div>
-
-                <!-- <div class="form-row"> 
-                    <div class="form-group col-md-5">
-                        <label for="inputPassword4">Contraseña</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" id="inputtext" required>
-                            <div class="input-group-prepend">
-                                <button class="btn btn-secondary btn-sm" type="button"><i class="fas fa-eye"></i></button>
-                            </div>
-                        </div>
-                        <small class="form-text text-muted">
-                            La contraseña debera de contener al menos una mayuscula y 5 numeros.
-                        </small>
-                    </div>
-
-                    <div class="form-group col-md-5">
-                        <label for="inputPassword4">Confirmar Contraseña</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" id="inputtext" required>
-                            <div class="input-group-prepend">
-                                <button class="btn btn-secondary btn-sm" type="button"><i class="fas fa-eye"></i></button>
-                            </div>
-                        </div>
-                        <small class="form-text text-muted">
-                            Recuerde la contraseña debera de coincidir con la anterior
-                        </small>
-                    </div>
-                </div> -->
                 <?php 
                     }
                 ?>

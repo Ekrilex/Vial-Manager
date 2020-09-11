@@ -6,6 +6,18 @@
                 <div class="card-title">Registrar Usuario</div>
             </div>
             <div class="card-body" style="background-color: #1f283e">
+                <?php if (isset($_SESSION['errores'])) { ?>
+                <div class="alert alert-danger alert-dismissible fade show text-white" style="background-color: #1f283e;"  role="alert">
+                    <?php
+                        foreach ($_SESSION['errores'] as $errores => $error) {
+                            echo $error."<br>";
+                        }
+                    ?>
+                    <button type="button" class="close btn btn-border" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="ture">&times;</span>
+                    </button>
+                </div>
+                <?php } unset($_SESSION['errores']); ?>
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputEmail4">Primer Nombre</label>
@@ -55,11 +67,11 @@
 
                     <div class="form-group col-md-4">
                         <label for="inputState">Tipo de documento</label>
-                        <select id="inputState" class="form-control" name="documento">
-                        <option selected>Seleccione...</option>
+                        <select id="tipo_documento" class="form-control" name="documento">
+                        <option value="" selected>Seleccione...</option>
                         <?php
-                            foreach ($documentos as $index2) {
-                                echo "<option value='".$index2['Tip_id']."'>".$index2['Tip_descripcion']."</option>";
+                            while ($index2=pg_fetch_assoc($documentos)) {
+                                echo "<option value='".$index2['tip_id']."'>".$index2['tip_descripcion']."</option>";
                             }
                         ?>
                         </select>
@@ -67,10 +79,10 @@
 
                     <div class="form-group col-md-3">
                         <label for="inputState">Rol</label>
-                        <select id="inputState" class="form-control" name="rol" >
+                        <select id="tipo_rol" class="form-control" name="rol" >
                         <option selected>Seleccione</option>
                         <?php
-                            foreach ($roles as $index3) {
+                            while ($index3=pg_fetch_assoc($roles)) {
                                 echo "<option value='".$index3['rol_id']."'>".$index3['rol_nombre']."</option>";
                             }
                         ?>
@@ -82,9 +94,9 @@
                     <div class="form-group col-md-5">
                         <label for="inputPassword4">Contraseña</label>
                         <div class="input-group">
-                            <input type="password" class="form-control validacion" id="inputtext" placeholder="Ingrese la contraseña" name="clave" >
+                            <input type="password" class="form-control validacion" id="password" placeholder="Ingrese la contraseña" name="clave" >
                             <div class="input-group-prepend">
-                                <button class="btn btn-secondary btn-sm" type="button"><i class="fas fa-eye"></i></button>
+                                <button onclick="mostrarContraseña()" class="btn btn-secondary btn-sm" type="button"><i class="fas fa-eye"></i></button>
                             </div>
                           </div>
                           <div id="error"></div>
@@ -96,9 +108,9 @@
                     <div class="form-group col-md-5">
                         <label for="inputPassword4">Confirmar Contraseña</label>
                         <div class="input-group">
-                            <input type="password" class="form-control validacion" id="inputtext" placeholder="Ingrese de nuevo la contraseña" >
+                            <input type="password" class="form-control validacion" id="confirmation" placeholder="Ingrese de nuevo la contraseña" name="clave2" >
                             <div class="input-group-prepend">
-                                <button class="btn btn-secondary btn-sm" type="button"><i class="fas fa-eye"></i></button>
+                                <button onclick="mostrarContraseña2()" class="btn btn-secondary btn-sm" type="button"><i class="fas fa-eye"></i></button>
                             </div>
                           </div>
                           <div id="error"></div>

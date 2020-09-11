@@ -18,7 +18,7 @@ class connection{
 
     private function setConnection(){
 
-        require_once 'Conf/confPG.php';
+        require 'Conf/confPG.php';
 
         $this->host = $host;
         $this->port = $port;
@@ -53,10 +53,16 @@ class connection{
     }
 
     private function close(){
-        pg_close($this.link);
+        pg_close($this->link);
     }
 
-
+    
+    
 }
 
+$objetoPrueba = new connection();
+
+$conection = $objetoPrueba->getConnect();
+
+echo pg_last_error($conection);
 ?>

@@ -33,7 +33,7 @@ $(document).ready(function(){
     });
 
     // Funcion para la validacion de caracteres especiales en los inputs.
-    $(document).on("change",".validacion",function(){
+    $(document).on("keyup",".validacion",function(){
         let texto = $(this).val();
         let noValidos = '!"#$%/()=?¡¿+´{}[]-_,:,;@*|';
         let cont = 0;
@@ -60,6 +60,23 @@ $(document).ready(function(){
         }
     });
 
+    $(document).on("keyup","#search",function(){
+        let url = $(this).attr("data-url");
+        let value = $(this).val();
+        
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: 'value=' + value,
+            success: function( data ){
+                $('tbody').html( data );
+            }
+        });
+    });
+
+
+
 });
 
 // Funcion para enviar paramentos mediante la modal a la funcion userDelete
@@ -70,8 +87,28 @@ const userDelete = ( identificacion ) => {
 }
 
 // Funcion para enviar paramentos mediante la modal a la funcion userActivation
-const userActivation = ( identificacion ) =>{
+const userActivation = ( identificacion) =>{
     console.log(identificacion);
     input = document.getElementById('inputcito2');
     input.value = identificacion;
+}
+
+const mostrarContraseña = () => {
+    // alert('hola');
+    let value = document.getElementById('password');
+    if (value.type == 'password') {
+        value.type = 'text';
+    } else {
+        value.type = 'password';
+    }
+}
+
+const mostrarContraseña2 = () => {
+    // alert('hola');
+    let value = document.getElementById('confirmation');
+    if (value.type == 'password') {
+        value.type = 'text';
+    } else {
+        value.type = 'password';
+    }
 }

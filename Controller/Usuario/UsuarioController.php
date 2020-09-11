@@ -4,7 +4,8 @@
     
     class UsuarioController{
     
-    // Funcion que realiza la consulta para plasmar los valores en la pagina en archivo de registro.php
+      
+      // Funcion que realiza la consulta para plasmar los valores en la pagina en archivo de registro.php
       public function getCreate(){
 
       $obj = new UsuarioModel();
@@ -15,27 +16,110 @@
       $documentos = $obj->consultar($queryDoc);
       $roles = $obj->consultar($queryRol);
 
-      include_once '../View/Usuario/registrar.php';
+      if ($documentos && $roles) {
+        include_once '../View/Usuario/registrar.php';
+      } else {
+        pg_last_error($documentos);
+      }
+
       }
 
       // Funcion que inserta la informacion en la base de datos
       public function postCreate(){
+
           $obj = new UsuarioModel();
+          $count = 0;
 
           $pri_nombre = $_POST['primer_nombre'];
+
+          if (!$pri_nombre!="") {
+            $_SESSION['errores']['pri_nombre']="Ingrese el primer nombre";
+            $count++;
+          }
+          
           $seg_nombre = $_POST['segundo_nombre'];
+
+          if (!$seg_nombre!="") {
+            $_SESSION['errores']['seg_nombre']="Ingrese el segundo nombre";
+            $count++;
+          }
+          
           $pri_apellido = $_POST['primer_apellido'];
+
+          if (!$pri_apellido!="") {
+            $_SESSION['errores']['pri_apellido']="Ingrese el primer apellido";
+            $count++;
+          }
+          
           $seg_apellido = $_POST['segundo_apellido'];
+
+          if (!$seg_apellido!="") {
+            $_SESSION['errores']['seg_apellido']="Ingrese el segundo apellido";
+            $count++;
+          }
+          
           $tip_documento = $_POST['documento'];
+
+          if (!$tip_documento!="") {
+            $_SESSION['errores']['tip_documento']="Seleccione el tipo de documento";
+            $count++;
+          }
+          
           $num_documento = $_POST['numero_documento'];
+
+          if (!$num_documento!="") {
+            $_SESSION['errores']['num_documento']="Ingrese el tipo de documento";
+            $count++;
+          }
+          
           $correo = $_POST['Correo_electronico'];
+
+          if (!$correo!="") {
+            $_SESSION['errores']['correo']="Ingrese el correo";
+            $count++;
+          }
+          
           $telefono = $_POST['Telefono'];
+
+          if (!$telefono!="") {
+            $_SESSION['errores']['telefono']="Ingrese el numero de telefono";
+            $count++;
+          }
+          
           $rol = $_POST['rol'];
+
+          if (!$rol!="") {
+            $_SESSION['errores']['rol']="Seleccione el tipo de rol";
+            $count++;
+          }
+          
           $contra = $_POST['clave'];
 
-          $nickname = $obj->genereteUser($pri_nombre,$pri_apellido);
+          if (!$contra!="") {
+            $_SESSION['errores']['pass1']="Ingrese la contraseña";
+            $count++;
+          }
 
-          $query = "INSERT INTO tbl_usuario VALUES(NULL, $num_documento, '".$pri_nombre."', '".$seg_nombre."', '".$pri_apellido."', '".$seg_apellido."', '".$contra."', '".$telefono."', '".$correo."', '".$nickname."', $rol, 1, $tip_documento)";
+          $contra2 = $_POST['clave2'];
+
+          if (!$contra2!="") {
+            $_SESSION['errores']['pass2']="Confirme la contraseña";
+            $count++;
+          }
+
+          if ($contra!=$contra2) {
+            $_SESSION['errores']['confir']="Las contraseñas no coinciden";
+            $count++;
+          }
+
+          if ($count>0) {
+              redirect(getUrl("Usuario","Usuario","getCreate"));
+          }
+
+          $nickname = $obj->genereteUser($pri_nombre,$pri_apellido);
+          $id = $obj->autoincrement("tbl_usuario","usu_id"); 
+
+          $query = "INSERT INTO tbl_usuario VALUES($id, $num_documento, '".$pri_nombre."', '".$seg_nombre."', '".$pri_apellido."', '".$seg_apellido."', '".$contra."', '".$telefono."', '".$correo."', $rol, 1, $tip_documento, '".$nickname."')";
 
           $ejecutar = $obj->insertar($query);
 
@@ -50,7 +134,7 @@
       public function index(){
           $obj = new UsuarioModel();
 
-          $query = "SELECT u.usu_num_identificacion, u.usu_primer_nombre, u.usu_segundo_nombre, usu_primer_apellido, usu_segundo_apellido, usu_nickname, r.rol_nombre, e.est_descripcion FROM tbl_usuario AS u, tbl_rol AS r, tbl_estado AS e WHERE u.estado_id = e.est_id AND u.rol_id = r.rol_id";
+          $query = "SELECT u.usu_num_identificacion, u.usu_primer_nombre, u.usu_segundo_nombre, usu_primer_apellido, usu_segundo_apellido, usu_nickname, r.rol_id,  r.rol_nombre, t.tip_id, e.est_descripcion FROM tbl_usuario AS u, tbl_rol AS r, tbl_estado AS e, tbl_tipo_documento AS t WHERE u.estado_id = e.est_id AND u.rol_id = r.rol_id AND u.tipo_documento_id = t.tip_id";
               
           $usuarios = $obj->consultar($query);
 
@@ -63,7 +147,7 @@
 
           $user = $_POST['usu_num_identificacion'];
 
-          $query = "UPDATE tbl_usuario SET estado_id = 2 WHERE usu_num_identificacion = $user";
+          $query = "UPDATE tbl_usuario SET estado_id = 2 WHERE usu_num_identificacion = '".$user."' ";
               
           $ejecucion = $obj->editar($query);
 
@@ -79,10 +163,12 @@
         $obj = new UsuarioModel();
 
         $user = $_GET['usu_id'];
+        $rol = $_GET['rol_id'];
+        $tip_documento = $_GET['tip_id'];
 
-        $query = "SELECT u.usu_num_identificacion, u.usu_primer_nombre, u.usu_segundo_nombre, usu_primer_apellido, usu_segundo_apellido, u.usu_telefono, u.usu_correo, r.rol_nombre, e.est_descripcion FROM tbl_usuario AS u, tbl_rol AS r, tbl_estado AS e WHERE u.estado_id = e.est_id AND u.rol_id = r.rol_id AND u.usu_num_identificacion = $user";
-        $query2 = "SELECT * FROM tbl_rol";
-        $query3 = "SELECT * FROM tbl_tipo_documento";
+        $query = "SELECT u.usu_id, u.usu_num_identificacion, u.usu_primer_nombre, u.usu_segundo_nombre, usu_primer_apellido, usu_segundo_apellido, u.usu_telefono, u.usu_correo, u.rol_id, u.tipo_documento_id, r.rol_nombre, t.tip_descripcion, e.est_descripcion FROM tbl_usuario AS u, tbl_rol AS r, tbl_estado AS e, tbl_tipo_documento AS t WHERE u.estado_id = e.est_id AND u.rol_id = r.rol_id AND u.tipo_documento_id = t.tip_id AND u.usu_num_identificacion = '".$user."'";
+        $query2 = "SELECT * FROM tbl_rol WHERE rol_id != $rol";
+        $query3 = "SELECT * FROM tbl_tipo_documento WHERE tip_id != $tip_documento";
 
         $users = $obj->consultar($query);
         $roles = $obj->consultar($query2);
@@ -97,6 +183,33 @@
         include_once('../view/Usuario/update.php');
       }
 
+      public function postUpdate(){
+
+        $obj = new UsuarioModel();
+
+        $id = $_POST['id'];
+        $pri_nombre = $_POST['primer_nombre'];
+        $seg_nombre = $_POST['segundo_nombre'];
+        $pri_apellido = $_POST['primer_apellido'];
+        $seg_apellido = $_POST['segundo_apellido'];
+        $correo = $_POST['correo'];
+        $telefono = $_POST['telefono'];
+        $identificacion = $_POST['numero_documento'];
+        $tip_documento = $_POST['tipo_documento'];
+        $rol = $_POST['rol'];
+
+        $query = "UPDATE tbl_usuario SET usu_num_identificacion = '".$identificacion."', usu_primer_nombre = '".$pri_nombre."', usu_segundo_nombre = '".$seg_nombre."', usu_primer_apellido = '".$pri_apellido."', usu_segundo_apellido = '".$seg_apellido."', usu_correo = '".$correo."', usu_telefono = '".$telefono."', rol_id = $rol, tipo_documento_id = $tip_documento WHERE usu_id = $id ";
+
+        $ejecucion = $obj->editar($query);
+
+        if ($ejecucion) {
+          redirect(getUrl("Usuario","Usuario","index"));
+        } else {
+          pg_last_error($ejecucion);
+        }
+        
+      }
+
       // Funcion que altera el estado de un usuario a activo
       public function activationUser(){
 
@@ -104,7 +217,7 @@
 
         $user = $_POST['usu_num_identificacion2'];
 
-        $query = "UPDATE tbl_usuario SET estado_id = 1 WHERE usu_num_identificacion = $user";
+        $query = "UPDATE tbl_usuario SET estado_id = 1 WHERE usu_num_identificacion = '".$user."'";
 
         $ejecucion = $obj->editar($query);
 
@@ -114,7 +227,24 @@
           mysqli_error($ejecucion);
         }
 
-      }       
+      }
+      
+      public function filtro(){
+        $users = $_POST['value'];
+
+        $obj = new UsuarioModel();
+
+        $query = "SELECT u.usu_num_identificacion, u.usu_primer_nombre, u.usu_segundo_nombre, usu_primer_apellido, usu_segundo_apellido, usu_nickname, r.rol_id,  r.rol_nombre, t.tip_id, e.est_descripcion FROM tbl_usuario AS u, tbl_rol AS r, tbl_estado AS e, tbl_tipo_documento AS t WHERE u.estado_id = e.est_id AND u.rol_id = r.rol_id AND u.tipo_documento_id = t.tip_id AND (LOWER(r.rol_nombre) LIKE LOWER('%".$users."%') OR LOWER(e.est_descripcion) LIKE LOWER('%".$users."%'))";
+
+        $usuarios = $obj->consultar($query);
+
+        if ($usuarios) {
+          include_once '../view/Usuario/filtro.php';
+        } else {
+          pg_last_error($usuarios);
+        }
+
+      }
 
 
     }

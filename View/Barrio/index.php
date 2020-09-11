@@ -14,149 +14,16 @@
                 </div>
             </div>
             <br>
-           
-                <div class="d-flex align-items-center">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <label>Buscar:&nbsp;&nbsp;</label>
-                    <label>
-                        <input type="text" name="filtroB" id="filtroB" data-url="<?php echo getUrl("Barrio","Barrio","filtro",false,"ajax");?>" class="form-control " placeholder="Buscar... "/>
-                    </label> 
-                </div> 
+            <div class="d-flex align-items-center">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label>Buscar:&nbsp;&nbsp;</label>
+                <label>
+                    <input type="text" name="filtroB" id="filtroB" data-url="<?php echo getUrl("Barrio","Barrio","filtro",false,"ajax");?>" class="form-control " placeholder="Buscar... "/>
+                </label> 
+            </div> 
           
             <div class="card-body">
-               
-                <!-- Modal Para Registrar un Barrio-->
-                <?php 
-                    if(isset($_SESSION['prueba'])){
-                ?>
-                <div class="modal" id="addRowModal">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title text-center text-dark" id="exampleModalLabel">Registrar Barrio</h1>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <!-- Validacion para los campos no llenos -->
-                                    <?php 
-                                        if(isset($_SESSION['errores'])){
-                                    ?>
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            <?php 
-                                                foreach($_SESSION['errores'] as $errores => $error){
-                                                    echo $error."<br>";
-                                                }
-                                            ?>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                    </div>
-                                    <?php 
-                                        }
-                                        unset($_SESSION['errores']);
-                                    ?>
-                                    <!-- Aqui termina -->
-                                    <p class="statusMsg"></p>
-                                    <form action="<?php echo getUrl("Barrio","Barrio","postIndex"); ?>" method="POST">
-                                        <div class="form-group">
-                                            <!-- <input type="hidden" class="form-control" id="bar_id"> -->
-
-                                            <h4 class="text-dark">Descripción o Nombre de Barrio</h4>
-                                            <input type="text" class="form-control barrioN" name="bar_nombre" id="bar_nombre" placeholder=""/>
-                                        </div>
-                                        <div class="form-group">
-                                            <h4 class="text-dark">N&uacute;mero de la Comuna</h4>
-                                            <select class="form-control" name="com" id="com" >
-                                            <option value="">Seleccione...</option>
-                                                <?php
-                                                    while($comun=pg_fetch_assoc($comunas)){
-                                                    // foreach($comunas as $comun){
-                                                        echo "<option value='".$comun['com_id']."'>".$comun['com_id']."</option>";
-                                                    }
-                                                ?>
-                                            </select>
-                                        </div>  
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal" >Cancelar</button>
-                                            <input type="submit" name="Registrar" value="Registrar" class="btn btn-success">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
-                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
-                    <script type="text/javascript">
-                    $(function(){
-                    $("#addRowModal").modal();
-                    });
-                    </script>
-                <?php 
-                    } unset($_SESSION['prueba']);
-                ?>
-                    <div class="modal" id="addRowModal">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title text-center text-dark" id="exampleModalLabel">Registrar Barrio</h1>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <!-- Validacion para los campos no llenos -->
-                                    <?php 
-                                        if(isset($_SESSION['errores'])){
-                                    ?>
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            <?php 
-                                                foreach($_SESSION['errores'] as $errores => $error){
-                                                    echo $error."<br>";
-                                                }
-                                            ?>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                    </div>
-                                    <?php 
-                                        }
-                                        unset($_SESSION['errores']);
-                                    ?>
-                                    <!-- Aqui termina -->
-                                    <p class="statusMsg"></p>
-                                    <form action="<?php echo getUrl("Barrio","Barrio","postIndex"); ?>" method="POST">
-                                        <div class="form-group">
-                                            <!-- <input type="hidden" class="form-control" id="bar_id"> -->
-
-                                            <h4 class="text-dark">Descripción o Nombre de Barrio</h4>
-                                            <input type="text" class="form-control barrioN" name="bar_nombre" id="bar_nombre" placeholder=""/>
-                                        </div>
-                                        <div class="form-group">
-                                            <h4 class="text-dark">N&uacute;mero de la Comuna</h4>
-                                            <select class="form-control" name="com" id="com" >
-                                            <option value="">Seleccione...</option>
-                                                <?php
-                                                    while($comun=pg_fetch_assoc($comunas)){
-                                                    // foreach($comunas as $comun){
-                                                        echo "<option value='".$comun['com_id']."'>".$comun['com_id']."</option>";
-                                                    }
-                                                ?>
-                                            </select>
-                                        </div>  
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal" >Cancelar</button>
-                                            <input type="submit" name="Registrar" value="Registrar" class="btn btn-success">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <!-- Aqui termina el model de registrar barrio -->
-                
+    
                 <div class="table-responsive">
                     <!-- Aqui se visualiza la validacion del Registro exitoso con un mensaje -->
                     <?php 
@@ -250,8 +117,7 @@
                                         echo "<td>".$bar['bar_descripcion']."</td>";
                                         echo "<td>".$bar['com_id']."</td>";
                                         echo "<td>".$bar['com_ubicacion']."</td>";
-                                        echo "<td> <a href='".getUrl("Barrio","Barrio","getUpdate",array("bar_id"=>$bar['bar_id']))."'>
-                                            <button data-toggle='tooltip' class='btn btn-link btn-primary btn-lg' data-original-title='Editar'>
+                                        echo "<td><a><button id='actuali' value='".$bar['bar_id']."' data-url='".getUrl("Barrio","Barrio","getUpdate",false,"ajax")."' data-toggle='tooltip' class='btn btn-link btn-primary btn-lg' data-original-title='Editar'>
                                             <i class='icon-note'></i></button></a> </td>";
                                         echo "<td><a><button id='elimi' value='".$bar['bar_id']."' data-url='".getUrl("Barrio","Barrio","getDelete",false,"ajax")."' data-toggle='tooltip' class='btn btn-link btn-danger' data-original-title='Eliminar'>
                                             <i class='flaticon-interface-5'></i> 
@@ -268,6 +134,50 @@
         </div>
     </div>
 </div>
+<!-- Modal de Editar -->
+
+<div class="modal" id="actualizar">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title text-center text-dark" id="exampleModalLabel">Editar Barrio</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                 <!-- Validacion para los campos no llenos 
+                <?php 
+                    // if(isset($_SESSION['errores'])){
+                ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?php 
+                            /*foreach($_SESSION['errores'] as $errores => $error){
+                                echo $error."<br>";
+                            }*/
+                        ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <?php 
+                    // }
+                    // unset($_SESSION['errores']);
+                ?>
+                Aqui termina -->
+                <p class="statusMsg"></p>
+                <form action="<?php echo getUrl("Barrio","Barrio","postUpdate"); ?>" method="POST">
+                    <div id="editarB"></div>
+                    <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal" >Cancelar</button>
+                        <input type="submit" name="Actualizar" value="Actualizar" class="btn btn-info">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Modal de Eliminar -->
 <div class="modal" id="eliminar">
 	<div class="modal-dialog" role="document">
@@ -296,3 +206,4 @@
 		</div>
 	</div>
 </div>
+

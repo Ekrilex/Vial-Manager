@@ -216,6 +216,12 @@ if (clave1.length>0 && clave2.length>0) {
             data: 'value=' + value,
             success: function( data ){
                 $('tbody').html( data );
+
+            }
+        });
+    });
+
+
 ///////////////////////////Sandra Barrio ////////////////////////////
 
     //Se creo esta funcion para que NO ingrese el usuario caracteres especiales en la vista "Registrar"
@@ -282,6 +288,24 @@ if (clave1.length>0 && clave2.length>0) {
         }
     });
    
+    //Se creo esta funcion para el modal de "Editar"
+    $(document).on("click", "#actuali",function(){
+       
+        var barrioActuali = $(this).val();
+        var url = $(this).attr("data-url");
+
+        // alert(barrioActuali);
+        $.ajax({
+            url:url,
+            type: "POST",
+            data: "barrioActuali=" + barrioActuali,
+            success: function(datos){
+                $("#editarB").html(datos);
+                $("#actualizar").modal();
+            }
+        });
+
+    });
 
     //Se creo esta funcion para el modal de "Eliminar"
     $(document).on("click", "#elimi",function(){

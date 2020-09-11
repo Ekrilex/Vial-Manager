@@ -1,0 +1,1 @@
+En esa carpeta se guardaran los archivos planos de la base de datos de VialManager

@@ -192,18 +192,13 @@
 						</a>
 						<div class="collapse" id="submenu">
 							<ul class="nav nav-collapse">
-							<li>
+								<li>
 									<a data-toggle="collapse" href="#subnav1">
 										<span class="sub-item">Barrio</span>
 										<span class="caret"></span>
 									</a>
 									<div class="collapse" id="subnav1">
 										<ul class="nav nav-collapse subnav">
-											<li>
-												<a href="<?php echo getUrl("Barrio","Barrio","getCreate")?>">
-													<span class="sub-item">Registrar Barrio</span>
-												</a>
-											</li>
 											<li>
 												<a href="<?php echo getUrl("Barrio","Barrio","index")?>">
 													<span class="sub-item">Consultar Barrio</span>

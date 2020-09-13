@@ -9,7 +9,8 @@
          	"Deformidades",
          	"Pérdida de capas estructurales",
          	"Daños superficiales",
-         	"Otros daños"
+            "Desprendimientos",
+         	"Otros deterioros"
          );
          return $tipos;  
         }

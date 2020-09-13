@@ -2,8 +2,8 @@
 <div class="container"><br><br>
  
 <div class="card col-md-12 col-sm-12 col-lg-12" style="max-width: 73rem;">
+<div class="card-header"><h3 class="card-title">Consultar deterioros&nbsp;&nbsp;<span class="icon-book-open"></span>&nbsp;&nbsp;<span class="icon-magnifier"></span></h3></div>  
   <div class="card-body">
-    <h5 class="card-title ldt text-primary" style="text-align:center;">Consultar deterioros</h5><br>
 <div class="row">
     <div class="col-lg-1 col-md-1 col-sm-1"></div>
     <div class="col-md-2 col-sm-3 col-lg-2 text-white">

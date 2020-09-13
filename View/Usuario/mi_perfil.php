@@ -1,18 +1,19 @@
 <?php 
   while ($usu=pg_fetch_assoc($Usuario)) {
  ?>
-<div class="container fondo"><br>
+<div class="container"><br>
+<div class="card">
+  <div class="card-title container"><br>
+    <h2 style="text-align:center;color:white;">Mi cuenta <span class="icon-people" style="color:white;"></span></h2>
+</div><br>
 
-  <div style="text-align:center;background:white;color:blue;border-radius:50px 50px 50px;">
-    <h2>Mi cuenta <span class="icon-people" style="color:blue;"></span></h2>
-  </div><br>
-  
-      <div style="width:95%;  border: 1 solid red;" class="container personal letra">
-            
+  <div class="card-body">
+      <div style="width:95%;" class="container text-white">
+
         <div class="row">
 
          <div class="col-md-3">
-           <h3>Rol: </h3>  
+           <h3>Rol:</h3>  
          </div> 
          <div class="col-md-3">
            <input type="text"  disabled Class="form-control text-danger form-l"  id="bor" name="Rol" value="<?php echo $usu['rol_nombre']; ?>">
@@ -126,6 +127,8 @@
      </form>
     </div>
    </div>
+   </div>
+  </div> 
   </div> 
 <?php
 }

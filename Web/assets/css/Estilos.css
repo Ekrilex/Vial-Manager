@@ -1,81 +1,92 @@
+ /*******Estilos Maria camila calambas chavez*******/
  
-
-/*******Estilos Maria camila calambas chavez*******/
-
-.modal-l{
-color:black;
-font-size:18px;
-}
-
-#bor{
-	border: 2px solid #036BFF;
-}
-.personal {
-    background: rgba(0, 0, 0, 0.7);
-    width: 95%;
-    border-radius: 1em;
-    padding-bottom: 1em;
-    padding: 1em;
-    color: white;
-    font-weight: bold;
-    z-index: 100;
-}
-
-.fondo{
-	background-color:#438DE6 ; 
-}
-.form-l{
-font-size:16px;
-}
-
-  .letra{
-  color: white;
-  margin: 0 auto;
-  text-align: center;
-  font-weight: 20;
-  font: verdana bold 19px Georgia, Serif;
-  text-shadow: -2px 2px 0 black;
-  }
-
-  @media screen and (max-width: 765px){
-	.boton-interfaz {
-	  position:absolute;
-	  bottom:1px;
-	  top:-25px;
-	}
-
-	.guardar{
-	  left:20%;
-	}
-
-	.cancelar{
-	  left:58%;
-	}
-  }
-
-/**********************************************************************/
-
-/**************************************Daniel Mosquera**************************/
-.text-d{font-family: verdana;}
- .ld{color:black;text-align:center;font-weight: 20;font: verdana bold 19px Georgia, Serif;
-  text-shadow: -1px 1px 0 blue;}
-.ldt{font-size:30px;background-color:white; color:blue;text-align:center;border-radius: 91px 94px 88px 91px;
--moz-border-radius: 91px 94px 88px 91px;-webkit-border-radius: 91px 94px 88px 91px;border: 0px solid #000000;}  
+ .modal-l {
+     color: black;
+     font-size: 18px;
+ }
  
- .lad{background-color:rgb(255,255,255,0.5);color:black;text-align:center;text-shadow: -1px 1px 0 blue;}
-/*************************************************************************************************************/
-
-/*--Estilos que uso Juan Sebastian--*/
-
-div.formulario {
-
-  margin-left:2.7%;
-  margin-top:3%;
-
-}
-
-
-
-
-
-/*-----------------------------------*/
+ #bor {
+     border: 2px solid #036BFF;
+ }
+ 
+ .personal {
+     background: rgba(0, 0, 0, 0.7);
+     width: 95%;
+     border-radius: 1em;
+     padding-bottom: 1em;
+     padding: 1em;
+     color: white;
+     font-weight: bold;
+     z-index: 100;
+ }
+ 
+ .fondo {
+     background-color: #438DE6;
+ }
+ 
+ .form-l {
+     font-size: 16px;
+ }
+ 
+ .letra {
+     color: white;
+     margin: 0 auto;
+     text-align: center;
+     font-weight: 20;
+     font: verdana bold 19px Georgia, Serif;
+     text-shadow: -2px 2px 0 black;
+ }
+ 
+ @media screen and (max-width: 765px) {
+     .boton-interfaz {
+         position: absolute;
+         bottom: 1px;
+         top: -25px;
+     }
+     .guardar {
+         left: 20%;
+     }
+     .cancelar {
+         left: 58%;
+     }
+ }
+ /**********************************************************************/
+ /**************************************Daniel Mosquera**************************/
+ 
+ .text-d {
+     font-family: verdana;
+ }
+ 
+ .ld {
+     color: black;
+     text-align: center;
+     font-weight: 20;
+     font: verdana bold 19px Georgia, Serif;
+     text-shadow: -1px 1px 0 blue;
+ }
+ 
+ .ldt {
+     font-size: 30px;
+     background-color: white;
+     color: blue;
+     text-align: center;
+     border-radius: 91px 94px 88px 91px;
+     -moz-border-radius: 91px 94px 88px 91px;
+     -webkit-border-radius: 91px 94px 88px 91px;
+     border: 0px solid #000000;
+ }
+ 
+ .lad {
+     background-color: rgb(255, 255, 255, 0.5);
+     color: black;
+     text-align: center;
+     text-shadow: -1px 1px 0 blue;
+ }
+ /*************************************************************************************************************/
+ /*--Estilos que uso Juan Sebastian--*/
+ 
+ div.formulario {
+     margin-left: 2.5%;
+     margin-top: 3%;
+ }
+ /*-----------------------------------*/

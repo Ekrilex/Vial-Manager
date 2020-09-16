@@ -41,9 +41,13 @@
                                     <td><?php echo $usu['usu_primer_apellido'] . " " . $usu['usu_segundo_apellido'] ?></td>
                                     <td><?php echo $usu['rol_nombre']; ?></td>
                                     <td><?php echo $usu['est_descripcion']; ?></td>
+                                    <?php if ($usu['est_id'] == 1) { ?>
                                     <td><button onclick="userDelete('<?php echo $usu['usu_num_identificacion']; ?>');" data-toggle="modal" data-target="#exampleModal" class="btn btn-lg" style="background-color:transparent; padding: 0px; color: red;"><i class="fas fa-user-slash"></i></button></td>
+                                    <?php } ?>
+                                    <?php if($usu['est_id'] == 2 ){ ?>
+                                    <td><button onclick="userActivation('<?php echo $usu['usu_num_identificacion']; ?>');" data-toggle="modal" data-target="#exampleModal2" class="btn btn-lg" style="background-color:transparent; padding: 0px; color: green;"><i class="fas fa-lock"></i></button></td>    
+                                    <?php } ?>
                                     <td><a href="<?php echo getUrl("Usuario", "Usuario", "getUpdate", array("usu_id" => $usu['usu_num_identificacion'], "rol_id" => $usu['rol_id'], "tip_id" => $usu['tip_id'])) ?>"><button class="btn btn-lg" style="background-color:transparent; padding: 0px; color: yellow;"><i class="fas fa-user-edit"></i></button></a></td>
-                                    <td><button onclick="userActivation('<?php echo $usu['usu_num_identificacion']; ?>');" data-toggle="modal" data-target="#exampleModal2" class="btn btn-lg" style="background-color:transparent; padding: 0px; color: green;"><i class="fas fa-lock"></i></button></td>
                                 </tr>
                             <?php
                             }

@@ -177,34 +177,6 @@ if (clave1.length>0 && clave2.length>0) {
         }
     });
 
-    // Funcion para la validacion de caracteres especiales en los inputs.
-    $(document).on("keyup",".validacion",function(){
-        let texto = $(this).val();
-        let noValidos = '!"#$%/()=?¡¿+´{}[]-_,:,;@*|';
-        let cont = 0;
-
-        for (let i = 0; i < texto.length; i++) {
-            for (let k = 0; k < noValidos.length; k++) {
-                if (texto[i]==noValidos[k]) {
-                    cont++;
-                }
-                
-            }
-        }
-
-        if (cont > 0) {
-            $(this).removeClass('is-valid');
-            $(this).addClass('is-invalid');
-            $("#enviar").attr('disabled',true);
-            $("#error").html("<p class='text-danger'> No ingrese caracteres especiales</p>");
-        } else {
-            $(this).removeClass('is-invalid');
-            $(this).addClass('is-valid');
-            $("#enviar").attr('disabled',false);
-            $("#error").html("");
-        }
-    });
-
     $(document).on("keyup","#search",function(){
         let url = $(this).attr("data-url");
         let value = $(this).val();
@@ -326,9 +298,9 @@ if (clave1.length>0 && clave2.length>0) {
 
     });
 ///////////////////////Aqui termina las funciones de tbl_barrio///////////////////
-
-
 });
+
+//////////////////////Funciones de modulo de usuarios///////////////////
 
 // Funcion para enviar paramentos mediante la modal a la funcion userDelete
 const userDelete = ( identificacion ) => {
@@ -344,8 +316,8 @@ const userActivation = ( identificacion) =>{
     input.value = identificacion;
 }
 
+// Funcion para mostrar contraseña
 const mostrarContraseña = () => {
-    // alert('hola');
     let value = document.getElementById('password');
     if (value.type == 'password') {
         value.type = 'text';
@@ -354,12 +326,195 @@ const mostrarContraseña = () => {
     }
 }
 
+// Funcion para mostrar contraseña
 const mostrarContraseña2 = () => {
-    // alert('hola');
     let value = document.getElementById('confirmation');
     if (value.type == 'password') {
         value.type = 'text';
     } else {
         value.type = 'password';
     }
+}
+
+// Funcion que valida que unicamente hayan letras en un determinado input
+const valVarchar = ( params, id ) => {
+    value = params.value;
+    value2 = id.toString();
+
+    if (/^[a-zA-z]+$/.test(value)) {
+        document.getElementById(value2).innerHTML = '';
+    } else {
+        document.getElementById(value2).innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese solo letras';
+    }
+    
+}
+
+// Funcion que valida si un email es correcto
+const valMail = ( params, id ) =>{
+    value = params.value;
+    value2 = id.toString();
+
+    if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(value)) {
+        document.getElementById(value2).innerHTML = '';
+    } else {
+        document.getElementById(value2).innerHTML = '<i class="fas fa-exclamation-circle"></i> Correo Invalido';
+    }
+}
+
+// Funcion que valida que unicamente hayan numeros en un determinado input
+const valInt = ( params, id ) =>{
+    value = params.value;
+    value2 = id.toString();
+
+    if (/^[0-9]+$/.test(value)) {
+        document.getElementById(value2).innerHTML = '';
+    } else {
+        document.getElementById(value2).innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese solo numeros';
+    }
+}
+
+// Funcion que validad que no hayan campos vacios en el formulario de registro de usuario
+const mainValidationRegister = () =>{
+
+    firts_name = document.getElementById('pri_nombre').value;
+    second_name = document.getElementById('seg_nombre').value;
+    firts_last = document.getElementById('pri_apellido').value;
+    second_last = document.getElementById('seg_apellido').value;
+    mail = document.getElementById('correo').value;
+    phone = document.getElementById('telefono').value;
+    numb_document = document.getElementById('num_documento').value;
+    type_document = document.getElementById('tipo_documento').value;
+    type_role = document.getElementById('tipo_rol').value;
+    password1 = document.getElementById('password').value;
+    password2 = document.getElementById('confirmation').value;
+
+    count = 0;
+
+    if (firts_name == '') {
+        document.getElementById('ad1').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el primer nombre';
+        count++;
+    }
+
+    if (second_name == '') {
+        document.getElementById('ad2').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el segundo nombre';
+        count++;
+    }
+
+    if (firts_last == '') {
+        document.getElementById('ad3').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el primer apellido';
+        count++;
+    }
+
+    if (second_last == '') {
+        document.getElementById('ad4').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el segundo apellido';
+        count++;
+    }
+
+    if (mail == '') {
+        document.getElementById('ad5').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el correo electronico';
+        count++;
+    }
+
+    if (phone == '') {
+        document.getElementById('ad7').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el numero de telefono';
+        count++;
+    }
+
+    if (numb_document == '') {
+        document.getElementById('ad8').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el numero de identificacion';
+        count++;
+    }
+
+    if (type_document == '') {
+        document.getElementById('ad9').innerHTML = '<i class="fas fa-exclamation-circle"></i> Seleccione algun documento';
+        count++;
+    }
+
+    if (type_role == '') {
+        document.getElementById('ad10').innerHTML = '<i class="fas fa-exclamation-circle"></i> Seleccione algun rol';
+        count++;
+    }
+
+    if (password1 == '') {
+        document.getElementById('ad12').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese una contraseña';
+        count++;
+    }
+
+    if (password2 == '') {
+        document.getElementById('ad13').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese una contraseña';
+        count++;
+    }
+
+    if (password1 != password2) {
+        document.getElementById('ad12').innerHTML = '<i class="fas fa-exclamation-circle"></i> Las contraseñas deben de coincidir';
+        document.getElementById('ad13').innerHTML = '<i class="fas fa-exclamation-circle"></i> Las contraseñas deben de coincidir';
+        count++;
+    }
+
+    if (count > 0) {
+        return false;
+    } else {
+        return true;
+    }
+
+}
+
+// Funcion que validad que no hayan campos vacios en el formulario de modificacion de usuario
+const mainValidationEdit = () =>{
+
+    value1 = document.getElementById('pri_nombre').value;
+    value2 = document.getElementById('seg_nombre').value;
+    value3 = document.getElementById('pri_apellido').value;
+    value4 = document.getElementById('seg_apellido').value;
+    value5 = document.getElementById('correo').value;
+    value6 = document.getElementById('telefono').value;
+    value7 = document.getElementById('num_documento').value;
+
+    count =0;
+    
+    if (value1 == '') {
+        document.getElementById('ad1').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el primer nombre';
+        count++;
+    }
+    
+    if (value2 == '') {
+        document.getElementById('ad2').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el segundo nombre';
+        count++;
+    }
+    
+    if (value3 == '') {
+        document.getElementById('ad3').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el primer apellido';
+        count++;
+    }
+    
+    if (value4 == '') {
+        document.getElementById('ad4').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el segundo apellido';
+        count++;
+    }
+    
+    if (value5 == '') {
+        document.getElementById('ad5').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el correo electronico';
+        count++;
+    }
+    
+    if (value6 == '') {
+        document.getElementById('ad6').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el numero de telefono';
+        count++;
+    }
+
+    if (value7 == '') {
+        document.getElementById('ad7').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el numero de documento';
+        count++;
+    }
+
+    alert(count);
+
+    if (count > 0) {
+        return false
+    } else {
+        return true;
+    }
+
+    // return false;
+
 }

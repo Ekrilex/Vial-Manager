@@ -21,25 +21,29 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputEmail4">Primer Nombre</label>
-                        <input type="text" class="form-control validacion" name="primer_nombre"  placeholder="Ingrese el primer nombre" >
+                        <input type="text" class="form-control validacion" name="primer_nombre" id="pri_nombre"  placeholder="Ingrese el primer nombre" onchange="valVarchar(this,'ad1')">
+                        <small id="ad1" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="inputPassword4">Segundo Nombre</label>
-                        <input type="text" class="form-control validacion" name="segundo_nombre"  placeholder="Ingrese el segundo nombre" >
+                        <input type="text" class="form-control validacion" name="segundo_nombre" id="seg_nombre"  placeholder="Ingrese el segundo nombre" onchange="valVarchar(this,'ad2')" >
+                        <small id="ad2" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="inputPassword4">Primer Apellido</label>
-                        <input type="text" class="form-control validacion" name="primer_apellido"  placeholder="Ingrese el primer apellido" >
+                        <input type="text" class="form-control validacion" name="primer_apellido" id="pri_apellido"  placeholder="Ingrese el primer apellido" onchange="valVarchar(this,'ad3')" >
+                        <small id="ad3" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="inputPassword4">Segundo Apellido</label>
-                        <input type="text" class="form-control validacion" name="segundo_apellido"  placeholder="Ingrese el segundo apellido" >
+                        <input type="text" class="form-control validacion" name="segundo_apellido" id="seg_apellido"  placeholder="Ingrese el segundo apellido" onchange="valVarchar(this,'ad4')" >
+                        <small id="ad4" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
                 </div>
@@ -47,13 +51,15 @@
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label for="inputAddress">Correo Electronico</label>
-                        <input type="text" class="form-control" name="Correo_electronico"  placeholder="Ingrese el correo electronico" >
+                        <input type="text" class="form-control" name="Correo_electronico" id="correo"  placeholder="Ingrese el correo electronico" onchange="valMail(this, 'ad5')" >
+                        <small id="ad5" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="inputAddress2">Telefono</label>
-                        <input type="text" class="form-control validacion" name="Telefono"  placeholder="Ingrese el telefono" >
+                        <input type="text" class="form-control validacion" name="Telefono" id="telefono" placeholder="Ingrese el telefono" onchange="valInt(this, 'ad7')" >
+                        <small id="ad7" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
                 </div>
@@ -61,7 +67,8 @@
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="inputCity">Numero de documento</label>
-                        <input type="text" class="form-control validacion" name="numero_documento"  placeholder="Ingrese el numero de documento" >
+                        <input type="text" class="form-control validacion" name="numero_documento" id="num_documento"  placeholder="Ingrese el numero de documento" onchange="valInt(this, 'ad8')" >
+                        <small id="ad8" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
 
@@ -75,18 +82,20 @@
                             }
                         ?>
                         </select>
+                        <small id="ad9" class="form-text text-muted text-danger"></small>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="inputState">Rol</label>
                         <select id="tipo_rol" class="form-control" name="rol" >
-                        <option selected>Seleccione</option>
+                        <option value="" selected>Seleccione...</option>
                         <?php
                             while ($index3=pg_fetch_assoc($roles)) {
                                 echo "<option value='".$index3['rol_id']."'>".$index3['rol_nombre']."</option>";
                             }
                         ?>
                         </select>
+                        <small id="ad10" class="form-text text-muted text-danger"></small>
                     </div>
                 </div>
 
@@ -100,9 +109,7 @@
                             </div>
                           </div>
                           <div id="error"></div>
-                        <small class="form-text text-muted">
-                            La contraseña debera de contener al menos una mayuscula y 5 numeros.
-                        </small>
+                        <small id="ad12" class="form-text text-muted text-danger"></small>
                     </div>
 
                     <div class="form-group col-md-5">
@@ -114,15 +121,13 @@
                             </div>
                           </div>
                           <div id="error"></div>
-                        <small class="form-text text-muted">
-                            Recuerde la contraseña debera de coincidir con la anterior
-                        </small>
+                        <small id="ad13" class="form-text text-muted text-danger"></small>
                     </div>
                 </div>
             </div>
             <div class="card-action">
                 <button type="submit" class="btn btn-danger">Cancelar</button>
-                <button type="submit" class="btn btn-success" id="enviar">Aceptar</button>
+                <button type="submit" class="btn btn-success" id="enviar" onclick="return mainValidationRegister();">Aceptar</button>
             </div>
         </div>
     </div>

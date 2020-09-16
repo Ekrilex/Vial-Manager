@@ -1,25 +1,25 @@
-1;Ahuellamiento;Deformaciones ;A
+ï»¿1;Ahuellamiento;Deformaciones ;A
 2;Hundimientos longitudinales;Deformaciones ;A
 3;Hundimientos transversales;Deformaciones ;A
 4;Fisura piel de cocodrilo;Fisuras;A
 5;Fisura longitudinal por fatiga;Fisuras;A
-6;Bacheos;Pérdida de capas estructurales;A
-7;Parcheos;Pérdida de capas estructurales;A
-8;Fisura longitudinal de junta construcción;Fisuras;B
-9;Fisura transversal de junta construcción;Fisuras;B
-10;Fisura de contacción térmica;Fisuras;B
+6;Bacheos;Perdida de capas estructurales;A
+7;Parcheos;Perdida de capas estructurales;A
+8;Fisura longitudinal de junta construccion;Fisuras;B
+9;Fisura transversal de junta construccion;Fisuras;B
+10;Fisura de contaccion termica;Fisuras;B
 11;Fisura Parabolica;Fisuras;B
 12;Fisura de borde;Fisuras;B
-13;Deformación;Deformación;B
+13;Deformacion;Deformaciones;B
 14;Ojo de pescado;Desprendimientos;B
 15;Perdida de pelicula ligante;Desprendimientos;B
-16;Perdida de agregado;Daños superficiales;B
-17;Descascaramientos;Pérdida de capas estructurales;B
-18;Pulimiento de agregado;Daños superficiales;B
-19;Exudación;Otros deterioros;B
+16;Perdida de agregado;DaÃ±os superficiales;B
+17;Descascaramientos;Perdida de capas estructurales;B
+18;Pulimiento de agregado;DaÃ±os superficiales;B
+19;Exudacion;Otros deterioros;B
 20;Aflojamiento de montero;Otros deterioros;B
 21;Aflojamiento de agua;Otros deterioros;B
-22;Desintegración de los bordes de pavimento;Otros deterioros;B
+22;Desintegracion de los bordes de pavimento;Otros deterioros;B
 23;Escalonamiento de los bordes entre calzada y berma;Otros deterioros;B
-24;Erosión de las bermas;Otros deterioros;B
-25;Segregación;Otros deterioros;B
+24;Erosion de las bermas;Otros deterioros;B
+25;Segregacion;Otros deterioros;B

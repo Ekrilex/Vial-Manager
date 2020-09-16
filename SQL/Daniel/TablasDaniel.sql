@@ -3,7 +3,7 @@ CREATE DATABASE vialmanager...
 CREATE TABLE tbl_tramo(
   
   Tra_id  serial primary key,
-  Tra_codigo integer not null,
+  Tra_codigo varchar(12) not null,
   Tra_fecha_creacion date,
   Tra_segmento integer not null,
   Tra_nomenclatura varchar (45) not null, 

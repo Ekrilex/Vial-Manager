@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.2.9
 -- Dumped by pg_dump version 9.2.9
--- Started on 2020-09-10 16:39:45
+-- Started on 2020-09-16 11:05:35
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -286,8 +286,8 @@ ALTER SEQUENCE tbl_comuna_com_id_seq OWNED BY tbl_comuna.com_id;
 
 CREATE TABLE tbl_deterioro (
     det_id integer NOT NULL,
-    det_nombre character varying(40) NOT NULL,
-    det_tipo_deterioro character varying(15) NOT NULL,
+    det_nombre character varying(60) NOT NULL,
+    det_tipo_deterioro character varying(30) NOT NULL,
     det_clasificacion character varying(2) NOT NULL
 );
 
@@ -713,7 +713,7 @@ ALTER SEQUENCE tbl_tipo_documento_tip_id_seq OWNED BY tbl_tipo_documento.tip_id;
 
 CREATE TABLE tbl_tramo (
     tra_id integer NOT NULL,
-    tra_codigo integer NOT NULL,
+    tra_codigo character varying(12) NOT NULL,
     tra_fecha_creacion date,
     tra_segmento integer NOT NULL,
     tra_nomenclatura character varying(45) NOT NULL,
@@ -1736,7 +1736,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2020-09-10 16:39:46
+-- Completed on 2020-09-16 11:05:36
 
 --
 -- PostgreSQL database dump complete

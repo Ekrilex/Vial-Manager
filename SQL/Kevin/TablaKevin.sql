@@ -1,7 +1,7 @@
 CREATE TABLE tbl_deterioro (
     det_id serial,
-    det_nombre VARCHAR (40) NOT NULL,
-    det_tipo_deterioro VARCHAR (15) NOT NULL,
+    det_nombre VARCHAR (60) NOT NULL,
+    det_tipo_deterioro VARCHAR (30) NOT NULL,
     det_clasificacion VARCHAR(2) NOT NULL,
     PRIMARY KEY(det_id)
 );

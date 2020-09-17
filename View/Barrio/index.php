@@ -14,15 +14,19 @@
                 </div>
             </div>
             <br>
-            <div class="d-flex align-items-center">
+
+            <!--
+                Este filtro es el que estaba antes no se va utilizar
+
+                <div class="d-flex align-items-center">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <label>Buscar:&nbsp;&nbsp;</label>
                 <label>
-                    <input type="text" name="filtroB" id="filtroB" data-url="<?php echo getUrl("Barrio","Barrio","filtro",false,"ajax");?>" class="form-control " placeholder="Buscar... "/>
+                    <input type="text" name="filtroB" id="filtroB" data-url="<?php// echo getUrl("Barrio","Barrio","filtro",false,"ajax");?>" class="form-control " placeholder="Buscar... "/>
                 </label> 
-            </div> 
+            </div>--> 
           
-            <div class="card-body">
+            <div class="card">
     
                 <div class="table-responsive">
                     <!-- Aqui se visualiza la validacion del Registro exitoso con un mensaje -->
@@ -77,7 +81,8 @@
                     <!-- Aqui termina el mensaje del Registro Eliminado-->
 
                     <!-- <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4"> -->
-                        <table class="table table-striped table-head-bg-info table-striped-bg-default mt-2">
+                    <table id="multi-filter-select" class="table table-striped   table-head-bg-info  table-striped-bg-default " >
+                        <!-- <table class="table table-striped table-head-bg-info table-striped-bg-default mt-2"> -->
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -87,28 +92,17 @@
                                     <th scope="col">
                                         &nbsp;&nbsp;&nbsp;
                                         &nbsp;&nbsp;&nbsp;
-                                        Acciones
+                                        <font color="blue">Editar</font>
                                     </th>
-                                    <th scope="col"></th>
+                                    <th scope="col">
+                                        &nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;
+                                        <font color="darkred">Eliminar</div>
+                                        
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <!-- <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>Edinburgh</td>
-                                    <td>
-                                        <div class="form-button-action">
-                                            <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>-->
                                 <?php
                                     while($bar=pg_fetch_assoc($barrios)){
                                     // foreach($barrios as $bar){
@@ -127,15 +121,13 @@
                                 
                                 ?>
                             </tbody>
-                        </table>
-                    <!-- </div> -->
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Modal de Editar -->
-
 <div class="modal" id="actualizar">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -207,3 +199,7 @@
 	</div>
 </div>
 
+	
+    
+
+    

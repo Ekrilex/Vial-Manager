@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.2.9
 -- Dumped by pg_dump version 9.2.9
--- Started on 2020-09-16 11:06:16
+-- Started on 2020-09-17 18:02:50
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -1484,6 +1484,7 @@ COPY tbl_eje_vial (eje_id, eje_numero, jerarquia_id) FROM stdin;
 265	1183	3
 266	1192	3
 267	1193	3
+268	12	4
 \.
 
 
@@ -1575,7 +1576,8 @@ COPY tbl_estado (est_id, est_descripcion) FROM stdin;
 1	Habilitado
 2	Inhabilitado
 3	Pendiente
-4	Finalizado
+4	En Progreso
+5	Finalizado
 \.
 
 
@@ -2177,7 +2179,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2020-09-16 11:06:17
+-- Completed on 2020-09-17 18:02:52
 
 --
 -- PostgreSQL database dump complete

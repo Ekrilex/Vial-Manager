@@ -5,12 +5,12 @@
    
         function Tipos(){
          $tipos= array(
-         	"Fisuras",
-         	"Deformidades",
-         	"Pérdida de capas estructurales",
-         	"Daños superficiales",
+            "Fisuras",
+            "Deformidades",
+            "Pérdida de capas estructurales",
+            "Daños superficiales",
             "Desprendimientos",
-         	"Otros deterioros"
+            "Otros deterioros"
          );
          return $tipos;  
         }
@@ -21,22 +21,24 @@
          return $cla;           
         }
 
+
         function validaTipo($valor){
          
          $t=$valor; $c=0; 
 
          $a=array(
-         	"Fisuras",
-         	"Deformidades",
-         	"Pérdida de capas estructurales",
-         	"Daños superficiales",
-         	"Otros daños"
+            "Fisuras",
+            "Deformidades",
+            "Pérdida de capas estructurales",
+            "Daños superficiales",
+            "Desprendimientos",
+            "Otros deterioros"
          );
 
          foreach ($a as $key => $val) {
-         	if ($val==$t) {
-         	   $c++;
-         	}
+            if ($val==$t) {
+               $c++;
+            }
          }
         
          if ($c>0) { $r=$t;}else{ $r=""; }
@@ -51,9 +53,9 @@
          $b=array("A","B");
 
          foreach ($b as $key => $vale) {
-         	if ($vale==$cl) {
-         	   $con++;
-         	}
+            if ($vale==$cl) {
+               $con++;
+            }
          }
         
          if ($con>0) { $rr=$cl;}else{ $rr=""; }
@@ -61,10 +63,13 @@
         
         }
 
-        function Rect($nombre,$tipo,$clasificacion){
+        function Rect($nombre,$tipo,$clasificacion,$igual){
        
        $c=0;
-    
+        if ($igual>0) {
+        $_SESSION['result']['igualdad']="<h3 class='text-danger'>¡El deteriroro ya existe!</h3>";  
+            $c++;        
+        }
        if (!$nombre!="") {
         $_SESSION['result']['nombre']="<h3 class='text-danger'>(*)Debe llenar el nombre del deterioro</h3>";
             $c++;}
@@ -79,7 +84,7 @@
         $c++;    
      }
        
-     return $c;
+     return $c; 
 
     }        
 

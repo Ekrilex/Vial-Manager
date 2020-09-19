@@ -64,8 +64,9 @@
         }
 
         function Rect($nombre,$tipo,$clasificacion,$igual){
-       
+
        $c=0;
+
         if ($igual>0) {
         $_SESSION['result']['igualdad']="<h3 class='text-danger'>¡El deteriroro ya existe!</h3>";  
             $c++;        

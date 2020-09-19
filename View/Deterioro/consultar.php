@@ -1,5 +1,7 @@
 
-<div class="container"><br><br>
+<div class="container"><br>
+
+<script type="text/javascript"> setTimeout(function() { $(".alert").fadeOut(5000); },1000); </script>
 
 <?php
 
@@ -12,7 +14,7 @@ if (isset($_SESSION['result'])) {
              } 
        echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
             <span aria-hidden='true'>&times;</span>
-            </button></div><br><br>"; 
+            </button></div><br>"; 
 
 }unset($_SESSION['result']); 
 

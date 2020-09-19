@@ -148,7 +148,7 @@ $(document).ready(function() {
 
     $(document).on("click", "#editar", function() {
         var id = $(this).val();
-        var url = $(this).attr("data-url");
+        var url = $(this).attr("data-url"); 
         $.ajax({
             url: url,
             type: "POST",
@@ -177,7 +177,7 @@ $(document).ready(function() {
     $(document).on("keyup", ".nombred", function() {
 
         var nombre = $(".nombred").val();
-        var expD = '!"#$%&/()=?¡+{}çÇ+-_`@çª<>.·[]°|,;:´¨*¿';
+        var expD = '!"#$%&/()=?¡+{}çÇ+-_`@ª^~€<>.·[]°|,;:´¨*¿';
         var c=0;
         for (let l = 0; l < nombre.length; l++) {
             for (let k = 0; k < expD.length; k++) {
@@ -195,7 +195,7 @@ $(document).ready(function() {
             $(".actualizar").attr('disabled', true);
             $(this).val(nombre.substr(0, nombre.length - 1));     
         }
-        if(nombre.length>0){
+        if(nombre.length>0 && c==0){
             $(".actualizar").attr('disabled', false);
             $("#errord").html("");                                    
         }
@@ -204,7 +204,7 @@ $(document).ready(function() {
     $(document).on("keyup", ".nombreD", function() {
 
         var nombre = $(".nombreD").val();
-        var expD = '!"#$%&/()=?¡+{}çÇ+-_`@çª<>.·[]°|,;:´¨*¿';
+        var expD = '!"#$%&/()=?¡+{}çÇ+-_`@çª<>~€.·[]°|,^;:´¨*¿';
         var c=0;
       for (let l = 0; l < nombre.length; l++) {
             for (let k = 0; k < expD.length; k++) {
@@ -217,6 +217,8 @@ $(document).ready(function() {
         if(c>0){
             $(".guardar").attr('disabled', true);
             $(this).val(nombre.substr(0, nombre.length - 1)); 
+        }else if(nombre.length>0 && c == 0){
+             $(".guardar").attr('disabled', false);
         }
 
     });

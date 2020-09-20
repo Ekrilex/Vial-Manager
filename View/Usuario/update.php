@@ -38,8 +38,9 @@
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label for="inputAddress">Correo Electronico</label>
-                        <input type="text" class="form-control" id="correo" name="correo" value="<?php echo $index['usu_correo'] ?>" onchange="valMail(this,'ad5')">
+                        <input type="text" class="form-control" id="correo" name="correo" value="<?php echo $index['usu_correo'] ?>" data-url="<?php echo getUrl('Usuario','Usuario','mailCheck',false,'ajax') ?>">
                         <small id="ad5" class="form-text text-muted text-danger"></small>
+                        <small id="confirm" class="form-text text-muted text-info"></small>
                     </div>
 
                     <div class="form-group col-md-4">

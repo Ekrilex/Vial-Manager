@@ -259,6 +259,8 @@ $(document).ready(function() {
         }
     });
 
+    ///////////////// Kevin Usuarios ///////////////////////
+
     $(document).on("keyup", "#search", function() {
         let url = $(this).attr("data-url");
         let value = $(this).val();
@@ -275,6 +277,142 @@ $(document).ready(function() {
         });
     });
 
+    // Funcion para validar si un correo esta disponible.
+    $(document).on("change","#correo", function(){
+        let url = $(this).attr("data-url");
+        let value = $(this).val();
+        
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: 'value=' + value,
+            success: function(data) {
+                $('#confirm').html(data);
+            }
+        });
+    })
+
+    // Funcion necesaria para las datatables
+    $('#users-table').DataTable( {
+        "pageLength": 5,
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select class="form-control"><option value=""></option></select>')
+                .appendTo( $(column.footer()).empty() )
+                .on( 'change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
+                        );
+
+                    column
+                    .search( val ? '^'+val+'$' : '', true, false )
+                    .draw();
+                } );
+
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    });
+
+    // Funcion para eliminar a un usuario
+    $('tr td #delete').click(function(ev){
+
+        ev.preventDefault();
+        let name = $(this).parents('tr').find('td:first').text();
+        let id = $(this).attr('data-id');
+        let url = $(this).attr('data-url');
+        let self = this;
+
+        swal({
+            title: '¿Realmente quieres eliminar al usuario '+ name +' ?',
+            text: 'El usuario sera inhabilitado del sistema',
+            icon: 'warning',
+            buttons:{
+                cancel:{
+                    className: 'btn btn-danger',
+                    visible: true
+                },
+                confirm:{
+                    className: 'btn btn-success'
+                }
+            }
+        }).then((result) => {
+            if(result){
+                console.log('hola');
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: 'value='+id,
+                    success: function(){
+                        swal({
+                            title: 'Eliminado!',
+                            text: 'El usuario ha sido eliminado correctamente',
+                            type: 'success',
+                            buttons: {
+                                confirm: {
+                                    className: 'btn btn-success'
+                                }
+                            }
+                        }).then(function(){
+                            location.reload();
+                        })
+                    }
+                });
+            }
+        });
+
+    });
+
+    // Funcion para activar a un usuario
+    $('tr td #activate').click(function(ev){
+
+        ev.preventDefault();
+        let name = $(this).parents('tr').find('td:first').text();
+        let id = $(this).attr('data-id');
+        let url = $(this).attr('data-url');
+        let self = this;
+
+        swal({
+            title: '¿Realmente quieres activar al usuario '+ name +' ?',
+            text: 'El usuario sera activado nuevamente en el sistema',
+            icon: 'warning',
+            buttons:{
+                cancel:{
+                    className: 'btn btn-danger',
+                    visible: true
+                },
+                confirm:{
+                    className: 'btn btn-success'
+                }
+            }
+        }).then((result) => {
+            if(result){
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: 'value='+id,
+                    success: function(){
+                        swal({
+                            title: 'Reactivado!',
+                            text: 'El usuario ha sido activado correctamente',
+                            type: 'success',
+                            buttons: {
+                                confirm: {
+                                    className: 'btn btn-success'
+                                }
+                            }
+                        }).then(function(){
+                            location.reload();
+                        })
+                    }
+                });
+            }
+        });
+
+    });
 
     ///////////////////////////Sandra Barrio ////////////////////////////
 
@@ -584,21 +722,8 @@ $(document).ready(function() {
 
 });
 
-//////////////////////Funciones de modulo de usuarios///////////////////
+//////////////////////Funciones de modulo de usuarios - Kevin///////////////////
 
-// Funcion para enviar paramentos mediante la modal a la funcion userDelete
-const userDelete = (identificacion) => {
-    console.log(identificacion);
-    input = document.getElementById('inputcito');
-    input.value = identificacion;
-}
-
-// Funcion para enviar paramentos mediante la modal a la funcion userActivation
-const userActivation = (identificacion) => {
-    console.log(identificacion);
-    input = document.getElementById('inputcito2');
-    input.value = identificacion;
-}
 
 // Funcion para mostrar contraseña
 const mostrarContraseña = () => {
@@ -621,56 +746,54 @@ const mostrarContraseña2 = () => {
 }
 
 // Funcion que valida que unicamente hayan letras en un determinado input
-const valVarchar = (params, id) => {
-    value = params.value;
-    value2 = id.toString();
+const valVarchar = (valor, small, input ) => {
+    value = valor.value;
+    value2 = small;
+    value3 = document.getElementById(input);
 
     if (/^[a-zA-z]+$/.test(value)) {
         document.getElementById(value2).innerHTML = '';
+        value3.classList.remove("has-error");
+        value3.classList.add("has-success");
     } else {
         document.getElementById(value2).innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese solo letras';
+        value3.classList.remove("has-success");
+        value3.classList.add("has-error");
     }
 
-}
-
-// Funcion que valida si un email es correcto
-const valMail = (params, id) => {
-    value = params.value;
-    value2 = id.toString();
-
-    if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(value)) {
-        document.getElementById(value2).innerHTML = '';
-    } else {
-        document.getElementById(value2).innerHTML = '<i class="fas fa-exclamation-circle"></i> Correo Invalido';
-    }
 }
 
 // Funcion que valida que unicamente hayan numeros en un determinado input
-const valInt = (params, id) => {
-    value = params.value;
-    value2 = id.toString();
+const valInt = ( valor, small, input ) => {
+    value = valor.value;
+    value2 = small;
+    value3 = document.getElementById(input);
 
     if (/^[0-9]+$/.test(value)) {
         document.getElementById(value2).innerHTML = '';
+        value3.classList.remove("has-error");
+        value3.classList.add("has-success");
     } else {
         document.getElementById(value2).innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese solo numeros';
+        value3.classList.remove("has-success");
+        value3.classList.add("has-error");
     }
 }
 
 // Funcion que validad que no hayan campos vacios en el formulario de registro de usuario
 const mainValidationRegister = () => {
 
-    firts_name = document.getElementById('pri_nombre').value;
-    second_name = document.getElementById('seg_nombre').value;
-    firts_last = document.getElementById('pri_apellido').value;
-    second_last = document.getElementById('seg_apellido').value;
-    mail = document.getElementById('correo').value;
-    phone = document.getElementById('telefono').value;
-    numb_document = document.getElementById('num_documento').value;
-    type_document = document.getElementById('tipo_documento').value;
-    type_role = document.getElementById('tipo_rol').value;
-    password1 = document.getElementById('password').value;
-    password2 = document.getElementById('confirmation').value;
+    let firts_name = document.getElementById('pri_nombre').value;
+    let second_name = document.getElementById('seg_nombre').value;
+    let firts_last = document.getElementById('pri_apellido').value;
+    let second_last = document.getElementById('seg_apellido').value;
+    let mail = document.getElementById('correo').value;
+    let phone = document.getElementById('telefono').value;
+    let numb_document = document.getElementById('num_documento').value;
+    let type_document = document.getElementById('tipo_documento').value;
+    let type_role = document.getElementById('tipo_rol').value;
+    let password1 = document.getElementById('password').value;
+    let password2 = document.getElementById('confirmation').value;
 
     count = 0;
 
@@ -732,6 +855,11 @@ const mainValidationRegister = () => {
     if (password1 != password2) {
         document.getElementById('ad12').innerHTML = '<i class="fas fa-exclamation-circle"></i> Las contraseñas deben de coincidir';
         document.getElementById('ad13').innerHTML = '<i class="fas fa-exclamation-circle"></i> Las contraseñas deben de coincidir';
+        count++;
+    }
+
+    if (!/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(mail)){
+        document.getElementById('ad5').innerHTML = '<i class="fas fa-exclamation-circle"></i> Error el corre electronico es invalido';
         count++;
     }
 

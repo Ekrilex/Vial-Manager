@@ -1,5 +1,5 @@
 <!-- Inicio de formulario -->
-<form action="<?php echo getUrl("Usuario","Usuario","postCreate");?>" method="POST">
+<form action="<?php echo getUrl("Usuario","Usuario","postCreate",false,"ajax");?>" method="POST">
      <div class="col-md-12" style="margin-top: 20px;">
         <div class="card">
             <div class="card-header">
@@ -19,55 +19,56 @@
                 </div>
                 <?php } unset($_SESSION['errores']); ?>
                 <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div id="input1" class="form-group col-md-3">
                         <label for="inputEmail4">Primer Nombre</label>
-                        <input type="text" class="form-control validacion" name="primer_nombre" id="pri_nombre"  placeholder="Ingrese el primer nombre" onchange="valVarchar(this,'ad1')">
+                        <input type="text" class="form-control validacion" name="primer_nombre" id="pri_nombre"  placeholder="Ingrese el primer nombre" onchange="valVarchar(this,'ad1','input1')">
                         <small id="ad1" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
 
-                    <div class="form-group col-md-3">
+                    <div id="input2" class="form-group col-md-3">
                         <label for="inputPassword4">Segundo Nombre</label>
-                        <input type="text" class="form-control validacion" name="segundo_nombre" id="seg_nombre"  placeholder="Ingrese el segundo nombre" onchange="valVarchar(this,'ad2')" >
+                        <input type="text" class="form-control validacion" name="segundo_nombre" id="seg_nombre"  placeholder="Ingrese el segundo nombre" onchange="valVarchar(this,'ad2', 'input2')" >
                         <small id="ad2" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
 
-                    <div class="form-group col-md-3">
+                    <div id="input3" class="form-group col-md-3">
                         <label for="inputPassword4">Primer Apellido</label>
-                        <input type="text" class="form-control validacion" name="primer_apellido" id="pri_apellido"  placeholder="Ingrese el primer apellido" onchange="valVarchar(this,'ad3')" >
+                        <input type="text" class="form-control validacion" name="primer_apellido" id="pri_apellido"  placeholder="Ingrese el primer apellido" onchange="valVarchar(this,'ad3', 'input3')">
                         <small id="ad3" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
 
-                    <div class="form-group col-md-3">
+                    <div id="input4" class="form-group col-md-3">
                         <label for="inputPassword4">Segundo Apellido</label>
-                        <input type="text" class="form-control validacion" name="segundo_apellido" id="seg_apellido"  placeholder="Ingrese el segundo apellido" onchange="valVarchar(this,'ad4')" >
+                        <input type="text" class="form-control validacion" name="segundo_apellido" id="seg_apellido"  placeholder="Ingrese el segundo apellido" onchange="valVarchar(this,'ad4', 'input4')">
                         <small id="ad4" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-8">
+                    <div id="input5" class="form-group col-md-8">
                         <label for="inputAddress">Correo Electronico</label>
-                        <input type="text" class="form-control" name="Correo_electronico" id="correo"  placeholder="Ingrese el correo electronico" onchange="valMail(this, 'ad5')" >
+                        <input type="text" class="form-control" name="Correo_electronico" id="correo"  placeholder="Ingrese el correo electronico" data-url="<?php echo getUrl('Usuario','Usuario','mailCheck',false,'ajax') ?>" >
                         <small id="ad5" class="form-text text-muted text-danger"></small>
+                        <small id="confirm" class="form-text text-muted text-info"></small>
                         <div id="error"></div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div id="input6" class="form-group col-md-4">
                         <label for="inputAddress2">Telefono</label>
-                        <input type="text" class="form-control validacion" name="Telefono" id="telefono" placeholder="Ingrese el telefono" onchange="valInt(this, 'ad7')" >
+                        <input type="text" class="form-control validacion" name="Telefono" id="telefono" placeholder="Ingrese el telefono" onchange="valInt(this, 'ad7', 'input6')" >
                         <small id="ad7" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-5">
+                    <div id="input7" class="form-group col-md-5">
                         <label for="inputCity">Numero de documento</label>
-                        <input type="text" class="form-control validacion" name="numero_documento" id="num_documento"  placeholder="Ingrese el numero de documento" onchange="valInt(this, 'ad8')" >
+                        <input type="text" class="form-control validacion" name="numero_documento" id="num_documento"  placeholder="Ingrese el numero de documento" onchange="valInt(this, 'ad8', 'input7')" >
                         <small id="ad8" class="form-text text-muted text-danger"></small>
                         <div id="error"></div>
                     </div>
@@ -100,7 +101,7 @@
                 </div>
 
                 <div class="form-row"> 
-                    <div class="form-group col-md-5">
+                    <div id="input8" class="form-group col-md-5">
                         <label for="inputPassword4">Contraseña</label>
                         <div class="input-group">
                             <input type="password" class="form-control validacion" id="password" placeholder="Ingrese la contraseña" name="clave" >
@@ -112,7 +113,7 @@
                         <small id="ad12" class="form-text text-muted text-danger"></small>
                     </div>
 
-                    <div class="form-group col-md-5">
+                    <div id="input9" class="form-group col-md-5">
                         <label for="inputPassword4">Confirmar Contraseña</label>
                         <div class="input-group">
                             <input type="password" class="form-control validacion" id="confirmation" placeholder="Ingrese de nuevo la contraseña" name="clave2" >

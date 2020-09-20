@@ -119,14 +119,14 @@
           $nickname = $obj->genereteUser($pri_nombre,$pri_apellido);
           $id = $obj->autoincrement("tbl_usuario","usu_id"); 
 
-          $query = "INSERT INTO tbl_usuario VALUES($id, $num_documento, '".$pri_nombre."', '".$seg_nombre."', '".$pri_apellido."', '".$seg_apellido."', '".$contra."', '".$telefono."', '".$correo."', $rol, 1, $tip_documento, '".$nickname."')";
+          $query = "INSERT INTO tbl_usuario VALUES($id, $num_documento, '".$pri_nombre."', '".$seg_nombre."', '".$pri_apellido."', '".$seg_apellido."', '".$contra."', '".$telefono."', '".$nickname."', '".$correo."', $rol, 1, $tip_documento)";
 
           $ejecutar = $obj->insertar($query);
 
           if ($ejecutar) {
             redirect(getUrl("Usuario","Usuario","index"));
           } else {
-            mysqli_error($ejecutar);
+            pg_last_error($ejecutar);
           }
       }
 
@@ -145,16 +145,16 @@
       public function deleteUsuario(){
           $obj = new UsuarioModel();
 
-          $user = $_POST['usu_num_identificacion'];
+          $user = $_POST['value'];
 
           $query = "UPDATE tbl_usuario SET estado_id = 2 WHERE usu_num_identificacion = '".$user."' ";
               
           $ejecucion = $obj->editar($query);
 
           if (!$ejecucion) {
-            mysqli_error($ejecucion);
+            pg_last_error($ejecucion);
           } else {
-            redirect(getUrl("Usuario","Usuario","index"));
+            // redirect(getUrl("Usuario","Usuario","index"));
           }
       }
 
@@ -215,7 +215,7 @@
 
         $obj = new UsuarioModel();
 
-        $user = $_POST['usu_num_identificacion2'];
+        $user = $_POST['value'];
 
         $query = "UPDATE tbl_usuario SET estado_id = 1 WHERE usu_num_identificacion = '".$user."'";
 
@@ -224,7 +224,7 @@
         if ($ejecucion) {
           redirect(getUrl("Usuario","Usuario","index"));
         } else {
-          mysqli_error($ejecucion);
+          pg_last_error($ejecucion);
         }
 
       }
@@ -243,6 +243,28 @@
         } else {
           pg_last_error($usuarios);
         }
+
+      }
+
+      // Funcion para validar si un correo se encuentra disponible.
+      public function mailCheck(){
+
+        $obj = new UsuarioModel();
+        $mail = $_POST['value'];
+        $query = "SELECT usu_correo FROM tbl_usuario WHERE usu_correo = '". $mail ."' ";
+        $eject = $obj->consultar($query);
+        $count = pg_num_rows($eject);
+
+        if ( $eject ) {
+          if ($count > 0) {
+            echo "<i class='fas fa-times'></i> Correo electronico no disponible";
+          } else {
+            echo "<i class='fas fa-check-circle'></i> Correo electronico disponible ";
+          }
+        } else {
+          pg_last_error( $eject );
+        }
+        
 
       }
 

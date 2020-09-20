@@ -1,4 +1,3 @@
-
 <!-- Modal Para Registrar un Barrio-->
 <?php 
     if(isset($_SESSION['prueba'])){
@@ -6,13 +5,13 @@
 <div class="modal" id="addRowModal">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title text-center text-dark" id="exampleModalLabel">Registrar Barrio</h1>
+			<div class="modal-header btn-success">
+				<h1 class="modal-title text-center text-light" id="exampleModalLabel">Registrar Barrio</h1>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true"></span>
 				</button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body btn-default">
                 <!-- Validacion para los campos no llenos -->
                 <?php 
                     if(isset($_SESSION['errores'])){
@@ -37,11 +36,12 @@
                 <form action="<?php echo getUrl("Barrio","Barrio","postCreate"); ?>" method="POST">
                     <div class="form-group">
                         <!-- <input type="hidden" class="form-control" id="bar_id"> -->
-                        <h4 class="text-dark">Descripción o Nombre de Barrio</h4>
-                        <input type="text" class="form-control barrioN" name="bar_nombre" id="bar_nombre" placeholder=""/>
+                        <h4 class="text-light">Descripción o Nombre de Barrio</h4>
+                        <input type="text" class="form-control is-valid barrioN" name="bar_nombre" id="bar_nombre" placeholder=""/>
+                        <div id="error"></div>
                     </div>
                     <div class="form-group">
-                        <h4 class="text-dark">N&uacute;mero de la Comuna</h4>
+                        <h4 class="text-light">N&uacute;mero de la Comuna</h4>
                         <select class="form-control" name="com" id="com">
                         <option value="">Seleccione...</option>
                             <?php
@@ -52,9 +52,10 @@
                             ?>
                         </select>
                     </div>  
-                    <div class="modal-footer">
-                         <button type="button" class="btn btn-default" data-dismiss="modal" >Cancelar</button>
-                        <input type="submit" name="Registrar" value="Registrar" class="btn btn-success">
+                    <br> 
+                    <div class="modal-footer btn-default">
+                         <button type="button" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
+                        <input type="submit" name="Registrar" id="paratodo" value="Registrar" class="btn btn-success">
                     </div>
                 </form>
             </div>
@@ -75,13 +76,13 @@ $("#addRowModal").modal();
     <div class="modal" id="addRowModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title text-center text-dark" id="exampleModalLabel">Registrar Barrio</h1>
+                <div class="modal-header btn-success">
+                    <h1 class="modal-title text-center text-light" id="exampleModalLabel">Registrar Barrio</h1>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"></span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body btn-default">
                     <!-- Validacion para los campos no llenos -->
                     <?php 
                         if(isset($_SESSION['errores'])){
@@ -106,11 +107,12 @@ $("#addRowModal").modal();
                         <div class="form-group">
                             <!-- <input type="hidden" class="form-control" id="bar_id"> -->
 
-                            <h4 class="text-dark">Descripción o Nombre de Barrio</h4>
-                            <input type="text" class="form-control barrioN" name="bar_nombre" id="bar_nombre" placeholder=""/>
+                            <h4 class="text-light">Descripción o Nombre de Barrio</h4>
+                            <input type="text" class="form-control is-valid barrioN" name="bar_nombre" id="bar_nombre" placeholder=""/>
+                            <div id="error"></div> 
                         </div>
                         <div class="form-group">
-                            <h4 class="text-dark">N&uacute;mero de la Comuna</h4>
+                            <h4 class="text-light">N&uacute;mero de la Comuna</h4>
                             <select class="form-control" name="com" id="com" >
                             <option value="">Seleccione...</option>
                                 <?php
@@ -120,10 +122,11 @@ $("#addRowModal").modal();
                                     }
                                 ?>
                             </select>
-                        </div>  
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" >Cancelar</button>
-                            <input type="submit" name="Registrar" value="Registrar" class="btn btn-success">
+                        </div> 
+                        <br> 
+                        <div class="modal-footer btn-default">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
+                            <input type="submit" name="Registrar" id="Registrar" value="Registrar" class="btn btn-success">
                         </div>
                     </form>
                 </div>
@@ -133,4 +136,5 @@ $("#addRowModal").modal();
 <!-- Aqui termina el model de registrar barrio -->
   
                
-      
+                   
+               

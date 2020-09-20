@@ -15,19 +15,30 @@
 
             include_once '../View/Barrio/index.php';
             include_once '../View/Barrio/create.php';
+            
         }
 
         public function postCreate(){
             $objeto= new BarrioModel();
            
             //Se crearon las decisiones en caso de que no se diligencien los campos
-            $cont=0;
+            $cont=0; $valida=0;
             $barrio=$_POST['bar_nombre'];
             if(!$barrio!=""){
                $_SESSION['errores']['nombre']="<span class='text-danger'>Debe diligenciar el campo nombre del barrio</span>";
                $cont++;
             }
-   
+            $sql="SELECT COUNT(*) AS valida FROM tbl_barrio WHERE bar_descripcion='".$barrio."'";
+            $b=$objeto->consultar($sql);
+            while($bb=pg_fetch_assoc($b)){
+                $valida=$bb['valida'];   
+            }
+
+            if($valida>=1){
+                $_SESSION['errores']['nombre']="<span class='text-danger'>Ya exite este barrio</span>";
+                $cont++;
+            }
+
             $comuna=$_POST['com'];
             if(!$comuna!=""){
                $_SESSION['errores']['comuna']="<span class='text-danger'>Debe seleccionar una comuna</span>";
@@ -63,15 +74,15 @@
            
             include_once '../View/Barrio/index.php';
             include_once '../View/Barrio/create.php';
-
+            include_once '../View/Barrio/update.php';
         }
 
        
         public function getUpdate(){
             $objeto=new BarrioModel();
 
-            $bar_id=$_POST['barrioActuali'];
-            
+            $bar_id=$_POST['bar_id'];
+
             $sql="SELECT * FROM tbl_barrio WHERE bar_id=$bar_id";
             $barrios=$objeto->consultar($sql);
 
@@ -79,19 +90,20 @@
             $comunas=$objeto->consultar($sql);
 
             while($bar=pg_fetch_assoc($barrios)){
-            //foreach($barrios as $bar){
+                //foreach($barrios as $bar){
 
                 echo "<div class='form-group'>"
-                     ."<h4 class='text-dark'>ID de Barrio</h4>"
-                        ."<input readonly class='form-control text-dark' type='text' name='bar_ida' id='bar_ida' value='".$bar['bar_id']."'>"
+                    ."<h4 class='text-light'>ID de Barrio</h4>"
+                        ."<input readonly class='form-control text-dark' type='text' name='bar_id' id='bar_id' value='".$bar['bar_id']."'>"
                     ."</div>";
                 echo "<div class='form-group'>"
-                    ."<h4 class='text-dark'>Descripción o Nombre de Barrio</h4>"
-                        ."<input  class='form-control barrioN' type='text' name='bar_descripcion'id='bar_descripcion' value='".$bar['bar_descripcion']."'>"
+                    ."<h4 class='text-light'>Descripción o Nombre de Barrio</h4>"
+                        ."<input  class='form-control is-valid barrioEditar' type='text' name='bar_descripcion'id='bar_descripcion' value='".$bar['bar_descripcion']."'>"
+                        ."<div id='errorEdit'></div>"
                     ."</div>"; 
                 echo "<div class='form-group'>";
-                    echo "<h4 class='text-dark'>N&uacute;mero de la Comuna</h4>" ;   
-                        echo "<select class='form-control' name='com' id='com'>";
+                    echo "<h4 class='text-light'>N&uacute;mero de la Comuna</h4>" ;   
+                        echo "<select class='form-control is-valid barrioEditar' name='com_id' id='com_id' value='".$bar['comuna_id']."' required >";
                         echo "<option value=''>Seleccione...</option>";
                         while($comun=pg_fetch_assoc($comunas)){
                         // foreach($comunas as $comun){
@@ -99,51 +111,32 @@
                                 echo "<option value='".$comun['com_id']."' selected>".$comun['com_id']."</option>";
                             }else{
                                 echo "<option value='".$comun['com_id']."'>".$comun['com_id']."</option>";
+                               
                             }
+                           
                         }
                     echo "</select>";
                 echo "</div>"; 
+             
             }
-
-            
+           
         }
 
         public function postUpdate(){
             $objeto= new BarrioModel();
-            $bar_id=$_POST['bar_ida'];//Trae el bar_id de getUpdate
-            /*//Se crearon las decisiones en caso de que no se diligencien los campos(NO SIRVE SALE ERROR)
-            $cont=0;
-            $bar_id=$_POST['bar_ida'];
-            if(!$bar_id!=""){
-               $_SESSION['errores']['nombre']="<span class='text-danger'>Debe diligenciar el campo nombre del barrio</span>";
-               $cont++;
-            }
-            $bar_descrip=$_POST['bar_descripcion'];
-            if(!$bar_descrip!=""){
-               $_SESSION['errores']['nombre']="<span class='text-danger'>Debe diligenciar el campo nombre del barrio</span>";
-               $cont++;
-            }
-   
-            $com_id=$_POST['com'];
-            if(!$com_id!=""){
-               $_SESSION['errores']['comuna']="<span class='text-danger'>Debe seleccionar una comuna</span>";
-               $cont++;
-            }
-            if($cont>0){
-                
-                redirect(getUrl("Barrio","Barrio","getUpdate"));
-            }else{*/
+            @$bar_id=$_POST['bar_id'];//Trae el bar_id de getUpdate
+         
             
-                $bar_descrip=$_POST['bar_descripcion'];
-                $com_id=$_POST['com'];
-                
-                $sql="UPDATE tbl_barrio SET bar_descripcion='".$bar_descrip."', comuna_id=$com_id WHERE bar_id=$bar_id";
-                $ejecucion=$objeto->editar($sql);
-                if($ejecucion){
-                    $_SESSION['resultEditar']="<span class='text-info'>Se edito el barrio <b>$bar_descrip</b> correctamente </span>";
-                }
-                redirect(getUrl("Barrio","Barrio","index"));
-            // }
+            @$bar_descrip=$_POST['bar_descripcion'];
+            @$com_id=$_POST['com_id'];
+            
+            $sql="UPDATE tbl_barrio SET bar_descripcion='".$bar_descrip."', comuna_id=$com_id WHERE bar_id=$bar_id";
+            $ejecucion=$objeto->editar($sql);
+            if($ejecucion){
+                $_SESSION['resultEditar']="<span class='text-info'>Se edito el barrio <b>$bar_descrip</b> correctamente </span>";
+            }
+            redirect(getUrl("Barrio","Barrio","index"));
+          
         }
 
         public function getDelete(){
@@ -179,7 +172,7 @@
         }
 
 
-        public function filtro(){
+        /*public function filtro(){
             $objeto= new BarrioModel();
 
             $barrio=$_POST['barrio'];
@@ -199,6 +192,6 @@
             }else{
                 include_once '../View/Barrio/filtro.php';
             }
-        }
+        }*/
     }
 ?>

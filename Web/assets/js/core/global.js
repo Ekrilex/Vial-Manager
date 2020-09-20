@@ -43,7 +43,7 @@ $(document).ready(function() {
             $("#error1").html("<h5 class='text-danger'>El correo es invalido</h5>");
         }
     });
-
+            
     $(document).on("keyup", ".campos", function() {
 
         var correo = $(".correo").val();
@@ -90,6 +90,48 @@ $(document).ready(function() {
 
     //////////////////Daniel //////////////////
 
+    $('#Tbl-deterioro').DataTable( {
+        "pageLength": 5,
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select class="form-control"><option value=""></option></select>')
+                .appendTo( $(column.footer()).empty() )
+                .on( 'change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
+                        );
+
+                    column
+                    .search( val ? '^'+val+'$' : '', true, false )
+                    .draw();
+                } );
+
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    });
+
+
+   $(document).on("click", ".cerrar", function() { location.reload(); });
+
+    $(document).on("click", ".guardar", function() { 
+        var url = $(this).attr("data-url"); 
+        var nom= $(".nombreD").val();   
+        var dan= $(".Dano").val();
+        var cla= $(".Clasi").val();
+        $.ajax({
+            url:  url,
+            type: "POST", 
+            data: "det_nombre=" + nom + "&det_tipo_deterioro=" + dan + "&det_clasificacion=" + cla,            
+            success: function(datos) {
+              $("#formEjemplo")[0].reset();            
+            $("#errores").html(datos);     
+            }
+        });
+    });
 
     $(document).on("keyup", "#filtro", function() {
         var url = $(this).attr("data-url");
@@ -99,14 +141,14 @@ $(document).ready(function() {
             type: "POST",
             data: "valor=" + valor,
             success: function(datos) {
-                $("tbody").html(datos);
+              $("tbody").html(datos);
             }
         });
     });
 
     $(document).on("click", "#editar", function() {
         var id = $(this).val();
-        var url = $(this).attr("data-url");
+        var url = $(this).attr("data-url"); 
         $.ajax({
             url: url,
             type: "POST",
@@ -135,15 +177,52 @@ $(document).ready(function() {
     $(document).on("keyup", ".nombred", function() {
 
         var nombre = $(".nombred").val();
+        var expD = '!"#$%&/()=?¡+{}çÇ+-_`@ª^~€<>.·[]°|,;:´¨*¿';
+        var c=0;
+        for (let l = 0; l < nombre.length; l++) {
+            for (let k = 0; k < expD.length; k++) {
+                if (nombre[l] == expD[k]) {
+                    c++;
+                }
+            }
+        }
 
         if (nombre.length == 0) {
             $(".actualizar").attr('disabled', true);
-            $("#errord").html("<h5 class='text-danger'>Debe llenar el nombre del detrioro</h5>");
-        } else {
+            $("#errord").html("<h5 class='text-danger'>(*) Debe llenar el nombre del detrioro</h5>");
+        }
+        if(nombre.length>0 && c>0){
+            $(".actualizar").attr('disabled', true);
+            $(this).val(nombre.substr(0, nombre.length - 1));     
+        }
+        if(nombre.length>0 && c==0){
             $(".actualizar").attr('disabled', false);
-            $("#errord").html("");
+            $("#errord").html("");                                    
         }
     });
+
+    $(document).on("keyup", ".nombreD", function() {
+
+        var nombre = $(".nombreD").val();
+        var expD = '!"#$%&/()=?¡+{}çÇ+-_`@çª<>~€.·[]°|,^;:´¨*¿';
+        var c=0;
+      for (let l = 0; l < nombre.length; l++) {
+            for (let k = 0; k < expD.length; k++) {
+                if (nombre[l] == expD[k]) {
+                    c++;
+                }
+            }
+        }
+
+        if(c>0){
+            $(".guardar").attr('disabled', true);
+            $(this).val(nombre.substr(0, nombre.length - 1)); 
+        }else if(nombre.length>0 && c == 0){
+             $(".guardar").attr('disabled', false);
+        }
+
+    });
+
 
     ////////////////////////////////////////////////////////////////////
 
@@ -338,8 +417,8 @@ $(document).ready(function() {
     ///////////////////////////Sandra Barrio ////////////////////////////
 
     //Se creo esta funcion para que NO ingrese el usuario caracteres especiales en la vista "Registrar"
-    $(document).on("keyup", ".barrioN", function() {
-
+    $(document).on("keyup", ".barrioN",function(){
+        
         var barrioNom = $(this).val();
         var cont = 0;
         var noValidos = "!#$%&/()=?¡+{}[]°|',;:´¨*¿";
@@ -351,70 +430,86 @@ $(document).ready(function() {
             }
         }
         if (cont > 0) {
-            $(this).val(barrioNom.substr(0, barrioNom.length - 1));
+            // $(this).val(barrioNom.substr(0, barrioNom.length - 1));
+            $(this).removeClass('is-valid');
+            $(this).addClass('is-invalid');
+            //$(this).attr('Class','form-control is-invalid validacion');
+            $("#Registrar").attr('disabled',true);
+            $("#error").html("<p class='text-danger'>No ingrese caracteres especiales</p>");
+        }else{
+            $(this).removeClass('is-invalid');
+            $(this).addClass('is-valid');
+            //$(this).attr('Class','form-control is-valid validacion');
+            $("#Registrar").attr('disabled',false);
+            $("#error").html("");
         }
     });
-    // Se creo el filtro para tbl_barrio, No se puden recibir carcateres especiales tambien
-    $(document).on("keyup", "#filtroB", function() {
-        var url = $(this).attr("data-url");
-        var valor = $(this).val();
-        var cont = 0;
-        var noValidos = "!#$%&/()=?¡+{}[]°|',;:´¨*¿";
-
-        //Validacion de caracteres especiales
-        for (let a = 0; a < valor.length; a++) {
-            for (let b = 0; b < noValidos.length; b++) {
-                if (valor[a] == noValidos[b]) {
-                    cont++;
-                }
-            }
-        }
-        if (cont > 0) {
-            $(this).val(valor.substr(0, valor.length - 1));
-        }
-
-        //Validacion de Filtro
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: "barrio=" + valor,
-            success: function(datos) {
-                $("tbody").html(datos);
-            }
-        });
-    });
-
+   
     //Se creo esta funcion para que NO ingrese el usuario caracteres especiales en la vista "Editar"
-    $(document).on("keyup", ".barrioEditar", function() {
-        var barrioEdit = $(this).val();
+    //y para validacion de campos vacios
+    $(document).on("keyup", ".barrioEditar",function(){
+      
+        var barrioNom = $(this).val();
+        var barDes= $("#bar_descripcion").val();
         var cont = 0;
+      
         var noValidos = "!#$%&/()=?¡+{}[]°|',;:´¨*¿";
-        for (let a = 0; a < barrioEdit.length; a++) {
+        for (let a = 0; a < barrioNom.length; a++) {
             for (let b = 0; b < noValidos.length; b++) {
-                if (barrioEdit[a] == noValidos[b]) {
+                if (barrioNom[a] == noValidos[b]) {
                     cont++;
-                }
+                   
+                } 
             }
         }
-        if (cont > 0) {
-            $(this).val(barrioEdit.substr(0, barrioEdit.length - 1));
+        if(barDes==''){
+         
+            $(this).removeClass('is-valid');
+            $(this).addClass('is-invalid');
+            $("#Actualizar").attr('disabled',true);
+            $("#errorEdit").html("<span class='text-danger'>No puede Dejar Campos Vacios</span>");
+            
+            $("#bar_descripcion").focus();
+            return false;
         }
+        if (cont > 0) {
+
+            // $(this).val(barrioNom.substr(0, barrioNom.length - 1));
+            $(this).removeClass('is-valid');
+            $(this).addClass('is-invalid');
+            //$(this).attr('Class','form-control is-invalid validacion');
+            $("#Actualizar").attr('disabled',true);
+            $("#errorEdit").html("<p class='text-danger'>No ingrese caracteres especiales</p>");
+          
+        }
+        else {
+          
+            $(this).removeClass('is-invalid');
+            $(this).addClass('is-valid');
+            // $(this).attr('Class','form-control is-valid validacion');
+            $("#Actualizar").attr('disabled',false);
+            $("#errorEdit").html("");
+        }
+       
+
+  
     });
 
     //Se creo esta funcion para el modal de "Editar"
-    $(document).on("click", "#actuali", function() {
-
-        var barrioActuali = $(this).val();
+    $(document).on("click", "#actuali",function(){
+       
+        var bar_id = $(this).val();
         var url = $(this).attr("data-url");
 
-        // alert(barrioActuali);
+      
         $.ajax({
-            url: url,
+            url:url,
             type: "POST",
-            data: "barrioActuali=" + barrioActuali,
-            success: function(datos) {
+            data: "bar_id=" + bar_id,
+            success: function(datos){
                 $("#editarB").html(datos);
-                $("#actualizar").modal();
+                $("#Actualizacion").modal();
+              
             }
         });
 
@@ -439,7 +534,7 @@ $(document).ready(function() {
 
     });
 
-    //filtro con datatables 
+    //filtro con datatables  y paginación
     $('#multi-filter-select').DataTable( {
         "pageLength": 5,
         initComplete: function () {

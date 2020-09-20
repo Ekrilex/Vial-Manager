@@ -1,20 +1,17 @@
 <div class="content">
     <div class="page-inner">
         <div class="card">
-            <div class="card-header" id="Prueba">
+            <div class="card-header">
                 <div class="d-flex align-items-center">
-                
-                    <h3 class="card-title">&nbsp;Consultar Barrio</h3>
+                    <h3 class="card-title">Consultar Barrio</h3>
 
                     <a type="button" id="añadir" class="text-light btn btn-success btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
                         <i class="fa fa-plus"></i>
                         Añadir Barrio
                     </a>
-
                 </div>
             </div>
             <br>
-
             <!--
                 Este filtro es el que estaba antes no se va utilizar
 
@@ -25,7 +22,6 @@
                     <input type="text" name="filtroB" id="filtroB" data-url="<?php// echo getUrl("Barrio","Barrio","filtro",false,"ajax");?>" class="form-control " placeholder="Buscar... "/>
                 </label> 
             </div>--> 
-          
             <div class="card">
     
                 <div class="table-responsive">
@@ -33,11 +29,13 @@
                     <?php 
                         if (isset($_SESSION['result'])){
                     ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <?php echo "<span class='text-success'>".$_SESSION['result']."</span>"?>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                    
+                        <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                            <script>
+                                setTimeout(function(){
+                                    $("#alert").html("<?php echo "<span class='text-success'>".$_SESSION['result']."</span>"?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000);
+                                }, 1000);
+                            </script>
                         </div>
 
                     <?php 
@@ -50,13 +48,15 @@
                     <?php 
                         if (isset($_SESSION['resultEditar'])){
                     ?>
-                        <div class="alert alert-info alert-dismissible fade show" role="alert">
-                            <?php echo "<span class='text-success'>".$_SESSION['resultEditar']."</span>"?>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
 
+                        <div id="alert" class="alert alert-info alert-dismissible fade show" role="alert">
+                            <script>
+                                setTimeout(function(){
+                                    $("#alert").html("<?php echo "<span class='text-info'>".$_SESSION['resultEditar']."</span>"?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000);
+                                }, 1000);
+                            </script>
+                        </div>
+                   
                     <?php 
                         }
                         unset($_SESSION['resultEditar']);
@@ -67,13 +67,13 @@
                     <?php 
                         if (isset($_SESSION['resultEliminar'])){
                     ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <?php echo "<span class='text-danger'>".$_SESSION['resultEliminar']."</span>"?>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                        <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <script>
+                                setTimeout(function(){
+                                    $("#alert").html("<?php echo "<span class='text-danger'>".$_SESSION['resultEliminar']."</span>"?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000);
+                                }, 1000);
+                            </script>
                         </div>
-
                     <?php 
                         }
                         unset($_SESSION['resultEliminar']);
@@ -90,19 +90,20 @@
                                     <th scope="col">N&uacute;mero de Comuna</th>
                                     <th scope="col">Ubicacion</th>
                                     <th scope="col">
-                                        &nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <font color="blue">Editar</font>
                                     </th>
                                     <th scope="col">
                                         &nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;
+                                        &nbsp;
                                         <font color="darkred">Eliminar</div>
                                         
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
+                                
                                 <?php
                                     while($bar=pg_fetch_assoc($barrios)){
                                     // foreach($barrios as $bar){
@@ -111,14 +112,16 @@
                                         echo "<td>".$bar['bar_descripcion']."</td>";
                                         echo "<td>".$bar['com_id']."</td>";
                                         echo "<td>".$bar['com_ubicacion']."</td>";
-                                        echo "<td><a><button id='actuali' value='".$bar['bar_id']."' data-url='".getUrl("Barrio","Barrio","getUpdate",false,"ajax")."' data-toggle='tooltip' class='btn btn-link btn-primary btn-lg' data-original-title='Editar'>
-                                            <i class='icon-note'></i></button></a> </td>";
-                                        echo "<td><a><button id='elimi' value='".$bar['bar_id']."' data-url='".getUrl("Barrio","Barrio","getDelete",false,"ajax")."' data-toggle='tooltip' class='btn btn-link btn-danger' data-original-title='Eliminar'>
-                                            <i class='flaticon-interface-5'></i> 
-                                            </button></a> </td>";
+                                        echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a><button id='actuali' value='".$bar['bar_id']."' data-url='".getUrl("Barrio","Barrio","getUpdate",false,"ajax")."' data-toggle='tooltip' class='btn btn-link btn-primary btn-lg' data-original-title='Editar'>
+                                                <i class='icon-note'></i></button></a> </td>";
+                                        echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a><button id='elimi' value='".$bar['bar_id']."' data-url='".getUrl("Barrio","Barrio","getDelete",false,"ajax")."' data-toggle='tooltip' class='btn btn-link btn-danger' data-original-title='Eliminar'>
+                                                <i class='flaticon-interface-5'></i> 
+                                                </button></a> </td>";
                                         echo "</tr>";
                                     }
-                                
+                                include_once '../View/Barrio/index.php';
+                              
                                 ?>
                             </tbody>
                     </table>
@@ -127,70 +130,33 @@
         </div>
     </div>
 </div>
-<!-- Modal de Editar -->
-<div class="modal" id="actualizar">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title text-center text-dark" id="exampleModalLabel">Editar Barrio</h1>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="modal-body">
-                 <!-- Validacion para los campos no llenos 
-                <?php 
-                    // if(isset($_SESSION['errores'])){
-                ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <?php 
-                            /*foreach($_SESSION['errores'] as $errores => $error){
-                                echo $error."<br>";
-                            }*/
-                        ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                </div>
-                <?php 
-                    // }
-                    // unset($_SESSION['errores']);
-                ?>
-                Aqui termina -->
-                <p class="statusMsg"></p>
-                <form action="<?php echo getUrl("Barrio","Barrio","postUpdate"); ?>" method="POST">
-                    <div id="editarB"></div>
-                    <div class="modal-footer">
-                         <button type="button" class="btn btn-default" data-dismiss="modal" >Cancelar</button>
-                        <input type="submit" name="Actualizar" value="Actualizar" class="btn btn-info">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
+<?php 
+    include_once '../View/Barrio/update.php';
+?>
+
 
 <!-- Modal de Eliminar -->
 <div class="modal" id="eliminar">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title text-center text-dark" id="exampleModalLabel">Eliminar Barrio</h1>
+			<div class="modal-header btn-danger">
+				<h1 class="modal-title text-center text-light" id="exampleModalLabel">Eliminar Barrio</h1>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true"></span>
 				</button>
 			</div>
-			<div class="modal-body"><!--tener en cuenta para el ajax-->
+			<div class="modal-body btn-default"><!--tener en cuenta para el ajax-->
                
                 <form action="<?php echo getUrl("Barrio","Barrio","postDelete"); ?>" method="POST">
                     
                     <div id="eliminarB" class="text-dark"></div><!--tener en cuenta para el ajax-->
                   
                     <div class="form-group">
-                        <h4 class="text-dark">¿Esta seguro de elimanar el barrio?</h4>
+                        <h4 class="text-light">¿Esta seguro de elimanar el barrio?</h4>
                     </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" >Cancelar</button>
+                    <div class="modal-footer btn-default">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal" >Cancelar</button>
                         <input type="submit" name="Aceptar" value="Aceptar" class="btn btn-danger">
                     </div>
                 </form>
@@ -198,6 +164,8 @@
 		</div>
 	</div>
 </div>
+
+
 
 	
     

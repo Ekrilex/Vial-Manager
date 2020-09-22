@@ -1,3 +1,4 @@
+
 <?php 
     if(pg_num_rows($EjeVial)>0){
 
@@ -10,8 +11,10 @@
                 ."<button class='btn btn-primary' id='seleccionarEje' value='".$Ejes['eje_id']."' data-url='".getUrl('Tramo','Tramo','elegirEje',false,'ajax')."'>Seleccionar</button>"
                 ."</td>";
             echo "</tr>";
+
+    
         }
     }else{
-        echo "<label><span><i class='fas fa-info-circle'></i></span>&nbsp;No se han encontrado ejes con la jerarquia especificada</label>";
+        echo "<td colspan='4'><label><span><i class='fas fa-info-circle'></i></span>&nbsp;No se han encontrado ejes con la jerarquia especificada</label></td>";
     }
 ?>

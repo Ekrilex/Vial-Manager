@@ -4,6 +4,16 @@
     include_once '../Model/Tramo/TramoModel.php';
 
     class TramoController {
+        /*las variables de "inicioCuenta" y "finCuenta" son valores que determinan desde que pagina hasta que pagina se debe mostrar los registros
+            esto es para cuando existen muchas paginas de registros y se debe ir "rotando" la paginacion*/
+
+        private $registrosPorPagina = 10;
+
+        //funcion por si se piensa agregar algun selector qe diga la cantidad de registros por pagina en una tabla
+        public function setRegistrosPorPagina($numeroRegistrosPorPagina){
+
+            $this->registrosPorPagina=$numeroRegistrosPorPagina;
+        }
 
         public function getCreate(){
 
@@ -27,15 +37,62 @@
             $sqlJerarquia = "SELECT * FROM tbl_jerarquia_vial";
             $jerarquias = $objetoModel->consultar($sqlJerarquia);
 
-            $sqlBarrios = "SELECT * FROM tbl_barrio, tbl_comuna WHERE comuna_id = com_id LIMIT 10";
+            //sql para que la funcion calcularPaginas calcule el numero de paginas y el total de registros
+            $sqlBarrios = "SELECT * FROM tbl_barrio, tbl_comuna WHERE comuna_id = com_id";
             $barrios = $objetoModel->consultar($sqlBarrios);
 
-            
+            $paginacion = $this->calcularPaginas($sqlBarrios);
+            $numeroPaginas = $paginacion['numeroPaginas'];
+
+            $sqlBarrios = "SELECT * FROM tbl_barrio, tbl_comuna WHERE comuna_id = com_id ORDER BY bar_id ASC LIMIT ".$this->registrosPorPagina." OFFSET 0";
+            $barrios = $objetoModel->consultar($sqlBarrios);
+
+            $inicioCuenta = 1;
+            $finCuenta = 7;
+
             include_once '../View/Tramo/registrar.php';
         }
 
+        private function calcularPaginas($sql){
+            /*funcion que segun la cantidad de registros por pagina que se requiera y los registros totales
+            de la tabla que se consulte, devolvera un arreglo asociativo con el numero total de registros
+            y el numero total de paginas calculadas*/
+
+            $objetoModel = new TramoModel();
+
+            $registros = $objetoModel->consultar($sql);
+
+            $totalRegistros = pg_num_rows($registros);
+
+            $numeroPaginas = ceil($totalRegistros/$this->registrosPorPagina);
+
+            $respuesta = array("totalRegistros" => $totalRegistros, "numeroPaginas" => $numeroPaginas);
+
+            return $respuesta;
+
+        }
+
+        public function postPaginacionBarrio(){
+            /*funcion que consulta los barrios segun la pagina en donde este situada el usuario*/
+            $objetoModel = new TramoModel();
+            $paginaSeleccionada = $_POST['pagina'];
+            
+            if(isset($_POST['seUsoElFiltro'])){
+                $barrioBuscado = $_POST['busqueda'];
+                $sql = "SELECT * FROM tbl_barrio, tbl_comuna WHERE (bar_descripcion LIKE '%".$barrioBuscado."%' OR com_id::varchar LIKE '%".$barrioBuscado."%') AND comuna_id = com_id ORDER BY bar_id ASC LIMIT ".$this->registrosPorPagina." OFFSET ".($paginaSeleccionada*10)."";
+                $barrios = $objetoModel->consultar($sql);
+
+            }else{
+                $sql = "SELECT * FROM tbl_barrio, tbl_comuna WHERE comuna_id = com_id ORDER BY bar_id ASC LIMIT ".$this->registrosPorPagina." OFFSET ".($paginaSeleccionada*10)."";
+                $barrios = $objetoModel->consultar($sql);
+            }
+
+            include_once '../View/Tramo/contenidoModalBarrio.php';
+            
+        }
+
         public function filtroCalzada(){
-            /*funcion que hace que el contendo del select 
+            /*funcion que hace que el contenido del select 
               de la calzada muestrela informacion segun lo que se elija en tipo de calzada*/
 
             $objetoModel = new TramoModel();
@@ -54,7 +111,7 @@
             $objetoModel = new TramoModel();
             $barrioBuscado = $_POST['barrioBuscado'];
 
-            $sql = "SELECT * FROM tbl_barrio, tbl_comuna WHERE (bar_descripcion LIKE '%".$barrioBuscado."%' OR com_id::varchar LIKE '%".$barrioBuscado."%') AND comuna_id = com_id LIMIT 10";
+            $sql = "SELECT * FROM tbl_barrio, tbl_comuna WHERE (bar_descripcion LIKE '%".$barrioBuscado."%' OR com_id::varchar LIKE '%".$barrioBuscado."%') AND comuna_id = com_id ORDER BY bar_id ASC LIMIT ".$this->registrosPorPagina." OFFSET 0";
 
             $barrios = $objetoModel->consultar($sql);
 
@@ -62,7 +119,31 @@
             
         }
 
+        public function getPaginacionBarrioFiltro(){
+
+            /*funcion que se ejecuta cuando el usuario utiliza el filtro,
+            generara la paginacion respectiva a el numero de resultados encontrados en su busqueda*/
+
+            $objetoModel = new TramoModel();
+            $barrioBuscado = $_POST['barrioBuscado'];
+
+            $sql = "SELECT * FROM tbl_barrio, tbl_comuna WHERE (bar_descripcion LIKE '%".$barrioBuscado."%' OR com_id::varchar LIKE '%".$barrioBuscado."%') AND comuna_id = com_id ORDER BY bar_id ASC";
+
+            $barrios = $objetoModel->consultar($sql);
+
+            $paginacion = $this->calcularPaginas($sql);
+            $numeroPaginas = $paginacion['numeroPaginas'];
+
+            $inicioCuenta = 1;
+            $finCuenta = 7;
+
+            include_once '../View/Tramo/paginacionBarrioFiltro.php';
+
+        }
+
         public function elegirBarrio(){
+
+            /*funcion para mostrar el barrio elegido en el modal en el formulario*/
 
             $objetoModel = new TramoModel();
             $bar_id = $_POST['barrioSeleccionado'];
@@ -77,15 +158,69 @@
         }
 
         public function enviarEje(){
+            /*funcion genera los registros de los eje viales en el modal de eje vial, segun la jerarquia
+            que haya seleccionado el usuario*/
 
             $objetoModel = new TramoModel();
             $jerarquia = $_POST['JerarquiaSelect'];
 
-            $sqlEjes = "SELECT * FROM tbl_eje_vial, tbl_jerarquia_vial WHERE jerarquia_id = ".$jerarquia." AND jer_id = jerarquia_id ";
+            $sqlEjes = "SELECT * FROM tbl_eje_vial, tbl_jerarquia_vial WHERE jerarquia_id = ".$jerarquia." AND jer_id = jerarquia_id LIMIT ".$this->registrosPorPagina." OFFSET 0";
             $EjeVial = $objetoModel->consultar($sqlEjes);
+
+            
 
             include_once '../View/Tramo/contenidoModalEje.php';
 
+        }
+
+        public function getPaginacionEje(){
+
+            /*funcion que genera la paginacion de los registros de los ejes viales
+            segun la jerarquia vial seleccionada*/
+
+            $objetoModel = new TramoModel();
+            $jerarquia = $_POST['JerarquiaSelect'];
+
+            $sqlEjesTotal = "SELECT * FROM tbl_eje_vial, tbl_jerarquia_vial WHERE jerarquia_id = ".$jerarquia." AND jer_id = jerarquia_id";
+            $EjeVialTotal = $objetoModel->consultar($sqlEjesTotal);
+
+            $paginacion = $this->calcularPaginas($sqlEjesTotal);
+            $numeroPaginas = $paginacion['numeroPaginas'];
+
+            $inicioCuenta = 1;
+            $finCuenta = 7;
+
+            //echo "<script>alert('numero registros: '+".$totalRegistros."+' numero paginas: '+".$numeroPaginas.");</script>";
+
+            include_once '../View/Tramo/paginacionEje.php';
+
+        }
+
+        public function postPaginacionEje(){
+
+            /*funcion que consulta los registros de los ejes viales segun la jerarquia y segun la pagina 
+            en la que se encuentre el usuario para poder imprimirlo en pantalla (tambien funciona
+            si la tabla fue filtrada)*/
+
+            $objetoModel = new TramoModel();
+            $paginaSeleccionada = $_POST['pagina'];
+            $jerarquia = $_POST['JerarquiaSelect'];
+
+            if(isset($_POST['seUsoElFiltro'])){
+                $ejeBuscado = $_POST['busqueda'];
+
+                $sqlEjes = "SELECT * FROM tbl_eje_vial, tbl_jerarquia_vial WHERE eje_numero::varchar LIKE '%".$ejeBuscado."%' AND jerarquia_id = ".$jerarquia." AND jer_id = jerarquia_id LIMIT ".$this->registrosPorPagina." OFFSET ".($paginaSeleccionada*10)."";
+                $EjeVial = $objetoModel->consultar($sqlEjes);
+                
+            }else{
+                $sqlEjes = "SELECT * FROM tbl_eje_vial, tbl_jerarquia_vial WHERE jerarquia_id = ".$jerarquia." AND jer_id = jerarquia_id LIMIT ".$this->registrosPorPagina." OFFSET ".($paginaSeleccionada*10)."";
+                $EjeVial = $objetoModel->consultar($sqlEjes);
+            }
+            
+            
+
+            include_once '../View/Tramo/contenidoModalEje.php';
+            
         }
 
         public function filtroEje(){
@@ -94,14 +229,41 @@
             $ejeBuscado = $_POST['EjeBuscado'];
             $jerarquia = $_POST['JerarquiaSelect'];
 
-            $sqlEjes = "SELECT * FROM tbl_eje_vial, tbl_jerarquia_vial WHERE eje_numero::varchar LIKE '%".$ejeBuscado."%' AND jerarquia_id = ".$jerarquia." AND jer_id = jerarquia_id ";
+            $sqlEjes = "SELECT * FROM tbl_eje_vial, tbl_jerarquia_vial WHERE eje_numero::varchar LIKE '%".$ejeBuscado."%' AND jerarquia_id = ".$jerarquia." AND jer_id = jerarquia_id LIMIT ".$this->registrosPorPagina." OFFSET 0";
             $EjeVial = $objetoModel->consultar($sqlEjes);
 
             include_once '../View/Tramo/filtroEje.php';
+            
+
+        }
+
+        public function getPaginacionEjeFiltro(){
+
+            /*funcion que genera la paginacion respectiva de los ejes viales
+            en el modal, segun la busqueda que haya realizado el usuario*/
+
+            $objetoModel = new TramoModel();
+            $ejeBuscado = $_POST['EjeBuscado'];
+            $jerarquia = $_POST['JerarquiaSelect'];
+
+            $sqlEjes = "SELECT * FROM tbl_eje_vial, tbl_jerarquia_vial WHERE eje_numero::varchar LIKE '%".$ejeBuscado."%' AND jerarquia_id = ".$jerarquia." AND jer_id = jerarquia_id";
+            $EjeVial = $objetoModel->consultar($sqlEjes);
+
+            $paginacion = $this->calcularPaginas($sqlEjes);
+            $numeroPaginas = $paginacion['numeroPaginas'];
+
+            //echo "<script>alert('numero registros: '+".$totalRegistros."+' numero paginas: '+".$numeroPaginas.");</script>";
+
+            $inicioCuenta = 1;
+            $finCuenta = 7;
+
+            include_once '../View/Tramo/paginacionEjeFiltro.php';
 
         }
 
         public function elegirEje(){
+
+            /*funcion para seleccionar el eje vial y mostrarlo en el formulario*/
 
             $objetoModel = new TramoModel();
             $eje_id = $_POST['ejeSeleccionado'];
@@ -156,40 +318,50 @@
             $tra_codigo += $elemento_id * 100000; //el elemento es el sexto digito del codigo
             $tra_codigo += $tra_segmento * 1000/1000; //el segmento ocupa los 5 digitos restantes de los 12
 
+            //validacion que determina si el eje pertenece a la jerarquia vial especificada
+           
+
             $sql = "INSERT INTO tbl_tramo VALUES(".$tra_id.",
             ".$tra_codigo.",
             current_timestamp,
             ".$tra_segmento.",
             '".$tra_nomenclatura."',
             '".$tra_nombre_via."',
+            ".$tra_disponibilidad.",
+            ".$tra_ancho_inicio.",
+            ".$tra_ancho_fin.",
             ".$calzada_id.",
             ".$barrio_id.",
             ".$elemento_id.",
             ".$jerarquia_vial_id.",
             ".$eje_vial_id.",
             ".$estado_id.",
-            ".$usuario_id.",
-            ".$tra_disponibilidad.",
-            ".$tra_ancho_inicio.",
-            ".$tra_ancho_fin." )";
-
-            $registrarTramo = $objetoModel->insertar($sql);
+            ".$usuario_id.");";
             
+            if($numeroEje[2] != $jerarquia_vial_id){
 
-            if($registrarTramo){
-                echo "<script>"
-                ."alert('El tramo se ha registrado satisfactoriamente');"
-                ."</script>";
+                $_SESSION['ErrorEje'] = "<span class='text-danger'>error al registrar el tramo <b>".$tra_codigo."</b>, el eje vial especificado no pertenece a la jerarquia vial seleccionada</span>";
 
             }else{
-                echo "<script>"
-                ."alert('Error al registrar el tramo');"
-                ."</script>";
 
-                
+                $registrarTramo = $objetoModel->insertar($sql);
+                    
+
+                if($registrarTramo){
+
+                    $_SESSION['resultRegistrar'] = "<span class='text-success'>el Tramo <b>".$tra_codigo."</b> se ha registrado satisfactoriamente</span>";
+
+                }else{
+
+                    $_SESSION['resultRegistrarError'] = "<span class='text-danger'>Error al registrar el tramo <b>".$tra_codigo."</b>, intente nuevamente</span>";
+                }
             }
             
+            //dd($sql);
+
             redirect(getUrl("Tramo","Tramo","getCreate"));
+
+            
         }
 
         public function index(){
@@ -247,7 +419,13 @@
             $sqlJerarquia = "SELECT * FROM tbl_jerarquia_vial";
             $jerarquias = $objetoModel->consultar($sqlJerarquia);
 
-            $sqlBarrios = "SELECT * FROM tbl_barrio, tbl_comuna WHERE comuna_id = com_id LIMIT 10";
+            $sqlBarrios = "SELECT * FROM tbl_barrio, tbl_comuna WHERE comuna_id = com_id ORDER BY bar_id";
+            $barrios = $objetoModel->consultar($sqlBarrios);
+
+            $paginacion = $this->calcularPaginas($sqlBarrios);
+            $numeroPaginas = $paginacion['numeroPaginas'];
+
+            $sqlBarrios = "SELECT * FROM tbl_barrio, tbl_comuna WHERE comuna_id = com_id ORDER BY bar_id ASC LIMIT ".$this->registrosPorPagina." OFFSET 0";
             $barrios = $objetoModel->consultar($sqlBarrios);
 
             //cargar de la informacion del tramo seleccionado
@@ -256,6 +434,9 @@
             WHERE T.calzada_id = C.cal_id AND C.tipo_calzada_id = TC.tipc_id AND T.barrio_id = B.bar_id AND T.elemento_id = EL.ele_id AND T.jerarquia_vial_id = J.jer_id AND T.eje_vial_id = EJ.eje_id AND T.estado_id = E.est_id AND T.usuario_id = U.usu_id AND tra_id = ".$tra_id." ";
 
             $tramo = $objetoModel->consultar($sql);
+
+            $inicioCuenta = 1;
+            $finCuenta = 7;
             
             include_once '../View/Tramo/editar.php';
         }
@@ -308,20 +489,31 @@
             tra_ancho_inicio=".$tra_ancho_inicio.",
             tra_ancho_fin=".$tra_ancho_fin." WHERE tra_id=".$tra_id."";
 
-            $modificarTramo = $objetoModel->editar($sql);
+            if($numeroEje[2] != $jerarquia_vial_id){
 
-            if($modificarTramo){
-                echo "<script>"
-                ."alert('El tramo se ha modificado satisfactoriamente');"
-                ."</script>";
+                $_SESSION['ErrorEjeEditar'] = "<span class='text-danger'>error al modificar el tramo <b>".$tra_codigo."</b>, el eje vial especificado no pertenece a la jerarquia vial seleccionada</span>";
 
             }else{
-                echo "<script>"
-                ."alert('Error al modificar el tramo');"
-                ."</script>";
-
                 
+                $modificarTramo = $objetoModel->editar($sql);
+
+                if($modificarTramo){
+                    /*echo "<script>"
+                    ."alert('El tramo se ha modificado satisfactoriamente');"
+                    ."</script>";*/
+
+                    $_SESSION['resultEditar'] = "<span class='text-primary'>el Tramo <b>".$tra_codigo."</b> se ha modificado satisfactoriamente</span>";
+
+                }else{
+                    /*echo "<script>"
+                    ."alert('Error al modificar el tramo');"
+                    ."</script>";*/
+
+                    $_SESSION['resultEditarError'] = "<span class='text-danger'>Error al modificar el tramo <b>".$tra_codigo."</b>, intente denuevo</span>";
+                }
+
             }
+                
             
            redirect(getUrl("Tramo","Tramo","index"));
 
@@ -331,6 +523,7 @@
 
             $objetoModel = new TramoModel();
             $tra_id = $_GET['tra_id'];
+            $tra_codigo = $_GET['tra_codigo'];
             $usuario_id = 1;
 
             //$usuario_id = $_SESSION['usu_id'];
@@ -340,16 +533,19 @@
             $inhabilitar = $objetoModel->editar($sql);
 
             if($inhabilitar){
-                echo "<script>"
+               /*echo "<script>"
                 ."alert('El tramo se ha inhabilitado correctamente');"
-                ."</script>";
+                ."</script>";*/
+
+                $_SESSION['resultInhabilitar'] = "<span class='text-danger'>El tramo <b>".$tra_codigo."</b> se ha inhabilitado satisfactoriamente</span>";
 
             }else{
-                echo "<script>"
+                /*echo "<script>"
                 ."alert('Error al inhabilitar el tramo');"
-                ."</script>";
+                ."</script>";*/
 
-                
+                $_SESSION['resultInhabilitar'] = "<span class='text-danger'>Error al inhabilitar el tramo <b>".$tra_codigo."</b></span>";
+
             }
 
             redirect(getUrl("Tramo","Tramo","index"));
@@ -360,6 +556,7 @@
 
             $objetoModel = new TramoModel();
             $tra_id = $_GET['tra_id'];
+            $tra_codigo = $_GET['tra_codigo'];
             $usuario_id = 1;
 
             //$usuario_id = $_SESSION['usu_id'];
@@ -369,16 +566,19 @@
             $habilitar = $objetoModel->editar($sql);
 
             if($habilitar){
-                echo "<script>"
+                /*echo "<script>"
                 ."alert('El tramo se ha habilitado');"
-                ."</script>";
+                ."</script>";*/
+
+                $_SESSION['resultHabilitar'] = "<span class='text-success'>El tramo <b>".$tra_codigo."</b> se ha Habilitado satisfactoriamente</span>";
+
 
             }else{
-                echo "<script>"
+               /* echo "<script>"
                 ."alert('Error al habilitar');"
-                ."</script>";
+                ."</script>";*/
 
-                
+                $_SESSION['resultHabilitar'] = "<span class='text-danger'>Error al habilitar el tramo <b>".$tra_codigo."</b>, intente denuevo</span>";
             }
 
             redirect(getUrl("Tramo","Tramo","index"));
@@ -386,6 +586,7 @@
         }
 
     }
+    
     
 
     

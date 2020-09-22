@@ -3,7 +3,7 @@
     while($tramoSeleccionado = pg_fetch_assoc($tramo)){
 ?>
     <div class="col-md-12">
-        <form action="<?php echo getUrl('Tramo','Tramo','postUpdate')?>" method="POST">
+        <form action="<?php echo getUrl('Tramo','Tramo','postUpdate')?>" method="POST" class="form">
             <div class="card">
 
                 <div class="card-header">
@@ -15,21 +15,23 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group">
                                 <label>Nombre que lleva la via</label>
-                                <input type="text" class="form-control" name="tra_nombre_via" value="<?php echo $tramoSeleccionado['tra_nombre_via'];?>" maxlength="30" placeholder="Nombre Via" required>
+                                <input type="text" class="form-control valCaracteresEspeciales" name="tra_nombre_via" id="inputNombreVia" value="<?php echo $tramoSeleccionado['tra_nombre_via'];?>" maxlength="30" placeholder="Nombre Via" required>
+                                <div id="error"></div>
                             </div>
 
                             <div class="form-group form-inline" style="margin-left:30px;">
-                                <label for="inlineinput" class="col-md-3 col-form-label">ancho inicio</label>
-                                <div class="col-md-4 p-1">
-                                    <input type="number" class="form-control input-full" name="tra_ancho_inicio" value="<?php echo $tramoSeleccionado['tra_ancho_inicio'];?>" id="inlineinput" min="0" max="10" step="0.1" required>
+                                <label for="inlineinput" class="col-md-5 col-form-label">ancho inicio (Metros)</label>
+                                <div class="col-md-5 p-1">
+                                    <input type="number" class="form-control input-full valAncho" name="tra_ancho_inicio" value="<?php echo $tramoSeleccionado['tra_ancho_inicio'];?>" id="inlineinput" min="0" max="10" step="0.1" placeholder="Metros" required> 
                                 </div>
                             </div>
 
                             <div class="form-group form-inline" style="margin-left:30px;">
-                                <label for="inlineinput" class="col-md-3 col-form-label">ancho fin</label>
-                                <div class="col-md-4 p-1">
-                                    <input type="number" class="form-control input-full" name="tra_ancho_fin" value="<?php echo $tramoSeleccionado['tra_ancho_fin'];?>" id="inlineinput" min="0" max="10" step="0.1" required>
+                                <label for="inlineinput" class="col-md-5 col-form-label">ancho fin (Metros)</label>
+                                <div class="col-md-5 p-1">
+                                    <input type="number" class="form-control input-full valAncho" name="tra_ancho_fin" value="<?php echo $tramoSeleccionado['tra_ancho_fin'];?>" id="inlineinput" min="0" max="10" step="0.1" placeholder="Metros" required>
                                 </div>
+                                <div id="errorAncho"></div>
                             </div>
 
                             <div class="form-group my-4">
@@ -90,7 +92,7 @@
                                 <label>Seleccione el Eje Vial</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-danger" data-toggle="modal" id="buscarEje" data-url="<?php echo getUrl('Tramo','Tramo','enviarEje',false,'ajax');?>" data-target="#modalEje" type="button">Buscar</button>
+                                        <button class="btn btn-danger" data-toggle="modal" id="buscarEje" data-url="<?php echo getUrl('Tramo','Tramo','enviarEje',false,'ajax');?>" data-paginacionUrl="<?php echo getUrl("Tramo","Tramo","getPaginacionEje",false,"ajax"); ?>" data-target="#modalEje" type="button">Buscar</button>
                                     </div>
                                     <input type="text" style="color:black; font-weight:bold;" id="campoEje" value="<?php echo "Eje Vial Numero: ".$tramoSeleccionado['eje_numero'];?>" class="form-control" placeholder="Eje Vial" aria-label="" aria-describedby="basic-addon1" required readonly>
                                     <input type="hidden" name="eje_vial_id" id="eje_vial_id" value="<?php echo $tramoSeleccionado['eje_id'];?>">
@@ -101,7 +103,8 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group">
                                 <label>Ingrese el N° del segmento del tramo</label>
-                                <input type="number" class="form-control" name="tra_segmento" value="<?php echo $tramoSeleccionado['tra_segmento'];?>" min="0" max="99999" placeholder="Segmento" required>
+                                <input type="number" class="form-control valSegmento" name="tra_segmento" value="<?php echo $tramoSeleccionado['tra_segmento'];?>" min="0" max="99999" placeholder="Segmento" required>
+                                <div id="errorSegmento"></div>
                             </div>
                             <div class="form-group form-group-default my-3">
                                 <label>Calzada</label>
@@ -142,9 +145,10 @@
                 </div>
 
                 <div class="card-action">
+                    <div id="cambiarEje"></div>
                     <a class="btn btn-secondary" href="<?php echo getUrl('Tramo','Tramo','getDetail',array("tra_id" => $tramoSeleccionado['tra_id']));?>">Volver</a>
                     <input type="hidden" name="tra_id" id="tra_id" value="<?php echo $tramoSeleccionado['tra_id'];?>">
-                    <button class="btn btn-success">Guardar Cambios</button>
+                    <button class="btn btn-success" id="guardarRegistro">Guardar Cambios</button>
                 </div>
             </div>
         </form>
@@ -157,14 +161,14 @@
                 <div class="modal-header btn-primary">
                     <h3 class="modal-title text-white">Buscar Barrio</h3>
                 </div>
-                <div class="modal-body" style="background-color:rgb(0,0,45);">
+                <div class="modal-body btn-default">
 
                     <div class="form-group col-md-4">
                         <label class="text-white">Buscar: </label>
-                        <input type="text" name="buscadorBarrio" id="buscadorBarrio" data-url="<?php echo getUrl('Tramo', 'Tramo', 'FiltroBarrio', false, 'ajax') ?>" class="form-control">
+                        <input type="text" name="buscadorBarrio" id="buscadorBarrio" data-url="<?php echo getUrl('Tramo', 'Tramo', 'FiltroBarrio', false, 'ajax') ?>" data-paginacionUrl="<?php echo getUrl("Tramo","Tramo","getPaginacionBarrioFiltro",false,"ajax"); ?>" class="form-control border border-secondary">
                     </div>
                     <div class="form-group">
-                        <table class="table table-head-bg-secondary" style="text-align:center;">
+                        <table class="table table-head-bg-secondary table-hover" style="text-align:center;">
                             <thead>
                                 <tr>
                                     <th>Codigo</th>
@@ -173,26 +177,56 @@
                                     <th>Accion</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="contenidoModalBarrio">
                                 <?php
 
-                                            while($bar = pg_fetch_assoc($barrios)){
-                                                echo "<tr>";
-                                                    echo "<td>".$bar['bar_id']."</td>";
-                                                    echo "<td>".$bar['bar_descripcion']."</td>";
-                                                    echo "<td>".$bar['com_id']."</td>";
-                                                    echo "<td>"
-                                                    ."<button class='btn btn-primary' id='seleccionarBarrio' value='".$bar['bar_id']."' data-url='".getUrl('Tramo','Tramo','elegirBarrio',false,'ajax')."'>Seleccionar</button>"
-                                                    ."</td>";
-                                                echo "</tr>";
-                                            }
+                                    while($bar = pg_fetch_assoc($barrios)){
+                                        echo "<tr>";
+                                            echo "<td>".$bar['bar_id']."</td>";
+                                            echo "<td>".$bar['bar_descripcion']."</td>";
+                                            echo "<td>".$bar['com_id']."</td>";
+                                            echo "<td>"
+                                            ."<button class='btn btn-primary' id='seleccionarBarrio' value='".$bar['bar_id']."' data-url='".getUrl('Tramo','Tramo','elegirBarrio',false,'ajax')."'>Seleccionar</button>"
+                                            ."</td>";
+                                        echo "</tr>";
+                                    }
 
-                                        ?>
+                                ?>
                             </tbody>
                         </table>
                     </div>
+                    <div id="contenidoPaginacionBarrio">
+                        <nav>
+                            <div id="cuentaPaginasB"><?php echo "Pagina 1 De ".$numeroPaginas;?></div>
+                            <ul class="pagination justify-content-end">
+                                        
+                                <li class="page-item text-dark disabled" id="anteriorB"><a class="page-link paginacionStaticB" data-paginasTotales="<?php echo $numeroPaginas;?>" data-accion="0" data-urlPagina="<?php echo getUrl("Tramo","Tramo","postPaginacionBarrio",false,"ajax");?>">Anterior</a></li>
+                                    <?php 
+                                        for($i = 0;$i<$numeroPaginas;$i++){
+                                            if(($i+1) >= $inicioCuenta && ($i+1) <= $finCuenta){
+
+                                                if($i == 0){
+                                                    echo "<li class='page-item active' id='paginaB".($i+1)."'><a class='page-link elemPaginacionB' data-numeroPagina='".$i."' data-paginasTotales='".$numeroPaginas."' data-urlPagina='".getUrl("Tramo","Tramo","postPaginacionbarrio",false,"ajax")."'>".($i+1)."</a></li>";
+                                                }else{
+                                                    echo "<li class='page-item text-dark' id='paginaB".($i+1)."'><a class='page-link elemPaginacionB' data-numeroPagina='".$i."' data-paginasTotales='".$numeroPaginas."' data-urlPagina='".getUrl("Tramo","Tramo","postPaginacionBarrio",false,"ajax")."'>".($i+1)."</a></li>";
+                                                }
+
+                                            }else{
+
+                                                echo "<li class='page-item text-dark' style='display:none;' id='paginaB".($i+1)."'><a class='page-link elemPaginacionB' data-numeroPagina='".$i."' data-paginasTotales='".$numeroPaginas."' data-urlPagina='".getUrl("Tramo","Tramo","postPaginacionBarrio",false,"ajax")."'>".($i+1)."</a></li>";
+
+                                            }
+                                        }
+                                            
+                                    ?>
+                                <li class="page-item text-dark <?php if($numeroPaginas == 1){ echo "disabled";} ?>" id="siguienteB"><a class="page-link paginacionStaticB" data-paginasTotales="<?php echo $numeroPaginas;?>" data-accion="1" data-urlPagina="<?php echo getUrl("Tramo","Tramo","postPaginacionBarrio",false,"ajax");?>">Siguiente</a></li>
+                            </ul>
+                            <input type='hidden' id="inicioCuentaBarrio" value="<?php echo $inicioCuenta;?>">
+                            <input type='hidden' id="finCuentaBarrio" value="<?php echo $finCuenta;?>">
+                        </nav>  
+                    </div>
                 </div>
-                <div class="modal-footer" style="background-color:rgb(0,0,45);">
+                <div class="modal-footer btn-default">
                     <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -206,14 +240,14 @@
                 <div class="modal-header btn-danger">
                     <h3 class="modal-title text-white">Buscar Eje</h3>
                 </div>
-                <div class="modal-body" style="background-color:rgb(0,0,45);">
+                <div class="modal-body btn-default">
 
                     <div class="form-group col-md-4">
                         <label class="text-white">Buscar: </label>
-                        <input type="text" name="buscadorBarrio" id="barraBuscarEje" data-url="<?php echo getUrl('Tramo', 'Tramo', 'filtroEje', false, 'ajax') ?>" class="form-control">
+                        <input type="text" name="buscadorEje" id="barraBuscarEje" data-url="<?php echo getUrl('Tramo', 'Tramo', 'filtroEje', false, 'ajax') ?>" data-paginacionUrl="<?php echo getUrl("Tramo","Tramo","getPaginacionEjeFiltro",false,"ajax"); ?>" class="form-control border border-secondary">
                     </div>
                     <div class="form-group">
-                        <table class="table table-head-bg-info" style="text-align:center;">
+                        <table class="table table-head-bg-info table-hover" style="text-align:center;">
                             <thead>
                                 <tr>
                                     <th>Codigo</th>
@@ -228,8 +262,11 @@
                         </table>
 
                     </div>
+                    <div id="contenidoPaginacion">
+                                              
+                    </div>
                 </div>
-                <div class="modal-footer" style="background-color:rgb(0,0,45);">
+                <div class="modal-footer btn-default">
                     <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>

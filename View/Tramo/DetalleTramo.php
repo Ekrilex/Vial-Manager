@@ -28,17 +28,21 @@
                                 </div>
 
                                 <div class="form-group form-inline" style="margin-left:30px;">
-                                    <label for="inlineinput" class="col-md-3 col-form-label">ancho inicio</label>
-                                    <div class="col-md-4 p-1">
-                                        <input type="number" style="color:black; font-weight:bold;" class="form-control input-full" value="<?php echo $tramoSeleccionado['tra_ancho_inicio'];?>" id="inlineinput" readonly>
+                                    <label for="inlineinput" class="col-md-4 col-form-label">ancho inicio</label>
+                                    <div class="col-md-5 p-1">
+                                        <input type="number" style="color:black; font-weight:bold;" class="form-control input-full" value="<?php echo $tramoSeleccionado['tra_ancho_inicio'];?>" id="inlineinput" readonly> Metros
                                     </div>
                                 </div>
 
                                 <div class="form-group form-inline" style="margin-left:30px;">
-                                    <label for="inlineinput" class="col-md-3 col-form-label">ancho fin</label>
-                                    <div class="col-md-4 p-1">
-                                    <input type="number" style="color:black; font-weight:bold;" class="form-control input-full" value="<?php echo $tramoSeleccionado['tra_ancho_fin'];?>" id="inlineinput" readonly>
+                                    <label for="inlineinput" class="col-md-4 col-form-label">ancho fin</label>
+                                    <div class="col-md-5 p-1">
+                                        <input type="number" style="color:black; font-weight:bold;" class="form-control input-full" value="<?php echo $tramoSeleccionado['tra_ancho_fin'];?>" id="inlineinput" readonly> Metros
+                                        
                                     </div>
+                                    
+                                    
+                                
                                 </div>
 
                                 <div class="form-group">
@@ -129,7 +133,7 @@
                                     <div class="modal-footer" style="background-color:rgb(0,0,45);">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
                                             
-                                        <a href="<?php echo getUrl('Tramo','Tramo','postDelete',array("tra_id"=>$tramoSeleccionado['tra_id']))?>"><button type="button" class="btn btn-secondary">Inhabilitar</button></a>
+                                        <a href="<?php echo getUrl('Tramo','Tramo','postDelete',array("tra_id"=>$tramoSeleccionado['tra_id'],"tra_codigo"=>$tramoSeleccionado['tra_codigo']))?>"><button type="button" class="btn btn-secondary">Inhabilitar</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -161,13 +165,13 @@
                                 <div class="modal-header btn-success">
                                     <h3 class="modal-title text-white">Habilitar Tramo</h3>
                                 </div>
-                                <div class="modal-body" style="background-color:rgb(0,0,45);">
+                                <div class="modal-body btn-default">
                                     <label>¿Está seguro que desea Habilitar este tramo?</label>
                                 </div>
-                                <div class="modal-footer" style="background-color:rgb(0,0,45);">
+                                <div class="modal-footer btn-default">
                                     <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
                                             
-                                    <a href="<?php echo getUrl('Tramo','Tramo','postActivate',array("tra_id"=>$tramoSeleccionado['tra_id']))?>"><button type="button" class="btn btn-info">Habilitar</button></a>
+                                    <a href="<?php echo getUrl('Tramo','Tramo','postActivate',array("tra_id"=>$tramoSeleccionado['tra_id'],"tra_codigo"=>$tramoSeleccionado['tra_codigo']))?>"><button type="button" class="btn btn-info">Habilitar</button></a>
                                 </div>
                             </div>
                         </div>

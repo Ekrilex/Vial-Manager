@@ -1,5 +1,100 @@
 
         <div class="page-inner">
+        <div>
+            <?php 
+                if(isset($_SESSION['resultEditar'])){
+
+                                        
+            ?>
+                <div id="alert" class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <script>
+                        setTimeout(function(){
+                            $("#alert").html("<?php echo "<span class='text-primary'>".$_SESSION['resultEditar']."</span>" ?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000) ;
+
+                        }, 1000);
+                    </script>
+                </div>
+            <?php 
+                }
+                unset($_SESSION['resultEditar']);
+            ?>
+        </div>
+        <div>
+            <?php 
+                if(isset($_SESSION['resultEditarError'])){
+
+                                        
+            ?>
+                <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <script>
+                        setTimeout(function(){
+                            $("#alert").html("<?php echo "<span class='text-danger'>".$_SESSION['resultEditarError']."</span>" ?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000) ;
+
+                        }, 1000);
+                    </script>
+                </div>
+            <?php 
+                }
+                unset($_SESSION['resultEditarError']);
+            ?>
+        </div>
+        <div>
+            <?php 
+                if(isset($_SESSION['resultInhabilitar'])){
+
+                                        
+            ?>
+                <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <script>
+                        setTimeout(function(){
+                            $("#alert").html("<?php echo "<span class='text-danger'>".$_SESSION['resultInhabilitar']."</span>" ?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000) ;
+
+                        }, 1000);
+                    </script>
+                </div>
+            <?php 
+                }
+                unset($_SESSION['resultInhabilitar']);
+            ?>
+        </div>
+        <div>
+            <?php 
+                if(isset($_SESSION['resultHabilitar'])){
+
+                                        
+            ?>
+                <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <script>
+                        setTimeout(function(){
+                            $("#alert").html("<?php echo "<span class='text-success'>".$_SESSION['resultHabilitar']."</span>" ?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000) ;
+
+                        }, 1000);
+                    </script>
+                </div>
+            <?php 
+                }
+                unset($_SESSION['resultHabilitar']);
+            ?>
+        </div>
+        <div>
+            <?php 
+                if(isset($_SESSION['ErrorEjeEditar'])){
+
+                                        
+            ?>
+                <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <script>
+                        setTimeout(function(){
+                            $("#alert").html("<?php echo "<span class='text-danger'>".$_SESSION['ErrorEjeEditar']."</span>" ?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(9000) ;
+
+                        }, 1000);
+                    </script>
+                </div>
+            <?php 
+                }
+                unset($_SESSION['ErrorEjeEditar']);
+            ?>
+        </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -7,8 +102,9 @@
                             <h4 class="card-title">Consultar Tramo</h4>
                         </div>
                         <div class="card-body">
+                            
                             <div class="table-responsive">
-                                <table id="basic-datatables" class="display table table-striped table-hover">
+                                <table id="basic-datatables-consultar" class="display table table-striped table-hover">
                                     <thead>
                                         <tr>
                                             <th>Código</th>

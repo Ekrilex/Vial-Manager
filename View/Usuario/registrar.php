@@ -1,4 +1,4 @@
-<!-- Inicio de formulario -->
+<<!-- Inicio de formulario -->
 <form action="<?php echo getUrl("Usuario","Usuario","postCreate",false,"ajax");?>" method="POST">
      <div class="col-md-12" style="margin-top: 20px;">
         <div class="card">

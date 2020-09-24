@@ -62,12 +62,12 @@
 						<div class="collapse" id="base">
 							<ul class="nav nav-collapse">
 								<li>
-									<a href="components/avatars.html">
+									<a href="<?php echo getUrl("Caso","Caso","getCreate");?>">
 										<span class="sub-item">Registrar Caso</span>
 									</a>
 								</li>
 								<li>
-									<a href="components/buttons.html">
+									<a href="<?php echo getUrl("Caso","Caso","index");?>">
 										<span class="sub-item">Consultar Caso</span>
 									</a>
 								</li>

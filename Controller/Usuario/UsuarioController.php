@@ -8,19 +8,19 @@
       // Funcion que realiza la consulta para plasmar los valores en la pagina en archivo de registro.php
       public function getCreate(){
 
-      $obj = new UsuarioModel();
+        $obj = new UsuarioModel();
 
-      $queryDoc = "SELECT * FROM tbl_tipo_documento";
-      $queryRol = "SELECT * FROM tbl_rol";
+        $queryDoc = "SELECT * FROM tbl_tipo_documento";
+        $queryRol = "SELECT * FROM tbl_rol";
 
-      $documentos = $obj->consultar($queryDoc);
-      $roles = $obj->consultar($queryRol);
+        $documentos = $obj->consultar($queryDoc);
+        $roles = $obj->consultar($queryRol);
 
-      if ($documentos && $roles) {
-        include_once '../View/Usuario/registrar.php';
-      } else {
-        pg_last_error($documentos);
-      }
+        if ($documentos && $roles) {
+          include_once '../View/Usuario/registrar.php';
+        } else {
+          pg_last_error($documentos);
+        }
 
       }
 
@@ -154,7 +154,7 @@
           if (!$ejecucion) {
             pg_last_error($ejecucion);
           } else {
-            // redirect(getUrl("Usuario","Usuario","index"));
+            
           }
       }
 
@@ -222,7 +222,7 @@
         $ejecucion = $obj->editar($query);
 
         if ($ejecucion) {
-          redirect(getUrl("Usuario","Usuario","index"));
+          // redirect(getUrl("Usuario","Usuario","index"));
         } else {
           pg_last_error($ejecucion);
         }

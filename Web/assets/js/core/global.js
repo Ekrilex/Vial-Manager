@@ -341,7 +341,7 @@ $(document).ready(function() {
             }
         }).then((result) => {
             if (result) {
-                console.log('hola');
+                // console.log('hola');
                 $.ajax({
                     url: url,
                     type: 'POST',
@@ -358,7 +358,7 @@ $(document).ready(function() {
                             }
                         }).then(function() {
                             location.reload();
-                        })
+                        });
                     }
                 });
             }

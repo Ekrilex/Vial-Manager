@@ -268,37 +268,97 @@
 
       }
 
+
        public function getPerfil(){
         $obj = new UsuarioModel();
         $_SESSION['id']="1";
-        $sql="SELECT * FROM  tbl_usuario as u , tbl_rol  as r, tbl_tipo_documento as d WHERE usu_id = '".$_SESSION['id']."' and u.rol_id = r.rol_id and d.tip_id = u.tipo_documento_id";
+        $sql="SELECT u.usu_num_identificacion , u.usu_primer_nombre , u.usu_segundo_nombre  , u.usu_primer_apellido , u.usu_segundo_apellido , u.usu_correo , u.usu_nickname , r.rol_nombre , d.tip_descripcion FROM  tbl_usuario as u , tbl_rol  as r, tbl_tipo_documento as d WHERE usu_id = '".$_SESSION['id']."' and u.rol_id = r.rol_id and d.tip_id = u.tipo_documento_id";
         $Usuario=$obj->consultar($sql);
         include_once '../View/Usuario/mi_perfil.php';
        }
 
-       public function postPerfil(){
-        $obj = new UsuarioModel();
-        $correo=$_POST['correo2'];
-        $clave1=$_POST['clave1'];
-        $clave2=$_POST['clave2'];
-           
-        if ($correo=="" || $clave2=="" || $clave1=="" || $clave1!=$clave2) { 
-             $_SESSION['error']="Datos invalidos, Debe diligenciar correctamente los campos";             
-            redirect(getUrl("Usuario","Usuario","getPerfil"));                     
-        }else{
 
-          $val="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/";         
-          
-          if (preg_match($val, $correo)) {
-            $sql="UPDATE tbl_usuario set usu_correo='".$correo."', usu_contrasena='".$clave1."' WHERE usu_id='".$_SESSION['id']."'";
-            $Usuario=$obj->editar($sql);
-            redirect(getUrl("Usuario","Usuario","getPerfil"));           
-          }else{
-            $_SESSION['error']="Email invalido , no se guardo cambios";           
-            redirect(getUrl("Usuario","Usuario","getPerfil"));                  
-          }
+       public function postPerfil(){
+
+        $obj = new UsuarioModel();
+        @$correo=$_POST['correo2'];
+        @$correo3=$_POST['correo3'];
+        @$clave1=$_POST['clave1'];
+        @$clave2=$_POST['clave2'];
+        
+        $sql="SELECT count(*) AS email FROM tbl_usuario WHERE usu_correo='".$correo3."'";
+        $existe1=$obj->consultar($sql); 
+        while ($exi=pg_fetch_assoc($existe1)) {
+        $existe=$exi['email']; 
+        } 
+        
+        if ($existe>0) {
+        echo "<i class='fas fa-times'></i> Correo electronico no disponible";      
+        }else if($existe==0){
+        echo "";
         }
-      }             
+
+        $sql="SELECT count(*) AS clave FROM tbl_usuario WHERE usu_contrasena='".$clave1."'";
+        $existe2=$obj->consultar($sql); 
+        while ($exi=pg_fetch_assoc($existe2)) {
+        $existeC=$exi['clave']; 
+        } 
+
+        if ($existeC>0) {
+        echo "<i class='fas fa-times'></i> intente otra contraseña";      
+        }else{
+          echo "";
+        }
+
+        $sql="SELECT count(*) AS email2 FROM tbl_usuario WHERE usu_correo='".$correo."'";
+        $existeCor=$obj->consultar($sql); 
+        while ($exii=pg_fetch_assoc($existeCor)) {
+        $existeE=$exii['email2']; 
+        } 
+
+        if ($correo!="" && $clave1=="" && $clave2=="") {
+          if ($existeE==0) {
+          $val="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/";         
+          if (preg_match($val, $correo)) {
+            $sql="UPDATE tbl_usuario set usu_correo='".$correo."' WHERE usu_id='".$_SESSION['id']."'";
+            $Usuario=$obj->editar($sql);
+            $_SESSION['datos']['coreo']="<h5>Su correo ha sido actualizado exitosamente</h5>";
+          } 
+         }         
+        }
+
+
+        @$exp="/([A-Z]{1}[a-z]{1}[0-9]{5})+$/";
+        @$exp2="/([0-9]{5}[A-Z]{1}[a-z]{1})+$/";
+    
+       if (preg_match($exp, $clave1)) {
+        @$exp3=$exp;
+       }else if (@preg_match(@$exp3, $clave1)) {
+        @$exp3=$exp2;
+       }
+                        
+       if($clave1!="" && $clave2!="" && $clave1==$clave2 && $correo=="" && $existeC==0){
+          $sql="UPDATE tbl_usuario set usu_contrasena='".$clave1."' WHERE usu_id='".$_SESSION['id']."'";
+          $Usuario=$obj->editar($sql);
+            $_SESSION['datos']['contraseña']="<h5>Su contraseña se ha actualizado exitosamente</h5>";
+        }
+
+        if ($clave1!="" && $clave1==$clave2 && $correo!="") {
+          if ($existeE==0 && $existeC==0) {
+         $val="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/";         
+         
+          if (preg_match($val, $correo) && @preg_match(@$exp3, $clave1)) {
+           $sql="UPDATE tbl_usuario set usu_correo='".$correo."', usu_contrasena='".$clave1."' WHERE usu_id='".$_SESSION['id']."'";
+           $Usuario=$obj->editar($sql);
+            $_SESSION['datos']['todos']="<h5>Sus datos han sido actualizados</h5>";
+          
+          }else{
+            $_SESSION['datos']['error']="<h5>Datos invalidos, no se guardo cambios</h5>";  
+          }  
+         }
+        }
+    }
+            
 
   }
 ?>

@@ -13,8 +13,9 @@
     @$tipo=$obj->validaTipo($_POST['det_tipo_deterioro']);    
     @$clasi=$obj->validaClasi($_POST['det_clasificacion']);
  
-    $sql="SELECT count(*) AS igual FROM tbl_deterioro WHERE det_nombre='".$det_nombre."'";
+    $sql="SELECT count(*) AS igual FROM tbl_deterioro WHERE det_nombre='".$det_nombre."' AND det_tipo_deterioro='".$tipo."' AND det_clasificacion='".$clasi."'";
     $n=$obj->consultar($sql);
+
     while ($nn=pg_fetch_assoc($n)) {
     $igual=$nn['igual']; 
     }    
@@ -44,6 +45,7 @@
     $deterioro=$obj->consultar($sql);
     $tiposs=$obj->Tipos();
     $clasi=$obj->Clasificacion();
+
 
       while ($det=pg_fetch_assoc($deterioro)) {        
        echo "<h5>Nombre:</h5><input type='text' name='nombre' class='form-control border border-primary nombred' value='".$det['det_nombre']."'><div id='errord'></div><input type='hidden' name='id' value='".$det['det_id']."'><div id='errord'></div><br>";
@@ -80,14 +82,17 @@
     $obj= new DeterioroModel();
     $id=$_POST['id'];
     $nombre=$_POST['nombre'];
-     $sql="SELECT count(*) AS igual FROM tbl_deterioro WHERE det_nombre='".$nombre."'";
-    $n=$obj->consultar($sql);
-    while ($nn=pg_fetch_assoc($n)) {
-    $igual=$nn['igual']; 
-    }  
-
     $tipo=$obj->validaTipo($_POST['det_tipo_deterioro']);
     $clasi=$obj->validaClasi($_POST['det_clasificacion']);
+
+    $sql="SELECT count(*) AS igual FROM tbl_deterioro WHERE det_nombre='".$nombre."' AND  det_tipo_deterioro='".$tipo."' AND det_clasificacion='".$clasi."'";
+    $n=$obj->consultar($sql);
+    
+    while ($nn=pg_fetch_assoc($n)) {
+    $igual=$nn['igual']; 
+    } 
+
+
     $Rect=$obj->Rect($nombre,$tipo,$clasi,$igual);
        
        if ($Rect==0) {

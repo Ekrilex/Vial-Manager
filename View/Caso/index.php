@@ -8,14 +8,14 @@
                 <div class="card-body">
 
                     <div class="table-responsive">
-                        <table id="basic-datatables-caso" class="display table table-striped table-hover">
+                        <table id="basic-datatables-caso" class="display table table-striped table-hover" style="text-align:center;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Usuario</th>
                                     <th>Fecha Vencimiento</th>
                                     <th>Prioridad</th>
-                                    <th>Disponibilidad</th>
+                                    <th>Orden</th>
                                     <th>Estado</th>
                                     <th>Ver Detalle</th>
                                 </tr>
@@ -33,42 +33,49 @@
                                                 
                                                 $colorPrioridad = "rgb(0,250,0)";
                                                 $nombrePrioridad = "Baja";
+                                                $iconoPrioridad = "<i class='fas fa-thumbs-up text-success'></i>";
+
                                             }else if($casos['cas_prioridad'] == 3 || $casos['cas_prioridad'] == 4){
 
                                                 $colorPrioridad = "rgb(250,250,0)";
                                                 $nombrePrioridad = "Media";
+                                                $iconoPrioridad = "<i class='fas fa-exclamation-triangle text-warning'></i>";
+
                                             }else if($casos['cas_prioridad'] > 4 && $casos['cas_prioridad'] <= 7){
                                                 $colorPrioridad = "rgb(250,0,0)";
                                                 $nombrePrioridad = "Alta";
+                                                $iconoPrioridad = "<i class='fas fa-flag text-danger'></i>";
                                             }
 
-                                            echo "<td style='color:".$colorPrioridad.";'>".$nombrePrioridad."</td>";
+                                            echo "<td style='color:".$colorPrioridad.";'>".$iconoPrioridad." ".$nombrePrioridad."</td>";
 
-                                            if($casos['cas_disponibilidad'] == 0){
-                                                $avisoOrden = "No Tiene Orden";
+                                            if($casos['cas_disponibilidad'] != 0){
+                                                $avisoOrden = "Vinculado a Orden";
                                             }else{
-                                                $avisoOrden = "Tiene Orden";
+                                                $avisoOrden = "No Vinculado a Orden";  
                                             }
+
+                                            
 
                                             echo "<td>".$avisoOrden."</td>";
 
-                                            echo "<script>alert('el estado es: ' + ".$casos['estado_id'].");</script>";
+                                            //echo "<script>alert('el estado es: ' + ".$casos['est_id'].");</script>";
 
-                                            /*if(($casos['estado_id']+1) == 3 || ($casos['estado_id']+1) == 4){
+                                            if($casos['est_id'] == 3 || $casos['est_id'] == 4){
                                                 
                                                 $colorEstado = "rgb(250,250,0)";
 
                                             }
 
-                                            if(($casos['estado_id']+1) == 2){
+                                            if($casos['est_id'] == 2){
                                                 $colorEstado = "rgb(250,0,0)";
                                             }
 
-                                            if(($casos['estado_id']+1) == 5){
+                                            if($casos['est_id'] == 5){
                                                 $colorEstado = "rgb(0,250,0)";
-                                            }*/
+                                            }
 
-                                            echo "<td>".$casos['est_descripcion']."</td>";
+                                            echo "<td style='color:".$colorEstado.";'>".$casos['est_descripcion']."</td>";
 
                                             echo "<td><a href='".getUrl("Caso","Caso","getDetail",array("cas_id" => $casos['cas_id']))."'><i class='fas fa-search text-info'></i></a></td>";
                                         echo "</tr>";

@@ -1310,7 +1310,167 @@ $(document).ready(function() {
     /////////////fin jquery tramo////////////////////////////////////////////
 
 
-    /////////////
+    /////Jquery para el modulo de Caso Sebastian/Kevin/Daniel//////////
+
+    $('#datatable-entorno').DataTable({
+        "pageLength": 5,
+        initComplete: function() {
+            this.api().columns().every(function() {
+                var column = this;
+                var select = $('<select class="form-control"><option value=""></option></select>')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function() {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+
+                column.data().unique().sort().each(function(d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                });
+            });
+        }
+    });
+
+    $('#datatable-deterioro').DataTable({
+        "pageLength": 5,
+        initComplete: function() {
+            this.api().columns().every(function() {
+                var column = this;
+                var select = $('<select class="form-control"><option value=""></option></select>')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function() {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+
+                column.data().unique().sort().each(function(d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                });
+            });
+        }
+    });
+
+    $(document).on("click", "#seleccionarEntorno", function() {
+
+        //var url = $(this).attr("data-url");
+        var entornoSeleccionado = $(this).val();
+        var nombre = $(this).attr("data-name");
+
+        
+        $('#modalEntorno').modal('hide');
+        $('#entorno').attr("value", nombre);
+        $('#entorno_id').val(entornoSeleccionado);
+
+    });
+
+    $(".botonEnviar").click(function() {
+        var url = $(this).attr("data-url");
+        var deterioroSeleccionado = $(this).val();
+        var nombre = $(this).attr("data-name");
+        
+        $('#modalDeterioro').modal('hide');
+        $('#deterioro').attr("value", nombre);
+        $('#deterioro_id').val(deterioroSeleccionado);
+
+
+    });
+
+    $("#boton_deterioro").click(function(){
+        var url = $(this).attr("data-url");
+        let arr = $('[name="deterioros[]"]:checked').map(function(){
+            return this.value;
+        }).get();
+
+        let arr2 = $('[name="deterioros[]"]:checked').map(function(){
+            return $(this).attr("data-name");
+        }).get();
+
+        let str = arr.join(',');
+        let str2 = arr2.join(',');
+
+        console.log(str);
+        console.log(str2);
+        console.log(arr2);
+
+        for (let i = 0; i < arr.length; i++) {
+            // let campo = '<input type="text" class="form-control" name="daño_name'+count+'" value='+arr2[i]+' >';
+            let campo =  '<label>'+arr2[i]+'</label>';
+            let campo2 = '<input type="hidden" class="form-control" name="daño_id[]" value='+arr[i]+' >';
+            let campo3 = '<select name="select_dano[]" class="form-control"><option value="">Gravedad</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>';
+            let campo4 = '<input name="area_dano[]" class="form-control" value="" >';
+
+            $('#campos').append(campo);
+            $('#campos').append(campo2);
+            $('#campos').append(campo3);
+            $('#campos').append(campo4);
+            $('#campos').append('<br>');
+
+            
+           
+        }
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "deteriorosId="+arr+"&deteriorosNombres="+arr2,    
+
+            success: function(deterioros){
+                $('#modalDeterioro').modal('hide');
+                $('#campo').html(deterioros);
+
+            }
+        });
+
+
+        
+    });
+
+    $(document).on("click","#selectTramo", function(){
+
+        var tramoSeleccionado = $(this).val();
+        var codigoTramo = $(this).attr("data-codigo");
+
+        //alert("id: " + tramoSeleccionado + " codigo: " + codigoTramo);
+
+        $('#modalTramo').modal('hide');
+        $('#tramo').attr("value",codigoTramo);
+        $('#tramo_id').val(tramoSeleccionado);
+
+    });
+
+    $('#datatable-tramo').DataTable({
+        "pageLength": 5,
+        initComplete: function() {
+            this.api().columns().every(function() {
+                var column = this;
+                var select = $('<select class="form-control"><option value=""></option></select>')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function() {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+
+                column.data().unique().sort().each(function(d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                });
+            });
+        }
+    });
 
 });
 
@@ -1520,5 +1680,5 @@ const mainValidationEdit = () => {
     }
 
     // return false;
-
 }
+        

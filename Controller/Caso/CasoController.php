@@ -40,9 +40,7 @@
         public function index(){
             $objetoModel = new CasoModel();
 
-            $sql = "
-
-            SELECT C.*,E.*,U.* FROM tbl_caso AS C, tbl_estado AS E, tbl_usuario AS U WHERE C.usuario_id = U.usu_id AND C.estado_id = E.est_id; ";
+            $sql = "SELECT C.*,E.*,U.* FROM tbl_caso AS C, tbl_estado AS E, tbl_usuario AS U WHERE C.usuario_id = U.usu_id AND C.estado_id = E.est_id ";
 
             $casosConsulta = $objetoModel->consultar($sql);
 
@@ -50,7 +48,14 @@
         }
 
         public function getDetail(){
-            
+            $objetoModel = new CasoModel();
+            $cas_id = $_GET['cas_id'];
+
+            $sql = "SELECT C.*,E.*,U.*,T.*,TP.*,EN.* FROM tbl_caso AS C, tbl_estado AS E, tbl_usuario AS U, tbl_tramo AS T, tbl_tipo_de_pavimento AS TP, tbl_entorno AS EN WHERE cas_id = ".$cas_id." AND C.usuario_id = U.usu_id AND C.estado_id = E.est_id AND C.tramo_id = T.tra_id AND C.tipo_pavimento_id = TP.pav_id AND C.entorno_id = EN.ent_id;";
+
+            $casoConsulta = $objetoModel->consultar($sql);
+
+            include_once '../View/Caso/detalle.php';
         }
 
 }

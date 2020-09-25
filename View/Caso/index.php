@@ -55,8 +55,6 @@
                                                 $avisoOrden = "No Vinculado a Orden";  
                                             }
 
-                                            
-
                                             echo "<td>".$avisoOrden."</td>";
 
                                             //echo "<script>alert('el estado es: ' + ".$casos['est_id'].");</script>";

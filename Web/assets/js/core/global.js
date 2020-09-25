@@ -3,24 +3,7 @@ $(document).ready(function() {
 
     /////////////Camila ////////////////////////
 
-$(document).on("click","#contra", function(){
-    var boton=$(this).val();
-    if (boton=="v1") {
-    $(this).attr('Class','far fa-eye-slash text-primary bg-dark btn btn-dark','Id','contra');
-    $(this).attr('value','v2');
-    $(".cl1").attr('type','text');
-    $("#cam").attr('Class','far fa-eye-slash text-primary bg-dark btn btn-dark');
-
-     }else if (boton=="v2"){
-        $(this).attr('Class','far fa-eye text-primary bg-dark btn btn-dark','Id','contra');
-        $(this).attr('value','v1');
-        $(".cl1").attr('type','password'); 
-        $("#cam").attr('Class','far fa-eye text-primary bg-dark btn btn-dark');
-     }
-  });
-
-
-  $(".correo2").on('paste', function(e){
+ $(".correo2").on('paste', function(e){
     e.preventDefault();
   });
   
@@ -179,7 +162,7 @@ $(document).on("click","#contra", function(){
   
   });
   
-
+  
   $(document).on("keyup",".campos",function(){
 
   var clave1=$(".clave1").val();
@@ -265,6 +248,7 @@ $(document).on("click","#contra", function(){
         });
     }
 
+
    if (errores>0) {
       $(".Datos").attr('disabled',true);          
      $("#error4").html("<h5 class='text-danger'>Debe llenar los campos correctamente</h5>");
@@ -279,7 +263,7 @@ $(document).on("click","#contra", function(){
    }
   
  });
-  
+
     //////////////////////////////////////////////////////////
 
     //////////////////Daniel //////////////////

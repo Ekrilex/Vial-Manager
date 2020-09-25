@@ -78,19 +78,24 @@
                                             Buscar
                                         </button>
                                     </div>
-                                    <input type='hidden' name="deterioro_id" id="deterioro_id" value="">
+                                    <input type='hidden' name="deterioros[]" id="deterioro_id" value="">
                                 </div>
                             </div>
     
                             <div id="d2" class="form-group col-md-2" style="padding: 15px">
                                 <label>Gravedad</label>
-                                <select name="gravedad" class="form-control"></select>
+                                <select name="gravedades[]" class="form-control">
+                                    <option value="" selected>Seleccione</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
                             </div>
     
                             <div id="d3" class="form-group" style="padding: 12px">
                                 <label>Area</label>
                                 <div class="input-group">
-                                    <input type="number" name="area" class="form-control">
+                                    <input type="number" name="areas[]" class="form-control">
                                 </div>
                             </div>
                         <!-- </div> -->

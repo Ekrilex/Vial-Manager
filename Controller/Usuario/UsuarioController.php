@@ -346,18 +346,14 @@
 
         if ($clave1!="" && $clave1==$clave2 && $correo!="") {
           if ($existeE==0 && $existeC==0) {
-         $val="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/";         
-         
-          if (preg_match($val, $correo) && @preg_match(@$exp3, $clave1)) {
-           $sql="UPDATE tbl_usuario set usu_correo='".$correo."', usu_contrasena='".$clave1."' WHERE usu_id='".$_SESSION['id']."'";
+                   $sql="UPDATE tbl_usuario set usu_contrasena='".$clave1."', usu_correo='".$correo."' WHERE usu_id='".$_SESSION['id']."'";
            $Usuario=$obj->editar($sql);
             $_SESSION['datos']['todos']="<h5>Sus datos han sido actualizados</h5>";
-          
           }else{
-            $_SESSION['datos']['error']="<h5>Datos invalido , no se guardo cambios</h5>";  
+            $_SESSION['datos']['error']="<h5>error en las credenciales</h5>";  
           }  
          }
-        }
+        
           
     }
             

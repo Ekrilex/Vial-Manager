@@ -1529,29 +1529,29 @@ $(document).ready(function() {
         }
     });
 
-    // $('#datatable-deterioro').DataTable({
-    //     "pageLength": 5,
-    //     initComplete: function() {
-    //         this.api().columns().every(function() {
-    //             var column = this;
-    //             var select = $('<select class="form-control"><option value=""></option></select>')
-    //                 .appendTo($(column.footer()).empty())
-    //                 .on('change', function() {
-    //                     var val = $.fn.dataTable.util.escapeRegex(
-    //                         $(this).val()
-    //                     );
+     $('#datatable-deterioro').DataTable({
+         "pageLength": 5,
+         initComplete: function() {
+             this.api().columns().every(function() {
+                 var column = this;
+                 var select = $('<select class="form-control"><option value=""></option></select>')
+                     .appendTo($(column.footer()).empty())
+                     .on('change', function() {
+                         var val = $.fn.dataTable.util.escapeRegex(
+                             $(this).val()
+                         );
 
-    //                     column
-    //                         .search(val ? '^' + val + '$' : '', true, false)
-    //                         .draw();
-    //                 });
+                         column
+                             .search(val ? '^' + val + '$' : '', true, false)
+                             .draw();
+                    });
 
-    //             column.data().unique().sort().each(function(d, j) {
-    //                 select.append('<option value="' + d + '">' + d + '</option>')
-    //             });
-    //         });
-    //     }
-    // });
+                 column.data().unique().sort().each(function(d, j) {
+                     select.append('<option value="' + d + '">' + d + '</option>')
+                });
+             });
+        }
+     });
 
     $(document).on("click", "#seleccionarEntorno", function() {
 
@@ -1578,7 +1578,7 @@ $(document).ready(function() {
 
     });
 
-    $("#boton_deterioro").click(function(){
+    /*$("#boton_deterioro").click(function(){
         var url = $(this).attr("data-url");
         let arr = $('[name="deterioros[]"]:checked').map(function(){
             return this.value;
@@ -1591,20 +1591,20 @@ $(document).ready(function() {
         let str = arr.join(',');
         let str2 = arr2.join(',');
 
-        // for (let i = 0; i < arr.length; i++) {
+         for (let i = 0; i < arr.length; i++) {
 
-        //     let html = '<label>'+arr2[i]+'</label>'
-        //     +'<input type="hidden" class="form-control" name="daño_id[]" value='+arr[i]+' >'
-        //     +'<select name="select_dano[]" class="form-control"><option value="">Gravedad</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>'
-        //     +'<input name="area_dano[]" class="form-control" value="" >';
+             let html = '<label>'+arr2[i]+'</label>'
+             +'<input type="hidden" class="form-control" name="daño_id[]" value='+arr[i]+' >'
+             +'<select name="select_dano[]" class="form-control"><option value="">Gravedad</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>'
+             +'<input name="area_dano[]" class="form-control" value="" >';
 
-        //     $('#campos').append(html);
-        //     $('#campos').append('<br>');
+             $('#campos').append(html);
+             $('#campos').append('<br>');
 
             
            
-        // }
-    });
+         }
+    });*/
 
     $("#search_det").click(function(){
         let campo = $("#d1").html();
@@ -1617,7 +1617,7 @@ $(document).ready(function() {
                             +"<div class='form-group col-md-2' style='padding: 15px'>"+campo2+"</div>"
                             +"<div class='form-group' style='padding: 12px'>"+campo3+"</div>"
                             +"<div class='col-md-1 col-ms-1 col-xs-12'>"
-                                +"<button class='btn btn-danger' type='button' style='margin-top: 40px;'>Quitar</button>"
+                                +"<button class='btn btn-danger' type='button' id='quitarDeterioro' style='margin-top: 40px;'>Quitar</button>"
                             +"</div>"
                          +"</div>")
         
@@ -1642,21 +1642,25 @@ $(document).ready(function() {
 
     });
 
+    $(document).on("click","#quitarDeterioro",function(){
+        $(this).parent().parent().remove();
+    })
+
     
 
-    $(".botonInput").click(function(){
+    /*$(".botonInput").click(function(){
         var identificacionInput = $(this).attr("id");
         //console.log(identificacionInput);
         $(".botonModalDeterioro").each(function(){
             $(this).val(identificacionInput);
         });
             
-    })
+    })*/
 
     $(document).on("click","#selectDeterioro", function(){
 
-        var inputDestino = "inputDeterioro"+$(this).val();
-        alert($(this).val());
+        var inputDestino = "inputDeterioro"+$("#inputDestino").val();
+        //alert(inputDestino);
 
         var codigoDeterioro = $(this).attr("data-id");
         var nombreDeterioro = $(this).attr("data-name");
@@ -1943,11 +1947,9 @@ const mainValidationEdit = () => {
 function enviarID(id){
     
     let value = id;
-    let botonesModal = document.getElementsByClassName("botonModalDeterioro");
-    
-    for(let i = 0; i < botonesModal.length; i++){
-        botonesModal[i].value = value;
-        console.log(botonesModal[i].value);
-    }
+    let inputDestino = document.getElementById("inputDestino");
+    //alert("inputDestino: " + value);
+    inputDestino.value = value;
+
 }
         

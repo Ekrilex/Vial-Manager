@@ -25,7 +25,7 @@
                           <td><?php echo $det['det_tipo_deterioro']; ?></td>
                           <td><?php echo $det['det_clasificacion']; ?></td>
                           <td>                    
-                            <button class='btn btn-secondary botonModalDeterioro' id='selectDeterioro' data-id="<?php echo $det['det_id'];?>" data-name="<?php echo $det['det_nombre']?>" value=""><span><i class='fas fa-plus-circle text-light'></i></span></button>													  
+                            <button class='btn btn-secondary botonModalDeterioro' id='selectDeterioro' data-id="<?php echo $det['det_id'];?>" data-name="<?php echo $det['det_nombre']?>"><span><i class='fas fa-plus-circle text-light'></i></span></button>													  
                           </td>
                       </tr>
                     <?php } ?>
@@ -34,6 +34,7 @@
         </div>
       </div>
       <div class="modal-footer btn-default">
+        <input type="hidden" id="inputDestino" value="">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-secondary" data-url="<?php echo getUrl("Caso","Caso","addDeterioros",false,"ajax"); ?>" id="boton_deterioro" >Añadir</button>
       </div>

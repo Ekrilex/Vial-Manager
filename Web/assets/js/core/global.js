@@ -3,266 +3,281 @@ $(document).ready(function() {
 
     /////////////Camila ////////////////////////
 
- $(".correo2").on('paste', function(e){
-    e.preventDefault();
-  });
-  
-  $(".correo2").on('copy', function(e){
-    e.preventDefault();
-  });
-
-  $(".campos").on('paste', function(e){
-    e.preventDefault();
-  });
-  
-  $(".campos").on('copy', function(e){
-    e.preventDefault();
-  });
-
-  $(document).on("click",".botonDatos",function(){
-    $(".Datos").attr('disabled',true);    
-  });
-
-
-  $(document).on("click",".Datos",function(){
-   var correo = $(".correo2").val();
-   var url = $(this).attr("data-url");
-   var clave1=$(".clave1").val();
-   var clave2=$(".clave2").val();
-   
-   if (correo.length>0 && clave1.length==7) {
-       $.ajax({
-            url: url,
-            type: "POST",
-            data: "correo2=" + correo + "&clave1=" + clave1 + "&clave2=" + clave2,
-            success: function(datos) {                                                        
-            
-            }       
-        });
-
-      location.reload();
-   }
-
-   if(correo.length>0 && clave1.length!=7){
-       $.ajax({
-            url: url,
-            type: "POST",
-            data: "correo2=" + correo,
-            success: function(datos) {
-                                                        
-              }       
-        });
-         location.reload();
-   }
-
-
-   if (clave1.length==7 && clave2.length==7 && correo.length==0) {
-   
-       $.ajax({
-            url: url,
-            type: "POST",
-            data: "clave1=" + clave1 + "&clave2=" + clave2,
-            success: function(datos) {
-                                                        
-              }       
-        });
-         location.reload();
-   }
+    $(document).on("click","#contra", function(){
+        var boton=$(this).val();
+        if (boton=="v1") {
+        $(this).attr('Class','far fa-eye-slash text-primary bg-dark btn btn-dark','Id','contra');
+        $(this).attr('value','v2');
+        $(".cl1").attr('type','text');
+        $("#cam").attr('Class','far fa-eye-slash text-primary bg-dark btn btn-dark');
+    
+         }else if (boton=="v2"){
+            $(this).attr('Class','far fa-eye text-primary bg-dark btn btn-dark','Id','contra');
+            $(this).attr('value','v1');
+            $(".cl1").attr('type','password'); 
+            $("#cam").attr('Class','far fa-eye text-primary bg-dark btn btn-dark');
+         }
+      });
+    
+    
+      $(".correo2").on('paste', function(e){
+        e.preventDefault();
+      });
       
-  });  
-
-  $(document).on("keyup",".correo2",function(){
-   
-   var correo = $(".correo2").val();
-   var clave1=$(".clave1").val();
-   var url = $(this).attr("data-url");
-   var expC=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/;
-   var correo = $(this).val();
-   $(this).attr('autocomplete','off')
-   var cont = 0;
-   var noValidos = '!"#$ª%&/·()=?¡<>~¬ç+{}[]°º^¨¨Ç`|,;:`´¨*¿'+"'";
-        for (let a = 0; a < correo.length; a++) {
-            for (let b = 0; b < noValidos.length; b++) {
-                if (correo[a] == noValidos[b]) {
-                    cont++;
+      $(".correo2").on('copy', function(e){
+        e.preventDefault();
+      });
+    
+      $(".campos").on('paste', function(e){
+        e.preventDefault();
+      });
+      
+      $(".campos").on('copy', function(e){
+        e.preventDefault();
+      });
+    
+      $(document).on("click",".botonDatos",function(){
+        $(".Datos").attr('disabled',true);    
+      });
+    
+    
+      $(document).on("click",".Datos",function(){
+       var correo = $(".correo2").val();
+       var url = $(this).attr("data-url");
+       var clave1=$(".clave1").val();
+       var clave2=$(".clave2").val();
+       
+       if (correo.length>0 && clave1.length==7) {
+           $.ajax({
+                url: url,
+                type: "POST",
+                data: "correo2=" + correo + "&clave1=" + clave1 + "&clave2=" + clave2,
+                success: function(datos) {                                                        
+                
+                }       
+            });
+    
+          location.reload();
+       }
+    
+       if(correo.length>0 && clave1.length!=7){
+           $.ajax({
+                url: url,
+                type: "POST",
+                data: "correo2=" + correo,
+                success: function(datos) {
+                                                            
+                  }       
+            });
+             location.reload();
+       }
+    
+    
+       if (clave1.length==7 && clave2.length==7 && correo.length==0) {
+       
+           $.ajax({
+                url: url,
+                type: "POST",
+                data: "clave1=" + clave1 + "&clave2=" + clave2,
+                success: function(datos) {
+                                                            
+                  }       
+            });
+             location.reload();
+       }
+          
+      });  
+    
+      $(document).on("keyup",".correo2",function(){
+       
+       var correo = $(".correo2").val();
+       var clave1=$(".clave1").val();
+       var url = $(this).attr("data-url");
+       var expC=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/;
+       var correo = $(this).val();
+       $(this).attr('autocomplete','off')
+       var cont = 0;
+       var noValidos = '!"#$ª%&/·()=?¡<>~¬ç+{}[]°º^¨¨Ç`|,;:`´¨*¿'+"'";
+            for (let a = 0; a < correo.length; a++) {
+                for (let b = 0; b < noValidos.length; b++) {
+                    if (correo[a] == noValidos[b]) {
+                        cont++;
+                    }
                 }
             }
+    
+      error=0;      
+    
+      if (correo.length == 0) {
+        error=error+1;
+        $("#error1").html("<h5 class='text-danger'>Debe llenar el correo electronico</h5>");        
+        $(".correo2").attr('class','form-control correo2 border border-danger');        
+      }else if(correo.length>0){
+        $("#error1").html("");        
+        $(".correo2").attr('class','form-control correo2 border border-primary');        
+      }
+    
+      if (correo.length>0) {
+    
+        if (!expC.test(correo)) {
+         $("#error1").html("<h5 class='text-danger'>Definiendo el correo..</h5>");    
+         error=error+1;      
+        }else if(expC.test(correo)){
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: "correo3=" + correo,
+                success: function(datos) {
+                  
+                  if(datos!="") {
+                   $("#error1").html(datos);
+                   $(".Datos").attr('disabled',true);                    
+                   error=error+1;                                           
+                  $(".correo2").attr('class','form-control correo2 border border-danger');        
+                  }else{
+                  $(".correo2").attr('class','form-control correo2 border border-primary');        
+                  }
+                }
+            });
         }
-
-  error=0;      
-
-  if (correo.length == 0) {
-    error=error+1;
-    $("#error1").html("<h5 class='text-danger'>Debe llenar el correo electronico</h5>");        
-    $(".correo2").attr('class','form-control correo2 border border-danger');        
-  }else if(correo.length>0){
-    $("#error1").html("");        
-    $(".correo2").attr('class','form-control correo2 border border-primary');        
-
-  }
-
-  if (correo.length>0) {
-
-    if (!expC.test(correo)) {
-     $("#error1").html("<h5 class='text-danger'>Definiendo el correo..</h5>");    
-     error=error+1;      
-    }else if(expC.test(correo)){
+      }  
+    
+        if (cont>0) {
+          $("#error1").html("<h5 class='text-danger'>correo invalido</h5>");
+          $(".correo2").attr('class','form-control correo2 border border-danger');        
+                          
+         error=error+1;
+         }else{
+        $(".correo2").attr('class','form-control correo2 border border-primary');        
+         } 
+    
+       if (clave1.length==7){
         $.ajax({
-            url: url,
-            type: "POST",
-            data: "correo3=" + correo,
-            success: function(datos) {
-              
-              if(datos!="") {
-               $("#error1").html(datos);
-               $(".Datos").attr('disabled',true);                    
-               error=error+1;                                           
-              $(".correo2").attr('class','form-control correo2 border border-danger');        
-              }else{
-              $(".correo2").attr('class','form-control correo2 border border-primary');        
-              }
+          url: url,
+          type: "POST",
+          data: "clave1=" + clave1,
+          success: function(datos) {
+           if (datos!="") {
+            $(".Datos").attr('disabled',true);  
+         $(".correo2").attr('class','form-control correo2 border border-danger');        
+            error=error+1;      
+            }else{
+            $(".correo2").attr('class','form-control correo2 border border-primary');          
             }
-        });
-    }
-  }  
-
-    if (cont>0) {
-      $("#error1").html("<h5 class='text-danger'>correo invalido</h5>");
-      $(".correo2").attr('class','form-control correo2 border border-danger');        
-                      
-     error=error+1;
-     }else{
-    $(".correo2").attr('class','form-control correo2 border border-primary');        
-     } 
-
-   if (clave1.length==7){
-    $.ajax({
-      url: url,
-      type: "POST",
-      data: "clave1=" + clave1,
-      success: function(datos) {
-       if (datos!="") {
-        $(".Datos").attr('disabled',true);  
-     $(".correo2").attr('class','form-control correo2 border border-danger');        
-        error=error+1;      
+           }
+          });
+        }
+    
+       if (error>0) {
+          $(".Datos").attr('disabled',true);          
+          $("#error4").html("<h5 class='text-danger'>Debe llenar los campos correctamente</h5>");     
         }else{
-        $(".correo2").attr('class','form-control correo2 border border-primary');          
+          $(".Datos").attr('disabled',false);          
+          $("#error4").html("");               
         }
-       }
+      
       });
-    }
-
-   if (error>0) {
-      $(".Datos").attr('disabled',true);          
-      $("#error4").html("<h5 class='text-danger'>Debe llenar los campos correctamente</h5>");     
-    }else{
-      $(".Datos").attr('disabled',false);          
-      $("#error4").html("");               
-  }
-  
-  });
-  
-  
-  $(document).on("keyup",".campos",function(){
-
-  var clave1=$(".clave1").val();
-  var clave2=$(".clave2").val();
-  var url = $(".clave1").attr("data-url");
-  var exp=/([A-Z]{1}[a-z]{1}[0-9]{5})+$/;
-  var exp2=/([0-9]{5}[A-Z]{1}[a-z]{1})+$/;
-  var correo = $(".correo2").val();
-  var expC=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/;
-
-  $(".clave1").attr('maxlength','7');
-  $(".clave2").attr('maxlength','7');
-
-  if (exp.test($(".clave1").val())) {
-      var exp3=/([A-Z]{1}[a-z]{1}[0-9]{5})+$/;
-    }else if (exp2.test($(".clave1").val())){
-      var exp3=/([0-9]{5}[A-Z]{1}[a-z]{1})+$/;
-    }
-
-  errores=0;      
-  
-
-    if (clave1.length !=7) {
-    $("#error2").html("<h5 class='text-danger'>Debe llenar la contraseña correctamente</h5>"); 
-    $("#error1").html("");        
-      errores=errores+1;
-    }else if (clave1.length==7){
-    $.ajax({
-      url: url,
-      type: "POST",
-      data: "clave1=" + clave1,
-      success: function(datos) {
-       if (datos!="") {
-        $("#error2").html(datos);        
-        $(".Datos").attr('disabled',true);                        
-        errores=errores+1;      
+      
+    
+      $(document).on("keyup",".campos",function(){
+    
+      var clave1=$(".clave1").val();
+      var clave2=$(".clave2").val();
+      var url = $(".clave1").attr("data-url");
+      var exp=/([A-Z]{1}[a-z]{1}[0-9]{5})+$/;
+      var exp2=/([0-9]{5}[A-Z]{1}[a-z]{1})+$/;
+      var correo = $(".correo2").val();
+      var expC=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/;
+    
+      $(".clave1").attr('maxlength','7');
+      $(".clave2").attr('maxlength','7');
+    
+      if (exp.test($(".clave1").val())) {
+          var exp3=/([A-Z]{1}[a-z]{1}[0-9]{5})+$/;
+        }else if (exp2.test($(".clave1").val())){
+          var exp3=/([0-9]{5}[A-Z]{1}[a-z]{1})+$/;
         }
-       }
-      });
-    }
-
- if (exp3.test(clave1)) {
- }else{
-      $("#error2").html("<h5 class='text-danger'>Contraseña invalida</h5>"); 
-       errores=errores+1;
-     }
-
-   if (clave1.length > 0 && !exp3.test(clave1)) {
-      $("#error2").html("<h5 class='text-danger'>Contraseña invalida</h5>"); 
-      errores=errores+1;
-   }else if (clave1.length > 0 && exp3.test(clave1)){
-      $("#error2").html(""); 
-   }
-   
-   if ( clave2.length !=7) {
-     $("#error3").html("<h5 class='text-danger'>Debe confirmar la contraseña</h5>"); 
-    $("#error1").html("");              
-      errores=errores+1;
-   }else{
-   $("#error3").html("");        
-   }
-
-   if (clave1!=clave2) { 
-      errores=errores+1;
-     $("#error2").html("<h5 class='text-danger'>Las contraseñas no coinciden</h5>");       
-     $("#error3").html("<h5 class='text-danger'>Las contraseñas no coinciden</h5>"); 
-   }else{
-   $("#error2").html("");        
-   $("#error3").html("");            
-   }
-
-  if(expC.test(correo)){
+    
+      errores=0;      
+      
+    
+        if (clave1.length !=7) {
+        $("#error2").html("<h5 class='text-danger'>Debe llenar la contraseña correctamente</h5>"); 
+        $("#error1").html("");        
+          errores=errores+1;
+        }else if (clave1.length==7){
         $.ajax({
-            url: url,
-            type: "POST",
-            data: "correo3=" + correo,
-            success: function(datos) {
-              if(datos!="") {
-               $(".Datos").attr('disabled',true);                    
-               errores=errores+1;                                           
-              }
+          url: url,
+          type: "POST",
+          data: "clave1=" + clave1,
+          success: function(datos) {
+           if (datos!="") {
+            $("#error2").html(datos);        
+            $(".Datos").attr('disabled',true);                        
+            errores=errores+1;      
             }
-        });
-    }
-
-
-   if (errores>0) {
-      $(".Datos").attr('disabled',true);          
-     $("#error4").html("<h5 class='text-danger'>Debe llenar los campos correctamente</h5>");
-    $(".clave1").attr('class','form-control cl1 campos  clave1 border border-danger');                    
-    $(".clave2").attr('class','form-control cl1 campos  clave2 border border-danger');                    
-   }else{
-      $(".Datos").attr('disabled',false); 
-      $("#error4").html("");   
-      $(".clave1").attr('class','form-control cl1 campos  clave1 border border-primary');                    
-      $(".clave2").attr('class','form-control cl1 campos  clave2 border border-primary');                    
-
-   }
-  
- });
+           }
+          });
+        }
+    
+     if (exp3.test(clave1)) {
+     }else{
+          $("#error2").html("<h5 class='text-danger'>Contraseña invalida</h5>"); 
+           errores=errores+1;
+         }
+    
+       if (clave1.length > 0 && !exp3.test(clave1)) {
+          $("#error2").html("<h5 class='text-danger'>Contraseña invalida</h5>"); 
+          errores=errores+1;
+       }else if (clave1.length > 0 && exp3.test(clave1)){
+          $("#error2").html(""); 
+       }
+       
+       if ( clave2.length !=7) {
+         $("#error3").html("<h5 class='text-danger'>Debe confirmar la contraseña</h5>"); 
+        $("#error1").html("");              
+          errores=errores+1;
+       }else{
+       $("#error3").html("");        
+       }
+    
+       if (clave1!=clave2) { 
+          errores=errores+1;
+         $("#error2").html("<h5 class='text-danger'>Las contraseñas no coinciden</h5>");       
+         $("#error3").html("<h5 class='text-danger'>Las contraseñas no coinciden</h5>"); 
+       }else{
+       $("#error2").html("");        
+       $("#error3").html("");            
+       }
+    
+      if(expC.test(correo)){
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: "correo3=" + correo,
+                success: function(datos) {
+                  if(datos!="") {
+                   $(".Datos").attr('disabled',true);                    
+                   errores=errores+1;                                           
+                  }
+                }
+            });
+        }
+    
+       if (errores>0) {
+          $(".Datos").attr('disabled',true);          
+          $("#error4").html("<h5 class='text-danger'>Debe llenar los campos correctamente</h5>");
+          $(".clave1").attr('class','form-control cl1 campos  clave1 border border-danger');                    
+          $(".clave2").attr('class','form-control cl1 campos  clave2 border border-danger');                    
+       }else{
+          $(".Datos").attr('disabled',false); 
+          $("#error4").html("");   
+          $(".clave1").attr('class','form-control cl1 campos  clave1 border border-primary');                    
+          $(".clave2").attr('class','form-control cl1 campos  clave2 border border-primary');                    
+    
+       }
+      
+     });
 
     //////////////////////////////////////////////////////////
 

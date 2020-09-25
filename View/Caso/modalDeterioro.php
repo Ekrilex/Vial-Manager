@@ -24,11 +24,8 @@
                           <td><?php echo $det['det_nombre']; ?></td>
                           <td><?php echo $det['det_tipo_deterioro']; ?></td>
                           <td><?php echo $det['det_clasificacion']; ?></td>
-                          <td>
-                            <label class="selectgroup-item">
-														  <input type="checkbox" name="deterioros[]" value="<?php echo $det['det_id'] ?>" data-name="<?php echo $det['det_nombre'] ?>" class="selectgroup-input">
-														  <span class="selectgroup-button">Seleccionar</span>
-													  </label>
+                          <td>                    
+                            <button class='btn btn-secondary botonModalDeterioro' id='selectDeterioro' data-id="<?php echo $det['det_id'];?>" data-name="<?php echo $det['det_nombre']?>" value=""><span><i class='fas fa-plus-circle text-light'></i></span></button>													  
                           </td>
                       </tr>
                     <?php } ?>

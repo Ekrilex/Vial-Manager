@@ -293,7 +293,7 @@
         } 
         
         if ($existe>0) {
-        echo "el correo ya existe";      
+        echo "<i class='fas fa-times'></i> el correo ya existe";      
         }else if($existe==0){
         echo "";
         }
@@ -305,7 +305,7 @@
         } 
 
         if ($existeC>0) {
-        echo "intente otra contraseña";      
+        echo "<i class='fas fa-times'></i> intente otra contraseña";      
         }else{
           echo "";
         }

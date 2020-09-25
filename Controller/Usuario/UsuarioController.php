@@ -269,6 +269,7 @@
       }
 
 
+
        public function getPerfil(){
         $obj = new UsuarioModel();
         $_SESSION['id']="1";
@@ -276,7 +277,6 @@
         $Usuario=$obj->consultar($sql);
         include_once '../View/Usuario/mi_perfil.php';
        }
-
 
        public function postPerfil(){
 
@@ -293,7 +293,7 @@
         } 
         
         if ($existe>0) {
-        echo "<i class='fas fa-times'></i> Correo electronico no disponible";      
+        echo "el correo ya existe";      
         }else if($existe==0){
         echo "";
         }
@@ -305,7 +305,7 @@
         } 
 
         if ($existeC>0) {
-        echo "<i class='fas fa-times'></i> intente otra contraseña";      
+        echo "intente otra contraseña";      
         }else{
           echo "";
         }
@@ -336,7 +336,8 @@
        }else if (@preg_match(@$exp3, $clave1)) {
         @$exp3=$exp2;
        }
-                        
+        
+                    
        if($clave1!="" && $clave2!="" && $clave1==$clave2 && $correo=="" && $existeC==0){
           $sql="UPDATE tbl_usuario set usu_contrasena='".$clave1."' WHERE usu_id='".$_SESSION['id']."'";
           $Usuario=$obj->editar($sql);
@@ -353,10 +354,11 @@
             $_SESSION['datos']['todos']="<h5>Sus datos han sido actualizados</h5>";
           
           }else{
-            $_SESSION['datos']['error']="<h5>Datos invalidos, no se guardo cambios</h5>";  
+            $_SESSION['datos']['error']="<h5>Datos invalido , no se guardo cambios</h5>";  
           }  
          }
         }
+          
     }
             
 

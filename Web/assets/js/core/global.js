@@ -1617,7 +1617,7 @@ $(document).ready(function() {
                             +"<div class='form-group col-md-2' style='padding: 15px'>"+campo2+"</div>"
                             +"<div class='form-group' style='padding: 12px'>"+campo3+"</div>"
                             +"<div class='col-md-1 col-ms-1 col-xs-12'>"
-                                +"<button class='btn btn-danger' type='button' id='quitarDeterioro' style='margin-top: 40px;'>Quitar</button>"
+                                +"<button class='btn btn-icon btn-round btn-danger' type='button' id='quitarDeterioro' style='margin-top: 40px;'><i class='fas fa-minus-circle'></i></button>"
                             +"</div>"
                          +"</div>")
         
@@ -1634,6 +1634,14 @@ $(document).ready(function() {
         });
 
         count = 1;
+        
+        $(".inputcito_hidden").each(function(){
+            $(this).attr("id","deterioro_id"+count)
+            $(this).attr("data-count", count)
+            count++;
+        })
+
+        count = 1;
 
         $(".botonInput").each(function(){
             $(this).attr("id",count)
@@ -1646,30 +1654,29 @@ $(document).ready(function() {
         $(this).parent().parent().remove();
     })
 
-    
-
-    /*$(".botonInput").click(function(){
-        var identificacionInput = $(this).attr("id");
-        //console.log(identificacionInput);
-        $(".botonModalDeterioro").each(function(){
-            $(this).val(identificacionInput);
-        });
-            
-    })*/
+    arr = [];
 
     $(document).on("click","#selectDeterioro", function(){
 
         var inputDestino = "inputDeterioro"+$("#inputDestino").val();
+        
         //alert(inputDestino);
 
         var codigoDeterioro = $(this).attr("data-id");
         var nombreDeterioro = $(this).attr("data-name");
+        arr.push(codigoDeterioro);
+
+        count = 0;
+
+        $(".inputcito_hidden").each(function(){
+            $(this).attr("value",arr[count]);
+            count++;
+        });
 
         //alert("id: " + tramoSeleccionado + " codigo: " + codigoTramo);
-
+    
         $('#modalDeterioro').modal('hide');
         $('#'+inputDestino).attr("value",nombreDeterioro);
-        $('#deterioro_id').val(codigoDeterioro);
 
     });
 
@@ -1677,12 +1684,16 @@ $(document).ready(function() {
 
         var tramoSeleccionado = $(this).val();
         var codigoTramo = $(this).attr("data-codigo");
+        var anchoInicio = $(this).attr("data-anchoInicio");
+        var anchoFin = $(this).attr("data-anchoFin");
 
         //alert("id: " + tramoSeleccionado + " codigo: " + codigoTramo);
-
+        //alert("ancho1: " + anchoInicio + "ancho2: " + anchoFin);
         $('#modalTramo').modal('hide');
         $('#tramo').attr("value",codigoTramo);
         $('#tramo_id').val(tramoSeleccionado);
+        $('#ancho_inicio').val(anchoInicio);
+        $('#ancho_fin').val(anchoFin);
 
     });
 
@@ -1734,7 +1745,86 @@ $(document).ready(function() {
         }
     });
 
+    // Validaciones de formulario de registro de casos.
+    $(document).on("submit", "#form_case", function() {
+
+
+        let elFormularioEsValido = true;
+
+        let formulario = document.getElementsByClassName("validacion");
+        let deterioros = document.getElementsByClassName("inputcito");
+
+        for (let i = 0; i < formulario.length; i++) {
+            if (formulario[i].value == "") {
+                swal("Error!", "Ningun campo debe estar vacio", {
+                    icon : "error",
+                    buttons: {        			
+                        confirm: {
+                            className : 'btn btn-danger'
+                        }
+                    },
+                });
+                elFormularioEsValido = false;
+                break;
+            }
+
+            if (formulario[i].name == "tipo_pavimento_id" && formulario[i].value == 2 ) {
+                swal("Advertencia", "De momento no esta disponible el pavimento Rigido", {
+                    icon : "warning",
+                    buttons: {        			
+                        confirm: {
+                            className : 'btn btn-warning'
+                        }
+                    },
+                });
+                elFormularioEsValido = false;
+                break;
+            }   
+        }
+
+
+        array = [];
+
+        for (let i = 0; i < deterioros.length; i++) {
+            array.push(deterioros[i].value);
+        }
+
+
+        let count = 1;
+
+       for (let j = 0; j < array.length; j++) {
+            for (let x = count; x < array.length; x++) {
+                if (array[j] == array[x]) {
+                    swal("Advertencia", "No se puede repetir deterioros", {
+                        icon : "warning",
+                        buttons: {        			
+                            confirm: {
+                                className : 'btn btn-warning'
+                            }
+                        },
+                    });
+                    elFormularioEsValido = false;
+                    break;
+                }
+            }
+            count++;
+       }
+
+
+        return elFormularioEsValido;
+    });
+
+    // $("#cas_causa").change(function(){
+    //     let causa = document.getElementById("cas_causa").value;
+
+    //     if (/^[0-9a-zA-Z]+$/.test(causa)) {
+    //         alert('hola');
+    //     } else {
+    //         alert('mami');
+    //     }
+    // })
 });
+
 
 //////////////////////Funciones de modulo de usuarios - Kevin///////////////////
 
@@ -1947,9 +2037,14 @@ const mainValidationEdit = () => {
 function enviarID(id){
     
     let value = id;
+    
+
     let inputDestino = document.getElementById("inputDestino");
+    
     //alert("inputDestino: " + value);
     inputDestino.value = value;
 
 }
+
+
         

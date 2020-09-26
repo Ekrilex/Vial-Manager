@@ -30,7 +30,7 @@
                                     echo "<td>".$tramos['tra_nombre_via']."</td>";
                                     echo "<td>".$tramos['jer_descripcion']."</td>";
                                     echo "<td>".$tramos['bar_descripcion']."</td>";
-                                    echo "<td><button class='btn btn-secondary' id='selectTramo' value='".$tramos['tra_id']."' data-codigo='".$tramos['tra_codigo']."'><span><i class='fas fa-plus-circle text-light'></i></span></button></td>";
+                                    echo "<td><button class='btn btn-secondary' id='selectTramo' data-anchoInicio='".$tramos['tra_ancho_inicio']."' data-anchoFin='".$tramos['tra_ancho_fin']."' value='".$tramos['tra_id']."' data-codigo='".$tramos['tra_codigo']."'><span><i class='fas fa-plus-circle text-light'></i></span></button></td>";
                                 echo "</tr>";
                               }
                           }

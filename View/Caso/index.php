@@ -50,9 +50,9 @@
                                             echo "<td style='color:".$colorPrioridad.";'>".$iconoPrioridad." ".$nombrePrioridad."</td>";
 
                                             if($casos['cas_disponibilidad'] != 0){
-                                                $avisoOrden = "Vinculado a Orden";
+                                                $avisoOrden = "Vinculado a orden #".$casos['orden_id']; 
                                             }else{
-                                                $avisoOrden = "No Vinculado a Orden";  
+                                                $avisoOrden = "No vinculado a orden"; 
                                             }
 
                                             echo "<td>".$avisoOrden."</td>";

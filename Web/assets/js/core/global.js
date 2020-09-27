@@ -1723,6 +1723,7 @@ $(document).ready(function() {
 
     $('#basic-datatables-caso').DataTable({
         "pageLength": 5,
+        "ordering": false,
         initComplete: function() {
             this.api().columns().every(function() {
                 var column = this;
@@ -1742,7 +1743,9 @@ $(document).ready(function() {
                     select.append('<option value="' + d + '">' + d + '</option>')
                 });
             });
+        
         }
+        
     });
 
     // Validaciones de formulario de registro de casos.
@@ -1823,6 +1826,55 @@ $(document).ready(function() {
     //         alert('mami');
     //     }
     // })
+
+
+    $(document).on("click",".cambiarEstadoCaso",function(){
+
+        var url = $(this).attr("data-url");
+        var id = $(this).attr("data-id");
+        var estado = $(".botonCambiarEstado").attr("data-estado");
+
+         var contenidoBoton = "";
+
+         if(estado == 3){
+            contenidoBoton = "<button class='btn btn-success botonCambiarEstado' data-toggle='modal' id='botonHabilitarCaso' data-estado='2' data-target='#modalHabilitarCaso'>Habilitar</button>";
+            
+            $('#modalInhabilitarCaso').modal('hide');
+        }else if(estado == 2){
+            contenidoBoton = "<button class='btn btn-danger botonCambiarEstado' data-toggle='modal' id='botonInhabilitarCaso' data-estado='3' data-target='#modalInhabilitarCaso'>Inhabilitar</button>";
+            $('#modalHabilitarCaso').modal('hide');
+        }
+
+        $('#inhabilitarHabilitar').html(contenidoBoton);
+
+        $.ajax({
+
+            url: url,
+            type: "POST",
+            data: "cas_id="+id+"&estado_id="+estado,
+            success: function(estado){
+                
+                    
+
+                swal("Modificacion", "El estado del caso se ha modificado", {
+                    icon : "success",
+                    buttons: {
+                        confirm: {
+                            className : 'btn btn-success'
+                        }
+                    },
+                });
+
+                $('#form-estado').html(estado);
+
+                
+                
+            }
+        })
+
+    });
+
+    ///////////////////////////Fin Jquery Casos//////////////////////////////
 });
 
 

@@ -6,11 +6,49 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
 ?>
 
     <div class="page-inner">
+        <div>
+            <?php 
+                if(isset($_SESSION['resultFinalizar'])){
+
+                                        
+            ?>
+                <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <script>
+                        setTimeout(function(){
+                            $("#alert").html("<?php echo "<span class='text-success'>".$_SESSION['resultFinalizar']."</span>" ?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000) ;
+
+                        }, 1000);
+                    </script>
+                </div>
+            <?php 
+                }
+                unset($_SESSION['resultFinalizar']);
+            ?>
+        </div>
+        <div>
+            <?php 
+                if(isset($_SESSION['resultFinalizarrError'])){
+
+                                        
+            ?>
+                <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <script>
+                        setTimeout(function(){
+                            $("#alert").html("<?php echo "<span class='text-danger'>".$_SESSION['resultFinalizarrError']."</span>" ?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000) ;
+
+                        }, 1000);
+                    </script>
+                </div>
+            <?php 
+                }
+                unset($_SESSION['resultFinalizarrError']);
+            ?>
+        </div>
         <div class="col-md-12">
             <div class="card">
 
                 <div class="card-header">
-                    <div class="card-title">Detalle Casos</div>
+                    <div class="card-title">Detalle Caso</div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -137,7 +175,7 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                         
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group">
-                                <label>Fecha de creacion vencimiento: </label>
+                                <label>Fecha de vencimiento: </label>
                                 <input type="text" class="form-control" style="color:black; font-weight:bold;" placeholder="Fecha de vencimiento" value="<?php echo $casoSeleccionado['cas_fecha_vencimiento']; ?>" readonly>
                             </div>
                             <div class="form-group">
@@ -170,7 +208,7 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                                 <label>Entorno: </label>
                                 <input type="text" class="form-control" style="color:black; font-weight:bold;" placeholder="Entorno" value="<?php echo $casoSeleccionado['ent_descripcion']; ?>" readonly>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <?php
                                 if ($casoSeleccionado['est_id'] == 3 || $casoSeleccionado['est_id'] == 4) {
 
@@ -185,8 +223,10 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                                     $colorEstado = "rgb(0,250,0)";
                                 }
                                 ?>
-                                <label>Estado: </label>
-                                <input type="text" class="form-control" style="color:<?php echo $colorEstado; ?>; font-weight:bold;" placeholder="Estado" value="<?php echo $casoSeleccionado['est_descripcion']; ?>" readonly>
+                                <span id="form-estado">
+                                    <label>Estado: </label>
+                                    <input type="text" class="form-control" style="color:<?php echo $colorEstado; ?>; font-weight:bold;" placeholder="Estado" value="<?php echo $casoSeleccionado['est_descripcion']; ?>" readonly>
+                                </span>
                             </div>
 
                         </div>
@@ -250,25 +290,28 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                 </div>
                 <div class="card-action">
                     <a class="btn btn-secondary" href="<?php echo getUrl('Caso','Caso','index')?>">Salir</a>
+
                     <button class="btn btn-info" id="editarCaso" data-url="<?php echo getUrl("Caso","Caso","getUpdate",false,"ajax");?>" data-id="<?php echo $casoSeleccionado['cas_id'];?>">Editar</button>
                     <!-- <button class="btn btn-info" id="finalizarCaso" data-url="<?php //echo getUrl("Caso","Caso","getfinalize",false,"ajax");?>" data-id="<?php //echo $casoSeleccionado['cas_id'];?>">Editar</button> -->
                     <?php 
-                        if($casoSeleccionado['orden_id'] != ""){
+                        if($casoSeleccionado['orden_id'] != "" && $casoSeleccionado['est_id'] != 5){
                     ?>
                         <button class="btn btn-success" data-toggle="modal" id="finalizarCaso" data-target="#modalFinalizar" data-id="<?php echo $casoSeleccionado['cas_id'];?>">Finalizar</button>
                     <?php 
                     
                         }
                     ?>
-                    <?php 
-                        if($casoSeleccionado['est_id' ] != 5){
-                            if($casoSeleccionado['est_id' ] != 2 ){
-                                echo "<button class='btn btn-danger' data-toggle='modal' id='inhabilitarCaso' data-target='#modalInhabilitarCaso'>Inhabilitar</button>";
-                            }else{
-                                echo "<button class='btn btn-success' data-toggle='modal' id='habilitarCaso' data-target='#modalHabilitarCaso'>Habilitar</button>";
+                    <span id="inhabilitarHabilitar">
+                        <?php 
+                            if($casoSeleccionado['est_id' ] != 5 && $casoSeleccionado['orden_id'] == ""){
+                                if($casoSeleccionado['est_id' ] != 2 ){
+                                    echo "<button class='btn btn-danger botonCambiarEstado' data-toggle='modal' data-estado='".$casoSeleccionado['est_id']."' data-target='#modalInhabilitarCaso'>Inhabilitar</button>";
+                                }else{
+                                    echo "<button class='btn btn-success botonCambiarEstado' data-toggle='modal' data-estado='".$casoSeleccionado['est_id']."' data-target='#modalHabilitarCaso'>Habilitar</button>";
+                                }
                             }
-                        }
                         ?>
+                    </span>
                 </div>
             </div>
         </div>
@@ -276,6 +319,8 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
 
 <?php
     include_once '../View/Caso/modalFinalizar.php';
+    include_once '../View/Caso/modalInhabilitar.php';
+    include_once '../View/Caso/modalHabilitar.php';
 }
 
 ?>

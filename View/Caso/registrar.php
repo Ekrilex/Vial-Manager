@@ -1,4 +1,43 @@
 <div class="page-inner">
+    <div>
+        <?php 
+            if(isset($_SESSION['resultRegistrar'])){
+
+                                    
+        ?>
+            <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                <script>
+                    setTimeout(function(){
+                        $("#alert").html("<?php echo "<span class='text-success'>".$_SESSION['resultRegistrar']."</span>" ?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000) ;
+
+                    }, 1000);
+                </script>
+            </div>
+        <?php 
+            }
+            unset($_SESSION['resultRegistrar']);
+        ?>
+    </div>
+    <div>
+        <?php 
+            if(isset($_SESSION['resultRegistrarError'])){
+
+                                    
+        ?>
+            <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <script>
+                    setTimeout(function(){
+                        $("#alert").html("<?php echo "<span class='text-danger'>".$_SESSION['resultRegistrarError']."</span>" ?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000) ;
+
+                    }, 1000);
+                </script>
+            </div>
+        <?php 
+            }
+            unset($_SESSION['resultRegistrarError']);
+        ?>
+    </div>
+
     <form id="form_case" action="<?php echo getUrl("Caso", "Caso", "postCreate"); ?>" method="POST" enctype="multipart/form-data">
         <div class="col-md-12">
             <div class="card">
@@ -103,9 +142,9 @@
                         <div id="d3" class="form-group" style="margin-top: 13px;">
                             <label>Area</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                <input type="text" class="form-control" name="areas[]" aria-label="Amount (to the nearest dollar)">
                                 <div class="input-group-append">
-                                    <span class="input-group-text">m</span>
+                                    <span class="input-group-text">mm</span>
                                 </div>
                             </div>
                         </div>

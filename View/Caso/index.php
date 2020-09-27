@@ -29,7 +29,7 @@
                                             echo "<td>".$casos['usu_primer_nombre']." ".$casos['usu_primer_apellido']."</td>";
                                             echo "<td>".$casos['cas_fecha_vencimiento']."</td>";
 
-                                            if($casos['cas_prioridad'] == 1 || $casos['cas_prioridad'] == 2){
+                                            if($casos['cas_prioridad'] == 1 || $casos['cas_prioridad'] == 2 || $casos['cas_prioridad'] == 0){
                                                 
                                                 $colorPrioridad = "rgb(0,250,0)";
                                                 $nombrePrioridad = "Baja";
@@ -49,7 +49,7 @@
 
                                             echo "<td style='color:".$colorPrioridad.";'>".$iconoPrioridad." ".$nombrePrioridad."</td>";
 
-                                            if($casos['cas_disponibilidad'] != 0){
+                                            if($casos['orden_id'] != ""){
                                                 $avisoOrden = "Vinculado a orden #".$casos['orden_id']; 
                                             }else{
                                                 $avisoOrden = "No vinculado a orden"; 

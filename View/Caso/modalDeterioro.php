@@ -36,7 +36,6 @@
       <div class="modal-footer btn-default">
         <input type="hidden" id="inputDestino" value="">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-secondary" data-url="<?php echo getUrl("Caso","Caso","addDeterioros",false,"ajax"); ?>" id="boton_deterioro" >Añadir</button>
       </div>
     </div>
   </div>

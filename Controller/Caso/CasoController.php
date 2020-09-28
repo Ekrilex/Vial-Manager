@@ -150,7 +150,7 @@
 
             move_uploaded_file($_FILES['cas_fotografia_fin']['tmp_name'], $cas_fotografia_fin);
 
-            $sql = "UPDATE tbl_caso SET cas_fotografia_fin = '".$cas_fotografia_fin."', estado_id = 5, cas_prioridad = 0, usuario_id = 1 WHERE cas_id = ".$cas_id."";
+            $sql = "UPDATE tbl_caso SET cas_fotografia_fin = '".$cas_fotografia_fin."', estado_id = 5, cas_prioridad = 1, usuario_id = 1 WHERE cas_id = ".$cas_id."";
 
             //$sql = "UPDATE tbl_caso SET cas_fotografia_fin = '".$cas_fotografia_fin."', estado_id = 5, cas_prioridad = 1, usuario_id = ".$_SESSION['usu_id']." WHERE cas_id = ".$cas_id."";
 

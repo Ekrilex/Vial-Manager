@@ -269,12 +269,33 @@
       }
 
 
+      public function getValidar(){
+        $obj = new UsuarioModel();
+        $cambio=$_POST['confir'];
+        $_SESSION['id']="1";
+        $_SESSION['mostrar']="0";              
+    
+        $sql2="SELECT * FROM tbl_usuario WHERE usu_id='".$_SESSION['id']."'";
+        $confirmar=$obj->consultar($sql2);
+        
+          while ($con=pg_fetch_assoc($confirmar)) {
 
+            if (password_verify($cambio, $con['usu_contrasena'])) {
+              $_SESSION['mostrar']="1";  
+              include_once '../View/Usuario/activarCambios.php';      
+            }else{
+              $_SESSION['mostrar']="0";              
+              include_once '../View/Usuario/activarCambios.php';      
+            }
+          }
+      }
+      
        public function getPerfil(){
         $obj = new UsuarioModel();
         $_SESSION['id']="1";
         $sql="SELECT u.usu_num_identificacion , u.usu_primer_nombre , u.usu_segundo_nombre  , u.usu_primer_apellido , u.usu_segundo_apellido , u.usu_correo , u.usu_nickname , r.rol_nombre , d.tip_descripcion FROM  tbl_usuario as u , tbl_rol  as r, tbl_tipo_documento as d WHERE usu_id = '".$_SESSION['id']."' and u.rol_id = r.rol_id and d.tip_id = u.tipo_documento_id";
         $Usuario=$obj->consultar($sql);
+    
         include_once '../View/Usuario/mi_perfil.php';
        }
 
@@ -285,7 +306,6 @@
         @$correo3=$_POST['correo3'];
         @$clave1=$_POST['clave1'];
         @$clave2=$_POST['clave2'];
-        
         $sql="SELECT count(*) AS email FROM tbl_usuario WHERE usu_correo='".$correo3."'";
         $existe1=$obj->consultar($sql); 
         while ($exi=pg_fetch_assoc($existe1)) {
@@ -298,15 +318,18 @@
         echo "";
         }
 
-        $sql="SELECT count(*) AS clave FROM tbl_usuario WHERE usu_contrasena='".$clave1."'";
+        $sql="SELECT * FROM tbl_usuario";
         $existe2=$obj->consultar($sql); 
         while ($exi=pg_fetch_assoc($existe2)) {
-        $existeC=$exi['clave']; 
+        $existeC=$exi['usu_contrasena']; 
         } 
 
-        if ($existeC>0) {
+          $c=0;
+        if (password_verify($clave1, $existeC)) {
+          $c=$c+1;
         echo "<i class='fas fa-times'></i> intente otra contraseña";      
         }else{
+          $c=0;
           echo "";
         }
 
@@ -338,25 +361,27 @@
        }
         
                     
-       if($clave1!="" && $clave2!="" && $clave1==$clave2 && $correo=="" && $existeC==0){
-          $sql="UPDATE tbl_usuario set usu_contrasena='".$clave1."' WHERE usu_id='".$_SESSION['id']."'";
+       if($clave1!="" && $clave2!="" && $clave1==$clave2 && $correo=="" && $c==0){
+        $pass=password_hash($clave1, PASSWORD_DEFAULT);
+
+          $sql="UPDATE tbl_usuario set usu_contrasena='".$pass."' WHERE usu_id='".$_SESSION['id']."'";
           $Usuario=$obj->editar($sql);
             $_SESSION['datos']['contraseña']="<h5>Su contraseña se ha actualizado exitosamente</h5>";
         }
 
         if ($clave1!="" && $clave1==$clave2 && $correo!="") {
-          if ($existeE==0 && $existeC==0) {
-                   $sql="UPDATE tbl_usuario set usu_contrasena='".$clave1."', usu_correo='".$correo."' WHERE usu_id='".$_SESSION['id']."'";
-           $Usuario=$obj->editar($sql);
+          if ($existeE==0 && $c==0) {
+           $pass=password_hash($clave1, PASSWORD_DEFAULT);
+            $sql="UPDATE tbl_usuario set usu_contrasena='".$pass."', usu_correo='".$correo."' WHERE usu_id='".$_SESSION['id']."'";
+            $Usuario=$obj->editar($sql);
             $_SESSION['datos']['todos']="<h5>Sus datos han sido actualizados</h5>";
           }else{
             $_SESSION['datos']['error']="<h5>error en las credenciales</h5>";  
           }  
-         }
+        }
+
+      }
         
-          
-    }
-            
 
   }
 ?>

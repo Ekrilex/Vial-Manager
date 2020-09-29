@@ -1,7 +1,19 @@
 $(document).ready(function() {
 
 
-    /////////////Camila ////////////////////////
+  /////////////Camila ////////////////////////
+    $(document).on("click",".confirmar", function(){
+     var url = $(this).attr("data-url");
+     var clave=$(".confir").val();
+      $.ajax({
+       url: url,
+       type: "POST",
+       data: "confir=" + clave,
+        success:function(datos){
+        $("#cambios").html(datos);
+        }
+      }); 
+    });
 
     $(document).on("click","#contra", function(){
         var boton=$(this).val();
@@ -37,10 +49,13 @@ $(document).ready(function() {
       });
     
       $(document).on("click",".botonDatos",function(){
-        $(".Datos").attr('disabled',true);    
+        $(".Datos").attr('disabled',true);          
       });
     
-    
+     $(document).on("click",".clo",function(){
+        location.reload();
+     });
+
       $(document).on("click",".Datos",function(){
        var correo = $(".correo2").val();
        var url = $(this).attr("data-url");
@@ -278,6 +293,7 @@ $(document).ready(function() {
        }
       
      });
+  
 
     //////////////////////////////////////////////////////////
 

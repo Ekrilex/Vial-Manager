@@ -44,11 +44,18 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                 unset($_SESSION['resultFinalizarrError']);
             ?>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" id="contenidoFormulario">
             <div class="card">
 
                 <div class="card-header">
-                    <div class="card-title">Detalle Caso</div>
+                    <div class="d-flex align-items-center">
+                        <div class="card-title">Detalle Caso</div>
+                        <?php 
+                            $areaTramo = $casoSeleccionado['tra_ancho_inicio'] + $casoSeleccionado['tra_ancho_fin'];
+                            $areaTramo *= 500 / 10; 
+                        ?>
+                        <div class="ml-auto"><h5 style="font-weight:bold;" class="text-light">Area del tramo: <?php echo $areaTramo;?>m²</h5></div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">

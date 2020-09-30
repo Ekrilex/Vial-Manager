@@ -123,7 +123,7 @@
                                         Buscar
                                     </button>
                                 </div>
-                                <input type='hidden' class="inputcito_hidden validacion" name="deterioros[]" id="deterioro_id" value="">
+                                <input type='hidden' class="inputcito_hidden validacion" name="deterioros[]" id="deterioro_id1" value="">
                             </div>
                             <small id="ad6" class="form-text text-muted text-danger"></small>
                         </div>
@@ -148,20 +148,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- <div id="d3" class="form-group" style="padding: 12px">
-                            <label>Area</label>
-                            <div class="input-group">
-                                <input type="number" name="areas[]" class="form-control validacion">
-                            </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">M</span>
-                            </div>
-                            <small id="ad8" class="form-text text-muted text-danger"></small>
-                        </div> -->
-
-                        <!-- </div> -->
-
 
                         <div style="margin-top: 54px;" class="col-md-1 col-sm-1 col-xd-12">
                             <button type="button" id="search_det" class="btn btn-icon btn-round btn-info">

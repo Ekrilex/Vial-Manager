@@ -1545,7 +1545,7 @@ $(document).ready(function() {
         }
     });
 
-     $('#datatable-deterioro').DataTable({
+    $('#datatable-deterioro').DataTable({
          "pageLength": 5,
          initComplete: function() {
              this.api().columns().every(function() {
@@ -1568,150 +1568,6 @@ $(document).ready(function() {
              });
         }
      });
-
-    $(document).on("click", "#seleccionarEntorno", function() {
-
-        //var url = $(this).attr("data-url");
-        var entornoSeleccionado = $(this).val();
-        var nombre = $(this).attr("data-name");
-
-        
-        $('#modalEntorno').modal('hide');
-        $('#entorno').attr("value", nombre);
-        $('#entorno_id').val(entornoSeleccionado);
-
-    });
-
-    $(".botonEnviar").click(function() {
-        var url = $(this).attr("data-url");
-        var deterioroSeleccionado = $(this).val();
-        var nombre = $(this).attr("data-name");
-        
-        $('#modalDeterioro').modal('hide');
-        $('#deterioro').attr("value", nombre);
-        $('#deterioro_id').val(deterioroSeleccionado);
-
-
-    });
-
-    /*$("#boton_deterioro").click(function(){
-        var url = $(this).attr("data-url");
-        let arr = $('[name="deterioros[]"]:checked').map(function(){
-            return this.value;
-        }).get();
-
-        let arr2 = $('[name="deterioros[]"]:checked').map(function(){
-            return $(this).attr("data-name");
-        }).get();
-
-        let str = arr.join(',');
-        let str2 = arr2.join(',');
-
-         for (let i = 0; i < arr.length; i++) {
-
-             let html = '<label>'+arr2[i]+'</label>'
-             +'<input type="hidden" class="form-control" name="daño_id[]" value='+arr[i]+' >'
-             +'<select name="select_dano[]" class="form-control"><option value="">Gravedad</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>'
-             +'<input name="area_dano[]" class="form-control" value="" >';
-
-             $('#campos').append(html);
-             $('#campos').append('<br>');
-
-            
-           
-         }
-    });*/
-
-    $("#search_det").click(function(){
-        let campo = $("#d1").html();
-        let campo2 = $("#d2").html();
-        let campo3 = $("#d3").html();
-        
-        
-        $("#copy").append("<div class='form-row'>"
-                            +"<div class='col-md-5 form-group'>"+campo+"</div>"
-                            +"<div class='form-group col-md-2' style='padding: 15px'>"+campo2+"</div>"
-                            +"<div class='form-group' style='padding: 12px'>"+campo3+"</div>"
-                            +"<div class='col-md-1 col-ms-1 col-xs-12'>"
-                                +"<button class='btn btn-icon btn-round btn-danger' type='button' id='quitarDeterioro' style='margin-top: 40px;'><i class='fas fa-minus-circle'></i></button>"
-                            +"</div>"
-                         +"</div>")
-        
-        
-    });
-
-    
-
-    $("#search_det").click(function(){
-        let count = 1;
-        $(".inputcito").each(function(){
-            $(this).attr("id","inputDeterioro"+count);
-            count++;
-        });
-
-        count = 1;
-        
-        $(".inputcito_hidden").each(function(){
-            $(this).attr("id","deterioro_id"+count)
-            $(this).attr("data-count", count)
-            count++;
-        })
-
-        count = 1;
-
-        $(".botonInput").each(function(){
-            $(this).attr("id",count)
-            count++;
-        })
-
-    });
-
-    $(document).on("click","#quitarDeterioro",function(){
-        $(this).parent().parent().remove();
-    })
-
-    arr = [];
-
-    $(document).on("click","#selectDeterioro", function(){
-
-        var inputDestino = "inputDeterioro"+$("#inputDestino").val();
-        
-        //alert(inputDestino);
-
-        var codigoDeterioro = $(this).attr("data-id");
-        var nombreDeterioro = $(this).attr("data-name");
-        arr.push(codigoDeterioro);
-
-        count = 0;
-
-        $(".inputcito_hidden").each(function(){
-            $(this).attr("value",arr[count]);
-            count++;
-        });
-
-        //alert("id: " + tramoSeleccionado + " codigo: " + codigoTramo);
-    
-        $('#modalDeterioro').modal('hide');
-        $('#'+inputDestino).attr("value",nombreDeterioro);
-
-    });
-
-    $(document).on("click","#selectTramo", function(){
-
-        var tramoSeleccionado = $(this).val();
-        var codigoTramo = $(this).attr("data-codigo");
-        var anchoInicio = $(this).attr("data-anchoInicio");
-        var anchoFin = $(this).attr("data-anchoFin");
-
-        //alert("id: " + tramoSeleccionado + " codigo: " + codigoTramo);
-        //alert("ancho1: " + anchoInicio + "ancho2: " + anchoFin);
-        $('#modalTramo').modal('hide');
-        $('#tramo').attr("value",codigoTramo);
-        $('#tramo_id').val(tramoSeleccionado);
-        $('#ancho_inicio').val(anchoInicio);
-        $('#ancho_fin').val(anchoFin);
-
-    });
 
     $('#datatable-tramo').DataTable({
         "pageLength": 5,
@@ -1736,7 +1592,7 @@ $(document).ready(function() {
             });
         }
     });
-
+    
     $('#basic-datatables-caso').DataTable({
         "pageLength": 5,
         "ordering": false,
@@ -1763,6 +1619,140 @@ $(document).ready(function() {
         }
         
     });
+    
+    $(document).on("click", "#seleccionarEntorno", function() {
+
+        var entornoSeleccionado = $(this).val();
+        var nombre = $(this).attr("data-name");
+
+        
+        $('#modalEntorno').modal('hide');
+        $('#entorno').attr("value", nombre);
+        $('#entorno_id').val(entornoSeleccionado);
+
+    });
+
+    arr = [];
+    
+    $(document).on("click","#selectDeterioro", function(){
+
+        var inputDestino = "inputDeterioro"+$("#inputDestino").val();
+        var hiddenDestino = "deterioro_id"+$("#inputDestino").val();
+
+        var codigoDeterioro = $(this).attr("data-id");
+        var nombreDeterioro = $(this).attr("data-name");
+        
+        
+        //alert("input destino: " + inputDestino + " hidden Destino: " + hiddenDestino);
+
+        $('#modalDeterioro').modal('hide');
+        $('#modalDeterioroEditar').modal('hide');
+        $('#'+inputDestino).attr("value",nombreDeterioro);
+        $('#'+hiddenDestino).attr("value",codigoDeterioro);
+
+    });
+    
+    $(document).on("click","#selectTramo", function(){
+
+        var tramoSeleccionado = $(this).val();
+        var codigoTramo = $(this).attr("data-codigo");
+        var anchoInicio = $(this).attr("data-anchoInicio");
+        var anchoFin = $(this).attr("data-anchoFin");
+
+        //alert("id: " + tramoSeleccionado + " codigo: " + codigoTramo);
+        //alert("ancho1: " + anchoInicio + "ancho2: " + anchoFin);
+        $('#modalTramo').modal('hide');
+        $('#tramo').attr("value",codigoTramo);
+        $('#tramo_id').val(tramoSeleccionado);
+        $('#ancho_inicio').val(anchoInicio);
+        $('#ancho_fin').val(anchoFin);
+
+    });
+    
+    $("#search_det").click(function(){
+        let campo = $("#d1").html();
+        let campo2 = $("#d2").html();
+        let campo3 = $("#d3").html();
+        
+        
+        $("#copy").append("<div class='form-row'>"
+                            +"<div class='col-md-5 form-group'>"+campo+"</div>"
+                            +"<div class='form-group col-md-2' style='padding: 15px'>"+campo2+"</div>"
+                            +"<div class='form-group' style='padding: 12px'>"+campo3+"</div>"
+                            +"<div class='col-md-1 col-ms-1 col-xs-12'>"
+                                +"<button class='btn btn-icon btn-round btn-danger' type='button' id='quitarDeterioro' style='margin-top: 40px;'><i class='fas fa-minus-circle'></i></button>"
+                            +"</div>"
+                         +"</div>")
+        
+        
+    });
+
+    $("#search_det").click(function(){
+        let count = 1;
+        $(".inputcito").each(function(){
+            $(this).attr("id","inputDeterioro"+count);
+            count++;
+        });
+
+        count = 1;
+        
+        $(".inputcito_hidden").each(function(){
+            $(this).attr("id","deterioro_id"+count)
+            $(this).attr("data-count", count)
+            count++;
+        })
+
+        count = 1;
+
+        $(".botonInput").each(function(){
+            $(this).attr("id",count)
+            count++;
+        })
+
+    });
+
+    $(document).on("click","#añadirDeterioro",function(){
+        let campo = $("#d1").html();
+        let campo2 = $("#d2").html();
+        let campo3 = $("#d3").html();
+
+        $("#copy").append("<div class='form-row'>"
+                            +"<div class='col-md-5 form-group'>"+campo+"</div>"
+                            +"<div class='form-group col-md-2' style='padding: 15px'>"+campo2+"</div>"
+                            +"<div class='form-group' style='padding: 12px'>"+campo3+"</div>"
+                            +"<div class='col-md-1 col-ms-1 col-xs-12'>"
+                                +"<button class='btn btn-icon btn-round btn-danger' type='button' id='quitarDeterioro' style='margin-top: 40px;'><i class='fas fa-minus-circle'></i></button>"
+                            +"</div>"
+                         +"</div>")
+    })
+
+    $(document).on("click","#añadirDeterioro",function(){
+        let count = 1;
+        $(".inputcito").each(function(){
+            $(this).attr("id","inputDeterioro"+count);
+            count++;
+        });
+
+        count = 1;
+        
+        $(".inputcito_hidden").each(function(){
+            $(this).attr("id","deterioro_id"+count)
+            $(this).attr("data-count", count)
+            count++;
+        })
+
+        count = 1;
+
+        $(".botonInput").each(function(){
+            $(this).attr("id",count)
+            count++;
+        })
+
+    });
+    
+    $(document).on("click","#quitarDeterioro",function(){
+        $(this).parent().parent().remove();
+    })
 
     // Validaciones de formulario de registro de casos.
     $(document).on("submit", "#form_case", function() {
@@ -1773,6 +1763,7 @@ $(document).ready(function() {
         let formulario = document.getElementsByClassName("validacion");
         let deterioros = document.getElementsByClassName("inputcito");
 
+        // Ciclo para validar que ningun campo este vacio
         for (let i = 0; i < formulario.length; i++) {
             if (formulario[i].value == "") {
                 swal("Error!", "Ningun campo debe estar vacio", {
@@ -1803,14 +1794,20 @@ $(document).ready(function() {
 
 
         array = [];
+        let count = 1;
+        let count2 = 0;
+        let count3 = 1;
 
+        // Ciclo para añadir en un arreglo los deterioros seleccionados
         for (let i = 0; i < deterioros.length; i++) {
             array.push(deterioros[i].value);
+            count2++;
+            count3++;
         }
 
 
-        let count = 1;
 
+        // Ciclo que valida que ningun deterioro se repita
        for (let j = 0; j < array.length; j++) {
             for (let x = count; x < array.length; x++) {
                 if (array[j] == array[x]) {
@@ -1829,21 +1826,35 @@ $(document).ready(function() {
             count++;
        }
 
+       if (count2 <= 1) {
+        swal("Advertencia", "Deben de haber minimo 2 deterioros seleccionados", {
+            icon : "warning",
+            buttons: {        			
+                confirm: {
+                    className : 'btn btn-warning'
+                }
+            },
+        });
+        elFormularioEsValido = false;
+       }
+
+       if (count3 > 10) {
+        swal("Advertencia", "Limite de deteriroros seleccionados", {
+            icon : "warning",
+            buttons: {        			
+                confirm: {
+                    className : 'btn btn-warning'
+                }
+            },
+        });
+        elFormularioEsValido = false;
+       }
+
 
         return elFormularioEsValido;
     });
 
-    // $("#cas_causa").change(function(){
-    //     let causa = document.getElementById("cas_causa").value;
-
-    //     if (/^[0-9a-zA-Z]+$/.test(causa)) {
-    //         alert('hola');
-    //     } else {
-    //         alert('mami');
-    //     }
-    // })
-
-
+    // Cambiar el estado del caso
     $(document).on("click",".cambiarEstadoCaso",function(){
 
         var url = $(this).attr("data-url");
@@ -1888,6 +1899,46 @@ $(document).ready(function() {
             }
         })
 
+    });
+
+    // Editar el caso
+    $("#editarCaso").click(function(){
+        let url = $(this).attr("data-url");
+        let caso_id = $(this).attr("data-id");
+        
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: "caso_id="+caso_id,
+            success: function (response) {
+                $('#contenidoFormulario').html(response);
+            }
+        });
+        
+    });
+
+    $('#datatable-deterioro-editar').DataTable({
+        "pageLength": 5,
+        initComplete: function() {
+            this.api().columns().every(function() {
+                var column = this;
+                var select = $('<select class="form-control"><option value=""></option></select>')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function() {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                   });
+
+                column.data().unique().sort().each(function(d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+               });
+            });
+       }
     });
 
     ///////////////////////////Fin Jquery Casos//////////////////////////////

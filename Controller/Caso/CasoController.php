@@ -199,6 +199,35 @@
 
         }
 
+        public function getUpdate(){
+
+            $objetoModel = new CasoModel();
+
+            $caso_id = $_POST['caso_id'];
+            
+            $sqlCaso= "SELECT C.*,E.*,U.*,T.*,TP.*,EN.* FROM tbl_caso AS C, tbl_estado AS E, tbl_usuario AS U, tbl_tramo AS T, tbl_tipo_de_pavimento AS TP, tbl_entorno AS EN WHERE cas_id = ".$caso_id." AND C.usuario_id = U.usu_id AND C.estado_id = E.est_id AND C.tramo_id = T.tra_id AND C.tipo_pavimento_id = TP.pav_id AND C.entorno_id = EN.ent_id;";
+            $casoConsulta = $objetoModel->consultar($sqlCaso);
+
+            $sqlEntornos = "SELECT * FROM tbl_entorno";
+            $sqlTramos = "SELECT * FROM tbl_tramo,tbl_barrio,tbl_estado,tbl_jerarquia_vial WHERE Barrio_id = bar_id AND Estado_id = est_id AND jerarquia_vial_id = jer_id";
+            $sqlDeterioros = "SELECT * FROM tbl_Deterioro ORDER BY det_clasificacion ASC";
+            $sqlDeteriorosCaso = "SELECT * FROM tbl_caso_deterioro AS CD, tbl_deterioro AS D WHERE CD.caso_id = ".$caso_id." AND CD.deterioro_id = D.det_id ORDER BY det_clasificacion ASC;";
+
+            $eject = $objetoModel->consultar($sqlEntornos);
+            $tramo = $objetoModel->consultar($sqlTramos);
+            $deterioro = $objetoModel->consultar($sqlDeterioros);
+            $deteriorosCasoConsulta = $objetoModel->consultar($sqlDeteriorosCaso);
+
+            include_once '../View/Caso/editar.php';
+
+        }
+
+        public function postUpdate(){
+
+
+
+        }
+
 
     }
     

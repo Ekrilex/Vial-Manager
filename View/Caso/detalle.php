@@ -44,6 +44,44 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                 unset($_SESSION['resultFinalizarrError']);
             ?>
         </div>
+        <div>
+            <?php 
+                if(isset($_SESSION['resultEditar'])){
+
+                                        
+            ?>
+                <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <script>
+                        setTimeout(function(){
+                            $("#alert").html("<?php echo "<span class='text-success'>".$_SESSION['resultEditar']."</span>" ?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000) ;
+
+                        }, 1000);
+                    </script>
+                </div>
+            <?php 
+                }
+                unset($_SESSION['resultEditar']);
+            ?>
+        </div>
+        <div>
+            <?php 
+                if(isset($_SESSION['resultEditarError'])){
+
+                                        
+            ?>
+                <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <script>
+                        setTimeout(function(){
+                            $("#alert").html("<?php echo "<span class='text-danger'>".$_SESSION['resultEditarError']."</span>" ?><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>").fadeOut(5000) ;
+
+                        }, 1000);
+                    </script>
+                </div>
+            <?php 
+                }
+                unset($_SESSION['resultEditarError']);
+            ?>
+        </div>
         <div class="col-md-12" id="contenidoFormulario">
             <div class="card">
 
@@ -84,11 +122,8 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                                                     <label>Fotografia Inicio de la via:</label><br>
                                                     <?php 
                                                         if($casoSeleccionado['cas_fotografia_inicio'] != ""){
-
-                                                        
-
                                                     ?>
-                                                        <img src="<?php echo $casoSeleccionado['cas_fotografia_inicio'] ?>" alt="no tiene" width="467px" height="300px" border="1px">                                                    <?php 
+                                                        <img src="<?php echo $casoSeleccionado['cas_fotografia_inicio'] ?>" alt="no tiene" width="467px" height="300px" border="1px"><?php 
                                                         }else{
                                                             echo "<h5><span><i class='fas fa-info-circle'></i></span>&nbsp;Este caso aun no dispone de foto final</h5>";
                                                         }
@@ -148,9 +183,6 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                                                     <label>Fotografia Despues de la intervencion:</label><br>
                                                     <?php 
                                                         if($casoSeleccionado['cas_fotografia_fin'] != ""){
-
-                                                        
-
                                                     ?>
                                                         <img src="<?php echo $casoSeleccionado['cas_fotografia_fin'] ?>" alt="no tiene" width="467px" height="300px" border="1px">
                                                     <?php 
@@ -190,28 +222,35 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
 
                                 if ($casoSeleccionado['cas_prioridad'] == 1 || $casoSeleccionado['cas_prioridad'] == 2) {
 
-                                    $colorPrioridad = "rgb(0,250,0)";
+                                    /*$colorPrioridad = "rgb(0,250,0)";
                                     $nombrePrioridad = "Baja";
-                                    $iconoPrioridad = "<i class='fas fa-thumbs-up text-success'></i>";
+                                    $iconoPrioridad = "<i class='fas fa-thumbs-up text-success'></i>";*/
+                                    $resultado = "<p class='text-success'><i class='fas fa-thumbs-up text-success'></i>&nbsp;Baja</p>";
                                 } else if ($casoSeleccionado['cas_prioridad'] == 3 || $casoSeleccionado['cas_prioridad'] == 4) {
 
-                                    $colorPrioridad = "rgb(250,250,0)";
-                                    $nombrePrioridad = "Media";
-                                    $iconoPrioridad = "<i class='fas fa-exclamation-triangle text-warning'></i>";
+                                    /* $colorPrioridad = "rgb(250,250,0)";
+                                     $nombrePrioridad = "Media";
+                                     $iconoPrioridad = "<i class='fas fa-exclamation-triangle text-warning'></i>";*/
+                                     $resultado = "<p class='text-warning'><i class='fas fa-exclamation-triangle text-warning'></i>&nbsp;Media</p>";
                                 } else if ($casoSeleccionado['cas_prioridad'] > 4 && $casoSeleccionado['cas_prioridad'] <= 7) {
-                                    $colorPrioridad = "red";
-                                    $nombrePrioridad = "Alta";
-                                    $iconoPrioridad = "<i class='fas fa-flag text-danger'></i>";
+                                     /*$colorPrioridad = "red";
+                                     $nombrePrioridad = "Alta";
+                                     $iconoPrioridad = "<i class='fas fa-flag text-danger'></i>";*/
+                                     $resultado = "<p class='text-danger'><i class='fas fa-flag text-danger'></i>&nbsp;Alta</p>";
                                 }
                                 ?>
-                                <label>Prioridad:</label>
-                                <div>
-                                    <span style="color:<?php echo $colorPrioridad; ?>;"><?php echo $iconoPrioridad . " " . $nombrePrioridad; ?></span>
+                                <label>Prioridad: &nbsp;<span data-toggle="tooltip" data-placement="right" title="Cambiar Prioridad"><a type="button" id="cambiarPrioridad" data-url="<?php echo getUrl("Caso","Caso","editarPrioridad",false,"ajax")?>"><i class="fas fa-cog text-light"></i></span></a></label>
+                                <div class="form-row">
+                                    <div id="textoPrioridad">
+                                        <span><?php echo $resultado;?></span>&nbsp;
+                                    </div>
+                                    <div id="divSelectPrioridad">
+                                    </div>
                                 </div>
 
 
                             </div>
-                            <div class="form-group mt-4">
+                            <div class="form-group mt--4" id="divEntorno">
                                 <label>Entorno: </label>
                                 <input type="text" class="form-control" style="color:black; font-weight:bold;" placeholder="Entorno" value="<?php echo $casoSeleccionado['ent_descripcion']; ?>" readonly>
                             </div>
@@ -296,6 +335,7 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                     </div>
                 </div>
                 <div class="card-action">
+                    <input type="hidden" id="cas_id" value="<?php echo $casoSeleccionado['cas_id'];?>">
                     <a class="btn btn-secondary" href="<?php echo getUrl('Caso','Caso','index')?>">Salir</a>
 
                     <button class="btn btn-info" id="editarCaso" data-url="<?php echo getUrl("Caso","Caso","getUpdate",false,"ajax");?>" data-id="<?php echo $casoSeleccionado['cas_id'];?>">Editar</button>

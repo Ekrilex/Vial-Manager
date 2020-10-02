@@ -24,12 +24,13 @@ create table tbl_caso (
 	cas_prioridad varchar(10) not null,
 	cas_causa varchar(200) not null,
 	cas_disponibilidad int not null,
+	cas_observacion varchar(300),
 	tipo_pavimento_id  int not null,
 	entorno_id int not null,
 	tramo_id int not null,
 	usuario_id int not null,
 	estado_id int not null,
-	orden_id int not null,
+	orden_id int,
 	primary key(cas_id)
 );
 
@@ -65,6 +66,7 @@ create table tbl_bitacora(
 	bit_usuario varchar(30),
 	bit_fecha_modificacion timestamp,
 	bit_tabla varchar(45),
+	bit_id_registro varchar(11),
 	bit_observacion varchar(100),
 	primary key(bit_id)
 

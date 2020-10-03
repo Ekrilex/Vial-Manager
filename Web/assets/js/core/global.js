@@ -1632,7 +1632,8 @@ $(document).ready(function() {
 
     });
 
-    arr = [];
+    var arr = [];
+    var arrayDeterioros = [];
     
     $(document).on("click","#selectDeterioro", function(){
 
@@ -1641,6 +1642,7 @@ $(document).ready(function() {
 
         var codigoDeterioro = $(this).attr("data-id");
         var nombreDeterioro = $(this).attr("data-name");
+        arrayDeterioros.push($(this).attr("data-tipo"));
         
         
         //alert("input destino: " + inputDestino + " hidden Destino: " + hiddenDestino);
@@ -1753,20 +1755,143 @@ $(document).ready(function() {
     $(document).on("click","#quitarDeterioro",function(){
         $(this).parent().parent().remove();
     })
+    
 
     // Validaciones de formulario de registro de casos.
     $(document).on("submit", "#form_case", function() {
 
 
         let elFormularioEsValido = true;
+        console.log(arrayDeterioros);
 
         let formulario = document.getElementsByClassName("validacion");
+        let deterioros = document.getElementsByClassName("inputcito");
+        let count_det_1 = 0;
+        let count_det_2 = 0;
+
+        // Ciclo para validar que ningun campo este vacio
+        for (let i = 0; i < formulario.length; i++) {
+            if (formulario[i].value.length == 0) {
+                swal("Error!", "Ningun campo debe estar vacio:"+formulario[i].type, {
+                    icon : "error",
+                    buttons: {        			
+                        confirm: {
+                            className : 'btn btn-danger'
+                        }
+                    },
+                });
+                elFormularioEsValido = false;
+                break;
+            }
+
+            if (formulario[i].name == "tipo_pavimento_id" && formulario[i].value == 2 ) {
+                swal("Advertencia", "De momento no esta disponible el pavimento Rigido", {
+                    icon : "warning",
+                    buttons: {        			
+                        confirm: {
+                            className : 'btn btn-warning'
+                        }
+                    },
+                });
+                elFormularioEsValido = false;
+                break;
+            }
+            
+            if ( arrayDeterioros[i] == "Perdida de capas estructurales" || arrayDeterioros[i] == "Otros deterioros"  || arrayDeterioros[i]== "Deformaciones" ) {
+                count_det_1++;
+            } else if ( arrayDeterioros[i] == "Fisuras" || arrayDeterioros[i] == "Desprendimientos" || arrayDeterioros[i] == "Daños superficiales" ){
+                count_det_2++;
+            }
+        }
+
+        if (count_det_1 < 1 || count_det_2  < 1) {
+            swal("Advertencia", "Seleccione un deterioro de tipo fisura y otro de deformacion", {
+                icon : "warning",
+                buttons: {        			
+                    confirm: {
+                        className : 'btn btn-warning'
+                    }
+                },
+            });
+            elFormularioEsValido = false;
+        }
+
+
+
+        array = [];
+        let count = 1;
+        let count2 = 0;
+        let count3 = 1;
+
+        // Ciclo para añadir en un arreglo los deterioros seleccionados
+        for (let i = 0; i < deterioros.length; i++) {
+            array.push(deterioros[i].value);
+            count2++;
+            count3++;
+        }
+
+
+
+        // Ciclo que valida que ningun deterioro se repita
+       for (let j = 0; j < array.length; j++) {
+            for (let x = count; x < array.length; x++) {
+                if (array[j] == array[x]) {
+                    swal("Advertencia", "No se puede repetir deterioros", {
+                        icon : "warning",
+                        buttons: {        			
+                            confirm: {
+                                className : 'btn btn-warning'
+                            }
+                        },
+                    });
+                    elFormularioEsValido = false;
+                    break;
+                }
+            }
+            count++;
+       }
+
+       if (count2 <= 1) {
+        swal("Advertencia", "Deben de haber minimo 2 deterioros seleccionados", {
+            icon : "warning",
+            buttons: {        			
+                confirm: {
+                    className : 'btn btn-warning'
+                }
+            },
+        });
+        elFormularioEsValido = false;
+       }
+
+       if (count3 > 10) {
+        swal("Advertencia", "Limite de deteriroros seleccionados", {
+            icon : "warning",
+            buttons: {        			
+                confirm: {
+                    className : 'btn btn-warning'
+                }
+            },
+        });
+        elFormularioEsValido = false;
+       }
+
+
+        return elFormularioEsValido;
+    });
+
+    $(document).on("submit", "#form_case_edit", function() {
+
+
+        let elFormularioEsValido = true;
+
+        let formulario = document.getElementsByClassName("validacion2");
         let deterioros = document.getElementsByClassName("inputcito");
 
         // Ciclo para validar que ningun campo este vacio
         for (let i = 0; i < formulario.length; i++) {
+            
             if (formulario[i].value == "") {
-                swal("Error!", "Ningun campo debe estar vacio", {
+                swal("Error!", "Ningun campo debe estar vacio: " + formulario[i].type, {
                     icon : "error",
                     buttons: {        			
                         confirm: {
@@ -1854,50 +1979,60 @@ $(document).ready(function() {
         return elFormularioEsValido;
     });
 
-    // Cambiar el estado del caso
+    // Cambiar el estado del caso 
     $(document).on("click",".cambiarEstadoCaso",function(){
 
         var url = $(this).attr("data-url");
         var id = $(this).attr("data-id");
         var estado = $(".botonCambiarEstado").attr("data-estado");
 
-         var contenidoBoton = "";
-
-         if(estado == 3){
-            contenidoBoton = "<button class='btn btn-success botonCambiarEstado' data-toggle='modal' id='botonHabilitarCaso' data-estado='2' data-target='#modalHabilitarCaso'>Habilitar</button>";
-            
-            $('#modalInhabilitarCaso').modal('hide');
-        }else if(estado == 2){
-            contenidoBoton = "<button class='btn btn-danger botonCambiarEstado' data-toggle='modal' id='botonInhabilitarCaso' data-estado='3' data-target='#modalInhabilitarCaso'>Inhabilitar</button>";
-            $('#modalHabilitarCaso').modal('hide');
+        if (estado == 3) {
+            var observacion = document.getElementById("cas_inhab_just").value;
+        } else if (estado == 2){
+            var observacion = document.getElementById("cas_hab_just").value;
         }
 
-        $('#inhabilitarHabilitar').html(contenidoBoton);
+        var contenidoBoton = "";
 
-        $.ajax({
-
-            url: url,
-            type: "POST",
-            data: "cas_id="+id+"&estado_id="+estado,
-            success: function(estado){
-                
-                    
-
-                swal("Modificacion", "El estado del caso se ha modificado", {
-                    icon : "success",
-                    buttons: {
-                        confirm: {
-                            className : 'btn btn-success'
-                        }
-                    },
-                });
-
-                $('#form-estado').html(estado);
-
-                
-                
+        if( observacion.length == 0 ){
+            swal("Modificacion", "El campo de la justificacion debe ser diligenciado", {
+                icon : "warning",
+                buttons: {
+                    confirm: {
+                        className : 'btn btn-warning'
+                    }
+                },
+            });
+        } else {
+            if(estado == 3){
+                contenidoBoton = "<button class='btn btn-success botonCambiarEstado' data-toggle='modal' id='botonHabilitarCaso' data-estado='2' data-target='#modalHabilitarCaso'>Habilitar</button>";  
+                $('#modalInhabilitarCaso').modal('hide');
+            }else if(estado == 2){
+                contenidoBoton = "<button class='btn btn-danger botonCambiarEstado' data-toggle='modal' id='botonInhabilitarCaso' data-estado='3' data-target='#modalInhabilitarCaso'>Inhabilitar</button>";
+                $('#modalHabilitarCaso').modal('hide');
             }
-        })
+    
+            $('#inhabilitarHabilitar').html(contenidoBoton);
+    
+            $.ajax({
+    
+                url: url,
+                type: "POST",
+                data: "cas_id="+id+"&estado_id="+estado+"&observacion="+observacion,
+                success: function(estado){
+                    swal("Modificacion", "El estado del caso se ha modificado", {
+                        icon : "success",
+                        buttons: {
+                            confirm: {
+                                className : 'btn btn-success'
+                            }
+                        },
+                    });
+                    $('#form-estado').html(estado);
+                }
+            })
+        }
+         
 
     });
 
@@ -1939,6 +2074,77 @@ $(document).ready(function() {
                });
             });
        }
+    });
+
+    $(document).on("click","#boton_imagen_inicio",function(){
+        $("#contenido").html("<input type='file' class='form-control validacion2' name='foto_inicio'>")
+    });
+
+    $(document).on("click","#boton_imagen_fin",function(){
+        $("#contenido2").html("<input type='file' class='form-control validacion2' name='foto_fin'>")
+    });
+
+    $(document).on("submit","#form_finish",function(){
+        let campos = document.getElementsByClassName("valid");
+        let isvalid = true;
+
+        for (let i = 0; i < campos.length; i++) {
+            if (campos[i].value.length == 0) {
+                swal("Error!", "Ningun campo debe estar vacio", {
+                    icon : "error",
+                    buttons: {        			
+                        confirm: {
+                            className : 'btn btn-danger'
+                        }
+                    },
+                });
+                isvalid = false;
+            }
+        }
+
+        return isvalid;
+    });
+
+    $(document).on("click","#cambiarPrioridad",function(){
+        urlControlador = $(this).attr("data-url");
+        
+        contenido = "<div class='input-group ml-3'>"+
+                        "<select class='form-control' class='col-md-1' id='selectPrioridad' data-url='"+urlControlador+"'>"+
+                            "<option value=''>seleccione</option>"+
+                            "<option value='1'>1</option>"+
+                            "<option value='2'>2</option>"+
+                            "<option value='3'>3</option>"+
+                            "<option value='4'>4</option>"+
+                            "<option value='5'>5</option>"+
+                            "<option value='6'>6</option>"+
+                            "<option value='7'>7</option>"+
+                        "</select><span data-toggle='tooltip' data-placement='right' title='Prioridades: 1 y 2 - baja, 3 y 4 - media, 5,6 y 7 - alta' class='mt-2 ml-2'><i class='fas fa-info-circle text-info'></i></span>"+
+                    "</div>";
+        //alert(contenido);
+        $('#textoPrioridad').addClass("mt-2");
+        $('#divEntorno').removeClass("mt-4");
+        $('#divSelectPrioridad').html(contenido);
+
+    });
+
+    $(document).on("change","#selectPrioridad",function(){
+
+        var prioridadSeleccionada = $(this).val();
+        var url = $(this).attr("data-url");
+        var cas_id = $('#cas_id').val();
+
+        if(prioridadSeleccionada != ""){
+            $.ajax({
+
+                url: url,
+                type: "POST",
+                data: "cas_prioridad="+prioridadSeleccionada+"&cas_id="+cas_id,
+                success: function(response){
+                    $('#textoPrioridad').html(response);
+                }
+            });
+
+        }
     });
 
     ///////////////////////////Fin Jquery Casos//////////////////////////////

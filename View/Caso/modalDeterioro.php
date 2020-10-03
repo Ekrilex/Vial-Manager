@@ -25,7 +25,7 @@
                           <td><?php echo $det['det_tipo_deterioro']; ?></td>
                           <td><?php echo $det['det_clasificacion']; ?></td>
                           <td>                    
-                            <button class='btn btn-secondary botonModalDeterioro' id='selectDeterioro' data-id="<?php echo $det['det_id'];?>" data-name="<?php echo $det['det_nombre']?>"><span><i class='fas fa-plus-circle text-light'></i></span></button>													  
+                            <button class='btn btn-secondary botonModalDeterioro' id='selectDeterioro' data-id="<?php echo $det['det_id'];?>" data-tipo="<?php echo $det['det_tipo_deterioro']; ?>" data-name="<?php echo $det['det_nombre']?>"><span><i class='fas fa-plus-circle text-light'></i></span></button>													  
                           </td>
                       </tr>
                     <?php } ?>

@@ -20,7 +20,7 @@
            
         }
 
-        private function getTipoDeterioros($deterioros){
+        public function getTipoDeterioros($deterioros){
 
             $tiposDeterioros = array();
 

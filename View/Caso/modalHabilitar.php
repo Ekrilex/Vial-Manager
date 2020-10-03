@@ -7,6 +7,10 @@
             </div>
             <div class="modal-body" style="background-color:rgb(0,0,45);">
                 <label>¿Está seguro que desea Habilitar este Caso?</label>
+                <div class="form-row col-md-12 mt-3">
+                    <label>Observacion</label>
+                    <textarea class="form-control validacionVacio" name="cas_hab_just" id="cas_hab_just" rows="4" placeholder="Ingrese la justificaccion" maxlength="300"></textarea>
+                </div>
             </div>
             <div class="modal-footer" style="background-color:rgb(0,0,45);">
                 <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>

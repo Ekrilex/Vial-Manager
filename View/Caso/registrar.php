@@ -142,7 +142,45 @@
                         <div id="d3" class="form-group" style="margin-top: 13px;">
                             <label>Area</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="areas[]" aria-label="Amount (to the nearest dollar)">
+                                <input type="number" class="form-control validacion" name="areas[]" aria-label="Amount (to the nearest dollar)">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">mm</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="d1" class="form-group col-md-5 mt-2">
+                            <label>Deterioro</label>
+                            <div class="input-group bg-info">
+                                <input type="text" class="form-control inputcito text-black" id="inputDeterioro2" style="color:black;" name="deterioro" value="Deterioro" readonly>
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-default botonInput" id="2" type="button" data-toggle="modal" onclick="enviarID(this.id);" data-target="#modalDeterioro">
+                                        <span class="btn-label">
+                                            <i class="fas fa-directions"></i>
+                                        </span>
+                                        Buscar
+                                    </button>
+                                </div>
+                                <input type='hidden' class="inputcito_hidden validacion" name="deterioros[]" id="deterioro_id2" value="">
+                            </div>
+                            <small id="ad6" class="form-text text-muted text-danger"></small>
+                        </div>
+
+                        <div id="d2" class="form-group col-md-2 mt-2" style="padding: 15px">
+                            <label>Gravedad</label>
+                            <select name="gravedades[]" class="form-control validacion">
+                                <option value="" selected>Seleccione</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <small id="ad7" class="form-text text-muted text-danger"></small>
+                        </div>
+
+                        <div id="d3" class="form-group" style="margin-top: 13px;">
+                            <label>Area</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control validacion" name="areas[]" aria-label="Amount (to the nearest dollar)">
                                 <div class="input-group-append">
                                     <span class="input-group-text">mm</span>
                                 </div>
@@ -164,7 +202,7 @@
 
                     <div class="card-action">
                         <div>
-                            <button type="submit" class="btn btn-danger">Cancelar</button>
+                            <a class="btn btn-danger" href="<?php echo getUrl("Caso","Caso","index")?>">Cancelar</a>
                             <button type="submit" class="btn btn-success ml-2" id="enviar">Aceptar</button>
                         </div>
                     </div>

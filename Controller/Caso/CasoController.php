@@ -317,7 +317,7 @@
 
             }
 
-            //redirect(getUrl("Caso","Caso","getDetail",array("cas_id" => $caso)));
+            redirect(getUrl("Caso","Caso","getDetail",array("cas_id" => $caso)));
         }
 
         public function editarPrioridad(){

@@ -127,50 +127,10 @@
                 </div>
             </div>
             <div class="card-action">
-                <button type="submit" class="btn btn-danger">Cancelar</button>
+                <a href="<?php echo getUrl("Usuario","Usuario","index");?>" class="btn btn-danger">Cancelar</a>
                 <button type="submit" class="btn btn-success" id="enviar" onclick="return mainValidationRegister();">Aceptar</button>
             </div>
         </div>
     </div>
-    
-    <!-- <div class="modal" id="ventana">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-l">Registrar usuario</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                         <p class="modal-l">¿Esta seguro que desea guardar este registro?</p>
-                    </div>
-                    <div class="modal-footer" style="font-size:18px;">
-                        <input type="submit" name="Si" value="Si" class="btn btn-primary" id="bor">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>            
-                    </div>
-              </div>
-          </div>
-      </div>
-      
-        <div class="modal" id="ventana2">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                 <h5 class="modal-l">Registrar usuario</h5>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-              <div class="modal-body">
-                    <p class="modal-l">¿Esta seguro que no desea guardar este registro?</p>
-              </div>
-              <div class="modal-footer" style="font-size:18px;">
-                <a href="../Web/index.php"><button type="button" class="btn btn-primary">Si</button></a>    
-                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>      
-              </div>
-            </div>
-          </div>
-        </div> -->
 </form>
 

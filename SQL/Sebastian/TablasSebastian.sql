@@ -67,7 +67,7 @@ create table tbl_bitacora(
 	bit_fecha_modificacion timestamp,
 	bit_tabla varchar(45),
 	bit_id_registro varchar(11),
-	bit_observacion varchar(100),
+	bit_observacion varchar(750),
 	primary key(bit_id)
 
 );

@@ -1885,7 +1885,7 @@ $(document).ready(function() {
        }
 
        if (count3 > 10) {
-        swal("Advertencia", "Limite de deteriroros seleccionados", {
+        swal("Advertencia", "Limite de deterioros seleccionados", {
             icon : "warning",
             buttons: {        			
                 confirm: {
@@ -1985,7 +1985,7 @@ $(document).ready(function() {
        }
 
        if (count3 > 10) {
-        swal("Advertencia", "Limite de deteriroros seleccionados", {
+        swal("Advertencia", "Limite de deterioros seleccionados", {
             icon : "warning",
             buttons: {        			
                 confirm: {

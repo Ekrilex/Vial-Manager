@@ -1,1 +1,1 @@
-Carpeta donde se Tenda todo lo relacionado con la base de datos del proyecto
+Carpeta donde se Tendra todo lo relacionado con la base de datos del proyecto

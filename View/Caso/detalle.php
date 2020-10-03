@@ -239,7 +239,7 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                                      $resultado = "<p class='text-danger'><i class='fas fa-flag text-danger'></i>&nbsp;Alta</p>";
                                 }
                                 ?>
-                                <label>Prioridad: &nbsp;<span data-toggle="tooltip" data-placement="right" title="Cambiar Prioridad"><a type="button" id="cambiarPrioridad" data-url="<?php echo getUrl("Caso","Caso","editarPrioridad",false,"ajax")?>"><i class="fas fa-cog text-light"></i></span></a></label>
+                                <label>Prioridad: &nbsp;<span data-toggle="tooltip" data-placement="right" title="Cambiar Prioridad"><a type="button" id="cambiarPrioridad" data-url="<?php echo getUrl("Caso","Caso","editarPrioridad",false,"ajax")?>"><i class="fas fa-cog text-light"></i></a></span></label>
                                 <div class="form-row">
                                     <div id="textoPrioridad">
                                         <span><?php echo $resultado;?></span>&nbsp;

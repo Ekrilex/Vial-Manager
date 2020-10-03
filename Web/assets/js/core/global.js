@@ -623,6 +623,27 @@ $(document).ready(function() {
 
     });
 
+    $(document).on("submit","#form_user_edit",function(){
+        valid = true;
+
+        form = document.getElementsByClassName("validEdit");
+
+        for (let i = 0; i < form.length; i++) {
+            if (form[i].value == "") {
+                swal("Advertencia", "Ningun campo debe estar vacio:",{
+                    icon : "warning",
+                    buttons: {        			
+                        confirm: {
+                            className : 'btn btn-danger'
+                        }
+                    },
+                });
+                valid = false;
+            }
+        }
+        return valid;
+    });
+    
     ///////////////////////////Sandra Barrio ////////////////////////////
 
     //Se creo esta funcion para que NO ingrese el usuario caracteres especiales en la vista "Registrar"
@@ -2347,8 +2368,6 @@ const mainValidationEdit = () => {
         document.getElementById('ad7').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el numero de documento';
         count++;
     }
-
-    alert(count);
 
     if (count > 0) {
         return false

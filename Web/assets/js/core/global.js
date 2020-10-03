@@ -2176,7 +2176,7 @@ $(document).ready(function() {
 
 
 // Funcion para mostrar contraseña
-const mostrarContraseña = () => {
+const mostrarContrasenia = () => {
     let value = document.getElementById('password');
     if (value.type == 'password') {
         value.type = 'text';
@@ -2186,7 +2186,7 @@ const mostrarContraseña = () => {
 }
 
 // Funcion para mostrar contraseña
-const mostrarContraseña2 = () => {
+const mostrarContrasenia2 = () => {
     let value = document.getElementById('confirmation');
     if (value.type == 'password') {
         value.type = 'text';

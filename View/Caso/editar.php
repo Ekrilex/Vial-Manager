@@ -145,7 +145,7 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                         if ($contador == 2) {
                         ?>
                             <div class="col-md-1 col-ms-1 col-xs-12">
-                                <button class="btn btn-icon btn-round btn-info" type="button" id="añadirDeterioro" style="margin-top: 52px;"><i class="fas fa-plus-circle"></i></button>
+                                <button class="btn btn-icon btn-round btn-info" type="button" id="anadirDeterioro" style="margin-top: 52px;"><i class="fas fa-plus-circle"></i></button>
                             </div>
                         <?php
 

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-
+    
   /////////////Camila ////////////////////////
     $(document).on("click",".confirmar", function(){
      var url = $(this).attr("data-url");
@@ -1713,7 +1713,7 @@ $(document).ready(function() {
 
     });
 
-    $(document).on("click","#añadirDeterioro",function(){
+    $(document).on("click","#anadirDeterioro",function(){
         let campo = $("#d1").html();
         let campo2 = $("#d2").html();
         let campo3 = $("#d3").html();
@@ -1728,7 +1728,7 @@ $(document).ready(function() {
                          +"</div>")
     })
 
-    $(document).on("click","#añadirDeterioro",function(){
+    $(document).on("click","#anadirDeterioro",function(){
         let count = 1;
         $(".inputcito").each(function(){
             $(this).attr("id","inputDeterioro"+count);
@@ -2155,7 +2155,7 @@ $(document).ready(function() {
 
 
 // Funcion para mostrar contraseña
-const mostrarContraseña = () => {
+const mostrarContrasenia = () => {
     let value = document.getElementById('password');
     if (value.type == 'password') {
         value.type = 'text';
@@ -2165,7 +2165,7 @@ const mostrarContraseña = () => {
 }
 
 // Funcion para mostrar contraseña
-const mostrarContraseña2 = () => {
+const mostrarContrasenia2 = () => {
     let value = document.getElementById('confirmation');
     if (value.type == 'password') {
         value.type = 'text';
@@ -2223,6 +2223,7 @@ const mainValidationRegister = () => {
     let type_role = document.getElementById('tipo_rol').value;
     let password1 = document.getElementById('password').value;
     let password2 = document.getElementById('confirmation').value;
+    
 
     count = 0;
 

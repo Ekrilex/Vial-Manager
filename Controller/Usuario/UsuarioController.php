@@ -119,7 +119,7 @@
           $nickname = $obj->genereteUser($pri_nombre,$pri_apellido);
           $id = $obj->autoincrement("tbl_usuario","usu_id"); 
 
-          $query = "INSERT INTO tbl_usuario VALUES($id, $num_documento, '".$pri_nombre."', '".$seg_nombre."', '".$pri_apellido."', '".$seg_apellido."', '".$contra."', '".$telefono."', '".$nickname."', '".$correo."', $rol, 1, $tip_documento)";
+          $query = "INSERT INTO tbl_usuario VALUES($id, '".$num_documento."', '".$pri_nombre."', '".$seg_nombre."', '".$pri_apellido."', '".$seg_apellido."', '".$contra."', '".$telefono."', '".$nickname."', '".$correo."', null, $rol, 1, $tip_documento)";
 
           $ejecutar = $obj->insertar($query);
 
@@ -356,7 +356,7 @@
     
        if (preg_match($exp, $clave1)) {
         @$exp3=$exp;
-       }else if (@preg_match(@$exp3, $clave1)) {
+       }else if (@preg_match(@$exp2, $clave1)) {
         @$exp3=$exp2;
        }
         

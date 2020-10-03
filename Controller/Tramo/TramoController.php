@@ -354,6 +354,7 @@
                 }else{
 
                     $_SESSION['resultRegistrarError'] = "<span class='text-danger'>Error al registrar el tramo <b>".$tra_codigo."</b>, intente nuevamente</span>";
+
                 }
             }
             

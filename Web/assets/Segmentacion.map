@@ -1,0 +1,164 @@
+MAP
+	NAME VialManager
+	STATUS ON
+	SIZE 700 550
+	EXTENT 1054114.34 860243.46 1068487.53 879005.65
+
+	SHAPEPATH "shape/"
+	FONTSET "misc/fonts/fonts.txt"
+	SYMBOLSET "misc/symbols/symbols.sym"
+
+	IMAGECOLOR 255 255 255
+	UNITS METERS
+
+	WEB
+		IMAGEPATH "C:/ms4w/tmp/ms_tmp/"
+		IMAGEURL "/ms_tmp/"
+
+
+	END
+
+	LEGEND
+		IMAGECOLOR 255 255 255
+		KEYSIZE 18 12
+		KEYSPACING 5 5
+
+		LABEL
+			SIZE SMALL
+			TYPE BITMAP
+			BUFFER 0
+			COLOR 0 0 30
+			FORCE FALSE
+			MINDISTANCE -1
+			MINFEATURESIZE -1
+			OFFSET 0 0
+			PARTIALS TRUE
+		END
+
+		POSITION LL
+		STATUS ON
+	END
+
+	LAYER
+		NAME "Norte"
+		STATUS ON
+		TYPE POINT
+		TRANSFORM OFF
+		POSTLABELCACHE TRUE
+
+		FEATURE
+			POINTS
+				35 35
+			END
+		END
+
+		CLASS
+
+			STYLE
+				SYMBOL 'Norte'
+				Color 0 0 0
+				OUTLINECOLOR 0 0 0
+			END
+		END
+	END
+
+	SCALEBAR
+		IMAGECOLOR 255 255 255
+
+		LABEL
+			COLOR 0 0 0
+			SIZE SMALL
+		END
+
+		SIZE 810 6
+		COLOR 255 255 255
+
+		BACKGROUNDCOLOR 0 0 0
+		OUTLINECOLOR 0 0 0
+
+		UNITS KILOMETERS
+		INTERVALS 8
+		STATUS ON 
+	END
+
+	LAYER
+		TRANSPARENCY 50
+		NAME "Cali"
+		STATUS ON
+		TYPE POLYGON
+		DATA "Cali3.shp"
+
+		CLASS
+			NAME "Cali"
+			STYLE
+				COLOR 50 50 225
+				OUTLINECOLOR 0 0 0
+			END
+		END
+	END
+
+	LAYER
+		TRANSPARENCY 10
+		NAME "Segmentacion"
+		STATUS OFF
+		TYPE LINE
+		DATA "SegmentacionUrbana.shp"
+
+		LABELITEM "Nombre."
+
+		CLASS
+			NAME "labels"
+		 	
+			STYLE
+				WIDTH 1.0
+				COLOR 250 0 0
+				OUTLINECOLOR  0 0 0
+			END
+			LABEL
+				FONT "sans"
+				TYPE truetype
+				ENCODING "UTF-8"
+				SIZE SMALL
+				POSITION CC
+				ANGLE auto
+				PARTIALS TRUE
+				COLOR 0 0 250
+			END
+		END
+	END
+
+	LAYER
+
+		NAME "SegmentacionNoLabel"
+		STATUS ON
+		TYPE POLYGON
+		DATA "SegmentacionUrbana.shp"
+
+		CLASS
+			NAME "Segmentacion"
+			STYLE
+				COLOR 250 0 0
+				OUTLINECOLOR  0 0 0
+			END
+		END
+	END
+
+	LAYER
+		CONNECTIONTYPE postgis
+		STATUS ON
+		
+		CONNECTION "user=postgres password=postgres dbname=prueba4111 host=localhost port=5433"
+		DATA "geom FROM (select * from puntos_pruebas) as lineas using unique gid SRID=-1"
+		TYPE POINT
+		CLASS
+			STYLE
+				SYMBOL puntos
+				SIZE 10
+				COLOR 0 250 0
+				OUTLINECOLOR 0 0 0
+			END
+		END
+
+	END
+
+END

@@ -12,7 +12,7 @@
 <body style="background-color:rgb(18, 18, 36); background-image:url('misc/img/FondoVisor.jpg'); background-size: 100% 100%;">
 	<?php 
 
-		if(!extension_loaded('MapScript')){
+		/*if(!extension_loaded('MapScript')){
 			dl('php_mapscript.'.PHP_SHLIB_SUFFIX); 
 		}
 
@@ -25,7 +25,7 @@
 		$urlLeyenda = $Leyenda->saveWebImage();
 
 		$Escala = $mapa->drawScaleBar();
-		$urlEscala = $Escala->saveWebImage();
+		$urlEscala = $Escala->saveWebImage();*/
 
 		
 
@@ -60,7 +60,7 @@
 									<input type="checkbox" name="layer[0]" value="Segmentacion" onclick="chgLayers();" UNCHECKED>
 									<strong>Labels Mapa</strong>
 								<p align="left">
-									<input type="checkbox" id="layer[2]" value="SegmentacionNoLabel" onclick="chgLayers();" CHECKED>
+									<input type="checkbox" name="layer[2]" value="SegmentacionNoLabel" onclick="chgLayers();" CHECKED>
 									<strong>Segmentacion</strong>
 							</div>
 					<p>
@@ -80,22 +80,22 @@
 				</div>
 			</td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<th class="tituloTabla" style="border:2px solid white; border-bottom:none;">
 				Leyenda <img src="misc/img/Legend.png" width="50px" valign="middle">
 			</th>
 		</tr>
 		<tr>
 			<td class="seccionLeyenda" style="border:2px solid white; border-top:none;">
-				<img src="<?php echo $urlLeyenda;?>" border="2px">
+				<img src="<?php //echo $urlLeyenda;?>" border="2px">
 			</td>
 			
 		</tr>
 		<tr>
 			<td style="border-left:2px solid white;">
-				<img src="<?php echo $urlEscala;?>" border="2px" class="escala" style="margin-left:5%;">
+				<img src="<?php //echo $urlEscala;?>" border="2px" class="escala" style="margin-left:5%;">
 			</td>
-		</tr>
+		</tr> -->
 			
 
 				
@@ -113,7 +113,7 @@
 
 		myMap1.setCgi("/cgi-bin/mapserv.exe");
 
-		myMap1.setMapFile('/ms4w/Apache/htdocs/geoFinal/Segmentacion.map');
+		myMap1.setMapFile('/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 
 		myMap1.setFullExtent(1049214.34, 1078487.53, 860243.46);
 		myMap1.setLayers('Cali SegmentacionNoLabel Norte');
@@ -124,7 +124,7 @@
 		myMap2.setActionNone();
 		myMap2.setFullExtent(1054114.34, 1068487.53, 860243.46);
 
-		myMap2.setMapFile('/ms4w/Apache/htdocs/geoFinal/Segmentacion.map');
+		myMap2.setMapFile('/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 
 		myMap2.setLayers('Cali');
 		myMap1.setReferenceMap(myMap2);

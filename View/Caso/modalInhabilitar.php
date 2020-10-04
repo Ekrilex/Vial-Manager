@@ -6,7 +6,7 @@
                 <h3 class="modal-title text-white">Inhabilitar Caso</h3>
             </div>
             <div class="modal-body" style="background-color:rgb(0,0,45);">
-                <label>¿Está seguro que desea inhabilitar este Caso?</label>
+                <label>&iquest;Est&aacute; seguro que desea inhabilitar este Caso?</label>
                 <div class="form-row col-md-12 mt-3">
                     <label>Observacion</label>
                     <textarea class="form-control validacionVacio" name="cas_inhab_just" id="cas_inhab_just" rows="4" placeholder="Ingrese la justificacion" maxlength="300"></textarea>

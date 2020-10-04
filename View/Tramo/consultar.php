@@ -107,26 +107,15 @@
                                 <table id="basic-datatables-consultar" class="display table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Código</th>
-                                            <th>Nombre Via</th>
-                                            <th>Dirección</th>
-                                            <th>Bárrio</th>
-                                            <th>Fecha Creación</th>
+                                            <th>C&oacute;digo</th>
+                                            <th>Nombre V&iacute;a</th>
+                                            <th>Direcci&oacute;n</th>
+                                            <th>B&aacute;rrio</th>
+                                            <th>Fecha Creaci&oacute;n</th>
                                             <th>Estado</th>
                                             <th>Ver Detalle</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Código</th>
-                                            <th>Nombre Via</th>
-                                            <th>Dirección</th>
-                                            <th>Bárrio</th>
-                                            <th>Fecha Creación</th>
-                                            <th>Estado</th>
-                                            
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <?php 
                                             while($tramos = pg_fetch_assoc($consultaTramos)){

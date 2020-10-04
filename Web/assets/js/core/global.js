@@ -1734,7 +1734,7 @@ $(document).ready(function() {
 
     });
 
-    $(document).on("click","#añadirDeterioro",function(){
+    $(document).on("click","#anadirDeterioro",function(){
         let campo = $("#d1").html();
         let campo2 = $("#d2").html();
         let campo3 = $("#d3").html();
@@ -1749,7 +1749,7 @@ $(document).ready(function() {
                          +"</div>")
     })
 
-    $(document).on("click","#añadirDeterioro",function(){
+    $(document).on("click","#anadirDeterioro",function(){
         let count = 1;
         $(".inputcito").each(function(){
             $(this).attr("id","inputDeterioro"+count);

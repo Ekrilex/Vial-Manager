@@ -1,5 +1,9 @@
 <?php
-
+    /*
+        OBSERVACION: 
+        se tendran que implementar las variables de sesion en los procesos 
+        que implique registrar el usuario actual que realiza una modificacion en el sistema
+    */
     include_once '../Model/Caso/CasoModel.php';
 
     class CasoController {
@@ -188,7 +192,7 @@
 
             } else if($estado_id == 2){
                 $cas_observacion = $_POST['observacion'];
-                $sql = "UPDATE tbl_caso SET estado_id = 3, cas_observacion = '".$cas_observacion."', cas_disponibilidad = 1 WHERE cas_id= ".$cas_id."";
+                $sql = "UPDATE tbl_caso SET estado_id = 3, cas_observacion = '".$cas_observacion."', cas_disponibilidad = 0 WHERE cas_id= ".$cas_id."";
                 $colorEstado = "rgb(255, 119, 0)";
                 $nombreEstado = "Pendiente";
                 
@@ -240,7 +244,7 @@
             $deterioros       =  $_POST['deterioros'];
             $areas            =  $_POST['areas'];
             $gravedades       =  $_POST['gravedades'];
-            $img_vieja_inicio = $_POST['foto_inicio_backup'];
+            $img_vieja_inicio =  $_POST['foto_inicio_backup'];
 
             $areaTramo = ($ancho_inicio+$ancho_fin);
             $areaTramo *= (500 / 10);

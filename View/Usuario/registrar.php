@@ -1,4 +1,4 @@
-<<!-- Inicio de formulario -->
+<!-- Inicio de formulario -->
 <form action="<?php echo getUrl("Usuario","Usuario","postCreate",false,"ajax");?>" method="POST">
      <div class="col-md-12" style="margin-top: 20px;">
         <div class="card">
@@ -102,11 +102,11 @@
 
                 <div class="form-row"> 
                     <div id="input8" class="form-group col-md-5">
-                        <label for="inputPassword4">Contraseña</label>
+                        <label for="inputPassword4">Contrase&ntilde;a</label>
                         <div class="input-group">
-                            <input type="password" class="form-control validacion" id="password" placeholder="Ingrese la contraseña" name="clave" >
+                            <input type="password" class="form-control validacion" id="password" placeholder="Ingrese la contrase&ntilde;a" name="clave" >
                             <div class="input-group-prepend">
-                                <button onclick="mostrarContraseña()" class="btn btn-secondary btn-sm" type="button"><i class="fas fa-eye"></i></button>
+                                <button onclick="mostrarContrasenia()" class="btn btn-secondary btn-sm" type="button"><i class="fas fa-eye"></i></button>
                             </div>
                           </div>
                           <div id="error"></div>
@@ -114,11 +114,11 @@
                     </div>
 
                     <div id="input9" class="form-group col-md-5">
-                        <label for="inputPassword4">Confirmar Contraseña</label>
+                        <label for="inputPassword4">Confirmar Contrase&ntilde;a</label>
                         <div class="input-group">
-                            <input type="password" class="form-control validacion" id="confirmation" placeholder="Ingrese de nuevo la contraseña" name="clave2" >
+                            <input type="password" class="form-control validacion" id="confirmation" placeholder="Ingrese de nuevo la contrase&ntilde;a" name="clave2" >
                             <div class="input-group-prepend">
-                                <button onclick="mostrarContraseña2()" class="btn btn-secondary btn-sm" type="button"><i class="fas fa-eye"></i></button>
+                                <button onclick="mostrarContrasenia2()" class="btn btn-secondary btn-sm" type="button"><i class="fas fa-eye"></i></button>
                             </div>
                           </div>
                           <div id="error"></div>

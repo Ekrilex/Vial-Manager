@@ -75,26 +75,26 @@ LAYER {
 
 A {TEXT-DECORATION: none}
 
-BODY
+/*BODY
 {
   background-color: white;
-  #background-color:#EBEBEB;
+  background-color:#EBEBEB;
   padding: 0 0 0 0;
   margin-top: 4px;
   margin-bottom: 4px;
   margin-left: 0px;
   margin-right: 0px;
   border: none;
-}
+}*/
 
-TD {
+/*TD {
 	vertical-align: top;
 }
 
 SPAN
 {
   display: none;
-}
+}*/
 
 .topmenu, .topmenu_set
 {

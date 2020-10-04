@@ -5,8 +5,8 @@ MAP
 	EXTENT 1054114.34 860243.46 1068487.53 879005.65
 
 	SHAPEPATH "shape/"
-	FONTSET "misc/fonts/fonts.txt"
-	SYMBOLSET "misc/symbols/symbols.sym"
+	FONTSET "../../../View/Visor/misc/fonts/fonts.txt"
+	SYMBOLSET "../../../View/Visor/misc/symbols/symbols.sym"
 
 	IMAGECOLOR 255 255 255
 	UNITS METERS
@@ -111,7 +111,7 @@ MAP
 		 	
 			STYLE
 				WIDTH 1.0
-				COLOR 250 0 0
+				COLOR 200 200 200
 				OUTLINECOLOR  0 0 0
 			END
 			LABEL
@@ -137,7 +137,7 @@ MAP
 		CLASS
 			NAME "Segmentacion"
 			STYLE
-				COLOR 250 0 0
+				COLOR 200 200 200
 				OUTLINECOLOR  0 0 0
 			END
 		END

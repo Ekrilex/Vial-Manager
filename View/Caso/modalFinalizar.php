@@ -13,7 +13,7 @@
                     <h5>Por Favor adjunte la foto despues de la intervencion sobre la via</h5>
                     <input type="file" class="form-control valid " name="cas_fotografia_fin" id="fotografia_fin">
                     <div class="form-row col-md-12 mt-3">
-                        <label>Causa</label>
+                        <label>Observacion</label>
                         <textarea class="form-control valid" name="cas_fin_observacion" id="cas_fin_observacion" rows="4" placeholder="Ingrese la justificaccion" maxlength="200"></textarea>
                         <small id="ad5" class="form-text text-muted text-danger"></small>
                     </div>

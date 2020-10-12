@@ -58,6 +58,8 @@
 	<script src="assets/js/setting-demo.js"></script>
 	<script src="assets/js/demo.js"></script>
 	<script src="assets/js/core/global.js"></script>
+	
+	
 	<script>
 		Circles.create({
 			id:'circles-1',

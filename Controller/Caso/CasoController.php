@@ -1,9 +1,14 @@
 <?php
+    /*
+        OBSERVACION: 
+        se tendran que implementar las variables de sesion en los procesos 
+        que implique registrar el usuario actual que realiza una modificacion en el sistema
+    */
 
     include_once '../Model/Caso/CasoModel.php';
 
     class CasoController {
-
+        
         public function getCreate(){
 
             $objetoModel = new CasoModel();
@@ -25,94 +30,102 @@
         }
 
         public function postCreate(){
+            
             $objetoModel = new CasoModel();
 
             $cas_id = $objetoModel->autoincrement("tbl_caso","cas_id");
-            //Tramo ancho:
-            $AnchoInicio = $_POST['tra_ancho_inicio'];
-            $AnchoFin = $_POST['tra_ancho_fin'];
-            //
-            $entorno_id = $_POST['entorno_id'];
-            $tramo_id = $_POST['tramo_id'];
-            $foto_inicio = $_FILES['cas_fotografia_inicio']['name'];
-
-            $img_inicio = "assets/img/imagenesCasos/".$foto_inicio;
-
-            move_uploaded_file($_FILES['cas_fotografia_inicio']['tmp_name'], $img_inicio);
-
-            $tipo_pavimento = $_POST['tipo_pavimento_id'];
-            $causa = $_POST['cas_causa'];
+        
+            $entorno_id        = $_POST['entorno_id'];
+            $anchoInicio       = $_POST['tra_ancho_inicio'];
+            $anchoFin          = $_POST['tra_ancho_fin'];
+            $tramo_id          = $_POST['tramo_id'];
+            $tipo_pavimento    = $_POST['tipo_pavimento_id'];
+            $causa             = $_POST['cas_causa'];
+            $deterioros        = $_POST['deterioros'];
+            $gravedades        = $_POST['gravedades'];
+            $areas             = $_POST['areas'];
+            $coordenadasX      = $_POST['coordenadasx'];
+            $coordenadasY      = $_POST['coordenadasy'];
+            $foto_inicio       = $_FILES['img_caso']['name'];
+            $img_inicio        = "assets/img/imagenesCasos/".$foto_inicio;
 
             $fecha_vencimiento = (date("Y") + 1)."-".date("m")."-".date("d");
+            //echo "<script>alert('".$_POST['cas_fotografia_inicio_tmp']."');</script>";
+            move_uploaded_file($_FILES['img_caso']['tmp_name'], $img_inicio);
 
-            $deterioros = $_POST['deterioros'];
-            $gravedades = $_POST['gravedades'];
-            $areas = $_POST['areas'];
+            $arrayDeterioros = array();
+            $extensiones     = array();
+            $areaTramo       = ($anchoInicio+$anchoFin);
+            $areaTramo      *= 500 / 10;
+
+            for($i = 0; $i < count($areas); $i++){ $extensiones[$i] = ($areas[$i]*100)/$areaTramo; }
+
+            $prioridad         = $objetoModel->calcularMetodologiaVizir($deterioros, $gravedades, $areas,$extensiones,$areaTramo);
+            $autoincrementable = $objetoModel->autoincrement("puntos_geovisor","id");
             
-            $areaTramo = ($AnchoInicio+$AnchoFin);
-            $areaTramo *= 500 / 10;
+            $sqlCaso     =  "INSERT INTO tbl_caso (cas_id, cas_fecha_creacion, cas_fecha_vencimiento,cas_fotografia_inicio,cas_prioridad,cas_causa,cas_disponibilidad,tipo_pavimento_id,estado_id,usuario_id,tramo_id,entorno_id) VALUES(".$cas_id.", 'now()','".$fecha_vencimiento."','".$img_inicio."','".$prioridad."','".$causa."',0,".$tipo_pavimento.",3,1,".$tramo_id.",".$entorno_id.")";
+            $coordenadas =  "INSERT INTO puntos_geovisor (id,nombre,cas_id,geometry,coordenadax,coordenaday) VALUES($autoincrementable, 'coordenada".$cas_id."', $cas_id, GeomFromText('POINT($coordenadasX $coordenadasY)'), '".$coordenadasX."', '".$coordenadasY."')";
 
-            $extensiones = array();
+            $cas_det_id          = $objetoModel->autoincrement("tbl_caso_deterioro","cas_det_id");
+            $insertarCaso        = $objetoModel->insertar($sqlCaso);
+            $insertarCoordenadas = $objetoModel->insertar($coordenadas);
+        
+            for($i = 0; $i < COUNT($deterioros);$i++){
+                    
+                $sqlCasoDeterioro = "INSERT INTO tbl_caso_deterioro VALUES(".$cas_det_id.",".$gravedades[$i].",".$areas[$i].",".$extensiones[$i].",".$deterioros[$i].",".$cas_id.")";
+                    
+                $insertarCasoDeterioro = $objetoModel->insertar($sqlCasoDeterioro);
 
-            for($i = 0; $i < count($areas); $i++){
-
-                $extensiones[$i] = ($areas[$i]*100)/$areaTramo;
-
+                $cas_det_id++;
             }
 
-            $prioridad = $objetoModel->calcularMetodologiaVizir($deterioros, $gravedades, $areas,$extensiones,$areaTramo);
-
-            $sqlCaso = "INSERT INTO tbl_caso (cas_id, cas_fecha_creacion, cas_fecha_vencimiento,cas_fotografia_inicio,cas_prioridad,cas_causa,cas_disponibilidad,tipo_pavimento_id,estado_id,usuario_id,tramo_id,entorno_id) VALUES(
-                ".$cas_id.",
-                'now()',
-                '".$fecha_vencimiento."',
-                '".$img_inicio."',
-                '".$prioridad."',
-                '".$causa."',
-                0,
-                ".$tipo_pavimento.",
-                3,
-                1,
-                ".$tramo_id.",
-                ".$entorno_id.")";
-
-            //dd($sqlCaso);
+            redirect(getUrl("Caso","Caso","index"));
             
-            //echo "<script>alert('".$prioridad."');</script>";
+        }
 
-            $insertarCaso = $objetoModel->insertar($sqlCaso);
+        public function getCreateMap(){
 
-            if($insertarCaso){
-                //echo "<script>alert('el caso se ha registrado correctamente');</script>";
+            
+            /*$deterioros = json_decode($_POST['arrayDet']);
+            $gravedades = json_decode($_POST['arrayGra']);
+            $areas      = json_decode($_POST['arrayArea']);
+            $tramo      = $_POST['arrayTramo'];
+            $causa      = $_POST['causa'];
+            $entorno    = $_POST['entorno'];
+            //$img        = $_POST['img'];
+            $pavimento  = $_POST['pav'];*/
 
-                $cas_det_id = $objetoModel->autoincrement("tbl_caso_deterioro","cas_det_id");
-                for($i = 0; $i < COUNT($deterioros);$i++){
-                    
-                    $sqlCasoDeterioro = "INSERT INTO tbl_caso_deterioro VALUES(".$cas_det_id.",".$gravedades[$i].",".$areas[$i].",".$extensiones[$i].",".$deterioros[$i].",".$cas_id.")";
-    
-                    /*echo $sqlCasoDeterioro;
-                    echo "<br>";*/
-                    
-                    $insertarCasoDeterioro = $objetoModel->insertar($sqlCasoDeterioro);
+            $causa = $_POST['cas_causa'];
+            $entorno = $_POST['entorno_id'];
+            $pavimento = $_POST['tipo_pavimento_id'];
+            $deterioros  = $_POST['deterioros'];
+            $gravedades  = $_POST['gravedades'];
+            $areas       = $_POST['areas'];
+            $anchoInicio = $_POST['tra_ancho_inicio'];
+            $anchoFin    = $_POST['tra_ancho_fin'];
+            $tramo_id    = $_POST['tramo_id'];
 
-                    $cas_det_id = $objetoModel->autoincrement("tbl_caso_deterioro","cas_det_id");
+
+            echo "<form id='formularioParte2' action='".getUrl("Caso", "Caso", "postCreate")."' method='POST' enctype='multipart/form-data'>";
+                include_once '../View/Caso/VisorCasoRegistro.php';
+
+                echo "<input type='hidden' name='cas_causa' value='$causa'>";
+                echo "<input type='hidden' name='entorno_id' value='$entorno'>";
+                echo "<input type='hidden' name='tipo_pavimento_id' value='$pavimento'>";
+                echo "<input type='hidden' name='tra_ancho_inicio' value='$anchoInicio'>";
+                echo "<input type='hidden' name='tra_ancho_fin' value='$anchoFin'>";
+                echo "<input type='hidden' name='tramo_id' value='$tramo_id'>";
+
+                for ($i=0; $i < COUNT($deterioros) ; $i++) { 
+                    echo "<input type='hidden' name='deterioros[]' value='$deterioros[$i]'>";
+                    echo "<input type='hidden' name='gravedades[]' value='$gravedades[$i]'>";
+                    echo "<input type='hidden' name='areas[]' value='$areas[$i]'>"; 
                 }
 
-                $_SESSION['resultRegistrar'] = "<span class='text-success'>el Caso <b>".$cas_id."</b> se ha registrado satisfactoriamente</span>";
-
-                redirect(getUrl("Caso","Caso","getCreate"));
-
-            }else{
-
-                $_SESSION['resultRegistrarError'] = "<span class='text-danger'>Error al registrar el Caso <b>".$cas_id."</b>, intente nuevamente</span>";
-
-                //echo "<script>alert('error al registrar el caso');</script>";
-            }
+            echo "</form>";
 
             
-            
 
-            
         }
 
         public function index(){
@@ -188,7 +201,7 @@
 
             } else if($estado_id == 2){
                 $cas_observacion = $_POST['observacion'];
-                $sql = "UPDATE tbl_caso SET estado_id = 3, cas_observacion = '".$cas_observacion."', cas_disponibilidad = 1 WHERE cas_id= ".$cas_id."";
+                $sql = "UPDATE tbl_caso SET estado_id = 3, cas_observacion = '".$cas_observacion."', cas_disponibilidad = 0 WHERE cas_id= ".$cas_id."";
                 $colorEstado = "rgb(255, 119, 0)";
                 $nombreEstado = "Pendiente";
                 
@@ -240,7 +253,7 @@
             $deterioros       =  $_POST['deterioros'];
             $areas            =  $_POST['areas'];
             $gravedades       =  $_POST['gravedades'];
-            $img_vieja_inicio = $_POST['foto_inicio_backup'];
+            $img_vieja_inicio =  $_POST['foto_inicio_backup'];
 
             $areaTramo = ($ancho_inicio+$ancho_fin);
             $areaTramo *= (500 / 10);
@@ -345,5 +358,3 @@
 
 
     }
-    
-?>

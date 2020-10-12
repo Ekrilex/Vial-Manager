@@ -5,8 +5,8 @@ MAP
 	EXTENT 1054114.34 860243.46 1068487.53 879005.65
 
 	SHAPEPATH "shape/"
-	FONTSET "misc/fonts/fonts.txt"
-	SYMBOLSET "misc/symbols/symbols.sym"
+	FONTSET "../../../View/Visor/misc/fonts/fonts.txt"
+	SYMBOLSET "../../../View/Visor/misc/symbols/symbols.sym"
 
 	IMAGECOLOR 255 255 255
 	UNITS METERS
@@ -82,7 +82,7 @@ MAP
 	END
 
 	LAYER
-		TRANSPARENCY 50
+		#TRANSPARENCY 90
 		NAME "Cali"
 		STATUS ON
 		TYPE POLYGON
@@ -91,7 +91,7 @@ MAP
 		CLASS
 			NAME "Cali"
 			STYLE
-				COLOR 50 50 225
+				COLOR 69 67 62
 				OUTLINECOLOR 0 0 0
 			END
 		END
@@ -111,18 +111,18 @@ MAP
 		 	
 			STYLE
 				WIDTH 1.0
-				COLOR 250 0 0
+				COLOR 200 200 200
 				OUTLINECOLOR  0 0 0
 			END
 			LABEL
 				FONT "sans"
 				TYPE truetype
 				ENCODING "UTF-8"
-				SIZE SMALL
+				SIZE 5
 				POSITION CC
 				ANGLE auto
 				PARTIALS TRUE
-				COLOR 0 0 250
+				COLOR 0 0 255
 			END
 		END
 	END
@@ -137,23 +137,23 @@ MAP
 		CLASS
 			NAME "Segmentacion"
 			STYLE
-				COLOR 250 0 0
-				OUTLINECOLOR  0 0 0
+				COLOR 110 9 12
+				OUTLINECOLOR  25 24 28
 			END
 		END
 	END
 
 	LAYER
 		CONNECTIONTYPE postgis
+		NAME "puntosMapa"
 		STATUS ON
-		
-		CONNECTION "user=postgres password=postgres dbname=prueba4111 host=localhost port=5433"
-		DATA "geom FROM (select * from puntos_pruebas) as lineas using unique gid SRID=-1"
+		CONNECTION "user=postgres password=12345 dbname=vialmanager3_4 host=localhost port=5432"
+		DATA "geometry FROM (select * from puntos_geovisor) as puntos using unique gid SRID=-1"
 		TYPE POINT
 		CLASS
 			STYLE
 				SYMBOL puntos
-				SIZE 10
+				SIZE 15
 				COLOR 0 250 0
 				OUTLINECOLOR 0 0 0
 			END

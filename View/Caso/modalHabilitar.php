@@ -6,7 +6,7 @@
                 <h3 class="modal-title text-white">Habilitar Caso</h3>
             </div>
             <div class="modal-body" style="background-color:rgb(0,0,45);">
-                <label>¿Está seguro que desea Habilitar este Caso?</label>
+                <label>&iquest;Est&aacute; seguro que desea Habilitar este Caso?</label>
                 <div class="form-row col-md-12 mt-3">
                     <label>Observacion</label>
                     <textarea class="form-control validacionVacio" name="cas_hab_just" id="cas_hab_just" rows="4" placeholder="Ingrese la justificaccion" maxlength="300"></textarea>

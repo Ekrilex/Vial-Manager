@@ -15,7 +15,7 @@
 // Old code
 //Object.prototype.objRef = null;
 
-var pixel_img = new Image(); pixel_img.src = 'misc/img/pixel.gif';
+var pixel_img = new Image(); pixel_img.src = '../View/Visor/misc/img/pixel.gif';
 var browser = new Browser();
 var dragObj = new Object();
 dragObj.zIndex = 0;
@@ -76,7 +76,7 @@ function msMap(DivTag, ControlType, p_protocol)
   var _toolbars = new Array(); // Array of toolbars
   this.getToolbar = function(p){return _toolbars[p];}
   //var _iconLoading = 'img/button_loading.png';
-  var _iconLoading = 'misc/img/GifCargando.gif';
+  var _iconLoading = '../View/Visor/misc/img/GifCargando.gif';
 
   // WMS.GetMap protocol specific
   var _wms_imageformat = 'image/png';
@@ -1339,12 +1339,12 @@ function pointOverlay( p_icon, p_infoSkin, p_title, p_x, p_y, p_item_name, p_ite
   if (_infoSkin == null)
   {
     // Create a default Info-window icon object...
-    _infoSkin = new msInfoSkin( 'misc/img/angolo_a.png', 'misc/img/angolo_b.png',
-                                'misc/img/angolo_c.png', 'misc/img/angolo_d.png',
-                                'misc/img/report_t.png', 'misc/img/report_d.png',
-                                'misc/img/report_l.png', 'misc/img/report_r.png',
-                                'misc/img/report_x.png', 'misc/img/close.png',
-                                'misc/img/report_arrow.png' );
+    _infoSkin = new msInfoSkin( '../View/Visor/misc/img/angolo_a.png', '../View/Visor/misc/img/angolo_b.png',
+                                '../View/Visor/misc/img/angolo_c.png', '../View/Visor/misc/img/angolo_d.png',
+                                '../View/Visor/misc/img/report_t.png', '../View/Visor/misc/img/report_d.png',
+                                '../View/Visor/misc/img/report_l.png', '../View/Visor/misc/img/report_r.png',
+                                '../View/Visor/misc/img/report_x.png', '../View/Visor/misc/img/close.png',
+                                '../View/Visor/misc/img/report_arrow.png' );
   }
   if (_icon == null) {_icon = new msIcon(null, null);}
 
@@ -1517,12 +1517,12 @@ function msIcon( p_img, p_shd, p_offsetX, p_offsetY )
   if ( p_offsetY != null ) { _offsetY = p_offsetY; }
   if ( _img_name == null )
   {
-    _img_name = 'misc/img/mm_20_red.png';
-    _shd_name = 'misc/img/mm_20_shadow.png';
+    _img_name = '../View/Visor/misc/img/mm_20_red.png';
+    _shd_name = '../View/Visor/misc/img/mm_20_shadow.png';
     _offsetX  = 6; _offsetY = 19;
   }
-  if (_img_name == '') {_img_name='misc/img/pixel.gif';}
-  if (_shd_name == '') {_shd_name='misc/img/pixel.gif';}
+  if (_img_name == '') {_img_name='../View/Visor/misc/img/pixel.gif';}
+  if (_shd_name == '') {_shd_name='../View/Visor/misc/img/pixel.gif';}
 
   this.getShiftX = function() { return _offsetX; }
   this.getShiftY = function() { return _offsetY; }
@@ -1886,11 +1886,11 @@ function msToolbar(p_msMap, _control, _default)
   var _tagMap = _msMap.getTagMap();
 
   // Toolbar Default Icons...
-  var _iconFullExtentButton = 'misc/img/FullExtentIcon.png';
-  var _iconZoomboxButton    = 'misc/img/ZoomBox.png';
-  var _iconPanButton        = 'misc/img/PanIcon.png';
-  var _iconZoominButton     = 'misc/img/ZoomInIcon.png';
-  var _iconZoomoutButton    = 'misc/img/ZoomOutIcon.png';
+  var _iconFullExtentButton = '../View/Visor/misc/img/aim.png';
+  var _iconZoomboxButton    = '../View/Visor/misc/img/focus.png';
+  var _iconPanButton        = '../View/Visor/misc/img/move.png';
+  var _iconZoominButton     = '../View/Visor/misc/img/zomax.png';
+  var _iconZoomoutButton    = '../View/Visor/misc/img/zomin.png';
 
   this.getTag = function(){return _tagToolbar;}
   this.hide = function(){_tagToolbar.style.display = 'none';}

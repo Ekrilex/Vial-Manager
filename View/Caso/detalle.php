@@ -92,7 +92,7 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                             $areaTramo = $casoSeleccionado['tra_ancho_inicio'] + $casoSeleccionado['tra_ancho_fin'];
                             $areaTramo *= 500 / 10; 
                         ?>
-                        <div class="ml-auto"><h5 style="font-weight:bold;" class="text-light">Area del tramo: <?php echo $areaTramo;?>m²</h5></div>
+                        <div class="ml-auto"><h5 style="font-weight:bold;" class="text-light">Area del tramo: <?php echo $areaTramo;?>M</h5></div>
                     </div>
                 </div>
                 <div class="card-body">

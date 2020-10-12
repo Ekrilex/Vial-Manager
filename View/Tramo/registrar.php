@@ -146,7 +146,7 @@
                             </div>
                             <div class="col-md-6 col-lg-4" >
                                 <div class="form-group">
-                                    <label>Ingrese el N° del segmento del tramo</label>
+                                    <label>Ingrese el # del segmento del tramo</label>
                                     <input type="number" class="form-control valSegmento" name="tra_segmento" id="inputSegmento" min="0" max="99999" placeholder="Segmento" required>
                                     <div id="errorSegmento"></div>
                                 </div>

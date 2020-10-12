@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
             <h3>Comunas y barrios</h3>
-            <p class="font-italic">
+            <p class="text-justify font-italic">
               Santiago de cali, tiene 22 comunas​ conformadas por 249 barrios estas comunas son distribuidas en las siguientes divisiones: 
             </p><br>
               <p><strong>1) Nor occidente</strong> con las comunas: 1, 2, 3, 9.</p><br>

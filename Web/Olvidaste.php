@@ -34,24 +34,24 @@
         <div class="container">
        
             <div class="col-md-15 formu">
-            <img src="assets/img/iconos/avatardefault_92824.ico" id="iconop">
+            <img src="assets/img/iconos/sena.png" style="border-radius:6em" id="iconop">
             <h1 class="text-center text-light display-5" ><b>Recuperar Contraseña<b></h1><br>
                 <form action="<?php echo getUrl("Correo","Correo","postEmail"); ?>" method="POST" name="login">
-                    <label for="exampleInputEmail1" class="text-light">Email</label>
+                    <label for="exampleInputEmail1" class="font-weight-bold text-light">Email</label>
                     <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-dark">
-                                <i class="flaticon-envelope-1 text-white"></i>
+                                <span class="input-group-text bg-warning">
+                                <i class="flaticon-envelope-1 font-weight-bold" style="color:black"></i>
                                 </span>
                             </div>
-                        <input type="email" class="form-control bg-dark text-light correo" name="correo" id="correo" placeholder="correo electrónico" maxlength="35">
+                        <input type="email" class="form-control  bg-warning font-weight-bold correo" style="color:black" name="correo" id="correo" placeholder="correo electronico" maxlength="35">
                     </div>
                    
                    <br><br>     
-                    <input type="submit" value="Enviar" name="enviar" class="btn btn-info btn-block">
+                    <input type="submit" value="Enviar" name="enviar" style="color:white;background-color: rgb(236, 92, 26);" class="font-weight-bold btn  btn-block">
                     </form>
                 <div class="text-center">  
-                    <a class="btn btn-success btn-link " href="login.php"><b>Regresar</b></a><br>
+                    <a class="font-weight-bold text-light btn btn-link " href="login.php"><b>Regresar</b></a><br>
                 </div>
             
             </div>

@@ -1,5 +1,6 @@
 $(document).ready(function() {
-
+    // Declaracion variables
+    var arr = [];
 
   /////////////Camila ////////////////////////
     $(document).on("click",".confirmar", function(){
@@ -1653,24 +1654,23 @@ $(document).ready(function() {
 
     });
 
-    var arr = [];
-    var arrayDeterioros = [];
+    
     
     $(document).on("click","#selectDeterioro", function(){
 
         var inputDestino = "inputDeterioro"+$("#inputDestino").val();
         var hiddenDestino = "deterioro_id"+$("#inputDestino").val();
-
         var codigoDeterioro = $(this).attr("data-id");
         var nombreDeterioro = $(this).attr("data-name");
-        arrayDeterioros.push($(this).attr("data-tipo"));
+        var tipoDeterioro = $(this).attr("data-tipo");
+
+
         
-        
-        //alert("input destino: " + inputDestino + " hidden Destino: " + hiddenDestino);
 
         $('#modalDeterioro').modal('hide');
         $('#modalDeterioroEditar').modal('hide');
         $('#'+inputDestino).attr("value",nombreDeterioro);
+        $('#'+inputDestino).attr("data-tipo",tipoDeterioro);
         $('#'+hiddenDestino).attr("value",codigoDeterioro);
 
     });
@@ -1703,7 +1703,7 @@ $(document).ready(function() {
                             +"<div class='form-group col-md-2' style='padding: 15px'>"+campo2+"</div>"
                             +"<div class='form-group' style='padding: 12px'>"+campo3+"</div>"
                             +"<div class='col-md-1 col-ms-1 col-xs-12'>"
-                                +"<button class='btn btn-icon btn-round btn-danger' type='button' id='quitarDeterioro' style='margin-top: 40px;'><i class='fas fa-minus-circle'></i></button>"
+                                +"<button class='btn btn-icon btn-round btn-danger quitarDeterioro' type='button' style='margin-top: 40px;'><i class='fas fa-minus-circle'></i></button>"
                             +"</div>"
                          +"</div>")
         
@@ -1712,6 +1712,8 @@ $(document).ready(function() {
 
     $("#search_det").click(function(){
         let count = 1;
+        let count2 = 3;
+
         $(".inputcito").each(function(){
             $(this).attr("id","inputDeterioro"+count);
             count++;
@@ -1730,6 +1732,11 @@ $(document).ready(function() {
         $(".botonInput").each(function(){
             $(this).attr("id",count)
             count++;
+        })
+
+        $(".quitarDeterioro").each(function(){
+            $(this).attr("value",count2)
+            count2++;
         })
 
     });
@@ -1744,7 +1751,7 @@ $(document).ready(function() {
                             +"<div class='form-group col-md-2' style='padding: 15px'>"+campo2+"</div>"
                             +"<div class='form-group' style='padding: 12px'>"+campo3+"</div>"
                             +"<div class='col-md-1 col-ms-1 col-xs-12'>"
-                                +"<button class='btn btn-icon btn-round btn-danger' type='button' id='quitarDeterioro' style='margin-top: 40px;'><i class='fas fa-minus-circle'></i></button>"
+                                +"<button class='btn btn-icon btn-round btn-danger quitarDeterioro' type='button' id='quitarDeterioro' style='margin-top: 40px;'><i class='fas fa-minus-circle'></i></button>"
                             +"</div>"
                          +"</div>")
     })
@@ -1773,27 +1780,59 @@ $(document).ready(function() {
 
     });
     
-    $(document).on("click","#quitarDeterioro",function(){
+    $(document).on("click",".quitarDeterioro",function(){
         $(this).parent().parent().remove();
+        
     })
     
+    $(document).on("submit", "#formularioParte2", function(){
+
+        let mapa = document.getElementsByClassName("validacionMap");
+        var elFormularioEsValido = true;
+
+        for (let x = 0; x < mapa.length; x++) {
+            if (mapa[x].value.length == 0) {
+                swal("Error!", "Por favor valide que haya andjuntado una imagen y seleccionado un punto en el mapa", {
+                    icon : "error",
+                    buttons: {        			
+                        confirm: {
+                            className : 'btn btn-danger'
+                        }
+                    },
+                });
+                elFormularioEsValido = false;
+                break;
+            }
+            
+        }
+
+        return elFormularioEsValido;
+
+        
+    });
+
+
 
     // Validaciones de formulario de registro de casos.
-    $(document).on("submit", "#form_case", function() {
+    $(document).on("click", "#envioData", function() {
 
 
         let elFormularioEsValido = true;
-        console.log(arrayDeterioros);
-
         let formulario = document.getElementsByClassName("validacion");
+        
         let deterioros = document.getElementsByClassName("inputcito");
-        let count_det_1 = 0;
-        let count_det_2 = 0;
-
+        let count = 1;
+        let count2 = 0;
+        let count3 = 1;
+        let countTipoDef = 0
+        let countTipoFis = 0
+        let array = [];
+    
         // Ciclo para validar que ningun campo este vacio
         for (let i = 0; i < formulario.length; i++) {
+            
             if (formulario[i].value.length == 0) {
-                swal("Error!", "Ningun campo debe estar vacio:"+formulario[i].type, {
+                swal("Error!", "Ningun campo debe estar vacio:", {
                     icon : "error",
                     buttons: {        			
                         confirm: {
@@ -1818,31 +1857,8 @@ $(document).ready(function() {
                 break;
             }
             
-            if ( arrayDeterioros[i] == "Perdida de capas estructurales" || arrayDeterioros[i] == "Otros deterioros"  || arrayDeterioros[i]== "Deformaciones" ) {
-                count_det_1++;
-            } else if ( arrayDeterioros[i] == "Fisuras" || arrayDeterioros[i] == "Desprendimientos" || arrayDeterioros[i] == "Daños superficiales" ){
-                count_det_2++;
-            }
         }
 
-        if (count_det_1 < 1 || count_det_2  < 1) {
-            swal("Advertencia", "Seleccione un deterioro de tipo fisura y otro de deformacion", {
-                icon : "warning",
-                buttons: {        			
-                    confirm: {
-                        className : 'btn btn-warning'
-                    }
-                },
-            });
-            elFormularioEsValido = false;
-        }
-
-
-
-        array = [];
-        let count = 1;
-        let count2 = 0;
-        let count3 = 1;
 
         // Ciclo para añadir en un arreglo los deterioros seleccionados
         for (let i = 0; i < deterioros.length; i++) {
@@ -1850,7 +1866,6 @@ $(document).ready(function() {
             count2++;
             count3++;
         }
-
 
 
         // Ciclo que valida que ningun deterioro se repita
@@ -1896,8 +1911,69 @@ $(document).ready(function() {
         elFormularioEsValido = false;
        }
 
+       for (let f = 0; f < deterioros.length; f++) {
+           if (deterioros[f].getAttribute('data-tipo') == "Otros deterioros" || deterioros[f].getAttribute('data-tipo') == "Deformaciones" || deterioros[f].getAttribute('data-tipo') == "Perdida de capas estructurales" ) {
+                countTipoDef++;
+           } else if (deterioros[f].getAttribute('data-tipo') == "Fisuras" || deterioros[f].getAttribute('data-tipo') == "Desprendimientos" || deterioros[f].getAttribute('data-tipo') == "Daños superficiales" ) {
+                countTipoFis++;
+           }
+       }
 
-        return elFormularioEsValido;
+       console.log(countTipoDef, countTipoFis);
+
+       if (countTipoDef > 0 && countTipoFis > 0) {} else {
+        swal("Error!", "Escoger deterioro de fisuracion y deformacion", {
+            icon : "error",
+            buttons: {        			
+                confirm: {
+                    className : 'btn btn-danger'
+                }
+            },
+        });
+        elFormularioEsValido = false;
+       }
+       
+        if(elFormularioEsValido){
+
+            let dataArrayDet   =  [];
+            let dataArrayGra   =  [];
+            let dataArrayArea  =  [];
+            let dataArrayTramo =  [];
+            let dataDeterioros = document.getElementsByClassName("deteriorosValue");
+            let dataGravedades = document.getElementsByClassName("gravedadValue");
+            let dataAreas      = document.getElementsByClassName("areaValue");
+            let dataTramo      = document.getElementsByClassName("tramoValue");
+            let dataEntorno    = document.getElementById("entorno_id").value;
+            let dataPavimento  = document.getElementById("tipo_pavimento_id").value;
+            let dataCausa      = document.getElementById("cas_causa").value;
+
+            for (let i = 0; i < dataDeterioros.length; i++) {
+                dataArrayDet.push(parseInt(dataDeterioros[i].value));
+                dataArrayGra.push(parseInt(dataGravedades[i].value));
+                dataArrayArea.push(parseInt(dataAreas[i].value));
+            }
+
+            for (let j = 0; j < dataTramo.length; j++) {dataArrayTramo.push(dataTramo[j].value)}
+                
+            var formData = new FormData($('#form_case')[0]);
+
+            //console.log(formData);
+
+                $.ajax({
+
+                    url: 'ajax.php?modulo=Caso&controlador=Caso&funcion=getCreateMap',
+                    type: "POST",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(data){ 
+                        $("#formularioParte1").html(data);
+                        
+                    }
+                });        
+        }
+        
     });
 
     $(document).on("submit", "#form_case_edit", function() {
@@ -2168,6 +2244,10 @@ $(document).ready(function() {
         }
     });
 
+    // $(document).on("submit","form_case",function(){
+
+    // });
+
     ///////////////////////////Fin Jquery Casos//////////////////////////////
 });
 
@@ -2252,10 +2332,10 @@ const mainValidationRegister = () => {
         count++;
     }
 
-    if (second_name == '') {
-        document.getElementById('ad2').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el segundo nombre';
-        count++;
-    }
+    // if (second_name == '') {
+    //     document.getElementById('ad2').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el segundo nombre';
+    //     count++;
+    // }
 
     if (firts_last == '') {
         document.getElementById('ad3').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el primer apellido';

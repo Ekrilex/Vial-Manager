@@ -75,7 +75,7 @@
 						</div>
 					</li>
 					<li class="nav-item">
-						<a data-toggle="collapse" href="#maps" class="btn btn-info">
+						<a class="btn btn-info" href="<?php echo getUrl("Visor","Visor","getMap")?>">
 							<i class="icon-location-pin text-white"></i>
 							<p class="text-light">Geo-Visor</p>
 							<!-- <span class="caret"></span> -->

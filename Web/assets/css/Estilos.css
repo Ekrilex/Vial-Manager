@@ -90,3 +90,27 @@
      margin-top: 3%;
  }
  /*-----------------------------------*/
+
+ /* Estilos Kevin */
+ #file-upload {
+     display: none;
+ }
+
+ /* #pruebita2 {
+     color: white;
+     height: 40px;
+     width: 130px;
+     background-color: #f5af09;
+     font-size: 20px;
+     margin: auto;
+     align-items: center;
+     justify-content: center;
+     display: flex;
+ } */
+
+ .custom-file-upload {
+    border: 1px solid #ccc;
+    /* display: inline-block; */
+    padding: 6px 12px;
+    cursor: pointer;
+}

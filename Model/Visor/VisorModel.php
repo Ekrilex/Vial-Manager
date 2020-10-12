@@ -1,10 +1,8 @@
 <?php 
 
-    include_once '../Model/MasterModel';
+    include_once '../Model/MasterModel.php';
 
     class VisorModel extends MasterModel{
-        
-
         
 
     }

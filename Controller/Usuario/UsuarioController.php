@@ -38,11 +38,6 @@
           }
           
           $seg_nombre = $_POST['segundo_nombre'];
-
-          if (!$seg_nombre!="") {
-            $_SESSION['errores']['seg_nombre']="Ingrese el segundo nombre";
-            $count++;
-          }
           
           $pri_apellido = $_POST['primer_apellido'];
 
@@ -107,27 +102,31 @@
             $count++;
           }
 
-          if ($contra!=$contra2) {
-            $_SESSION['errores']['confir']="Las contraseñas no coinciden";
-            $count++;
-          }
-
           if ($count>0) {
               redirect(getUrl("Usuario","Usuario","getCreate"));
           }
 
-          $nickname = $obj->genereteUser($pri_nombre,$pri_apellido);
-          $id = $obj->autoincrement("tbl_usuario","usu_id"); 
+          echo $contra;
 
-          $query = "INSERT INTO tbl_usuario VALUES($id, '".$num_documento."', '".$pri_nombre."', '".$seg_nombre."', '".$pri_apellido."', '".$seg_apellido."', '".$contra."', '".$telefono."', '".$nickname."', '".$correo."', null, $rol, 1, $tip_documento)";
+          $passCifrado = password_hash($contra, PASSWORD_DEFAULT, array("cost"=>12));
 
-          $ejecutar = $obj->insertar($query);
+          // $nickname = $obj->genereteUser($pri_nombre,$pri_apellido);
+          // $id       = $obj->autoincrement("tbl_usuario","usu_id"); 
 
-          if ($ejecutar) {
-            redirect(getUrl("Usuario","Usuario","index"));
-          } else {
-            pg_last_error($ejecutar);
-          }
+          // $insertUser     = "INSERT INTO tbl_usuario (usu_id, usu_num_idebtificacion, usu_primer_nombre, usu_segundo_nombre, usu_primer_apellido, usu_segundo_apellido, usu_telefono, usu_nickname, usu_correo, usu_observacion, rol_id, estado_id, tipo_documento_id )".
+          //                   "VALUES($id, '".$num_documento."', '".$pri_nombre."', '".$seg_nombre."', '".$pri_apellido."', '".$seg_apellido."', '".$telefono."', '".$nickname."', '".$correo."', null, $rol, 1, $tip_documento)";
+
+          // $insertUserPass = "INSERT INTO tbl_usuario (usu_contraseña) VALUES($pass) WHERE usu_id = $id";
+
+          // $ejecutar  = $obj->insertar($insertUser);
+          // $ejecutar2 = $obj->insertar($insertUserPass);
+
+          // if ($ejecutar && $ejecutar2) {
+          //   redirect(getUrl("Usuario","Usuario","index"));
+          // } else {
+          //   pg_last_error($ejecutar);
+          //   pg_last_error($ejecutar2);
+          // }
       }
 
       // Funcion que realiza la consulta para plasmar los valores en la pagina en archivo de index.php

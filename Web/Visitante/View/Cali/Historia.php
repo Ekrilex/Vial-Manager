@@ -14,7 +14,7 @@
  
            <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
              <h3 class="text-center">Historia<br></h3>    
-             <p class="font-italic text-center ">
+             <p class="font-italic text-justify ">
              
             Cuenta la historia que el fundador de Santiago de Cali fue un español llamado Sebastián de Belalcázar quien vino a América, en el tercer viaje que realizara Cristóbal Colón (1498).
             En 1534 Belalcázar fundó la ciudad de Quito en una expedición enviada por Francisco Pizarro. Posteriormente, en búsqueda de El Dorado entra al actual territorio colombiano y funda las ciudades de Pasto y Popayán.

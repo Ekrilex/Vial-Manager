@@ -19,7 +19,7 @@
 
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
             <h3 class="text-center">¿Quiénes Son?</h3><br>
-            <p class="font-italic text-center ">
+            <p class="font-italic text-justify ">
             El Servicio Nacional de Aprendizaje - SENA, es un establecimiento público del orden nacional, con 
             personería jurídica, patrimonio propio e independiente, y autonomía administrativa;  Adscrito al 
             Ministerio del Trabajo de Colombia. Ofrece formación gratuita a millones de colombianos que se 
@@ -46,7 +46,7 @@
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
             <h3>Historia</h3>
-            <p class="font-italic">
+            <p class="font-italic text-justify">
             El Centro Industrial, actualmente denominado Centro de Diseño Tecnológico Industrial, inició sus labores en
             1961 en Cali, siendo el primer y más grande Centro de Formación de la regional Valle, donde sus instalaciones 
             iniciaron en la planta de radiadores FASA, parte posterior del hoy Centro Comercial UNICO, con programas metalmecánicos, 
@@ -130,7 +130,7 @@
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
           <br>
             <h3>Valores y Compromisos</h3><br>
-            <p class="font-italic">
+            <p class="font-italic text-justify">
             1. <b>Honestidad:</b> Actúo siempre con fundamento en la verdad, cumpliendo mis deberes con transparencia y rectitud, y siempre favoreciendo el interés general.
             <br>
             2. <b>Respeto:</b> Reconozco, valoro y trato de manera digna a todas las personas, con sus virtudes y defectos, sin importar su labor, su procedencia, títulos o cualquier otra condición.
@@ -159,7 +159,7 @@
         <div class="row">
           <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
             <h3>Funciones y Deberes</h3><br>
-            <p class="font-italic">
+            <p class="font-italic text-justify">
             <b>1.</b>Cumplir y hacer que se cumplan los deberes contenidos en la Constitución, los tratados de Derecho Internacional Humanitario, los demás ratificados por el Congreso, las leyes, 
             los decretos, las ordenanzas, los acuerdos distritales y municipales, los estatutos de la entidad, los reglamentos y los manuales de funciones, las decisiones judiciales y disciplinarias, 
             las convenciones colectivas, los contratos de trabajo y las órdenes superiores emitidas por funcionario competente.

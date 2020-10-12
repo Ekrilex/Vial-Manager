@@ -8,6 +8,7 @@
 
 	<!-- Fonts and icons -->
 	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
+	<script type="text/javascript" src="../View/Visor/misc/lib/mscross-1.1.9.js"></script>
 	<script>
 		WebFont.load({
 			google: {"families":["Lato:300,400,700,900"]},

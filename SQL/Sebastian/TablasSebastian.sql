@@ -68,9 +68,28 @@ create table tbl_bitacora(
 	bit_tabla varchar(45),
 	bit_id_registro varchar(11),
 	bit_observacion varchar(750),
+	bit_casos varchar(65),
 	primary key(bit_id)
 
 );
+
+create table puntos_geovisor(
+
+  gid serial primary key,
+  id int not null,
+  nombre varchar(20) not null,
+  cas_id int not null,
+  coordenadax varchar(25) not null,
+  coordenaday varchar(25) not null
+
+
+);
+
+alter table puntos_geovisor
+add foreign key(cas_id)
+references tbl_caso(cas_id);
+
+select AddGeometryColumn('puntos_geovisor', 'geometry',-1,'POINT',2);
 
 -- LLAVES FORANEAS CORRESPONDIENTES A LAS TABLAS
 

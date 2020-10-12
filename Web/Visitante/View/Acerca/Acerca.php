@@ -16,12 +16,12 @@
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
             <h3>¿Que es vial-manager?.</h3>
-            <p class="font-italic">
+            <p class="font-italic text-justify">
               Vial manager es un sistema de información web , desarrollada por 5 aprendices del servicio nacional de aprendizaje (sena), este aplicativo web brinda apoyo en la getión del estado de la malla vial de santiago de cali.
             </p><br> 
             <ul>
               <h3>La soluci&oacute;n a una necesidad</h3>
-            <p class="font-italic">
+            <p class="font-italic text-justify">
               Este aplicativo web surge como solucion para administrar con mas eficacia la getion de la malla vial de la ciudad , aportando la tecnologia y el ingenio de los aprendices sena para que este proceso evolucione desde su inicio hasta su final.
             </p>             
              <!-- <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>

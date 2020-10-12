@@ -19,7 +19,7 @@
             <div class="icon-box">
               <div class="icon"><h3>1</h3></div>
               <h4>Primarias</a></h4>
-              <p>Son aquellas troncales, transversales y accesos a capitales de Departamento que cumplen la función básica de integración de las principales zonas de producción y consumo del país y de éste con los demás países.</p>
+              <p class="text-justify">Son aquellas troncales, transversales y accesos a capitales de Departamento que cumplen la función básica de integración de las principales zonas de producción y consumo del país y de éste con los demás países.</p>
             </div>
           </div>
 
@@ -27,7 +27,7 @@
             <div class="icon-box">
               <div class="icon"><h3>2</h3></div>
               <h4>Secundarias</h4>
-              <p>Son aquellas vías que unen las cabeceras municipales entre sí y/o que provienen de una cabecera municipal y conectan con una carretera Primaria.Las carreteras consideradas como Secundarias pueden funcionar pavimentadas o en afirmado.</p>
+              <p class="text-justify">Son aquellas vías que unen las cabeceras municipales entre sí y/o que provienen de una cabecera municipal y conectan con una carretera Primaria.Las carreteras consideradas como Secundarias pueden funcionar pavimentadas o en afirmado.</p>
             </div>
           </div>
 
@@ -35,7 +35,7 @@
             <div class="icon-box">
               <div class="icon"><h3>3</h3></div>
               <h4>Terciarias</h4>
-              <p>Son aquellas vías de acceso que unen las cabeceras municipales con sus veredas o unen veredas entre sí.Las carreteras consideradas como Terciarias deben funcionar en afirmado. En caso de pavimentarse deberán cumplir con las condiciones geométricas estipuladas para las vías Secundarias.</p>
+              <p class="text-justify">Son aquellas vías de acceso que unen las cabeceras municipales con sus veredas o unen veredas entre sí.Las carreteras consideradas como Terciarias deben funcionar en afirmado. En caso de pavimentarse deberán cumplir con las condiciones geométricas estipuladas para las vías Secundarias.</p>
             </div>
           </div>
 
@@ -57,7 +57,7 @@
             <div class="icon-box">
               <div class="icon"><h3>1</h3></div>
               <h4>Terreno plano</h4>
-              <p>Tiene pendientes transversales al eje de la vía menores de cinco grados (5°). Exige el mínimo movimiento de tierras durante la construcción por lo que no presenta dificultad ni en su trazado ni en su explanación.Sus pendientes longitudinales son normalmente menores de tres por ciento (3%).</p>
+              <p class="text-justify">Tiene pendientes transversales al eje de la vía menores de cinco grados (5°). Exige el mínimo movimiento de tierras durante la construcción por lo que no presenta dificultad ni en su trazado ni en su explanación.Sus pendientes longitudinales son normalmente menores de tres por ciento (3%).</p>
             </div>
           </div>
 
@@ -65,7 +65,7 @@
             <div class="icon-box">
               <div class="icon"><h3>2</h3></div>
               <h4>Terreno ondulado</h4>
-              <p>Tiene pendientes transversales al eje de la vía entre seis y trece grados (6° - 13°). Requiere moderado movimiento de tierras durante la construcción, lo que permite alineamientos más o menos rectos, sin mayores dificultades en el trazado y en la explanación. Sus pendientes longitudinales se encuentran entre tres y seis por ciento (3% - 6%).</p>
+              <p class="text-justify">Tiene pendientes transversales al eje de la vía entre seis y trece grados (6° - 13°). Requiere moderado movimiento de tierras durante la construcción, lo que permite alineamientos más o menos rectos, sin mayores dificultades en el trazado y en la explanación. Sus pendientes longitudinales se encuentran entre tres y seis por ciento (3% - 6%).</p>
             </div>
           </div>
 
@@ -73,7 +73,7 @@
             <div class="icon-box">
               <div class="icon"><h3>3</h3></div>
               <h4>Terreno monta&ntilde;oso</h4>
-              <p>Tiene pendientes transversales al eje de la vía entre trece y cuarenta grados (13° - 40°). Generalmente requiere grandes movimientos de tierra durante la construcción, razón por la cual presenta dificultades en el trazado y en la explanación. Sus pendientes longitudinales predominantes se encuentran entre seis y ocho por ciento (6% - 8%).</p>
+              <p class="text-justify">Tiene pendientes transversales al eje de la vía entre trece y cuarenta grados (13° - 40°). Generalmente requiere grandes movimientos de tierra durante la construcción, razón por la cual presenta dificultades en el trazado y en la explanación. Sus pendientes longitudinales predominantes se encuentran entre seis y ocho por ciento (6% - 8%).</p>
             </div>
           </div>
         </div>

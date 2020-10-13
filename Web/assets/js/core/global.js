@@ -4,7 +4,7 @@ $(document).ready(function() {
 //////////////// INICIO DE ORDENES DE MANTENIMIENTO  /////////
 
 $('#Tbl-orden').DataTable({
-    "pageLength": 5,
+    "pageLength": 10,
     initComplete: function() {
         this.api().columns().every(function() {
             var column = this;
@@ -56,7 +56,7 @@ var arr = $('[name="list[]"]:checked').map(function(){
 
 swal({
 title: "Registrar Orden",
-text: "¿Esta seguro de registrar orden?",
+text: "Esta seguro de registrar orden?",
 icon: "warning",
 buttons: true,
 dangerMode: true,
@@ -114,7 +114,7 @@ var arr = $('[name="list[]"]:checked').map(function(){
 
 swal({
    title: "Actualizacion de orden",
-   text: "¿Esta seguro de actualizar esta orden?",
+   text: "Esta seguro de actualizar esta orden?",
    icon: "warning",
    buttons: true,
    dangerMode: true,
@@ -170,7 +170,7 @@ $(document).on("click",".eliminarOrd" , function(){
    
     swal({
          title: "inhabilitar / Denegar",
-         text: "¿Esta seguro de modificar esta orden?",
+         text: "Esta seguro de modificar esta orden?",
          icon: "warning",
          buttons: true,
          dangerMode: true,
@@ -271,7 +271,7 @@ var arr = $('[name="list[]"]:checked').map(function(){
 
 swal({
    title: "Habilitar orden",
-   text: "¿Esta seguro de habilitar esta orden?",
+   text: "Esta seguro de habilitar esta orden?",
    icon: "warning",
    buttons: true,
    dangerMode: true,
@@ -326,7 +326,7 @@ var ord_id=$("#ord_id").val();
 
 swal({
     title: "Aprobar orden",
-    text: "¿Esta seguro de aprobar esta orden?",
+    text: "Esta seguro de aprobar esta orden?",
     icon: "warning",
     buttons: true,
     dangerMode: true,
@@ -375,7 +375,7 @@ var ord_id=$("#ord_id").val();
 
 swal({
     title: "Finalizar orden",
-    text: "Si usted finaliza la orden y tiene casos pendientes por finalizar estos casos no se guardaran en la finalizacion de la orden y seran desvinculados  ¿Esta seguro de finalizar esta orden?",
+    text: "Si se finaliza una orden, y esta contiene casos sin cerrar dichos casos se desvincularan de esta orden,  Esta seguro de finalizar esta orden?",
     icon: "warning",
     buttons: true,
     dangerMode: true,
@@ -847,7 +847,7 @@ $(document).on("click", "#editar", function() {
     }
     swal({
         title: "Eliminación de deterioro",
-        text: "¿Esta seguro de eliminar esta deterioro?",
+        text: "Esta seguro de eliminar esta deterioro?",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -1091,7 +1091,7 @@ $(document).on("keyup", ".nombreD", function() {
         let self = this;
 
         swal({
-            title: '¿Realmente quieres activar al usuario ' + name + ' ?',
+            title: 'Realmente quieres activar al usuario ' + name + ' ?',
             text: 'El usuario sera activado nuevamente en el sistema',
             icon: 'warning',
             buttons: {
@@ -1289,7 +1289,7 @@ $(document).on("keyup", ".nombreD", function() {
         }
         swal({
             title: "Eliminación de barrio",
-            text: "¿Esta seguro de eliminar esta barrio?",
+            text: "Esta seguro de eliminar este barrio?",
             icon: "warning",
             buttons: true,
             dangerMode: true,

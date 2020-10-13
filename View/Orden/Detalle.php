@@ -122,7 +122,7 @@
                     <a class="btn btn-secondary" href="<?php echo getUrl('Orden','Orden','historialOrd',array("bit_id" => $bita['bit_id']));?>">Volver</a>
                     <input type="hidden" name="ord_id" id="ord_id" value="<?php echo $bita['bit_id_registro'];?>">
                     <?php 
-                      if($_SESSION['rol'] != 4){
+                      if($_SESSION['rol'] != 4 && $laOrdenSePuedeHabilitar == true){
                     ?>
                       <button  class="btn btn-success habilitar" data-url="<?php echo getUrl('Orden','Orden','postDetalle',false,'ajax')?>">Habilitar Orden</button>
                     <?php 

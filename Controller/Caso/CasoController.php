@@ -84,17 +84,27 @@
             $cas_det_id          = $objetoModel->autoincrement("tbl_caso_deterioro","cas_det_id");
             $insertarCaso        = $objetoModel->insertar($sqlCaso);
             $insertarCoordenadas = $objetoModel->insertar($coordenadas);
-        
-            for($i = 0; $i < COUNT($deterioros);$i++){
-                    
-                $sqlCasoDeterioro = "INSERT INTO tbl_caso_deterioro VALUES(".$cas_det_id.",".$gravedades[$i].",".$areas[$i].",".$extensiones[$i].",".$deterioros[$i].",".$cas_id.")";
-                    
-                $insertarCasoDeterioro = $objetoModel->insertar($sqlCasoDeterioro);
 
-                $cas_det_id++;
+            if($insertarCaso && $insertarCoordenadas){
+        
+                for($i = 0; $i < COUNT($deterioros);$i++){
+                        
+                    $sqlCasoDeterioro = "INSERT INTO tbl_caso_deterioro VALUES(".$cas_det_id.",".$gravedades[$i].",".$areas[$i].",".$extensiones[$i].",".$deterioros[$i].",".$cas_id.")";
+                        
+                    $insertarCasoDeterioro = $objetoModel->insertar($sqlCasoDeterioro);
+
+                    $cas_det_id++;
+                }
+
+                $_SESSION['resultRegistrar'] = "<span class='text-success'>el Caso <b>".$cas_id."</b> se ha Registrado Satisfactoriamente</span>";
+
+                
+            }else{
+                $_SESSION['resultRegistrarError'] = "<span class='text-danger'>Error al Registrar el Caso <b>".$cas_id."</b>, Por Favor intente nuevamente</span>";
+
             }
 
-            redirect(getUrl("Caso","Caso","index"));
+            redirect(getUrl("Caso","Caso","getCreate"));
             
         }
 

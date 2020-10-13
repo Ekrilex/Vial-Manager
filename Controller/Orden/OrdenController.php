@@ -47,7 +47,7 @@
     $sql="SELECT cas_fotografia_inicio FROM tbl_caso WHERE cas_id = '".$id."'";
     $Caso=$obj->consultar($sql);
      while ($cas=pg_fetch_assoc($Caso)) {        
-      echo "<img src='".$cas['cas_fotografia_inicio']."' class='col-md-12'>";
+      echo "<img src='".$cas['cas_fotografia_inicio']."' class='col-md-12' height='350'>";
       }
 
     }
@@ -204,9 +204,15 @@
 
       $sql="SELECT * FROM tbl_bitacora WHERE bit_id=$bit_id";
       $bitacora=$obj->consultar($sql);
-      
-     
-       
+
+      $sql="SELECT estado_id, ord_id FROM tbl_orden_mantenimiento, tbl_bitacora WHERE bit_id = ".$bit_id." AND bit_id_registro::integer = ord_id AND estado_id = 2";
+      $consultaExistenciaOrden = $obj->consultar($sql);
+      if(pg_num_rows($consultaExistenciaOrden) > 0){
+        $laOrdenSePuedeHabilitar = true;
+      }else{
+        $laOrdenSePuedeHabilitar = false;
+      }
+
       include_once '../View/Orden/Detalle.php';
        
       

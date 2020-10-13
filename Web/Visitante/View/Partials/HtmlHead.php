@@ -27,6 +27,9 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="../View/Mapa/misc/img/dc.css">
+  <script type="text/javascript" src="../View/Mapa/misc/lib/mscross-1.1.9.js"></script>
+
 
   <!-- =======================================================
   * Template Name: Gp - v2.1.0

@@ -145,7 +145,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modal-foto" tabindex="-1" aria-labelledby="modal-foto" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header  btn-secondary">
         <h5 class="modal-title" id="exampleModalLabel">Fotografia Inicial</h5>
@@ -165,7 +165,7 @@
 
 <!-- Modal -->
 <div class="modal" id="modal-deterioros">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header  btn-secondary">
         <h5 class="modal-title">Deterioros</h5>

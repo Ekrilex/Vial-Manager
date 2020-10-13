@@ -3,7 +3,7 @@
 	<div class="logo-header" data-background-color="dark2">
 		
 		<a href="indexPrueba.php" class="logo">
-			<img src="assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+			<img src="assets/img/vm.png" alt="navbar brand" class="navbar-brand" width="150" height="75">
 			<!-- <label class="text-light fw-bold">Vial Manager<label> -->
 		</a>
 		<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">

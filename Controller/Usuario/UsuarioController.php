@@ -48,10 +48,10 @@
           
           $seg_apellido = $_POST['segundo_apellido'];
 
-          if (!$seg_apellido!="") {
+          /*if (!$seg_apellido!="") {
             $_SESSION['errores']['seg_apellido']="Ingrese el segundo apellido";
             $count++;
-          }
+          }*/
           
           $tip_documento = $_POST['documento'];
 
@@ -91,14 +91,14 @@
           $contra = $_POST['clave'];
 
           if (!$contra!="") {
-            $_SESSION['errores']['pass1']="Ingrese la contraseña";
+            $_SESSION['errores']['pass1']="Ingrese la contrasena";
             $count++;
           }
 
           $contra2 = $_POST['clave2'];
 
           if (!$contra2!="") {
-            $_SESSION['errores']['pass2']="Confirme la contraseña";
+            $_SESSION['errores']['pass2']="Confirme la contrasena";
             $count++;
           }
 
@@ -106,27 +106,31 @@
               redirect(getUrl("Usuario","Usuario","getCreate"));
           }
 
-          echo $contra;
+          //echo "contrasena ingresada: ".$contra;
 
-          $passCifrado = password_hash($contra, PASSWORD_DEFAULT, array("cost"=>12));
+          //$passCifrado = password_hash($contra, PASSWORD_DEFAULT, array("cost"=>12));
 
-          // $nickname = $obj->genereteUser($pri_nombre,$pri_apellido);
-          // $id       = $obj->autoincrement("tbl_usuario","usu_id"); 
+          //$passCifrado = crypt($contra);
 
-          // $insertUser     = "INSERT INTO tbl_usuario (usu_id, usu_num_idebtificacion, usu_primer_nombre, usu_segundo_nombre, usu_primer_apellido, usu_segundo_apellido, usu_telefono, usu_nickname, usu_correo, usu_observacion, rol_id, estado_id, tipo_documento_id )".
-          //                   "VALUES($id, '".$num_documento."', '".$pri_nombre."', '".$seg_nombre."', '".$pri_apellido."', '".$seg_apellido."', '".$telefono."', '".$nickname."', '".$correo."', null, $rol, 1, $tip_documento)";
+          //echo "contrasena encryptada: ".$passCifrado;
 
-          // $insertUserPass = "INSERT INTO tbl_usuario (usu_contraseña) VALUES($pass) WHERE usu_id = $id";
+          $nickname = $obj->genereteUser($pri_nombre,$pri_apellido);
+          $id       = $obj->autoincrement("tbl_usuario","usu_id"); 
 
-          // $ejecutar  = $obj->insertar($insertUser);
-          // $ejecutar2 = $obj->insertar($insertUserPass);
+          $insertUser     = "INSERT INTO tbl_usuario (usu_id, usu_num_identificacion, usu_primer_nombre, usu_segundo_nombre, usu_primer_apellido, usu_segundo_apellido, usu_contrasena, usu_telefono, usu_nickname, usu_correo, usu_observacion, rol_id, estado_id, tipo_documento_id )".
+                            "VALUES($id, '".$num_documento."', '".$pri_nombre."', '".$seg_nombre."', '".$pri_apellido."', '".$seg_apellido."', '".$contra."','".$telefono."', '".$nickname."', '".$correo."', null, $rol, 1, $tip_documento)";
 
-          // if ($ejecutar && $ejecutar2) {
-          //   redirect(getUrl("Usuario","Usuario","index"));
-          // } else {
-          //   pg_last_error($ejecutar);
+          //$insertUserPass = "INSERT INTO tbl_usuario (usu_contraseña) VALUES($pass) WHERE usu_id = $id";
+
+          $ejecutar  = $obj->insertar($insertUser);
+          //$ejecutar2 = $obj->insertar($insertUserPass);
+
+            if ($ejecutar) {
+                redirect(getUrl("Usuario","Usuario","index"));
+           } else {
+             pg_last_error($ejecutar);
           //   pg_last_error($ejecutar2);
-          // }
+           }
       }
 
       // Funcion que realiza la consulta para plasmar los valores en la pagina en archivo de index.php
@@ -279,7 +283,7 @@
         
           while ($con=pg_fetch_assoc($confirmar)) {
 
-            if (password_verify($cambio, $con['usu_contrasena'])) {
+            if ($cambio == $con['usu_contrasena']) {
               $_SESSION['mostrar']="1";  
               include_once '../View/Usuario/activarCambios.php';      
             }else{
@@ -324,9 +328,9 @@
         } 
 
           $c=0;
-        if (password_verify($clave1, $existeC)) {
+        if ($clave1 == $existeC) {
           $c=$c+1;
-        echo "<i class='fas fa-times'></i> intente otra contraseña";      
+        echo "<i class='fas fa-times'></i> intente otra contrasena";      
         }else{
           $c=0;
           echo "";
@@ -361,16 +365,16 @@
         
                     
        if($clave1!="" && $clave2!="" && $clave1==$clave2 && $correo=="" && $c==0){
-        $pass=password_hash($clave1, PASSWORD_DEFAULT);
+        $pass=$clave1;
 
           $sql="UPDATE tbl_usuario set usu_contrasena='".$pass."' WHERE usu_id='".$_SESSION['id']."'";
           $Usuario=$obj->editar($sql);
-            $_SESSION['datos']['contraseña']="<h5>Su contraseña se ha actualizado exitosamente</h5>";
+            $_SESSION['datos']['contraseña']="<h5>Su contrasena se ha actualizado exitosamente</h5>";
         }
 
         if ($clave1!="" && $clave1==$clave2 && $correo!="") {
           if ($existeE==0 && $c==0) {
-           $pass=password_hash($clave1, PASSWORD_DEFAULT);
+           $pass=$clave1;
             $sql="UPDATE tbl_usuario set usu_contrasena='".$pass."', usu_correo='".$correo."' WHERE usu_id='".$_SESSION['id']."'";
             $Usuario=$obj->editar($sql);
             $_SESSION['datos']['todos']="<h5>Sus datos han sido actualizados</h5>";

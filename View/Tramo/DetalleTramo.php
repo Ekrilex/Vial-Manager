@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Ultimo usuario que modificó el tramo</label>
+                                    <label>Ultimo usuario que modific&oacute; el tramo</label>
                                     <div class="input-group">
                                         <input type="text" style="color:black; font-weight:bold;" class="form-control" value="<?php echo $tramoSeleccionado['usu_primer_nombre']." ".$tramoSeleccionado['usu_segundo_nombre']." ".$tramoSeleccionado['usu_primer_apellido']." ".$tramoSeleccionado['usu_segundo_apellido']; ?>" placeholder="Eje Vial" aria-label="" aria-describedby="basic-addon1" readonly>
                                     </div>
@@ -127,10 +127,10 @@
                                     <div class="modal-header btn-danger">
                                         <h3 class="modal-title text-white">Inhabilitar Tramo</h3>
                                     </div>
-                                    <div class="modal-body" style="background-color:rgb(0,0,45);">
-                                        <label>¿Está seguro que desea inhabilitar este tramo?</label>
+                                    <div class="modal-body btn-default">
+                                        <label>Est&aacute; seguro que desea inhabilitar este tramo?</label>
                                     </div>
-                                    <div class="modal-footer" style="background-color:rgb(0,0,45);">
+                                    <div class="modal-footer btn-default">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
                                             
                                         <a href="<?php echo getUrl('Tramo','Tramo','postDelete',array("tra_id"=>$tramoSeleccionado['tra_id'],"tra_codigo"=>$tramoSeleccionado['tra_codigo']))?>"><button type="button" class="btn btn-secondary">Inhabilitar</button></a>
@@ -166,7 +166,7 @@
                                     <h3 class="modal-title text-white">Habilitar Tramo</h3>
                                 </div>
                                 <div class="modal-body btn-default">
-                                    <label>¿Está seguro que desea Habilitar este tramo?</label>
+                                    <label>Est&aacute; seguro que desea Habilitar este tramo?</label>
                                 </div>
                                 <div class="modal-footer btn-default">
                                     <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>

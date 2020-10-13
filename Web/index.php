@@ -1,5 +1,6 @@
 <?php 
 	include_once '../Lib/helpers.php';
+	//include_once '../Lib/helpersLogin.php';
 	include_once '../View/Partials/HtmlHead.php';
 	
 	echo "<body data-background-color='dark'>";

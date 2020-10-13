@@ -539,7 +539,7 @@ $(document).ready(function() {
         let self = this;
 
         swal({
-            title: '¿Realmente quieres eliminar al usuario ' + name + ' ?',
+            title: 'Realmente quieres eliminar al usuario ' + name + ' ?',
             text: 'El usuario sera inhabilitado del sistema',
             icon: 'warning',
             buttons: {
@@ -1921,9 +1921,9 @@ $(document).ready(function() {
            }
        }
 
-       console.log(countTipoDef, countTipoFis);
+       //console.log(countTipoDef, countTipoFis);
 
-       if (countTipoDef > 0 && countTipoFis > 0) {} else {
+       /*if (countTipoDef > 0 && countTipoFis > 0) {} else {
         swal("Error!", "Escoger deterioro de fisuracion y deformacion", {
             icon : "error",
             buttons: {        			
@@ -1933,7 +1933,7 @@ $(document).ready(function() {
             },
         });
         elFormularioEsValido = false;
-       }
+       }*/
        
         if(elFormularioEsValido){
 
@@ -2283,7 +2283,7 @@ const valVarchar = (valor, small, input) => {
     value2 = small;
     value3 = document.getElementById(input);
 
-    if (/^[a-zA-z]+$/.test(value)) {
+    if (/^[a-zA-z]+$/.test(value) || value=='') {
         document.getElementById(value2).innerHTML = '';
         value3.classList.remove("has-error");
         value3.classList.add("has-success");
@@ -2345,10 +2345,10 @@ const mainValidationRegister = () => {
         count++;
     }
 
-    if (second_last == '') {
+   /*  if (second_last == '') {
         document.getElementById('ad4').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el segundo apellido';
         count++;
-    }
+    }*/
 
     if (mail == '') {
         document.getElementById('ad5').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ingrese el correo electronico';
@@ -2391,10 +2391,10 @@ const mainValidationRegister = () => {
         count++;
     }
 
-    if (!/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(mail)) {
-        document.getElementById('ad5').innerHTML = '<i class="fas fa-exclamation-circle"></i> Error el corre electronico es invalido';
+    /*if (!/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(mail)) {
+        document.getElementById('ad5').innerHTML = '<i class="fas fa-exclamation-circle"></i> Error el correo electronico es invalido';
         count++;
-    }
+    }*/
 
     if (count > 0) {
         return false;

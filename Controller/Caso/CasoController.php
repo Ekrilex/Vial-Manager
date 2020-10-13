@@ -63,7 +63,7 @@
             $prioridad         = $objetoModel->calcularMetodologiaVizir($deterioros, $gravedades, $areas,$extensiones,$areaTramo);
             $autoincrementable = $objetoModel->autoincrement("puntos_geovisor","id");
             
-            $sqlCaso     =  "INSERT INTO tbl_caso (cas_id, cas_fecha_creacion, cas_fecha_vencimiento,cas_fotografia_inicio,cas_prioridad,cas_causa,cas_disponibilidad,tipo_pavimento_id,estado_id,usuario_id,tramo_id,entorno_id) VALUES(".$cas_id.", 'now()','".$fecha_vencimiento."','".$img_inicio."','".$prioridad."','".$causa."',0,".$tipo_pavimento.",3,1,".$tramo_id.",".$entorno_id.")";
+            $sqlCaso     =  "INSERT INTO tbl_caso (cas_id, cas_fecha_creacion, cas_fecha_vencimiento,cas_fotografia_inicio,cas_prioridad,cas_causa,cas_disponibilidad,tipo_pavimento_id,estado_id,usuario_id,tramo_id,entorno_id) VALUES(".$cas_id.", 'now()','".$fecha_vencimiento."','".$img_inicio."','".$prioridad."','".$causa."',0,".$tipo_pavimento.",3,".$_SESSION['id'].",".$tramo_id.",".$entorno_id.")";
             $coordenadas =  "INSERT INTO puntos_geovisor (id,nombre,cas_id,geometry,coordenadax,coordenaday) VALUES($autoincrementable, 'coordenada".$cas_id."', $cas_id, GeomFromText('POINT($coordenadasX $coordenadasY)'), '".$coordenadasX."', '".$coordenadasY."')";
 
             $cas_det_id          = $objetoModel->autoincrement("tbl_caso_deterioro","cas_det_id");
@@ -164,7 +164,7 @@
 
             move_uploaded_file($_FILES['cas_fotografia_fin']['tmp_name'], $cas_fotografia_fin);
 
-            $sql = "UPDATE tbl_caso SET cas_fotografia_fin = '".$cas_fotografia_fin."', cas_observacion = '".$observacion."', estado_id = 5, usuario_id = 1 WHERE cas_id = ".$cas_id."";
+            $sql = "UPDATE tbl_caso SET cas_fotografia_fin = '".$cas_fotografia_fin."', cas_observacion = '".$observacion."', estado_id = 5, usuario_id = ".$_SESSION['id']." WHERE cas_id = ".$cas_id."";
 
             //$sql = "UPDATE tbl_caso SET cas_fotografia_fin = '".$cas_fotografia_fin."', estado_id = 5, cas_prioridad = 1, usuario_id = ".$_SESSION['usu_id']." WHERE cas_id = ".$cas_id."";
 
@@ -195,13 +195,13 @@
 
             if($estado_id == 3){
                 $cas_observacion = $_POST['observacion'];
-                $sql = "UPDATE tbl_caso SET estado_id = 2, cas_observacion = '".$cas_observacion."', cas_disponibilidad = 1 WHERE cas_id= ".$cas_id."";
+                $sql = "UPDATE tbl_caso SET estado_id = 2, cas_observacion = '".$cas_observacion."', cas_disponibilidad = 1, usuario_id = ".$_SESSION['id']." WHERE cas_id= ".$cas_id."";
                 $colorEstado = "rgb(250,0,0)";
                 $nombreEstado = "Inhabilitado";
 
             } else if($estado_id == 2){
                 $cas_observacion = $_POST['observacion'];
-                $sql = "UPDATE tbl_caso SET estado_id = 3, cas_observacion = '".$cas_observacion."', cas_disponibilidad = 0 WHERE cas_id= ".$cas_id."";
+                $sql = "UPDATE tbl_caso SET estado_id = 3, cas_observacion = '".$cas_observacion."', cas_disponibilidad = 0, usuario_id = ".$_SESSION['id']." WHERE cas_id= ".$cas_id."";
                 $colorEstado = "rgb(255, 119, 0)";
                 $nombreEstado = "Pendiente";
                 
@@ -273,12 +273,12 @@
                 unlink($img_vieja_inicio);
 
                 $queryUpdate = "UPDATE tbl_caso SET entorno_id = $entorno, tramo_id = $tramo, cas_causa = '".$causa."',".
-                           "cas_fotografia_inicio = '".$ruta_foto_inicio."', cas_prioridad = $prioridad WHERE cas_id = ".$caso."";
+                           "cas_fotografia_inicio = '".$ruta_foto_inicio."', cas_prioridad = $prioridad, usuario_id=".$_SESSION['id']." WHERE cas_id = ".$caso."";
                 
             } else {
 
                 $queryUpdate = "UPDATE tbl_caso SET entorno_id = $entorno, tramo_id = $tramo, cas_causa = '".$causa."',".
-                           "cas_prioridad = $prioridad WHERE cas_id = ".$caso." ";
+                           "cas_prioridad = $prioridad, usuario_id=".$_SESSION['id']." WHERE cas_id = ".$caso." ";
 
             }
 
@@ -339,8 +339,8 @@
             $prioridad = $_POST['cas_prioridad'];
             $caso = $_POST['cas_id'];
 
-            $query = "UPDATE tbl_caso SET cas_prioridad = $prioridad WHERE cas_id = $caso;";
-            //$query = "UPDATE tbl_caso SET cas_prioridad = $prioridad, usuario_id=".$_SESSION['id']." WHERE = cas_id = $caso";
+            //$query = "UPDATE tbl_caso SET cas_prioridad = $prioridad WHERE cas_id = $caso;";
+            $query = "UPDATE tbl_caso SET cas_prioridad = $prioridad, usuario_id=".$_SESSION['id']." WHERE cas_id = $caso";
            
             $cambioPrioridad = $objetoModel->editar($query);
 

@@ -6,17 +6,20 @@
 
         <div class="card-body">
             <div class="form-row">
-                <div><label class="text-light" style="font-size:20px;">Por Favor registre la ubicacion del deterioro en el mapa con la opcion: <img src="../View/Visor/misc/img/marker-gold.png" alt="la imagen no se pudo cargar"></label></div>
+                <div><label class="text-light" style="font-size:20px;">Por Favor registre la ubicacion del deterioro en el mapa con la opcion: <img src="../View/Visor/misc/img/point.png" alt="la imagen no se pudo cargar"></label></div>
                 <div class="mscross" style="width:950px; height:650px; -moz-user-select:none; border:2px solid rgb(128,76,249);" id="dc_main"></div>
 
                 <script type="text/javascript">
                     myMap1 = new msMap(document.getElementById("dc_main"), "standardLeft");
                     myMap1.setCgi("/cgi-bin/mapserv.exe");
-                    myMap1.setMapFile('/ms4w/Apache/htdocs/ADSI/VIALMANAGER/Vial-Manager/Web/assets/Maps/Segmentacion.map');
+                    
+                    //myMap1.setMapFile('/ms4w/Apache/htdocs/ADSI/VIALMANAGER/Vial-Manager/Web/assets/Maps/Segmentacion.map');
+                    myMap1.setMapFile('/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map');
+
                     myMap1.setFullExtent(1049214.34, 1078487.53, 860243.46);
                     myMap1.setLayers('Cali SegmentacionNoLabel');
 
-                    var insertarDano = new msTool('ObtenerCoordenadas', insertd, '../View/Visor/misc/img/marker-gold.png', queryI);
+                    var insertarDano = new msTool('ObtenerCoordenadas', insertd, '../View/Visor/misc/img/point.png', queryI);
 
                     myMap1.getToolbar(0).addMapTool(insertarDano);
 

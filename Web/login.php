@@ -2,6 +2,8 @@
     session_start();
    
     session_destroy();
+
+    include '../lib/helpers.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -62,35 +64,43 @@
            <div class="formu">
             <img src="assets/img/iconos/sena.png" style="border-radius:6em" id="iconop">
             <h1 class="text-center text-light display-5" ><b>Login<b></h1><br>
-                <form action="index.php" method="POST" name="login">
+                <form action="<?php echo getUrl("Acceso","Acceso","login",false,"ajax");?>" method="POST" name="login">
               
-                    <label class="font-weight-bold text-light ">Nickname</label>
+                    <label class="font-weight-bold text-light ">Correo Electronico</label>
                     <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text bg-warning">
                                 <i class="far fa-user font-weight-bold" style="color:black"></i>
                                 </span>
                             </div>
-                        <input type="text" class="form-control bg-warning font-weight-bold" style="color:black"name="user" id="user" placeholder="nombre de usuario" maxlength="20">
+                        <input type="text" class="form-control bg-warning font-weight-bold" style="color:black"name="user" id="user" placeholder="Correo Electronico" maxlength="">
                     </div>
                    
                    <br>
-                    <label class="font-weight-bold text-light">Password</label>
+                    <label class="font-weight-bold text-light">Contrase&ntilde;a</label>
                     <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text bg-warning">
                                 <i class="icon-lock font-weight-bold"  style="color:black"></i><!--icon-lock fas fa-user-lock-->
                                 </span>
                             </div>
-                        <input type="password" class="form-control bg-warning font-weight-bold" style="color:black" name="clave" id="clave" placeholder="contraseña" maxlength="20">
+                        <input type="password" class="form-control bg-warning font-weight-bold" style="color:black" name="clave" id="clave" placeholder="contrase&ntilde;a" maxlength="20">
                     </div>
                    
-                   <br><br>     
-                    <input type="submit" value="Iniciar Sesión" name="enviar" style="color:white;background-color: rgb(236, 92, 26);" class="font-weight-bold btn btn-block">
+                      
+                   <div>
+                        <?php 
+                            if(isset($_GET['error'])){
+                                echo "<span class='text-danger'>".$_GET['error']."</span>";
+                            }
+                        ?>
+                   </div>
+                   <br> 
+                    <input type="submit" value="Iniciar Sesion" name="enviar" style="color:white;background-color: rgb(236, 92, 26);" class="font-weight-bold btn btn-block">
 
                 <div class="text-center">  
-                    <a class="btn  btn-link " style="color:white" href="Olvidaste.php"><b>¿Olvidaste tu Contraseña?</b></a><br>
-                    <a class="btn btn-link " style="color:white" href="#"><b>Volver</b></a><br>
+                    <a class="btn btn-link " style="color:white" href="Olvidaste.php"><b>&iquest;Olvidaste tu Contrase&ntilde;a?</b></a><br>
+                    <a class="btn btn-link " style="color:white" href="Visitante/Web/index.php"><b>Volver</b></a><br>
                 </div>
               
                 </form>

@@ -3,13 +3,13 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header btn-default">
-				<h3 class="modal-title text-center" id="exampleModalLabel"><b>¿Desea cerrar sesión?</b></h3>
+				<h3 class="modal-title text-center" id="exampleModalLabel"><b>&iquest;Desea cerrar sesion?</b></h3>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true"></span>
 				</button>
 			</div>
 			<div class="modal-body btn-default">
-			Seleccione "Aceptar" a continuación si está listo para finalizar su sesión actual
+			Seleccione "Aceptar" a continuacion si esta listo para finalizar su sesion actual
 			</div>
 			<div class="modal-footer btn-default">
 				<button type="button" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>

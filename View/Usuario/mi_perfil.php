@@ -137,7 +137,7 @@
       <div class="modal-body text-white btn-default">
        <h5>Contrase&ntilde;a actual</h5>
         <div class="input-group">
-          <input type="password" class="form-control cl1 confir border-primary" placeholder="porfavor ingrese su contraseña">
+          <input type="password" class="form-control cl1 confir border-primary" placeholder="porfavor ingrese su contrasena">
           <button type="button" class="far fa-eye text-primary bg-dark btn btn-dark" id="contra" value="v1"  style="font-size:18px;"></button>
         </div>
       </div>

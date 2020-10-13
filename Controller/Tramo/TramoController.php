@@ -296,7 +296,7 @@
             $jerarquia_vial_id = $_POST['jerarquia_vial_id'];
             $eje_vial_id = $_POST['eje_vial_id'];
             $estado_id = 1;
-            $usuario_id = 1;//se utilizara el usuario de prueba ya que aun no existen variables de session
+            $usuario_id = $_SESSION['id'];//se utilizara el usuario de prueba ya que aun no existen variables de session
 
             /*$usuario_id = $_SESSION['usu_id'];*/
 
@@ -457,7 +457,7 @@
             $elemento_id = $_POST['elemento_id'];
             $jerarquia_vial_id = $_POST['jerarquia_vial_id'];
             $eje_vial_id = $_POST['eje_vial_id'];
-            $usuario_id = 1;//se utilizara el usuario de prueba ya que aun no existen variables de session
+            $usuario_id = $_SESSION['id'];//se utilizara el usuario de prueba ya que aun no existen variables de session
 
             /*$usuario_id = $_SESSION['usu_id'];*/
 
@@ -525,7 +525,7 @@
             $objetoModel = new TramoModel();
             $tra_id = $_GET['tra_id'];
             $tra_codigo = $_GET['tra_codigo'];
-            $usuario_id = 1;
+            $usuario_id = $_SESSION['id'];
 
             //$usuario_id = $_SESSION['usu_id'];
 
@@ -558,7 +558,7 @@
             $objetoModel = new TramoModel();
             $tra_id = $_GET['tra_id'];
             $tra_codigo = $_GET['tra_codigo'];
-            $usuario_id = 1;
+            $usuario_id = $_SESSION['id'];
 
             //$usuario_id = $_SESSION['usu_id'];
 

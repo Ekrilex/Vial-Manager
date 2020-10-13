@@ -147,7 +147,8 @@ MAP
 		CONNECTIONTYPE postgis
 		NAME "puntosMapa"
 		STATUS ON
-		CONNECTION "user=postgres password=12345 dbname=vialmanager3_4 host=localhost port=5432"
+		#CONNECTION "user=postgres password=12345 dbname=vialmanager3_4 host=localhost port=5432"
+		CONNECTION "user=postgres password=postgres dbname=VialManager3_4 host=localhost port=5433"
 		DATA "geometry FROM (select * from puntos_geovisor) as puntos using unique gid SRID=-1"
 		TYPE POINT
 		CLASS

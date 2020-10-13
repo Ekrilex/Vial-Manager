@@ -239,7 +239,7 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                                      $resultado = "<p class='text-danger'><i class='fas fa-flag text-danger'></i>&nbsp;Alta</p>";
                                 }
                                 ?>
-                                <label>Prioridad: &nbsp;<span data-toggle="tooltip" data-placement="right" title="Cambiar Prioridad"><a type="button" id="cambiarPrioridad" data-url="<?php echo getUrl("Caso","Caso","editarPrioridad",false,"ajax")?>"><i class="fas fa-cog text-light"></i></a></span></label>
+                                <label>Prioridad: &nbsp;<span data-toggle="tooltip" data-placement="right" title="Cambiar Prioridad"><?php if($_SESSION['rol'] != 3){ ?> <a type="button" id="cambiarPrioridad" data-url="<?php echo getUrl("Caso","Caso","editarPrioridad",false,"ajax")?>"><i class="fas fa-cog text-light"></i></a><?php }?></span></label>
                                 <div class="form-row">
                                     <div id="textoPrioridad">
                                         <span><?php echo $resultado;?></span>&nbsp;
@@ -337,24 +337,34 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                 <div class="card-action">
                     <input type="hidden" id="cas_id" value="<?php echo $casoSeleccionado['cas_id'];?>">
                     <a class="btn btn-secondary" href="<?php echo getUrl('Caso','Caso','index')?>">Salir</a>
-
-                    <button class="btn btn-info" id="editarCaso" data-url="<?php echo getUrl("Caso","Caso","getUpdate",false,"ajax");?>" data-id="<?php echo $casoSeleccionado['cas_id'];?>">Editar</button>
+                    <?php 
+                        if($_SESSION['rol'] != 3){
+                    ?>
+                            <button class="btn btn-info" id="editarCaso" data-url="<?php echo getUrl("Caso","Caso","getUpdate",false,"ajax");?>" data-id="<?php echo $casoSeleccionado['cas_id'];?>">Editar</button>
+                    <?php 
+                        }
+                    ?>
                     <!-- <button class="btn btn-info" id="finalizarCaso" data-url="<?php //echo getUrl("Caso","Caso","getfinalize",false,"ajax");?>" data-id="<?php //echo $casoSeleccionado['cas_id'];?>">Editar</button> -->
                     <?php 
-                        if($casoSeleccionado['orden_id'] != "" && $casoSeleccionado['est_id'] != 5){
+                        if($_SESSION['rol'] == 4 || $_SESSION['rol'] == 1){
+                            if($casoSeleccionado['orden_id'] != "" && $casoSeleccionado['est_id'] != 5){
                     ?>
                         <button class="btn btn-success" data-toggle="modal" id="finalizarCaso" data-target="#modalFinalizar" data-id="<?php echo $casoSeleccionado['cas_id'];?>">Finalizar</button>
                     <?php 
                     
+                            }
                         }
+                        
                     ?>
                     <span id="inhabilitarHabilitar">
                         <?php 
-                            if($casoSeleccionado['est_id' ] != 5 && $casoSeleccionado['orden_id'] == ""){
-                                if($casoSeleccionado['est_id' ] != 2 ){
-                                    echo "<button class='btn btn-danger botonCambiarEstado' data-toggle='modal' data-estado='".$casoSeleccionado['est_id']."' data-target='#modalInhabilitarCaso'>Inhabilitar</button>";
-                                }else{
-                                    echo "<button class='btn btn-success botonCambiarEstado' data-toggle='modal' data-estado='".$casoSeleccionado['est_id']."' data-target='#modalHabilitarCaso'>Habilitar</button>";
+                            if($_SESSION['rol'] != 3){
+                                if($casoSeleccionado['est_id' ] != 5 && $casoSeleccionado['orden_id'] == ""){
+                                    if($casoSeleccionado['est_id' ] != 2 ){
+                                        echo "<button class='btn btn-danger botonCambiarEstado' data-toggle='modal' data-estado='".$casoSeleccionado['est_id']."' data-target='#modalInhabilitarCaso'>Inhabilitar</button>";
+                                    }else{
+                                        echo "<button class='btn btn-success botonCambiarEstado' data-toggle='modal' data-estado='".$casoSeleccionado['est_id']."' data-target='#modalHabilitarCaso'>Habilitar</button>";
+                                    }
                                 }
                             }
                         ?>

@@ -112,7 +112,7 @@
 						</li>
 					</ul>
 				</li>-->
-				<li class="nav-item dropdown hidden-caret">
+				<!-- <li class="nav-item dropdown hidden-caret">
 					<a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<i class="fa fa-bell"></i>
 						<span class="notification">4</span>
@@ -169,7 +169,7 @@
 							<a class="see-all" href="javascript:void(0);">See all notifications<i class="fa fa-angle-right"></i> </a>
 						</li>
 					</ul>
-				</li>
+				</li> -->
 				<!--<li class="nav-item dropdown hidden-caret">
 					<a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
 						<i class="fas fa-layer-group"></i>
@@ -235,7 +235,7 @@
 								<div class="user-box">
 									<div class="avatar-lg"><img src="assets/img/iconos/avatardefault_92824.ico" alt="image profile" class="avatar-img rounded"></div>
 									<div class="u-text">
-										<h4>Juan Castellar</h4>
+										<h4><?php echo $_SESSION['nombre']." ".$_SESSION['apellido']?></h4>
 									</div>
 								</div>
 							</li>
@@ -243,7 +243,7 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="<?php echo getUrl("Usuario","Usuario","getPerfil"); ?>"><i class="fas fa-user-alt"></i> Mi Perfil</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" data-toggle="modal" data-target="#exampleModal" ><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+								<a class="dropdown-item" data-toggle="modal" data-target="#exampleModal" ><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a>
 							</li>
 						</div>
 					</ul>

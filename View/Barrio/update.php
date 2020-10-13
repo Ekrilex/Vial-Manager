@@ -16,8 +16,7 @@
                     <div id="editarB">
                      
                     </div>
-                 
-                    <br>
+            
                     <div class="modal-footer btn-default">
                          <button type="button" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
                         <input type="submit" name="Actualizar" id="Actualizar" value="Actualizar" class="btn btn-info">

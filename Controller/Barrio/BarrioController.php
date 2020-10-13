@@ -71,7 +71,10 @@
             $sql="SELECT * FROM tbl_comuna"; // meti esta consulta para que me desplegara las comunas en el modal de index(consultar)
             $comunas=$objeto->consultar($sql);
 
-           
+            $sql="SELECT barrio_id FROM tbl_tramo ";
+            $tramo=$objeto->eliminar($sql);
+
+            
             include_once '../View/Barrio/index.php';
             include_once '../View/Barrio/create.php';
             include_once '../View/Barrio/update.php';
@@ -103,7 +106,7 @@
                     ."</div>"; 
                 echo "<div class='form-group'>";
                     echo "<h4 class='text-light'>N&uacute;mero de la Comuna</h4>" ;   
-                        echo "<select class='form-control is-valid barrioEditar' name='com_id' id='com_id' value='".$bar['comuna_id']."' required >";
+                        echo "<select class='form-control is-valid barrioSelect' name='com_id' id='com_id' value='".$bar['comuna_id']."'  >";
                         echo "<option value=''>Seleccione...</option>";
                         while($comun=pg_fetch_assoc($comunas)){
                         // foreach($comunas as $comun){
@@ -113,9 +116,9 @@
                                 echo "<option value='".$comun['com_id']."'>".$comun['com_id']."</option>";
                                
                             }
-                           
                         }
                     echo "</select>";
+                    echo "<div id='errorSelect'></div>";
                 echo "</div>"; 
              
             }
@@ -142,33 +145,36 @@
         public function getDelete(){
             $objeto=new BarrioModel();
 
-            $bar_id=$_POST['barrioElimi']; 
+            $bar_id=$_GET['bar_id']; 
             
             $sql="SELECT * FROM tbl_barrio WHERE bar_id=$bar_id";
             $barrios=$objeto->consultar($sql);
 
-            // $sql="SELECT * FROM tbl_comuna";
-            // $comunas=$objeto->eliminar($sql);
+            $sql="SELECT barrio_id FROM tbl_tramo";
+            $tramo=$objeto->consultar($sql);
 
-            while($bar=pg_fetch_assoc($barrios)){
-            // foreach($barrios as $bar){
-                echo "<input  type='hidden' name='barid' id='barid' value='".$bar['bar_id']."'>";
-                echo "<input  type='hidden' name='bar_descripcion'id='bar_descripcion' value='".$bar['bar_descripcion']."'>";
-            }
+            
+            // while($bar=pg_fetch_assoc($barrios)){
+            // // foreach($barrios as $bar){
+            //     echo "<div id='eliminarB'><input  type='hidden' name='barid' id='barid' value='".$bar['bar_id']."'>";
+            //     echo "<input  type='hidden' name='bar_descripcion' id='bar_descripcion' value='".$bar['bar_descripcion']."'></div>";
+            // }
         }
 
         public function postDelete(){
             $objeto= new BarrioModel();
 
-            $bar_id=$_POST['barid'];
+            $bar_id=$_POST['barrioElimi'];
             $bar_descrip=$_POST['bar_descripcion'];
-           
+
             $sql="DELETE FROM tbl_barrio WHERE bar_id=$bar_id";
             $ejecucion=$objeto->eliminar($sql);
             if($ejecucion){
                 $_SESSION['resultEliminar']="<span class='text-danger'>Se elimino el barrio <b>$bar_descrip</b> correctamente </span>";
             }
+          
             redirect(getUrl("Barrio","Barrio","index"));
+            
         }
 
 
@@ -193,5 +199,9 @@
                 include_once '../View/Barrio/filtro.php';
             }
         }*/
+
+
+       
+          
     }
 ?>

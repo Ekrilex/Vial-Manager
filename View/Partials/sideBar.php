@@ -113,13 +113,13 @@
 
 							?>	
 									<li>
-										<a href="sidebar-style-1.html">
+										<a href="<?php echo getUrl("Orden","Orden", "getCreate");?>">
 											<span class="sub-item">Registrar Orden</span>
 										</a>
 									</li>
 							<?php }?>	
 								<li>
-									<a href="overlay-sidebar.html">
+									<a href="<?php echo getUrl("Orden","Orden", "index");?>">
 										<span class="sub-item">Consultar Orden</span>
 									</a>
 								</li>

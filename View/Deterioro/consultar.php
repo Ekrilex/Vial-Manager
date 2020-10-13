@@ -1,6 +1,6 @@
 
 <div class="container"><br>
-
+<br>
 <script type="text/javascript"> setTimeout(function() { $(".alert").fadeOut(5000); },1000); </script>
 
 <?php
@@ -20,37 +20,36 @@ if (isset($_SESSION['result'])) {
 
 ?>
  
- <div class="card col-md-12 col-sm-12 col-lg-12" style="max-width: 73rem;">
+<div class="card col-md-12 col-sm-12 col-lg-12" style="max-width: 73rem;">
   <div class="card-header">
-   <div class="d-flex align-items-center">
-    <h3 class="card-title">Consultar deterioros&nbsp;&nbsp;<span class="icon-book-open"></span>&nbsp;&nbsp;<span class="icon-magnifier"></span></h3>
+    <div class="d-flex align-items-center">
+      <h3 class="card-title">Consultar deterioros&nbsp;&nbsp;<span class="icon-book-open"></span>&nbsp;&nbsp;<span class="icon-magnifier"></span></h3>
 
-    <a type="button" class="text-light btn btn-success btn-round ml-auto" data-toggle="modal" data-target="#Nuevo">
+      <a type="button" class="text-light btn btn-success btn-round ml-auto" data-toggle="modal" data-target="#Nuevo">
       <i class="fa fa-plus"></i> Añadir Deterioro</a>
     </div>
   </div>  
-  <div class="card-body"><br>
-<!--<div class="row">
-    <div class="col-lg-1 col-md-1 col-sm-1"></div>
-    <div class="col-md-2 col-sm-3 col-lg-2 text-white">
-     <h4>Buscar:</h4>   
-    </div>
-    <div class="col-md-7 col-sm-7 col-lg-5">
-    <input class="form-control" id="filtro" data-url="<?php //echo getUrl("Deterioro","Deterioro","filtro",false,"ajax"); ?>" type="text" placeholder=" Buscar..">        
-    </div>
- 
-  </div><br>--> 
-    <div class="card-body">
+    <br>
+    <!--<div class="row">
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+        <div class="col-md-2 col-sm-3 col-lg-2 text-white">
+        <h4>Buscar:</h4>   
+        </div>
+        <div class="col-md-7 col-sm-7 col-lg-5">
+        <input class="form-control" id="filtro" data-url="<?php //echo getUrl("Deterioro","Deterioro","filtro",false,"ajax"); ?>" type="text" placeholder=" Buscar..">        
+        </div>
+    
+      </div><br>--> 
+     
       <div class="table-responsive">
-       <table id="Tbl-deterioro" class="display table table-striped table-hover" >
+       <table id="Tbl-deterioro" class="display table table-striped table-hover table-head-bg-secondary  table-striped-bg-default" >
          <thead>
           <tr>
            <th>#</th> 
            <th>Nombre deterioro</th>
            <th>Tipo deterioro</th>
            <th>Clasificaci&oacute;n</th>
-           <th style="width: 10%;text-align: center;">Acci&oacute;n</th>
-           <th></th> 
+           <th style="width: 19%;text-align: center;">Acci&oacute;n</th>
           </tr>
          </thead>
           <tbody>
@@ -62,14 +61,15 @@ if (isset($_SESSION['result'])) {
               echo "<td>".$det['det_nombre']."</td>";
               echo "<td>".$det['det_tipo_deterioro']."</td>";
               echo "<td>".$det['det_clasificacion']."</td>";
-              echo "<td><button data-toggle='tooltip' class='btn btn-link btn-primary icon-note' id='editar' value='".$det['det_id']."' data-url='".getUrl("Deterioro","Deterioro","getUpdate",false,"ajax")."' data-original-title='Editar'></button></td>";
-              echo "<td><button data-toggle='tooltip' class='btn btn-link btn-danger flaticon-interface-5' id='eliminar' value='".$det['det_id']."' data-url='".getUrl("Deterioro","Deterioro","getDelete",false,"ajax")."' data-original-title='Eliminar'></button></td>";
+              echo "<td><button data-toggle='tooltip' class='btn btn-link btn-primary icon-note' id='editar' value='".$det['det_id']."' data-url='".getUrl("Deterioro","Deterioro","getUpdate",false,"ajax")."' data-original-title='Editar'></button>"
+                      ."&nbsp;&nbsp;&nbsp;<button data-toggle='tooltip' class='btn btn-link btn-danger flaticon-interface-5' id='eliminar' value='".$det['det_id']."' data-url='".getUrl("Deterioro","Deterioro","postDelete",false,"ajax")."' data-original-title='Eliminar'></button></td>";
               echo "</tr>";
            } ?>
           </tbody>
         </table>
+        <br><br>
       </div>
-    </div><br><br>
+  
 
     <div class="modal col-md-12 col-sm-12 " id="Nuevo" data-backdrop="static"> 
      <div class="modal-dialog">
@@ -155,27 +155,32 @@ if (isset($_SESSION['result'])) {
     </div>
 
 
-<div class="modal col-md-12 col-sm-12" id="modal_eliminar">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form action="<?php echo getUrl("Deterioro","Deterioro","postDelete"); ?>" method="POST">          
-      <div class="modal-header btn-danger">
-        <h3 class="modal-title text-white">Eliminar registro</h3>
+  <!-- <div class="modal col-md-12 col-sm-12" id="modal_eliminar">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="<?php //echo getUrl("Deterioro","Deterioro","postDelete"); ?>" method="POST">          
+        <div class="modal-header btn-danger">
+          <h3 class="modal-title text-white">Eliminar registro</h3>
+        </div>
+        <div class="modal-body btn-default">
+        <h3 class="container text-white" style="text-align:center;">¿Esta seguro de eliminar este registro?</h3>
+            <div id="cotenido_eliminar" class="text-white"></div>  
+        </div>
+        <div class="modal-footer btn-default">
+          <input type="submit" class="btn btn-danger" value="Aceptar">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+        </form>   
       </div>
-      <div class="modal-body btn-default">
-      <h3 class="container text-white" style="text-align:center;">¿Esta seguro de eliminar este registro?</h3>
-          <div id="cotenido_eliminar" class="text-white"></div>  
-      </div>
-      <div class="modal-footer btn-default">
-        <input type="submit" class="btn btn-danger" value="Aceptar">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      </div>
-      </form>   
     </div>
-  </div>
+  </div> -->
 </div>
+<?php 
+    $prueba=" ";
+    while($Cade=pg_fetch_assoc($casoDeterioro)){
+        
+        $prueba.=$Cade['deterioro_id'].",";
+    }
+    echo "<input type='hidden' name='deterioros_id' id='deterioros_id' class='btn btn-danger' value=".$prueba.">";
 
-
-  </div>
- </div>
-</div>
+?>

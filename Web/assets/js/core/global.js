@@ -1,5 +1,461 @@
 $(document).ready(function() {
 
+
+//////////////// INICIO DE ORDENES DE MANTENIMIENTO  /////////
+
+$('#Tbl-orden').DataTable({
+    "pageLength": 5,
+    initComplete: function() {
+        this.api().columns().every(function() {
+            var column = this;
+            var select = $('<select class="form-control"><option value=""></option></select>')
+                .appendTo($(column.footer()).empty())
+                .on('change', function() {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
+                    );
+
+                    column
+                        .search(val ? '^' + val + '$' : '', true, false)
+                        .draw();
+                });
+
+            column.data().unique().sort().each(function(d, j) {
+                select.append('<option value="' + d + '">' + d + '</option>')
+            });
+        });
+    }
+});
+
+
+$(document).on("click",".foto", function(){
+var url = $(this).attr("data-url");
+var id = $(this).attr("data-id");
+
+$.ajax({
+  url: url,
+  type: "POST",
+  data: "cas_id=" + id,
+   success:function(datos){
+   $("#foto").html(datos);
+   $("#modal-foto").modal();
+   }
+});   
+
+});
+
+
+$(document).on("click",".registrar", function(){
+
+var url = $(this).attr("data-url");
+
+var arr = $('[name="list[]"]:checked').map(function(){
+  return this.value;
+}).get();
+
+
+swal({
+title: "Registrar Orden",
+text: "¿Esta seguro de registrar orden?",
+icon: "warning",
+buttons: true,
+dangerMode: true,
+})
+.then((registrar) => {
+if (registrar) {
+
+    var total = arr.length;
+
+if (total>=2 && total<=5) {
+
+    $.ajax({
+    url: url,
+    type: "POST",
+    data: "sel=" + arr,
+    success:function(datos){
+        swal({
+        title: "Orden Emitida",
+        text: "La orden ha sido registrada correctamente",
+        icon: "success",
+        }).then(function() {
+        location.reload();
+        });
+    }
+    });    
+
+    }else{
+
+    swal({
+        title: 'Orden incompleta',
+        text: 'Debe de seleccionar minimo 2 y maximo 5 casos a la orden',
+        icon: 'error',
+        buttons: {
+            confirm: {
+            className: 'btn btn-success'
+            }
+        }
+    });
+    }  
+
+}
+
+});
+
+
+});
+
+$(document).on("click",".editarOrd", function(){
+
+var ord_id=$("#ord_id").val();
+var url = $(this).attr("data-url");   
+var arr = $('[name="list[]"]:checked').map(function(){
+   return this.value;
+ }).get();
+
+swal({
+   title: "Actualizacion de orden",
+   text: "¿Esta seguro de actualizar esta orden?",
+   icon: "warning",
+   buttons: true,
+   dangerMode: true,
+}).then((actualizar) => {
+ 
+    if (actualizar) {
+
+        var total = arr.length;
+
+        if (total>=2 && total<6) {
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: "sell="+ arr + "&ord_id=" + ord_id,
+                success:function(datos){      
+            
+                    swal({
+                        title: "Orden actualizada",
+                        text: "La orden ha sido actualizada correctamente",
+                        icon: "success",
+                    }).then(function() {
+                        location.reload();
+                    });
+                }
+            });   
+
+        }else{
+
+            swal({
+                title: 'Orden incompleta',
+                text: 'Debe de seleccionar minimo 2 y maximo 5 casos a la orden para actualizar esta orden',
+                icon: 'error',
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                }
+            });
+
+        }
+    }
+
+});
+
+});
+
+
+$(document).on("click",".eliminarOrd" , function(){
+
+    var ord_id=$("#ord_id").val();
+    var url=$(this).attr("data-url");
+   
+    swal({
+         title: "inhabilitar / Denegar",
+         text: "¿Esta seguro de modificar esta orden?",
+         icon: "warning",
+         buttons: true,
+         dangerMode: true,
+     }).then((eliminar) => {
+
+        if(eliminar){
+
+            var textarea = document.createElement('textarea');
+            textarea.rows = 6;
+            textarea.className = 'swal-content__textarea';
+          
+            // Set swal return value every time an onkeyup event is fired in this textarea
+            textarea.onkeyup = function () {
+              swal.setActionValue({
+                confirm: this.value
+              });
+            };
+          
+            swal({
+              text: 'deshabilitar / denegar',
+              content: textarea,
+              buttons: {
+                cancel: {
+                  text: 'Cancel',
+                  visible: true
+                },
+                confirm: {
+                  text: 'button',
+                  closeModal: false
+                }
+              }
+            }).then(function (value) {
+                var g = value;               
+                if (g.length>0 && g.length<301) {
+                $.ajax({
+                    url:url,
+                    type: "POST",
+                    data: "ord_id=" + ord_id + "&justificacion=" + g,
+                    success: function(datos){
+                         swal({
+                             title: "Orden modificada",
+                             text: "La orden se ha modificado correctamente",
+                             icon: "success",
+                         }).then(function() {
+                            window.location.href = "index.php?modulo=Orden&controlador=Orden&funcion=index&ord_id=2";
+                         });
+                    }
+                });
+
+              }else{
+                swal('Error', 'Por favor diligencie el campo , puede ingresar como maximo 300 caracteres.', 'error');
+              }
+          
+
+            });
+
+        }else{
+            swal({
+                title: 'Orden Cancelada',
+                text: 'Se Cancelo la modificacon de la Orden',
+                icon: 'error',
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-danger'
+                    }
+                }
+            });
+        }
+     });
+
+});
+
+$(document).on("click",".deterioros", function(){
+var url = $(this).attr("data-url");
+var id = $(this).attr("data-id");
+
+$.ajax({
+  url: url,
+  type: "POST",
+  data: "cas_id=" + id,
+   success:function(datos){
+   $("#deterioros").html(datos);
+   $("#modal-deterioros").modal();
+   }
+});   
+
+});
+
+
+
+$(document).on("click",".habilitar", function(){
+
+var ord_id=$("#ord_id").val();
+var url = $(this).attr("data-url");   
+var arr = $('[name="list[]"]:checked').map(function(){
+   return this.value;
+ }).get();
+
+swal({
+   title: "Habilitar orden",
+   text: "¿Esta seguro de habilitar esta orden?",
+   icon: "warning",
+   buttons: true,
+   dangerMode: true,
+}).then((actualizar) => {
+ 
+    if (actualizar) {
+
+        var total = arr.length;
+
+        if (total>=2 && total<6) {
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: "sell="+ arr + "&ord_id=" + ord_id,
+                success:function(datos){      
+            
+                    swal({
+                        title: "Orden actualizada",
+                        text: "La orden ha sido habilitada correctamente",
+                        icon: "success",
+                    }).then(function() {
+                        window.location.href = "index.php?modulo=Orden&controlador=Orden&funcion=index&ord_id=2";
+
+                    });
+                }
+            });   
+
+        }else{
+
+            swal({
+                title: 'Orden incompleta',
+                text: 'Debe de seleccionar minimo 2 y maximo 5 casos a la orden para habilitar esta orden',
+                icon: 'error',
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                }
+            });
+
+        }
+    }
+
+});
+
+});
+
+$(document).on("click",".aprobarOrd" , function(){
+var url = $(this).attr("data-url");
+var ord_id=$("#ord_id").val();
+
+swal({
+    title: "Aprobar orden",
+    text: "¿Esta seguro de aprobar esta orden?",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+ }).then((actualizar) => {
+  
+     if (actualizar) {
+ 
+             $.ajax({
+                 url: url,
+                 type: "POST",
+                 data: "ord_id=" + ord_id,
+                 success:function(datos){      
+             
+                     swal({
+                         title: "Orden aprobada",
+                         text: "La orden ha sido aprobada correctamente",
+                         icon: "success",
+                     }).then(function() {
+                         location.reload();
+                     });
+                 }
+             });   
+         
+     }else{
+        swal({
+            title: 'proceso Cancelado',
+            text: 'Se Cancelo la aprobacion de la Orden',
+            icon: 'error',
+            buttons: {
+                confirm: {
+                    className: 'btn btn-danger'
+                }
+            }
+        });
+
+     }
+
+ });
+
+});
+
+
+$(document).on("click",".finalizarOrd" , function(){
+var url = $(this).attr("data-url");
+var ord_id=$("#ord_id").val();
+
+swal({
+    title: "Finalizar orden",
+    text: "Si usted finaliza la orden y tiene casos pendientes por finalizar estos casos no se guardaran en la finalizacion de la orden y seran desvinculados  ¿Esta seguro de finalizar esta orden?",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+ }).then((actualizar) => {
+  
+     if (actualizar) {
+ 
+
+        var textarea = document.createElement('textarea');
+        textarea.rows = 6;
+        textarea.className = 'swal-content__textarea';
+      
+        // Set swal return value every time an onkeyup event is fired in this textarea
+        textarea.onkeyup = function () {
+          swal.setActionValue({
+            confirm: this.value
+          });
+        };
+      
+        swal({
+          text: 'Finalizar orden',
+          content: textarea,
+          buttons: {
+            cancel: {
+              text: 'Cancel',
+              visible: true
+            },
+            confirm: {
+              text: 'button',
+              closeModal: false
+            }
+          }
+        }).then(function (value) {
+            var g = value;               
+            if (g.length>0 && g.length<301) {
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: "ord_id=" + ord_id + "&justificacion=" + g,
+                success:function(datos){      
+            
+                    swal({
+                        title: "Orden Finalizada",
+                        text: "La orden ha sido finalizada correctamente",
+                        icon: "success",
+                    }).then(function() {
+                        location.reload();
+                    });
+                }
+            }); 
+
+
+          }else{
+            swal('Error', 'Por favor diligencie el campo , puede ingresar como maximo 300 caracteres.', 'error');
+          }
+      
+
+        });  
+         
+     }else{
+        swal({
+            title: 'proceso Cancelado',
+            text: 'Se Cancelo la finalizacion de la Orden',
+            icon: 'error',
+            buttons: {
+                confirm: {
+                    className: 'btn btn-danger'
+                }
+            }
+        });
+
+     }
+
+ });
+
+});
+
+/////////////////////////////   FIN DE ORDEN   ///////////////////////////////////////////////// 
+
     
     // Declaracion variables
     var arr = [];
@@ -300,143 +756,190 @@ $(document).ready(function() {
 
     //////////////////////////////////////////////////////////
 
-    //////////////////Daniel //////////////////
+  //////////////////Daniel //////////////////
 
-    $('#Tbl-deterioro').DataTable({
-        "pageLength": 5,
-        initComplete: function() {
-            this.api().columns().every(function() {
-                var column = this;
-                var select = $('<select class="form-control"><option value=""></option></select>')
-                    .appendTo($(column.footer()).empty())
-                    .on('change', function() {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
+  $('#Tbl-deterioro').DataTable({
+    "pageLength": 5,
+    initComplete: function() {
+        this.api().columns().every(function() {
+            var column = this;
+            var select = $('<select class="form-control"><option value=""></option></select>')
+                .appendTo($(column.footer()).empty())
+                .on('change', function() {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
+                    );
 
-                        column
-                            .search(val ? '^' + val + '$' : '', true, false)
-                            .draw();
-                    });
-
-                column.data().unique().sort().each(function(d, j) {
-                    select.append('<option value="' + d + '">' + d + '</option>')
+                    column
+                        .search(val ? '^' + val + '$' : '', true, false)
+                        .draw();
                 });
+
+            column.data().unique().sort().each(function(d, j) {
+                select.append('<option value="' + d + '">' + d + '</option>')
             });
+        });
+    }
+});
+
+
+$(document).on("click", ".cerrar", function() { location.reload(); });
+
+$(document).on("click", ".guardar", function() {
+    var url = $(this).attr("data-url");
+    var nom = $(".nombreD").val();
+    var dan = $(".Dano").val();
+    var cla = $(".Clasi").val();
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: "det_nombre=" + nom + "&det_tipo_deterioro=" + dan + "&det_clasificacion=" + cla,
+        success: function(datos) {
+            $("#formEjemplo")[0].reset();
+            $("#errores").html(datos);
         }
     });
+});
 
-
-    $(document).on("click", ".cerrar", function() { location.reload(); });
-
-    $(document).on("click", ".guardar", function() {
-        var url = $(this).attr("data-url");
-        var nom = $(".nombreD").val();
-        var dan = $(".Dano").val();
-        var cla = $(".Clasi").val();
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: "det_nombre=" + nom + "&det_tipo_deterioro=" + dan + "&det_clasificacion=" + cla,
-            success: function(datos) {
-                $("#formEjemplo")[0].reset();
-                $("#errores").html(datos);
-            }
-        });
+$(document).on("keyup", "#filtro", function() {
+    var url = $(this).attr("data-url");
+    var valor = $(this).val();
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: "valor=" + valor,
+        success: function(datos) {
+            $("tbody").html(datos);
+        }
     });
+});
 
-    $(document).on("keyup", "#filtro", function() {
-        var url = $(this).attr("data-url");
-        var valor = $(this).val();
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: "valor=" + valor,
-            success: function(datos) {
-                $("tbody").html(datos);
-            }
-        });
+$(document).on("click", "#editar", function() {
+    var id = $(this).val();
+    var url = $(this).attr("data-url");
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: "id=" + id,
+        success: function(datos) {
+            $("#contenido_editar").html(datos);
+            $('#modal_editar').modal();
+        }
     });
+});
 
-    $(document).on("click", "#editar", function() {
-        var id = $(this).val();
-        var url = $(this).attr("data-url");
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: "id=" + id,
-            success: function(datos) {
-                $("#contenido_editar").html(datos);
-                $('#modal_editar').modal();
-            }
-        });
-    });
+  //Se creo esta funcion para el modal de "Eliminar"(Swit-Alert->Nuevo)
+  $(document).on("click", "#eliminar", function() {
 
-    $(document).on("click", "#eliminar", function() {
-        var id = $(this).val();
-        var url = $(this).attr("data-url");
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: "id=" + id,
-            success: function(datos) {
-                $("#cotenido_eliminar").html(datos);
-                $('#modal_eliminar').modal();
-            }
-        });
-    });
+    var id = $(this).val();
+    var url = $(this).attr("data-url");
+    var deterioros_id=$("#deterioros_id").val();
+    var cont=0;
 
-    $(document).on("keyup", ".nombred", function() {
+    arreglo = deterioros_id.split(",");
+    // alert(id);
 
-        var nombre = $(".nombred").val();
-        var expD = '!"#$%&/()=?¡+{}çÇ+-_`@ª^~€<>.·[]°|,;:´¨*¿';
-        var c = 0;
-        for (let l = 0; l < nombre.length; l++) {
-            for (let k = 0; k < expD.length; k++) {
-                if (nombre[l] == expD[k]) {
-                    c++;
+    for(x=0; x < deterioros_id.length; x++){
+        if(id==arreglo[x]){
+            // alert(deterioros_id[x]);
+             cont=1;
+        }
+    }
+    swal({
+        title: "Eliminación de deterioro",
+        text: "¿Esta seguro de eliminar esta deterioro?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((eliminar) => {
+
+        if(cont==0 && eliminar){
+          
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: "id=" + id,
+                success: function(datos) {
+                    swal({
+                        title: "Deterioro Eliminada",
+                        text: "El deterioro se ha eliminado correctamente",
+                        icon: "success",
+                    }).then(function() {
+                        location.reload();
+                    });
                 }
-            }
-        }
-
-        if (nombre.length == 0) {
-            $(".actualizar").attr('disabled', true);
-            $("#errord").html("<h5 class='text-danger'>(*) Debe llenar el nombre del detrioro</h5>");
-        }
-        if (nombre.length > 0 && c > 0) {
-            $(".actualizar").attr('disabled', true);
-            $(this).val(nombre.substr(0, nombre.length - 1));
-        }
-        if (nombre.length > 0 && c == 0) {
-            $(".actualizar").attr('disabled', false);
-            $("#errord").html("");
-        }
-    });
-
-    $(document).on("keyup", ".nombreD", function() {
-
-        var nombre = $(".nombreD").val();
-        var expD = '!"#$%&/()=?¡+{}çÇ+-_`@çª<>~€.·[]°|,^;:´¨*¿';
-        var c = 0;
-        for (let l = 0; l < nombre.length; l++) {
-            for (let k = 0; k < expD.length; k++) {
-                if (nombre[l] == expD[k]) {
-                    c++;
+            });
+  
+        }else if(cont==1){
+            swal({
+                title: 'Deterioro Cancelada',
+                text: 'El deterioro esta Vinculado a un Caso',
+                icon: 'error',
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-danger'
+                    }
                 }
+            });
+
+        }
+    })
+
+
+});
+
+
+$(document).on("keyup", ".nombred", function() {
+
+    var nombre = $(".nombred").val();
+    var expD = '!"#$%&/()=?¡+{}çÇ+-_`@ª^~€<>.·[]°|,;:´¨*¿';
+    var c = 0;
+    for (let l = 0; l < nombre.length; l++) {
+        for (let k = 0; k < expD.length; k++) {
+            if (nombre[l] == expD[k]) {
+                c++;
             }
         }
+    }
 
-        if (c > 0) {
-            $(".guardar").attr('disabled', true);
-            $(this).val(nombre.substr(0, nombre.length - 1));
-        } else if (nombre.length > 0 && c == 0) {
-            $(".guardar").attr('disabled', false);
+    if (nombre.length == 0) {
+        $(".actualizar").attr('disabled', true);
+        $("#errord").html("<h5 class='text-danger'>(*) Debe llenar el nombre del detrioro</h5>");
+    }
+    if (nombre.length > 0 && c > 0) {
+        $(".actualizar").attr('disabled', true);
+        $(this).val(nombre.substr(0, nombre.length - 1));
+    }
+    if (nombre.length > 0 && c == 0) {
+        $(".actualizar").attr('disabled', false);
+        $("#errord").html("");
+    }
+});
+
+$(document).on("keyup", ".nombreD", function() {
+
+    var nombre = $(".nombreD").val();
+    var expD = '!"#$%&/()=?¡+{}çÇ+-_`@çª<>~€.·[]°|,^;:´¨*¿';
+    var c = 0;
+    for (let l = 0; l < nombre.length; l++) {
+        for (let k = 0; k < expD.length; k++) {
+            if (nombre[l] == expD[k]) {
+                c++;
+            }
         }
+    }
 
-    });
+    if (c > 0) {
+        $(".guardar").attr('disabled', true);
+        $(this).val(nombre.substr(0, nombre.length - 1));
+    } else if (nombre.length > 0 && c == 0) {
+        $(".guardar").attr('disabled', false);
+    }
 
+});
 
-    ////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
 
     //Validacion de caracteres especiales en la interfaz "Olvidaste.php" correo electronico
     $(document).on("keyup", "#correo", function() {
@@ -647,7 +1150,7 @@ $(document).ready(function() {
         return valid;
     });
     
-    ///////////////////////////Sandra Barrio ////////////////////////////
+   ///////////////////////////Sandra Barrio ////////////////////////////
 
     //Se creo esta funcion para que NO ingrese el usuario caracteres especiales en la vista "Registrar"
     $(document).on("keyup", ".barrioN", function() {
@@ -726,7 +1229,29 @@ $(document).ready(function() {
 
 
     });
-
+    //Funcion para select
+    $(document).on("click", ".barrioSelect",function(){
+        var select = $(this).val();
+       
+        if (select > 0) {
+        
+            $(this).removeClass('is-invalid');
+            $(this).addClass('is-valid');
+            // $(this).attr('Class','form-control is-valid validacion');
+            $("#Actualizar").attr('disabled',false);
+            $("#errorSelect").html("");
+          
+        }
+        else {
+          // $(this).val(barrioNom.substr(0, barrioNom.length - 1));
+          $(this).removeClass('is-valid');
+          $(this).addClass('is-invalid');
+          //$(this).attr('Class','form-control is-invalid validacion');
+          $("#Actualizar").attr('disabled',true);
+          $("#errorSelect").html("<span class='text-danger'>Debe seleccionar una comuna</span>");
+        }
+  
+    }); 
     //Se creo esta funcion para el modal de "Editar"
     $(document).on("click", "#actuali", function() {
 
@@ -746,25 +1271,65 @@ $(document).ready(function() {
         });
 
     });
-
-    //Se creo esta funcion para el modal de "Eliminar"
+   
+    //Se creo esta funcion para el modal de "Eliminar"(Swit-Alert->Nuevo)
     $(document).on("click", "#elimi", function() {
 
         var barrioElimi = $(this).val();
         var url = $(this).attr("data-url");
-
+        var barrios_id=$("#barrios_id").val();
+        var cont=0;
+        arreglo = barrios_id.split(",");
         // alert(barrioElimi);
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: "barrioElimi=" + barrioElimi,
-            success: function(datos) {
-                $("#eliminarB").html(datos);
-                $("#eliminar").modal();
+        for(x=0; x < barrios_id.length; x++){
+            if(barrioElimi==arreglo[x]){
+                // alert(barrios_id[x]);
+                 cont=1;
             }
-        });
+        }
+        swal({
+            title: "Eliminación de barrio",
+            text: "¿Esta seguro de eliminar esta barrio?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((eliminar) => {
+
+            if(cont==0 && eliminar){
+              
+                $.ajax({
+                    url:url,
+                    type: "POST",
+                    data: "barrioElimi=" + barrioElimi,
+                    success: function(datos){
+                        swal({
+                            title: "Barrio Eliminada",
+                            text: "El barrio se ha eliminado correctamente",
+                            icon: "success",
+                        }).then(function() {
+                            location.reload();
+                        });
+                    }
+                });
+      
+            }else if(cont==1){
+                swal({
+                    title: 'Barrio Cancelada',
+                    text: 'El barrio esta Vinculado a un Tramo',
+                    icon: 'error',
+                    buttons: {
+                        confirm: {
+                            className: 'btn btn-danger'
+                        }
+                    }
+                });
+
+            }
+        })
+
 
     });
+
 
     //filtro con datatables  y paginación
     $('#multi-filter-select').DataTable({

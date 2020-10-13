@@ -54,8 +54,8 @@
                     </div>  
                     <br> 
                     <div class="modal-footer btn-default">
-                         <button type="button" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
-                        <input type="submit" name="Registrar" id="paratodo" value="Registrar" class="btn btn-success">
+                         <a type="button" class="btn btn-danger" href="<?php echo getUrl("Barrio","Barrio","index");?>">Cancelar</a>
+                        <input type="submit" name="Registrar" id="Registrar" value="Registrar" class="btn btn-success">
                     </div>
                 </form>
             </div>

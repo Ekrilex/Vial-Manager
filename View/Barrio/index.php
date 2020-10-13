@@ -89,37 +89,33 @@
                                     <th scope="col">Nombre de Barrio</th>
                                     <th scope="col">N&uacute;mero de Comuna</th>
                                     <th scope="col">Ubicacion</th>
-                                    <th scope="col">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <font color="blue">Editar</font>
+                                    <th scope="col" class="text-center">
+                                       Acciones
                                     </th>
-                                    <th scope="col">
-                                        &nbsp;&nbsp;&nbsp;
-                                        &nbsp;
-                                        <font color="darkred">Eliminar</div>
-                                        
-                                    </th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
                                 
                                 <?php
                                     while($bar=pg_fetch_assoc($barrios)){
+                                        
                                     // foreach($barrios as $bar){
                                         echo "<tr>";
                                         echo "<td>".$bar['bar_id']."</td>";
                                         echo "<td>".$bar['bar_descripcion']."</td>";
                                         echo "<td>".$bar['com_id']."</td>";
                                         echo "<td>".$bar['com_ubicacion']."</td>";
-                                        echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <a><button id='actuali' value='".$bar['bar_id']."' data-url='".getUrl("Barrio","Barrio","getUpdate",false,"ajax")."' data-toggle='tooltip' class='btn btn-link btn-primary btn-lg' data-original-title='Editar'>
-                                                <i class='icon-note'></i></button></a> </td>";
-                                        echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a><button id='elimi' value='".$bar['bar_id']."' data-url='".getUrl("Barrio","Barrio","getDelete",false,"ajax")."' data-toggle='tooltip' class='btn btn-link btn-danger' data-original-title='Eliminar'>
+                                                <i class='icon-note'></i></button></a>"
+                                             ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a><button id='elimi' value='".$bar['bar_id']."' data-url='".getUrl("Barrio","Barrio","postDelete",false,"ajax")."' data-toggle='tooltip' class='btn btn-link btn-danger' data-original-title='Eliminar'>
                                                 <i class='flaticon-interface-5'></i> 
                                                 </button></a> </td>";
                                         echo "</tr>";
+                                        // echo "<input type='hidden' id='elimi' value='".$bar['bar_id']."' data-url='".getUrl("Barrio","Barrio","getDelete",false,"ajax")."' >";
                                     }
+                                    
                                 include_once '../View/Barrio/index.php';
                               
                                 ?>
@@ -134,10 +130,20 @@
 <?php 
     include_once '../View/Barrio/update.php';
 ?>
+<?php 
+    $prueba=" ";
+    while($tra=pg_fetch_assoc($tramo)){
+        
+        $prueba.=$tra['barrio_id'].",";
+    }
+    echo "<input type='hidden' name='barrios_id' id='barrios_id' class='btn btn-danger' value=".$prueba.">";
+
+?>
+
 
 
 <!-- Modal de Eliminar -->
-<div class="modal" id="eliminar">
+<!-- <div class="modal" id="eliminar">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header btn-danger">
@@ -146,24 +152,28 @@
 					<span aria-hidden="true"></span>
 				</button>
 			</div>
-			<div class="modal-body btn-default"><!--tener en cuenta para el ajax-->
+			<div class="modal-body btn-default">tener en cuenta para el ajax
                
-                <form action="<?php echo getUrl("Barrio","Barrio","postDelete"); ?>" method="POST">
+                <form action="<?php //echo getUrl("Barrio","Barrio","postDelete"); ?>" method="POST">
                     
-                    <div id="eliminarB" class="text-dark"></div><!--tener en cuenta para el ajax-->
+                    <div id="eliminarB" class="text-dark"></div>tener en cuenta para el ajax
                   
                     <div class="form-group">
                         <h4 class="text-light">¿Esta seguro de elimanar el barrio?</h4>
                     </div>
                     <div class="modal-footer btn-default">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal" >Cancelar</button>
-                        <input type="submit" name="Aceptar" value="Aceptar" class="btn btn-danger">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal" >Cancelar</button> -->
+                   
+                       
+                   
+                       <!-- <button type="submit" name="Aceptar" class="btn btn-danger" >Aceptar</button>
+                    
                     </div>
                 </form>
             </div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 
 

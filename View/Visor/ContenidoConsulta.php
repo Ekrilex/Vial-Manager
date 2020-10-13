@@ -56,7 +56,7 @@
                                                 <?php 
                                                     if($casoEncontrado['cas_fotografia_fin'] != ""){
                                                 ?>
-                                                <img src="<?php echo $casoEncontrado['cas_fotografia_fin'];?>" alt='no tiene' width='467px' height='300px' >
+                                                <img src="<?php echo $casoEncontrado['cas_fotografia_fin'];?>" alt='no tiene' width='350px' height='250px' >
                                                 <?php 
                                                     }else{
                                                         echo "<h5><span><i class='fas fa-info-circle'></i></span>&nbsp;Este caso aun no dispone de foto final</h5>";

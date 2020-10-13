@@ -3,8 +3,10 @@
     <div class="card-header">
       <div class="d-flex align-items-center">
           <h3 class="card-title">Consultar Ordenes de mantenimiento  <span class="icon-book-open"></span>&nbsp;&nbsp;<span class="icon-magnifier"></span></h3>
-          <a type="button" class="text-light btn btn-warning btn-round ml-auto historial" href="<?php echo getUrl("Orden","Orden","historialOrd"); ?>">
-          Ver Historial <i class="flaticon-agenda"></i></a>
+          <?php if($_SESSION['rol'] != 4){?>
+                <a type="button" class="text-light btn btn-warning btn-round ml-auto historial" href="<?php echo getUrl("Orden","Orden","historialOrd"); ?>">
+                Ver Historial <i class="flaticon-agenda"></i></a>
+          <?php }?>
       </div>
     </div>   
       <div class="card-body">
@@ -30,14 +32,23 @@
                     echo "<td>".$ord['ord_fecha_vencimiento']."</td>";
                     echo "<td>".$ord['usu_nickname']."</td>";
                     echo "<td>".$ord['est_descripcion']."</td>";
-                    if($ord['est_descripcion']!="Finalizado"){              
-                    echo "<td><a href='".getUrl("Orden","Orden","getUpdate",array("ord_id" => $ord['ord_id']))."'><button data-toggle='tooltip' class='btn btn-link btn-primary fas fa-search text-info' data-original-title='Editar'></button></a>";
-                    echo "<a href='".getUrl("Orden","Orden","getDelete",array("ord_id" => $ord['ord_id']))."'><button data-toggle='tooltip' class='btn btn-link btn-danger fas fa-cog' data-original-title='Gestionar'></button></a></td>";
-                  }else{
-                    echo "<td><a href='".getUrl("Orden","Orden","getDelete",array("ord_id" => $ord['ord_id']))."'><button data-toggle='tooltip' class='btn btn-link btn-danger fas fa-cog container' data-original-title='Gestionar'></button></a></td>";
-                  }
-                    echo "</tr>";
-                  } 
+                    if($ord['est_descripcion']!="Finalizado"){     
+                      if($_SESSION['rol'] != 4){     
+                        $disabled = "inline";    
+                      }else{
+                        $disabled = "none";
+                      }
+
+                      echo "<td><a href='".getUrl("Orden","Orden","getUpdate",array("ord_id" => $ord['ord_id']))."' style='display:".$disabled.";'><button data-toggle='tooltip' class='btn btn-link btn-primary fas fa-search text-info' data-original-title='Editar'></button></a>";
+
+                      echo "<a href='".getUrl("Orden","Orden","getDelete",array("ord_id" => $ord['ord_id']))."'><button data-toggle='tooltip' class='btn btn-link btn-danger fas fa-cog' data-original-title='Gestionar'></button></a></td>";
+                    }else{
+                     
+                        echo "<td><a href='".getUrl("Orden","Orden","getDelete",array("ord_id" => $ord['ord_id']))."'><button data-toggle='tooltip' class='btn btn-link btn-danger fas fa-cog container' data-original-title='Gestionar'></button></a></td>";
+                      
+                    }
+                      echo "</tr>";
+                    } 
                 ?>
               </tbody>
           </table>

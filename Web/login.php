@@ -10,6 +10,8 @@
     <head>
         <title>INICIO DE SESI&Oacute;N</title>
         <link rel="stylesheet" href="assets/css/login.css">
+        <link rel="icon" href="assets/img/logoTemp.png" type="image/x-icon"/>
+
         <!-- CSS Files -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/atlantis.min.css">

@@ -29,6 +29,21 @@
             }
         }
 
+        public static function obtenerCaso($tra_id){
+
+            $objetoModel = new CasoModel();
+
+            $query = "SELECT tramo_id FROM tbl_caso WHERE tramo_id = ".$tra_id."";
+            $consultaCasos = $objetoModel->consultar($query);
+
+            if(pg_num_rows($consultaCasos) > 0){
+                return true;
+            }else{
+                return false;
+            }
+
+        }
+
         public function postCreate(){
             
             $objetoModel = new CasoModel();

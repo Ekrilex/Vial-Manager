@@ -119,13 +119,21 @@
                       
                     if($_SESSION['aprobar']=="ok" && $ord['est_descripcion']=="En Progreso"){
                    ?>
+                      <?php if($_SESSION['rol']==3 || $_SESSION['rol']==1){?>
+                          <button class="btn btn-success finalizarOrd" data-url="<?php echo getUrl('Orden','Orden','finalizar',false,'ajax')?>" >Finalizar orden</button>
+                    <?php }?>
 
-                    <button class="btn btn-success finalizarOrd" data-url="<?php echo getUrl('Orden','Orden','finalizar',false,'ajax')?>" >Finalizar orden</button>                
                     <?php
                     }else if($_SESSION['aprobar']=="no"){
+                      if($_SESSION['rol'] != 4){
                     ?>
-                    <button  class="btn btn-danger eliminarOrd" data-url="<?php echo getUrl('Orden','Orden','postDelete',false,'ajax')?>">Inhabilitar / denegar</button>
-                    <button class="btn btn-white aprobarOrd" data-url="<?php echo getUrl('Orden','Orden','aprobar',false,'ajax')?>" >Aprobar</button>                
+                      <button  class="btn btn-danger eliminarOrd" data-url="<?php echo getUrl('Orden','Orden','postDelete',false,'ajax')?>">Inhabilitar / denegar</button>
+                      <?php }?>
+                      <?php 
+                        if($_SESSION['rol'] != 4 && $_SESSION['rol'] != 3 && $ord['est_descripcion']!="En Progreso"){
+                      ?>
+                      <button class="btn btn-white aprobarOrd" data-url="<?php echo getUrl('Orden','Orden','aprobar',false,'ajax')?>" >Aprobar</button>     
+                        <?php }?>           
                     <?php
                        }
                         unset($_SESSION['aprobar']);                      

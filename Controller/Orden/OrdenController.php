@@ -151,7 +151,7 @@
         $c=$or['estados'];
       }
       
-      if($c==$conta || $c==2){
+      if($c==$conta || $c>2){
          $_SESSION['aprobar']="ok";
       }else if($c<$conta){
         $_SESSION['aprobar']="no";

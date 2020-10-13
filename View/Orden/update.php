@@ -116,7 +116,9 @@ if($ord['est_descripcion']!="Finalizado"){
                     <div id="cambiarEje"></div>
                     <a class="btn btn-secondary" href="<?php echo getUrl('Orden','Orden','index',array("ord_id" => $ord['ord_id']));?>">Volver</a>
                     <input type="hidden" name="ord_id" id="ord_id" value="<?php echo $ord['ord_id'];?>">
-                    <button  class="btn btn-success editarOrd" data-url="<?php echo getUrl('Orden','Orden','postUpdate',false,'ajax')?>">Guardar Cambios</button>
+                    <?php if($_SESSION['rol'] != 4){?>
+                        <button  class="btn btn-success editarOrd" data-url="<?php echo getUrl('Orden','Orden','postUpdate',false,'ajax')?>">Guardar Cambios</button>
+                    <?php }?>
                 </div>
             </div>
           

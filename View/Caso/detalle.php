@@ -338,7 +338,7 @@ while ($casoSeleccionado = pg_fetch_assoc($casoConsulta)) {
                     <input type="hidden" id="cas_id" value="<?php echo $casoSeleccionado['cas_id'];?>">
                     <a class="btn btn-secondary" href="<?php echo getUrl('Caso','Caso','index')?>">Salir</a>
                     <?php 
-                        if($_SESSION['rol'] != 3){
+                        if($_SESSION['rol'] != 3 && $_SESSION['rol'] != 2){
                     ?>
                             <button class="btn btn-info" id="editarCaso" data-url="<?php echo getUrl("Caso","Caso","getUpdate",false,"ajax");?>" data-id="<?php echo $casoSeleccionado['cas_id'];?>">Editar</button>
                     <?php 

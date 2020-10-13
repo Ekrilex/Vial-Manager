@@ -23,6 +23,8 @@
                 <tbody id="registrosTramo">
                     <?php 
                           while($tramos = pg_fetch_assoc($tramo)){
+                            if(CasoController::obtenerCaso($tramos['tra_id']) == false){
+                              
                               if($tramos['tra_disponibilidad'] == 0 && $tramos['estado_id'] == 1){
                                 echo "<tr>";
                                     echo "<td>".$tramos['tra_codigo']."</td>";
@@ -33,6 +35,7 @@
                                     echo "<td><button class='btn btn-secondary' id='selectTramo' data-anchoInicio='".$tramos['tra_ancho_inicio']."' data-anchoFin='".$tramos['tra_ancho_fin']."' value='".$tramos['tra_id']."' data-codigo='".$tramos['tra_codigo']."'><span><i class='fas fa-plus-circle text-light'></i></span></button></td>";
                                 echo "</tr>";
                               }
+                            }
                           }
 
                     ?>

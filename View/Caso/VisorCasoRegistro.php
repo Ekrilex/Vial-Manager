@@ -34,7 +34,8 @@
                     function queryI(event, map, x, y, xx, yy) {
 
                         if (seleccionado) {
-                            alert("Coordenadas del mapa: " + x + " y " + y + " reales x : " + xx + " reales y: " + yy);
+                            //alert("Coordenadas del mapa: " + x + " y " + y + " reales x : " + xx + " reales y: " + yy);
+                            alert("punto seleccionado");
                             seleccionado = false;
                             map.getTagMap().style.cursor = "default";
 

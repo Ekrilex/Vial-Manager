@@ -5,15 +5,15 @@
 			<div class="sidebar-content">
 				<div class="user">
 					<div class="avatar-sm float-left mr-2">
-						<img src="assets/img/iconos/avatardefault_92824.ico" alt="..." class="avatar-img rounded-circle">
+						<img src="assets/img/iconos/sena.png" alt="..." class="avatar-img rounded-circle">
 					</div>
 					<div class="info">
 						<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 							<span>
 								<?php 
-									echo $_SESSION['nombre']." ".$_SESSION['apellido'];
+								echo "<span class='user-level text-light'>". $_SESSION['nombre']." ".$_SESSION['apellido']. "</span>";
 								?>
-								<span class="user-level"><?php echo $_SESSION['nombreRol'];?></span>
+								<span class="user-level text-light"><?php echo $_SESSION['nombreRol'];?></span>
 								<!-- <span class="caret"></span> -->
 							</span>
 						</a>
@@ -84,9 +84,9 @@
 						</li>
 					
 					<li class="nav-item">
-						<a class="btn btn-info" href="<?php echo getUrl("Visor","Visor","getMap")?>">
-							<i class="icon-location-pin text-white"></i>
-							<p class="text-light">Geo-Visor</p>
+						<a class="btn btn-warning" href="<?php echo getUrl("Visor","Visor","getMap")?>">
+							<i class="icon-location-pin font-weight-bold text-dark"></i>
+							<p class="font-weight-bold text-dark">Geo-Visor</p>
 							<!-- <span class="caret"></span> -->
 						</a>
 						<!--<div class="collapse" id="maps">

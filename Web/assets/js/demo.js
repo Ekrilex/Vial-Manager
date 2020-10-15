@@ -18,10 +18,10 @@ Circles.create({
 //Notify
 $.notify({
 	icon: 'flaticon-alarm-1',
-	title: 'Atlantis Lite',
-	message: 'Free Bootstrap 4 Admin Dashboard',
+	title: 'Vial-Manager(SENA)',
+	message: 'Bienvenido Usuario ',
 },{
-	type: 'info',
+	type: 'warning',
 	placement: {
 		from: "bottom",
 		align: "right"

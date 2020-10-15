@@ -20,7 +20,7 @@
 						</ul>
 					</nav>
 					<div class="copyright ml-auto">
-						 2020, made with <i class="fa fa-heart heart text-danger"></i> by <!--<a href="https://www.themekita.com">ThemeKita --> Vial Manager Team</a>
+						 2020, hecho con <i class="fa fa-heart heart text-danger"></i> por grupo #5 <!--<a href="https://www.themekita.com">ThemeKita --> Vial Manager</a>
 					</div>				
 				</div>
 			</footer>

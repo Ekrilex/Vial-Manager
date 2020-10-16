@@ -1,5 +1,5 @@
 <?php
-//agregar el helpers para el Visitante
+//agregar el helpers para el MVC
 
 @session_start();
 
@@ -9,7 +9,7 @@
             ."</script>";
     }
 
-    function add($var){
+    function dd($var){
         echo "<pre>";
         die(print_r($var));
     }

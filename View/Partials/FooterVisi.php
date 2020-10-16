@@ -40,7 +40,7 @@
 
           <div class="col-lg-4 col-md-6 footer-newsletter">
 
-    <img src="assets/img/sena.png" width="60%">
+    <img src="assetsVisi/img/sena.png" width="60%">
 
           </div>
 

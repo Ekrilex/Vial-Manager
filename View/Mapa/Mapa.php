@@ -4,19 +4,30 @@
 
 </section>
  
-<main id="main">
+<center><main id="main">
     
-    <section id="about" class="about">
-        <div class="container" data-aos="fade-up">
-
-            <h1 class="text-center">Este espacio es para el GeoVisor de la ciudad de Cali</h1>
-            <div class="mscross" style="margin-left:10%; width:900px; height:700px; -moz-user-select:none; position:relative; " id="dc_main"></div>
-            <div id="Layer1">
-                <div style="width:200px; margin-top: -30px; margin-left:70px; height:240px; -moz-user-select:none; position:relative; z-index: 100;" id="dc_main2"></div>
-            </div>
-
-        </div>
-        <hr>
+    <section id="services" class="services">
+		<div class="container" data-aos="fade-up">
+			<div class="container" data-aos="fade-up">
+				<h1 id="proyecto" class="text-center font-italic">Geo-Visor de la ciudad de Cali</h1>
+				<div class="container" data-aos="fade-up">
+					<div class="d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+						<div class="icon-box">
+							<table width="90%" height="700px" border="10" bordercolor="#ec6409" >
+								<tr><td>
+									<div class="mscross" style="width:978px; height:700px; -moz-user-select:none; position:relative;" id="dc_main"></div>
+									
+									<div id="Layer1">
+										<div style="width:200px; margin-top: -30px; margin-left:70px; height:240px; -moz-user-select:none; position:relative;" id="dc_main2"></div>
+									</div>
+								</tr></td>
+							</table>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
     </section>
 
     <?php include_once '../View/Mapa/ModalConsultarPunto.php'; ?>
@@ -30,7 +41,7 @@
 
 		myMap1.setCgi("/cgi-bin/mapserv.exe");
 
-		myMap1.setMapFile('/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map');
+		myMap1.setMapFile('/ms4w/Apache/htdocs/ProyectoMS4W/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 		//myMap1.setMapFile('/ms4w/Apache/htdocs/ADSI/VIALMANAGER/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 
 		myMap1.setFullExtent(1049214.34, 1078487.53, 860243.46);
@@ -42,7 +53,7 @@
 		myMap2.setActionNone();
 		myMap2.setFullExtent(1054114.34, 1068487.53, 860243.46);
 
-		myMap2.setMapFile('/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map');
+		myMap2.setMapFile('/ms4w/Apache/htdocs/ProyectoMS4W/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 		//myMap2.setMapFile('/ms4w/Apache/htdocs/ADSI/VIALMANAGER/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 
 		myMap2.setLayers('Cali SegmentacionNoLabel');
@@ -107,3 +118,7 @@
 		myMap2.redraw();
 	</script>
     <script type="text/javascript" src="../../assets/js/ajaxConsultarPunto.js"></script>
+
+<?php
+	include_once '../View/Contacto/Contacto.php'; 
+?>

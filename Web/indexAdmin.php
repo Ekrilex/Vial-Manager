@@ -1,11 +1,13 @@
 <?php 
 	include_once '../Lib/helpers.php';
+	//include_once '../Lib/helpersLogin.php';
 	include_once '../View/Partials/HtmlHead.php';
 	
-	echo "<body>";
+	echo "<body data-background-color='dark'>";
 		echo "<div class='wrapper static-sidebar'>";
 
 			include_once '../View/Partials/navBar.php';
+			include_once '../View/Partials/sideBar.php';
 
 			echo "<div class='main-panel'>";
 

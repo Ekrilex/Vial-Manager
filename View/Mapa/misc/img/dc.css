@@ -561,6 +561,18 @@ padding-right: 2px;
 
 }
 
+h1#proyecto{
+  color: black;
+  width:990px;
+  background: #E2E7F1; 
+  border-radius: 1em;
+  box-shadow: .25em .25em .25em rgb(236, 100, 9);
+  margin-bottom: 0.51em;
+ 
+}
+
+
+
 /*table#TablaContenido{
 
   margin:30px auto;
@@ -590,6 +602,6 @@ td#seccionMapa {
   border:2px solid black;
   border-radius:0.8em;
 
-}*/
+} */
 
 

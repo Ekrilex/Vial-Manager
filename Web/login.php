@@ -102,7 +102,7 @@
 
                 <div class="text-center">  
                     <a class="btn btn-link " style="color:white" href="Olvidaste.php"><b>&iquest;Olvidaste tu Contrase&ntilde;a?</b></a><br>
-                    <a class="btn btn-link " style="color:white" href="Visitante/Web/index.php"><b>Volver</b></a><br>
+                    <a class="btn btn-link " style="color:white" href="index.php"><b>Volver</b></a><br>
                 </div>
               
                 </form>

@@ -32,7 +32,7 @@
         <div class="col-lg-7 mt-5 mt-lg-0">
         <h3>Dejanos tus Inquietudes</h3>
         <br>
-        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+        <form action="formsVisi/contact.php" method="post" role="form" class="php-email-form">
             <div class="form-row">
             <div class="col-md-6 form-group">
                 <input type="text" name="name" class="form-control" id="name" placeholder="Nombre" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />

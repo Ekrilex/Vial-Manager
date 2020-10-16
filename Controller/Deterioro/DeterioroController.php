@@ -102,7 +102,7 @@
         if ($Rect==0) {
           $sql="UPDATE tbl_deterioro set det_nombre='".$nombre."' , det_tipo_deterioro='".$tipo."' , det_clasificacion='".$clasi."' WHERE det_id='".$id."'";
           $deterioro=$obj->editar($sql);
-          $_SESSION['result']['valido']="<h3>¡Registro $nombre se actualizado exitosamente!</h3>";
+          $_SESSION['result']['valido']="<h3>&#161;Registro $nombre se actualizado exitosamente!</h3>";
         }
 
       redirect(getUrl("Deterioro","Deterioro","index"));    
@@ -129,7 +129,7 @@
       $id=$_POST['id'];
       $sql="DELETE FROM tbl_deterioro WHERE det_id='".$id."'";
       $deterioro=$obj->eliminar($sql);
-      $_SESSION['result']['valido']="<h3>¡Registro eliminado!</h3>";      
+      $_SESSION['result']['valido']="<h3>&#161;Registro eliminado!</h3>";      
       redirect(getUrl("Deterioro","Deterioro","index"));            
     }
 

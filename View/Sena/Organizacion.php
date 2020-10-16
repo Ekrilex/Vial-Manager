@@ -14,7 +14,7 @@
       <br><br><br>
       <div class="row">
           <div class="col-lg-6 " data-aos-delay="100">
-            <img src="assets/img/senaPondaje2.jpg" width="100%" height="350"  alt="">
+            <img src="assetsVisi/img/senaPondaje2.jpg" width="100%" height="350"  alt="">
           </div>
 
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
@@ -42,7 +42,7 @@
       <br>
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-            <img src="assets/img/senaPondaje3.jpg" width="105%" height="400" alt="">
+            <img src="assetsVisi/img/senaPondaje3.jpg" width="105%" height="400" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
             <h3>Historia</h3>
@@ -73,7 +73,7 @@
       <br> <br><br><br>
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-            <img src="assets/img/sena.png" width="60%" height="320" alt="">
+            <img src="assetsVisi/img/sena.png" width="60%" height="320" alt="">
           </div>
           
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
@@ -125,7 +125,7 @@
       <div class="container" data-aos="fade-up">
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-            <img src="assets/img/valores.jpg" width="105%" height="540" alt="">
+            <img src="assetsVisi/img/valores.jpg" width="105%" height="540" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
           <br>
@@ -195,7 +195,7 @@
 
       </div>
     </section><!-- End Funciones y Deberes Section -->
-    <hr>
+  
     <?php
       include_once '../View/Contacto/Contacto.php'; 
     ?>

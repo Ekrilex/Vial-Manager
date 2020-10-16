@@ -11,7 +11,7 @@
  
          <div class="row">
            <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-             <img src="assets/img/cali-jamundi.png" class="img-fluid" alt="">
+             <img src="assetsVisi/img/cali-jamundi.png" class="img-fluid" alt="">
            </div>
            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
              <h3>Ampliación de la vía Cali – Jamundí ya avanza en un 80%</h3>
@@ -31,7 +31,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="row">
-          <div class="image col-lg-6" style='background-image: url("assets/img/vial-google.png");' data-aos="fade-riassets/img/vial.jpgght"></div>
+          <div class="image col-lg-6" style='background-image: url("assetsVisi/img/vial-google.png");' data-aos="fade-riassets/img/vial.jpgght"></div>
           <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
             <ul>
             <h3>Beneficios de este proyecto.</h3>             
@@ -55,7 +55,7 @@
             <h3 style="text-align:center;">Mantenimiento en la ciudad</h3><br> 
          <div class="row">
            <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-             <img src="assets/img/vial-cali.jpeg" class="img-fluid" alt="">          
+             <img src="assetsVisi/img/vial-cali.jpeg" class="img-fluid" alt="">          
            </div>
            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
              <p class="text-justify">

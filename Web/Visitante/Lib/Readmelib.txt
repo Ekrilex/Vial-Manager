@@ -1,1 +1,0 @@
-incializador de la carpeta Lib

@@ -22,10 +22,10 @@
               <p><strong>5) Sur</strong> con las comunas: 10, 17, 18, 19, 20, 22.</p><br>                       
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
-            <img src="assets/img/comuna.png" class="img-fluid" alt="">             
+            <img src="assetsVisi/img/comuna.png" class="img-fluid" alt="">             
           </div>
         </div>
-        <div align="center"><a href="http://weblog.emcali.net.co/contenidos_weblog/Comunas%20y%20Barrios%20de%20Cali.pdf" target="_blank" style="color: blue;"><img src="assets/img/pdf.png"> Ver mas informaci&oacute;n</a></div>
+        <div align="center"><a href="http://weblog.emcali.net.co/contenidos_weblog/Comunas%20y%20Barrios%20de%20Cali.pdf" target="_blank" style="color: blue;"><img src="assetsVisi/img/pdf.png"> Ver mas informaci&oacute;n</a></div>
       </div>
     </section><!-- End About Section -->
  

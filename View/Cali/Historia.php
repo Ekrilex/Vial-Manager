@@ -70,9 +70,7 @@
  
        </div>
      </section><!-- End Quienes Section -->
- 
-     <hr>
-   
+
     
      <?php
        include_once '../View/Contacto/Contacto.php'; 

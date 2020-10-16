@@ -7,7 +7,7 @@
 
                     <a type="button" id="añadir" class="text-light btn btn-success btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
                         <i class="fa fa-plus"></i>
-                        Añadir Barrio
+                        A&ntilde;adir Barrio
                     </a>
                 </div>
             </div>

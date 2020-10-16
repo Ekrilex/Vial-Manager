@@ -1,7 +1,7 @@
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
-    <img src="assets/img/sena.png" width="8%">
+    <img src="assetsVisi/img/sena.png" width="8%">
       <h1 class="logo"><a href="index.php">Vial-Manager</a></h1>
    
       <nav class="nav nav-tabs d-lg-block">
@@ -59,7 +59,7 @@
         </ul>
       </nav><!-- .nav-menu -->
 
-      <a href="../../login.php" class="get-started-btn scrollto">&nbsp;&nbsp;Login&nbsp;&nbsp;</a>
+      <a href="login.php" class="get-started-btn scrollto">&nbsp;&nbsp;Login&nbsp;&nbsp;</a>
 
     </div>
   </header><!-- End Header -->

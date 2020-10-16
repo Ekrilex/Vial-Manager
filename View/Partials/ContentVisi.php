@@ -3,7 +3,7 @@
   <section id="hero" class="d-flex align-items-center justify-content-center hero">
     <div class="container" data-aos="fade-up">
         <?php 
-          include_once 'carousel.php';
+          include_once 'carouselVisi.php';
         ?>
     </div>
   

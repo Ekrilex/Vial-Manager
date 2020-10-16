@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Recuperar Contraseña</title>
+        <title>Recuperar Contrase&ntilde;a</title>
         <link rel="stylesheet" href="assets/css/login.css">
         <!-- CSS Files -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -35,7 +35,7 @@
        
             <div class="col-md-15 formu">
             <img src="assets/img/iconos/sena.png" style="border-radius:6em" id="iconop">
-            <h1 class="text-center text-light display-5" ><b>Recuperar Contraseña<b></h1><br>
+            <h1 class="text-center text-light display-5" ><b>Recuperar Contrase&ntilde;a<b></h1><br>
                 <form action="<?php echo getUrl("Correo","Correo","postEmail"); ?>" method="POST" name="login">
                     <label for="exampleInputEmail1" class="font-weight-bold text-light">Email</label>
                     <div class="input-group">

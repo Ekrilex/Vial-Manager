@@ -33,7 +33,7 @@
                             $_SESSION['correo']=$usu['usu_correo'];
                             $_SESSION['auth']="ok";	
                             
-                            redirect("index.php");
+                            redirect("indexAdmin.php");
 
                         }else{
                             $error = "el usuario definido se encuenta inhabilitado";

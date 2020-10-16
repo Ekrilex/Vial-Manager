@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="cerraSesion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header btn-default">
@@ -9,7 +9,7 @@
 				</button>
 			</div>
 			<div class="modal-body btn-default">
-			Seleccione "Aceptar" a continuacion si esta listo para finalizar su sesion actual
+			Seleccione "Aceptar" a continuacion si esta listo para finalizar su sesi&oacute;n actual
 			</div>
 			<div class="modal-footer btn-default">
 				<button type="button" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>

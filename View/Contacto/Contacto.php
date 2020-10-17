@@ -32,27 +32,27 @@
         <div class="col-lg-7 mt-5 mt-lg-0">
         <h3>Dejanos tus Inquietudes</h3>
         <br>
-        <form action="formsVisi/contact.php" method="post" role="form" class="php-email-form">
+        <form  id="pregunta" method="POST" action="<?php echo  getUrl("Correo","Correo","preguntas",false,"ajax"); ?>" role="form" class="php-email-form">
             <div class="form-row">
             <div class="col-md-6 form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Nombre" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                <input type="text" name="name" class="form-control" id="name" placeholder="Nombre" data-rule="minlen:4" data-msg="Ingrese al menos 3 caracteres" />
                 <div class="validate"></div>
             </div>
             <div class="col-md-6 form-group">
-                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" data-rule="apellido" data-msg="Please enter a valid email" />
+                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" data-rule="apellido" data-msg="Ingrese al menos 4 caracteres" />
                 <div class="validate"></div>
             </div>
             </div>
             <div class="form-group">
-            <input type="email" class="form-control" name="correo" id="correo" placeholder="Correo Electrónico" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+            <input type="email" class="form-control" name="correo" id="correo" placeholder="Correo Electrónico" data-rule="minlen:4" data-msg="Por favor introduzca una dirección de correo electrónico válida" />
             <div class="validate"></div>
             </div>
             <div class="form-group">
-            <input type="text" class="form-control" name="asunto" id="asunto" placeholder="Asunto" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+            <input type="text" class="form-control" name="asunto" id="asunto" placeholder="Asunto" data-rule="minlen:4" data-msg="Ingrese al menos 8 caracteres de asunto" />
             <div class="validate"></div>
             </div>
             <div class="form-group">
-            <textarea class="form-control" name="message" rows="6" data-rule="required" data-msg="Please write something for us" placeholder="Escriba un comentario..."></textarea>
+            <textarea style="resize: none;" class="form-control" name="message" id="message" rows="6" data-rule="required" data-msg="porfavor escriba su mensaje" placeholder="Escriba un comentario..."></textarea>
             <div class="validate"></div>
             </div>
             <div class="mb-3">
@@ -60,7 +60,8 @@
             <div class="error-message"></div>
             <div class="sent-message">Your message has been sent. Thank you!</div>
             </div>
-            <div class="text-center"><button type="submit">Enviar Mensaje</button></div>
+            <div class="text-center"><button   type="submit">Enviar Mensaje</button></div>
+
         </form>
         </fieldset>
         </div>

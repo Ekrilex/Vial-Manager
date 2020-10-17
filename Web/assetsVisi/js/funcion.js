@@ -31,4 +31,15 @@ $(document).ready(function(){
 
   });
 
+$(document).on("submit",".enviar",function(){
+         $("input[type=text], textarea").val("");
+
+ 
+
+
+   
+});
+
+
+
 });

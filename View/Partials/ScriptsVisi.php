@@ -9,6 +9,7 @@
   <script src="assetsVisi/vendor/waypoints/jquery.waypoints.min.js"></script>
   <script src="assetsVisi/vendor/counterup/counterup.min.js"></script>
   <script src="assetsVisi/vendor/aos/aos.js"></script>
+  <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assetsVisi/js/main.js"></script>

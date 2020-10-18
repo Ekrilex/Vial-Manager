@@ -32,7 +32,7 @@
                     echo "<td>".$ord['ord_fecha_vencimiento']."</td>";
                     echo "<td>".$ord['usu_nickname']."</td>";
                     echo "<td>".$ord['est_descripcion']."</td>";
-                    if($ord['est_descripcion']!="Finalizado"){     
+                    if($ord['est_descripcion']!="Finalizado" && $ord['est_descripcion']!="En Progreso"){     
                       if($_SESSION['rol'] != 4){     
                         $disabled = "inline"; 
                         $container = ""; 

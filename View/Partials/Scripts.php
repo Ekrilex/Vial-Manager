@@ -58,6 +58,7 @@
 	<script src="assets/js/setting-demo.js"></script>
 	<script src="assets/js/demo.js"></script>
 	<script src="assets/js/core/global.js"></script>
+	<script type="text/javascript" src="assets/js/CheckboxOrden.js"></script>
 	
 	
 	<script>

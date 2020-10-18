@@ -90,6 +90,9 @@
 
       $sql="SELECT * FROM tbl_caso WHERE orden_id = $id OR cas_disponibilidad = 0";
       $CasoTabla=$obj->consultar($sql);
+
+      $sql="SELECT * FROM tbl_caso WHERE orden_id = $id";
+      $CasosVinculados=$obj->consultar($sql);
       
       include_once '../View/Orden/update.php';
     }

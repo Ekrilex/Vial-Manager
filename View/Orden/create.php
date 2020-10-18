@@ -7,6 +7,8 @@
     <h3 class="card-title">Seleccionar caso </span>&nbsp;&nbsp;<span class="icon-magnifier"></span></h3>
        <a type="button" class="text-light btn btn-success btn-round ml-auto registrar" data-url="<?php echo getUrl("Orden","Orden","postCreate",false,"ajax"); ?>">
       <i class="fa fa-plus"></i> Emitir Orden</a>
+      <div id="ordenesTabla">
+      </div>
     </div>
   </div>   
     <div class="card-body">
@@ -52,7 +54,7 @@
               echo "<td>".$cas['cas_fecha_creacion']."</td>";
               echo "<td>".$cas['cas_fecha_vencimiento']."</td>";              
               echo "<td><button class='btn btn-secondary foto' data-url='".getUrl("Orden","Orden","imagen",false,"ajax")."' data-id='".$cas['cas_id']."'>Ver fotografia</button></td>";               
-              echo "<td><input class='form-check container selec' style='width:18px;height:16px;' type='checkbox' value='".$cas['cas_id']."' name='list[]'></td>";
+              echo "<td><input class='form-check container selecOrd' style='width:18px;height:16px;' type='checkbox' value='".$cas['cas_id']."'></td>";
               echo "</tr>";
            } ?>
           </tbody>

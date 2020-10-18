@@ -41,8 +41,9 @@
 
 		myMap1.setCgi("/cgi-bin/mapserv.exe");
 
-		myMap1.setMapFile('/ms4w/Apache/htdocs/ProyectoMS4W/Vial-Manager/Web/assets/Maps/Segmentacion.map');
+		myMap1.setMapFile('/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 		//myMap1.setMapFile('/ms4w/Apache/htdocs/ADSI/VIALMANAGER/Vial-Manager/Web/assets/Maps/Segmentacion.map');
+		//myMap1.setMapFile('/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 
 		myMap1.setFullExtent(1049214.34, 1078487.53, 860243.46);
 		myMap1.setLayers('Cali SegmentacionNoLabel puntosMapa');
@@ -53,7 +54,7 @@
 		myMap2.setActionNone();
 		myMap2.setFullExtent(1054114.34, 1068487.53, 860243.46);
 
-		myMap2.setMapFile('/ms4w/Apache/htdocs/ProyectoMS4W/Vial-Manager/Web/assets/Maps/Segmentacion.map');
+		myMap2.setMapFile('/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 		//myMap2.setMapFile('/ms4w/Apache/htdocs/ADSI/VIALMANAGER/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 
 		myMap2.setLayers('Cali SegmentacionNoLabel');
@@ -117,7 +118,7 @@
         myMap1.redraw();
 		myMap2.redraw();
 	</script>
-    <script type="text/javascript" src="../../assets/js/ajaxConsultarPunto.js"></script>
+    <script type="text/javascript" src="../Web/assets/js/ajaxConsultarPunto.js"></script>
 
 <?php
 	include_once '../View/Contacto/Contacto.php'; 

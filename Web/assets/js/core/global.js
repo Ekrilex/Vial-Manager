@@ -49,7 +49,7 @@ $(document).ready(function() {
     
     var url = $(this).attr("data-url");
     
-    var arr = $('[name="list[]"]:checked').map(function(){
+    var arr = $('[name="list[]"]').map(function(){
       return this.value;
     }).get();
     
@@ -108,7 +108,7 @@ $(document).ready(function() {
     
     var ord_id=$("#ord_id").val();
     var url = $(this).attr("data-url");   
-    var arr = $('[name="list[]"]:checked').map(function(){
+    var arr = $('[name="list[]"]').map(function(){
        return this.value;
      }).get();
     

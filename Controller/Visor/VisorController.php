@@ -34,9 +34,9 @@
             $huboUnaCoincidencia = false;
             while($coordenadas = pg_fetch_assoc($consultaCoordenadas)){
 
-                if($cx >= ($coordenadas['coordenadax']-100) && $cx <= ($coordenadas['coordenadax']+100)){
+                if($cx >= ($coordenadas['coordenadax']-50) && $cx <= ($coordenadas['coordenadax']+50)){
                     //echo "x coincide";
-                    if($cy >= ($coordenadas['coordenaday']-100) && $cy <= ($coordenadas['coordenaday']+100)){
+                    if($cy >= ($coordenadas['coordenaday']-50) && $cy <= ($coordenadas['coordenaday']+50)){
                         //echo "y coincide";
                         $huboUnaCoincidencia = true;
 

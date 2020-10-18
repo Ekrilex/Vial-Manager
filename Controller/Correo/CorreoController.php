@@ -30,9 +30,9 @@
               $sql="SELECT * FROM tbl_usuario WHERE usu_correo = '".$email1."'"; 
               $usuario=$obj->consultar($sql);
           
-              foreach ($usuario as $usu){
+              while ($usu = pg_fetch_assoc($usuario)){
                   $email2=$usu['usu_correo'];
-                  $pass=$usu['usu_contraseña'];
+                  $pass=$usu['usu_contrasena'];
                   $nickname=$usu['usu_nickname'];         
               }
       
@@ -54,12 +54,12 @@
                       $mail->isSMTP();                                            
                       $mail->Host       = 'smtp.gmail.com';                    
                       $mail->SMTPAuth   = true;                                  
-                      $mail->Username   = 'pruebavialmanager123@gmail.com';                   
-                      $mail->Password   = 'sena12345678';                               
+                      $mail->Username   = 'vmanager2020@gmail.com';                   
+                      $mail->Password   = 'SENA12345678VM';                               
                       $mail->SMTPSecure = 'tls';     
                       $mail->Port       = 587;                                 
                   
-                      $mail->setFrom('pruebavialmanager123@gmail.com', 'vialManager');
+                      $mail->setFrom('vmanager2020@gmail.com', 'vialManager');
                       $mail->addAddress($email2, 'usuario');  
 
                       $mail->isHTML(true);                                  

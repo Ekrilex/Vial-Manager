@@ -1,10 +1,14 @@
 "use strict";
 // Cicle Chart
+
+var totalOrdenFin = document.getElementById("totalOrdenFin").value;
+var totalOrdenPen = document.getElementById("totalOrdenPen").value;
+
 Circles.create({
 	id:           'task-complete',
 	radius:       50,
-	value:        80,
-	maxValue:     100,
+	value:        totalOrdenFin,
+	maxValue:     totalOrdenPen,
 	width:        5,
 	text:         function(value){return value + '%';},
 	colors:       ['#36a3f7', '#fff'],
@@ -55,12 +59,16 @@ $('#map-example').vectorMap(
 
 var ctx = document.getElementById('statisticsChart').getContext('2d');
 
+var monthCases = document.getElementsByClassName("mesesCaso");
+var monthOrden = document.getElementsByClassName("mesesOrden");
+var monthUser  = document.getElementsByClassName("mesesUser");
+
 var statisticsChart = new Chart(ctx, {
 	type: 'line',
 	data: {
 		labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 		datasets: [ {
-			label: "Subscribers",
+			label: "Casos registrados",
 			borderColor: '#f3545d',
 			pointBackgroundColor: 'rgba(243, 84, 93, 0.6)',
 			pointRadius: 0,
@@ -68,9 +76,12 @@ var statisticsChart = new Chart(ctx, {
 			legendColor: '#f3545d',
 			fill: true,
 			borderWidth: 2,
-			data: [154, 184, 175, 203, 210, 231, 240, 278, 252, 312, 320, 374]
+			data: [monthCases[0].value,monthCases[1].value,monthCases[2].value,
+				   monthCases[3].value,monthCases[4].value,monthCases[5].value,
+				   monthCases[6].value,monthCases[7].value,monthCases[8].value,
+				   monthCases[9].value,monthCases[10].value,monthCases[11].value]
 		}, {
-			label: "New Visitors",
+			label: "Ordenes emitidas",
 			borderColor: '#fdaf4b',
 			pointBackgroundColor: 'rgba(253, 175, 75, 0.6)',
 			pointRadius: 0,
@@ -78,9 +89,12 @@ var statisticsChart = new Chart(ctx, {
 			legendColor: '#fdaf4b',
 			fill: true,
 			borderWidth: 2,
-			data: [256, 230, 245, 287, 240, 250, 230, 295, 331, 431, 456, 521]
+			data: [monthOrden[0].value,monthOrden[1].value,monthOrden[2].value,
+				   monthOrden[3].value,monthOrden[4].value,monthOrden[5].value,
+			       monthOrden[6].value,monthOrden[7].value,monthOrden[8].value,
+			       monthOrden[9].value,monthOrden[10].value,monthOrden[11].value]
 		}, {
-			label: "Active Users",
+			label: "Usuarios Registrados",
 			borderColor: '#177dff',
 			pointBackgroundColor: 'rgba(23, 125, 255, 0.6)',
 			pointRadius: 0,
@@ -88,7 +102,10 @@ var statisticsChart = new Chart(ctx, {
 			legendColor: '#177dff',
 			fill: true,
 			borderWidth: 2,
-			data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 900]
+			data: [monthUser[0].value,monthUser[1].value,monthUser[2].value,
+				   monthUser[3].value,monthUser[4].value,monthUser[5].value,
+			       monthUser[6].value,monthUser[7].value,monthUser[8].value,
+			       monthUser[9].value,monthUser[10].value,monthUser[11].value]
 		}]
 	},
 	options : {

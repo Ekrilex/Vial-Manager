@@ -149,12 +149,18 @@
                         <a class="btn btn-secondary" href="<?php echo getUrl('Tramo','Tramo','index')?>">Salir</a>
                         <button class="btn btn-info" id="editarTramo" data-url="<?php echo getUrl("Tramo","Tramo","getUpdate",false,"ajax");?>" data-id="<?php echo $tramoSeleccionado['tra_id'];?>">Editar</button>
                         <?php 
-                            
-                            if($tramoSeleccionado['estado_id' ]== 1){
-                                echo "<button class='btn btn-danger' data-toggle='modal' id='inhabilitarTramo' data-target='#modalInhabilitar'>Inhabilitar</button>";
-                            }else{
-                                echo "<button class='btn btn-success' data-toggle='modal' id='habilitarTramo' data-target='#modalHabilitar'>Habilitar</button>";
-                            }
+                            //while($caso = pg_fetch_assoc($CasoVinculado)){
+                                
+                                if($Caso[0] == null){
+                                    if($tramoSeleccionado['estado_id' ]== 1){
+                                        echo "<button class='btn btn-danger' data-toggle='modal' id='inhabilitarTramo' data-target='#modalInhabilitar'>Inhabilitar</button>";
+                                    }else{
+                                        echo "<button class='btn btn-success' data-toggle='modal' id='habilitarTramo' data-target='#modalHabilitar'>Habilitar</button>";
+                                    }
+                                }else{
+                                    echo "<label><i class='fas fa-info-circle'></i>este Tramo esta vinculado al caso (".$Caso[0].")</label>";
+                                }
+                            //}
                         ?>
                         
                     </div>

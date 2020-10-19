@@ -1721,7 +1721,7 @@ $(document).ready(function() {
     
         //datatable de la vista de consultar con 20 registros por pagina
         $('#basic-datatables-consultar').DataTable({
-            "pageLength": 20,
+            "pageLength": 10,
         });
     
         //FUNCIONES PERTENECIENTES A LA PAGINACION DE LOS MODALES

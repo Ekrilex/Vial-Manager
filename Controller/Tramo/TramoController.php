@@ -387,7 +387,12 @@
             FROM tbl_tramo AS T,tbl_calzada AS C,tbl_tipo_de_calzada AS TC,tbl_barrio AS B,tbl_elemento_complementario AS EL,tbl_jerarquia_vial AS J,tbl_eje_vial AS EJ,tbl_estado AS E,tbl_usuario AS U
             WHERE T.calzada_id = C.cal_id AND C.tipo_calzada_id = TC.tipc_id AND T.barrio_id = B.bar_id AND T.elemento_id = EL.ele_id AND T.jerarquia_vial_id = J.jer_id AND T.eje_vial_id = EJ.eje_id AND T.estado_id = E.est_id AND T.usuario_id = U.usu_id AND tra_id = ".$tra_id." ";
 
+            $sqlCasoVinculado = "SELECT cas_id FROM tbl_caso WHERE tramo_id = ".$tra_id."";
+
             $tramo = $objetoModel->consultar($sql);
+            $CasoVinculado = $objetoModel->consultar($sqlCasoVinculado);
+
+            $Caso = pg_fetch_row($CasoVinculado);
 
             include_once '../View/Tramo/DetalleTramo.php';
 

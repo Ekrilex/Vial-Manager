@@ -36,7 +36,7 @@
                 <form action="<?php echo getUrl("Barrio","Barrio","postCreate"); ?>" method="POST">
                     <div class="form-group">
                         <!-- <input type="hidden" class="form-control" id="bar_id"> -->
-                        <h4 class="text-light">Descripción o Nombre de Barrio</h4>
+                        <h4 class="text-light">Descripcio&oacute;n o Nombre de Barrio</h4>
                         <input type="text" class="form-control is-valid barrioN" name="bar_nombre" id="bar_nombre" placeholder=""/>
                         <div id="error"></div>
                     </div>
@@ -107,7 +107,7 @@ $("#addRowModal").modal();
                         <div class="form-group">
                             <!-- <input type="hidden" class="form-control" id="bar_id"> -->
 
-                            <h4 class="text-light">Descripción o Nombre de Barrio</h4>
+                            <h4 class="text-light">Descripci&oacute;n o Nombre de Barrio</h4>
                             <input type="text" class="form-control is-valid barrioN" name="bar_nombre" id="bar_nombre" placeholder=""/>
                             <div id="error"></div> 
                         </div>

@@ -1,13 +1,11 @@
 <?php 
-	include_once '../Lib/helpers.php';
-	//include_once '../Lib/helpersLogin.php';
-	include_once '../View/Partials/HtmlHead.php';
+	include_once '../Lib/helpersVisi.php';
+	include_once '../View/Partials/HtmlHeadVisi.php';
 	
-	echo "<body data-background-color='dark'>";
+	echo "<body>";
 		echo "<div class='wrapper static-sidebar'>";
 
-			include_once '../View/Partials/navBar.php';
-			include_once '../View/Partials/sideBar.php';
+			include_once '../View/Partials/navBarVisi.php';
 
 			echo "<div class='main-panel'>";
 
@@ -16,16 +14,16 @@
 					if(isset($_GET['modulo'])){
 						resolve();
 					}else{
-						include_once '../View/Partials/Content.php';
+						include_once '../View/Partials/ContentVisi.php';
 					}
 					
 				echo "</div>";
 
-				include_once '../View/Partials/Footer.php';
+				include_once '../View/Partials/FooterVisi.php';
 
 			echo "</div>";
 			
 		echo "</div>";
-		include_once '../View/Partials/Scripts.php';
+		include_once '../View/Partials/ScriptsVisi.php';
 	echo "</body>";
 ?>

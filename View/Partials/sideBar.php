@@ -42,7 +42,7 @@
 				</div>
 				<ul class="nav nav-primary">
 					<li class="nav-item active">
-						<a href="index.php" class="collapsed" aria-expanded="false">
+						<a href="indexAdmin.php" class="collapsed" aria-expanded="false">
 							<i class="fas fa-home"></i>
 							<p>Inicio</p>
 						</a>

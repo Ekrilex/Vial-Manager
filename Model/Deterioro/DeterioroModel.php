@@ -68,7 +68,7 @@
        $c=0;
 
         if ($igual>0) {
-        $_SESSION['result']['igualdad']="<h3 class='text-danger'>¡El deteriroro ya existe!</h3>";  
+        $_SESSION['result']['igualdad']="<h3 class='text-danger'>&#161;El deterioro ya existe!</h3>";  
             $c++;        
         }
        if (!$nombre!="") {

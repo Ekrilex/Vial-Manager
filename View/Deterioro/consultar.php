@@ -26,7 +26,7 @@ if (isset($_SESSION['result'])) {
       <h3 class="card-title">Consultar deterioros&nbsp;&nbsp;<span class="icon-book-open"></span>&nbsp;&nbsp;<span class="icon-magnifier"></span></h3>
 
       <a type="button" class="text-light btn btn-success btn-round ml-auto" data-toggle="modal" data-target="#Nuevo">
-      <i class="fa fa-plus"></i> Añadir Deterioro</a>
+      <i class="fa fa-plus"></i> A&ntilde;adir Deterioro</a>
     </div>
   </div>  
     <br>
@@ -95,7 +95,7 @@ if (isset($_SESSION['result'])) {
           <div class="row">
              <span class="col-md-1"></span>    
            <div class="col-md-4 text-white">
-             <h5>Tipo de daño</h5>
+             <h5>Tipo de da&ntilde;o</h5>
            </div>
            <div class="col-md-6">
              <select class="form-control Dano border border-success">

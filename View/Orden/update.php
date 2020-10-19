@@ -99,9 +99,10 @@ if($ord['est_descripcion']!="Finalizado"){
                             echo "<td>".$cas['cas_fecha_vencimiento']."</td>";              
                             echo "<td><button class='btn btn-secondary foto' data-url='".getUrl("Orden","Orden","imagen",false,"ajax")."' data-id='".$cas['cas_id']."'>Ver fotografia</button></td>";               
                             if($cas['orden_id']==$ord['ord_id']){
-                                echo "<td><input class='form-check container selecOrd' CHECKED style='width:18px;height:16px;' type='checkbox' value='".$cas['cas_id']."' name='list[]'></td>";
+                                echo "<td><input class='form-check container selecOrd' CHECKED style='width:18px;height:16px;' type='checkbox' value='".$cas['cas_id']."'></td>";
+                                
                               }else{
-                                echo "<td><input class='form-check container selecOrd' style='width:18px;height:16px;' type='checkbox' value='".$cas['cas_id']."' name='list[]'></td>";
+                                echo "<td><input class='form-check container selecOrd' style='width:18px;height:16px;' type='checkbox' value='".$cas['cas_id']."'></td>";
                             }
                             echo "</tr>";
                             
@@ -111,8 +112,19 @@ if($ord['est_descripcion']!="Finalizado"){
                         </table>
                     </div>
                 </div><br><br>
-             
+                      
                 <div class="card-action">
+                    <div id="casosAntiguos">
+
+                      <?php 
+                          while($casosDefault = pg_fetch_assoc($CasosVinculados)){
+                            echo "<input type='hidden' class='inputsDefault' value='".$casosDefault['cas_id']."'>";
+                          }
+                      ?>
+                    </div>
+                    <div id="ordenesTabla">
+                        
+                    </div>
                     <div id="cambiarEje"></div>
                     <a class="btn btn-secondary" href="<?php echo getUrl('Orden','Orden','index',array("ord_id" => $ord['ord_id']));?>">Volver</a>
                     <input type="hidden" name="ord_id" id="ord_id" value="<?php echo $ord['ord_id'];?>">

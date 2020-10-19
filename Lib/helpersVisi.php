@@ -17,7 +17,7 @@
     function getUrl($modulo,$controlador,$funcion,$parametros=false,$pagina=false){
        
         if($pagina==false){
-            $pagina="indexAdmin";
+            $pagina="index";
         }
         $url="$pagina.php?modulo=$modulo&controlador=$controlador&funcion=$funcion";
 

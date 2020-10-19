@@ -32,7 +32,7 @@
                     echo "<td>".$ord['ord_fecha_vencimiento']."</td>";
                     echo "<td>".$ord['usu_nickname']."</td>";
                     echo "<td>".$ord['est_descripcion']."</td>";
-                    if($ord['est_descripcion']!="Finalizado"){     
+                    if($ord['est_descripcion']!="Finalizado" && $ord['est_descripcion']!="En Progreso"){     
                       if($_SESSION['rol'] != 4){     
                         $disabled = "inline"; 
                         $container = ""; 
@@ -41,7 +41,7 @@
                         $container = "container"; 
                       }
 
-                      echo "<td><a href='".getUrl("Orden","Orden","getUpdate",array("ord_id" => $ord['ord_id']))."' style='display:".$disabled.";'><button data-toggle='tooltip' class='btn btn-link btn-primary fas fa-search text-info' data-original-title='Editar'></button></a>";
+                      echo "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='".getUrl("Orden","Orden","getUpdate",array("ord_id" => $ord['ord_id']))."' style='display:".$disabled.";'><button data-toggle='tooltip' class='btn btn-link btn-primary fas fa-search text-info' data-original-title='Editar'></button></a>";
 
                       echo "<a href='".getUrl("Orden","Orden","getDelete",array("ord_id" => $ord['ord_id']))."'><button data-toggle='tooltip' class='btn btn-link btn-danger fas fa-cog ".$container."' data-original-title='Gestionar'></button></a></td>";
                     }else{

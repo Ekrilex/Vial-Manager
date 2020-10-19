@@ -137,7 +137,7 @@
       public function index(){
           $obj = new UsuarioModel();
 
-          $query = "SELECT u.usu_num_identificacion, u.usu_primer_nombre, u.usu_segundo_nombre, usu_primer_apellido, usu_segundo_apellido, usu_nickname, r.rol_id,  r.rol_nombre, t.tip_id, e.est_descripcion, e.est_id FROM tbl_usuario AS u, tbl_rol AS r, tbl_estado AS e, tbl_tipo_documento AS t WHERE u.estado_id = e.est_id AND u.rol_id = r.rol_id AND u.tipo_documento_id = t.tip_id";
+          $query = "SELECT u.usu_num_identificacion, u.usu_primer_nombre, u.usu_segundo_nombre, usu_primer_apellido, usu_segundo_apellido, usu_nickname, r.rol_id,  r.rol_nombre, t.tip_id, e.est_descripcion, e.est_id FROM tbl_usuario AS u, tbl_rol AS r, tbl_estado AS e, tbl_tipo_documento AS t WHERE u.estado_id = e.est_id AND u.rol_id = r.rol_id AND u.tipo_documento_id = t.tip_id AND usu_id <> ".$_SESSION['id']."";
               
           $usuarios = $obj->consultar($query);
 

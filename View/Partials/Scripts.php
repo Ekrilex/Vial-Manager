@@ -31,6 +31,8 @@
 
 	<!-- Chart JS -->
 	<script src="assets/js/plugin/chart.js/chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 
 	<!-- jQuery Sparkline -->
 	<script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
@@ -61,13 +63,26 @@
 	
 	
 	<script>
+
+		let casosToday = document.getElementById("casosToday").value;
+		let ordenToday = document.getElementById("ordenToday").value;
+		let usersToday = document.getElementById("usersToday").value;
+		let days       = document.getElementsByClassName("days");
+		let arrayDays  = [];
+
+		for (let i = 0; i < days.length; i++) {
+			arrayDays.push(days[i].value);
+		}
+
+		console.log(arrayDays[5]);
+		
 		Circles.create({
 			id:'circles-1',
 			radius:45,
-			value:60,
+			value:casosToday,
 			maxValue:100,
 			width:7,
-			text: 5,
+			text: casosToday,
 			colors:['#f1f1f1', '#FF9E27'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -79,10 +94,10 @@
 		Circles.create({
 			id:'circles-2',
 			radius:45,
-			value:70,
+			value: ordenToday,
 			maxValue:100,
 			width:7,
-			text: 36,
+			text: ordenToday,
 			colors:['#f1f1f1', '#2BB930'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -94,10 +109,10 @@
 		Circles.create({
 			id:'circles-3',
 			radius:45,
-			value:40,
+			value:usersToday,
 			maxValue:100,
 			width:7,
-			text: 12,
+			text: usersToday,
 			colors:['#f1f1f1', '#F25961'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -111,12 +126,18 @@
 		var mytotalIncomeChart = new Chart(totalIncomeChart, {
 			type: 'bar',
 			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
+				labels: ["D", "L", "M", "M", "J", "V", "S"],
 				datasets : [{
-					label: "Total Income",
+					label: "Total Creados",
 					backgroundColor: '#ff9e27',
 					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
+					data: [arrayDays[0],
+						   arrayDays[1],
+						   arrayDays[2],
+						   arrayDays[3],
+						   arrayDays[4],
+						   arrayDays[5],
+						   arrayDays[6]],
 				}],
 			},
 			options: {

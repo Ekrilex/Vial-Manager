@@ -300,10 +300,9 @@
 						</li>
 					<?php } ?>
 					<li class="nav-item">
-						<a data-toggle="collapse" href="#reporte">
+						<a href="<?php echo getUrl("Reportes","Reportes","index"); ?>">
 							<i class="flaticon-interface-6"></i>
 							<p>Reporte</p>
-							<span class="caret"></span>
 						</a>
 						<div class="collapse" id="reporte">
 							<ul class="nav nav-collapse">

@@ -120,9 +120,9 @@
             //$img        = $_POST['img'];
             $pavimento  = $_POST['pav'];*/
 
-            $causa = $_POST['cas_causa'];
-            $entorno = $_POST['entorno_id'];
-            $pavimento = $_POST['tipo_pavimento_id'];
+            $causa       = $_POST['cas_causa'];
+            $entorno     = $_POST['entorno_id'];
+            $pavimento   = $_POST['tipo_pavimento_id'];
             $deterioros  = $_POST['deterioros'];
             $gravedades  = $_POST['gravedades'];
             $areas       = $_POST['areas'];

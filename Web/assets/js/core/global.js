@@ -166,10 +166,11 @@ $(document).ready(function() {
     $(document).on("click",".eliminarOrd" , function(){
     
         var ord_id=$("#ord_id").val();
+        var titulo = $(this).attr('data-titulo');
         var url=$(this).attr("data-url");
        
         swal({
-             title: "inhabilitar / Denegar",
+             title: titulo,
              text: "Esta seguro de modificar esta orden?",
              icon: "warning",
              buttons: true,
@@ -190,7 +191,7 @@ $(document).ready(function() {
                 };
               
                 swal({
-                  text: 'deshabilitar / denegar',
+                  text: titulo,
                   content: textarea,
                   buttons: {
                     cancel: {
@@ -198,7 +199,7 @@ $(document).ready(function() {
                       visible: true
                     },
                     confirm: {
-                      text: 'button',
+                      text: titulo,
                       closeModal: false
                     }
                   }

@@ -16,7 +16,7 @@
                                 <th scope="col">Cargo</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Acciones</th>
-                                <th scope="col">Editar</th>
+                                <!-- <th scope="col">Editar</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -32,13 +32,13 @@
                                     <td><?php echo $usu['est_descripcion']; ?></td>
                                     <?php if ($usu['est_id'] == 1) { ?>
                                     <!-- <td><button id="delete" onclick="userDelete('<?php echo $usu['usu_num_identificacion']; ?>');" data-toggle="modal" data-target="#exampleModal" class="btn btn-lg" style="background-color:transparent; padding: 0px; color: red;"><i class="fas fa-user-slash"></i></button></td> -->
-                                    <td><button id="delete" data-url="<?php echo getUrl("Usuario","Usuario","deleteUsuario"); ?>" data-id="<?= $usu['usu_num_identificacion'] ?>" class="btn btn-lg" style="background-color:transparent; padding: 0px; color: red;"><i class="fas fa-user-slash"></i></button></td>
+                                    <td><button id="delete" data-url="<?php echo getUrl("Usuario","Usuario","deleteUsuario"); ?>" data-id="<?= $usu['usu_num_identificacion'] ?>" class="btn btn-lg" style="background-color:transparent; padding: 0px; color: red;"><i class="fas fa-user-slash"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <?php } ?>
                                     <?php if($usu['est_id'] == 2 ){ ?>
                                     <!-- <td><button onclick="userActivation('<?php echo $usu['usu_num_identificacion']; ?>');" data-toggle="modal" data-target="#exampleModal2" class="btn btn-lg" style="background-color:transparent; padding: 0px; color: green;"><i class="fas fa-lock"></i></button></td>     -->
-                                    <td><button id="activate" data-url="<?php echo getUrl("Usuario","Usuario","activationuser"); ?>" data-id="<?= $usu['usu_num_identificacion'] ?>" class="btn btn-lg" style="background-color:transparent; padding: 0px; color: green;"><i class="fas fa-lock"></i></button></td>    
+                                    <td><button id="activate" data-url="<?php echo getUrl("Usuario","Usuario","activationuser"); ?>" data-id="<?= $usu['usu_num_identificacion'] ?>" class="btn btn-lg" style="background-color:transparent; padding: 0px; color: green;"><i class="fas fa-lock"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
                                     <?php } ?>
-                                    <td><a href="<?php echo getUrl("Usuario", "Usuario", "getUpdate", array("usu_id" => $usu['usu_num_identificacion'], "rol_id" => $usu['rol_id'], "tip_id" => $usu['tip_id'])) ?>"><button class="btn btn-lg" style="background-color:transparent; padding: 0px; color: yellow;"><i class="fas fa-user-edit"></i></button></a></td>
+                                    <a href="<?php echo getUrl("Usuario", "Usuario", "getUpdate", array("usu_id" => $usu['usu_num_identificacion'], "rol_id" => $usu['rol_id'], "tip_id" => $usu['tip_id'])) ?>"><button class="btn btn-lg" style="background-color:transparent; padding: 0px; color: yellow;"><i class="fas fa-user-edit"></i></button></a></td>
                                 </tr>
                             <?php
                             }

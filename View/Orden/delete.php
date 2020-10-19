@@ -35,7 +35,7 @@
 
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group form-inline">
-                                <label for="inlineinput" class="col-md-5 col-form-label">Fecha Creación</label>
+                                <label for="inlineinput" class="col-md-5 col-form-label">Fecha Creaci&oacute;n</label>
 
                                 <input type="date" class="form-control font-weight-bold text-dark input-full " name="fecha_creacion" value="<?php echo $ord['ord_fecha_creacion'];?>" id="fecha_creacion" placeholder="" readonly> 
                              
@@ -126,9 +126,17 @@
                     <?php
                     }else if($_SESSION['aprobar']=="no"){
                       if($_SESSION['rol'] != 4){
+                          if($_SESSION['rol'] == 3 || $_SESSION['rol'] == 1){
+                            $textoBoton = "Inhabilitar";
+                          
+                          }else{
+                            $textoBoton = "Denegar";
+                          }
                     ?>
-                      <button  class="btn btn-danger eliminarOrd" data-url="<?php echo getUrl('Orden','Orden','postDelete',false,'ajax')?>">Inhabilitar / denegar</button>
-                      <?php }?>
+                      <button  class="btn btn-danger eliminarOrd" data-titulo="<?php echo $textoBoton?>" data-url="<?php echo getUrl('Orden','Orden','postDelete',false,'ajax')?>"><?php echo $textoBoton;?></button>
+                      <?php 
+                          
+                      }?>
                       <?php 
                         if($_SESSION['rol'] != 4 && $_SESSION['rol'] != 3 && $ord['est_descripcion']!="En Progreso"){
                       ?>

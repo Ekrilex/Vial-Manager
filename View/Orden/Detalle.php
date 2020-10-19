@@ -63,6 +63,9 @@
                 </div>
                 <hr>
                 <div class="card-body">
+                <?php 
+                    if($_SESSION['rol'] != 4 && $laOrdenSePuedeHabilitar == true){
+                  ?>
                     <div class="table-responsive">
                     <table id="Tbl-orden" class="display table table-striped table-hover" >
                         <thead>
@@ -115,6 +118,9 @@
                         </tbody>
                         </table>
                     </div>
+                    <?php 
+                      }
+                    ?>
                 </div><br><br>
              
                 <div class="card-action">

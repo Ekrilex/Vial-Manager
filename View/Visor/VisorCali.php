@@ -2,7 +2,7 @@
 
 	<?php
 
-	if (!extension_loaded('MapScript')) {
+	/*if (!extension_loaded('MapScript')) {
 		dl('php_mapscript.' . PHP_SHLIB_SUFFIX);
 	}
 
@@ -15,8 +15,24 @@
 	$urlLeyenda = $Leyenda->saveWebImage();
 
 	$Escala = $mapa->drawScaleBar();
-	$urlEscala = $Escala->saveWebImage();
+	$urlEscala = $Escala->saveWebImage();*/
 
+	define( "MAPFILE", "C:/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map" );
+	define( "MODULE", "php_mapscript.dll" );
+
+	// load the mapscript module
+	if (!extension_loaded("MapScript")) dl(MODULE);
+
+	// open map
+	$mapa = ms_newMapObj( MAPFILE );
+
+
+	$oImage = $mapa->draw();
+
+
+	$url = $oImage->saveWebImage();
+	$mapLegend = $mapa->drawLegend();
+	$urlLeyenda = $mapLegend->saveWebImage();
 
 
 
@@ -45,7 +61,7 @@
 		<div style="width:200px; margin-top: -30px; margin-left:70px; height:240px; -moz-user-select:none; position:relative; z-index: 100;" id="dc_main2"></div>
 	</div>
 	<div class="custom-template">
-		<div class="title">Settings</div>
+		<div class="title">Opciones</div>
 		<div class="custom-content">
 			<div class="switcher">
 				<div class="switch-block">
@@ -84,7 +100,7 @@
 		myMap1.setCgi("/cgi-bin/mapserv.exe");
 
 		
-		myMap1.setMapFile('/ms4w/Apache/htdocs/ADSI/VIALMANAGER/Vial-Manager/Web/assets/Maps/Segmentacion.map');
+		myMap1.setMapFile('/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 		// myMap1.setMapFile('/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 		
 		
@@ -99,16 +115,13 @@
 		myMap2.setActionNone();
 		myMap2.setFullExtent(1054114.34, 1068487.53, 860243.46);
 
-		myMap2.setMapFile('/ms4w/Apache/htdocs/ADSI/VIALMANAGER/Vial-Manager/Web/assets/Maps/Segmentacion.map');
+		myMap2.setMapFile('/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 		// myMap2.setMapFile('/ms4w/Apache/htdocs/RepositorioVialManager/Vial-Manager/Web/assets/Maps/Segmentacion.map');
 
 
 		myMap2.setLayers('Cali SegmentacionNoLabel');
 		myMap1.setReferenceMap(myMap2);
 
-
-		//Clase 30/09/2020
-		//agregar boton al toolbar del mapa
 
 		var insertarDano = new msTool('Cosultar Informacion Via', consultarDeterioro, '../View/Visor/misc/img/point.png', queryC);
 
@@ -130,7 +143,7 @@
 
 
 
-				myMap1.setLayers(list + " Norte");
+				myMap1.setLayers(list);
 				myMap2.setLayers(list);
 				myMap1.redraw();
 				myMap2.redraw();

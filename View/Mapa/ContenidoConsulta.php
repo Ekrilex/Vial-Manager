@@ -48,7 +48,7 @@
                                         <div class='form-row'>
                                             <div class='form-group col-md-6'>
                                                 <label>Imagen Inicial del caso</label><br>
-                                                <img src="<?php echo "../../".$casoEncontrado['cas_fotografia_inicio'];?>" alt='no tiene' width='350px' height='250px' >
+                                                <img src="<?php echo "".$casoEncontrado['cas_fotografia_inicio'];?>" alt='no tiene' width='350px' height='250px' >
                                             </div>
 
                                             <div class='form-group col-md-6'>
@@ -56,7 +56,7 @@
                                                 <?php 
                                                     if($casoEncontrado['cas_fotografia_fin'] != ""){
                                                 ?>
-                                                <img src="<?php echo "../../".$casoEncontrado['cas_fotografia_fin'];?>" alt='no tiene' width='350px' height='250px' >
+                                                <img src="<?php echo "".$casoEncontrado['cas_fotografia_fin'];?>" alt='no tiene' width='350px' height='250px' >
                                                 <?php 
                                                     }else{
                                                         echo "<h5><span><i class='fas fa-info-circle'></i></span>&nbsp;!Este caso aun no dispone de foto final</h5>";

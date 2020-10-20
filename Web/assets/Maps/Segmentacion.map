@@ -39,29 +39,6 @@ MAP
 		STATUS ON
 	END
 
-	LAYER
-		NAME "Norte"
-		STATUS ON
-		TYPE POINT
-		TRANSFORM OFF
-		POSTLABELCACHE TRUE
-
-		FEATURE
-			POINTS
-				35 35
-			END
-		END
-
-		CLASS
-
-			STYLE
-				SYMBOL 'Norte'
-				Color 0 0 0
-				OUTLINECOLOR 0 0 0
-			END
-		END
-	END
-
 	SCALEBAR
 		IMAGECOLOR 255 255 255
 
@@ -147,8 +124,8 @@ MAP
 		CONNECTIONTYPE postgis
 		NAME "puntosMapa"
 		STATUS ON
-		CONNECTION "user=postgres password=12345 dbname=vialmanager3_4 host=localhost port=5432"
-		#CONNECTION "user=postgres password=postgres dbname=VialManager3_4 host=localhost port=5433"
+		#CONNECTION "user=postgres password=12345 dbname=vialmanager3_4 host=localhost port=5432"
+		CONNECTION "user=postgres password=postgres dbname=VialManager3_5 host=localhost port=5433"
 		DATA "geometry FROM (select * from puntos_geovisor) as puntos using unique gid SRID=-1"
 		TYPE POINT
 		CLASS

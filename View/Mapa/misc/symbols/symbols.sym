@@ -1,3 +1,6 @@
+
+SYMBOLSET
+
 SYMBOL
 	NAME 'tent'
 		TYPE VECTOR
@@ -11,7 +14,7 @@ SYMBOL
 		.25 1
 		0 1
 	END
-END
+END 
 
 SYMBOL
 	NAME 'star'
@@ -29,7 +32,7 @@ SYMBOL
 		.125 1
 		.25 .625
 	END
-END
+END 
 
 
 
@@ -43,7 +46,7 @@ SYMBOL
 		0 .5
 		1 .5
 	END
-END
+END 
 
 SYMBOL
 	NAME 'cross'
@@ -57,44 +60,23 @@ SYMBOL
 	END
 END
 
-
+  
 SYMBOL
 	NAME 'pointflag'
 		TYPE TRUETYPE
-		FONT esri-130
+		FONT esri-130 
 		FILLED true
 		ANTIALIAS true
 	CHARACTER 'h'
 END
 
 SYMBOL
-	NAME 'Norte'
+	NAME 'rosavientos'
 	TYPE PIXMAP
 	IMAGE 'norte.gif'
 END
 
-SYMBOL
-	NAME 'ubicacion'
-	TYPE PIXMAP
-	IMAGE 'marker.png'
 END
 
-SYMBOL 
-	NAME 'icononuevo'
-	TYPE PIXMAP
-	IMAGE 'fotball.png'
-END
 
-SYMBOL 
-	NAME 'lemming'
-	TYPE PIXMAP
-	IMAGE 'lemminganimated.gif'
-END
 
-SYMBOL
-	NAME 'puntos'
-	TYPE PIXMAP
-	IMAGE 'point.gif'
-		
-		
-END
